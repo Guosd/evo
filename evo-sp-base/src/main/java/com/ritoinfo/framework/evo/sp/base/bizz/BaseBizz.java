@@ -1,7 +1,7 @@
 package com.ritoinfo.framework.evo.sp.base.bizz;
 
 import com.ritoinfo.framework.evo.sp.base.condition.BaseCondition;
-import com.ritoinfo.framework.evo.sp.base.dao.MyBatisDao;
+import com.ritoinfo.framework.evo.sp.base.dao.BaseDao;
 import com.ritoinfo.framework.evo.sp.base.entity.BaseEntity;
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.util.List;
  * User: Kyll
  * Date: 2018-02-09 16:52
  */
-public abstract class BaseBizz<D extends MyBatisDao<E, PK, C>, E extends BaseEntity<PK>, PK extends Serializable, C extends BaseCondition> {
+public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity<PK>, PK extends Serializable, C extends BaseCondition> {
 	@Autowired
 	private D dao;
 

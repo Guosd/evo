@@ -17,17 +17,18 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>evo-admin</module>
 		<module>evo-common</module>
 		<module>evo-config</module>
 		<module>evo-eureka</module>
-		<module>evo-zipkin</module>
 		<module>evo-zuul</module>
-		<module>evo-sp-auth</module>
+		<module>evo-admin</module>
+		<module>evo-zipkin</module>
 		<module>evo-sp-base</module>
-		<module>evo-sp-base-dao-mybatis-xml</module>
+		<module>evo-sp-base-mybatis</module>
+		<module>evo-sp-base-mybatis-xml</module>
+		<module>evo-sp-base-mybatis-sql-provider</module>
+		<module>evo-sp-auth</module>
 		<module>evo-sp-org</module>
-		<module>evo-sp-base-dao-mybatis-sql-provider</module>
 	</modules>
 
 	<properties>
@@ -48,6 +49,8 @@
 		<mysql-connector-java.version>5.1.24</mysql-connector-java.version>
 		<evo-common.version>1.0.0-SNAPSHOT</evo-common.version>
 		<evo-sp-base.version>1.0.0-SNAPSHOT</evo-sp-base.version>
+		<evo-sp-base-mybatis.version>1.0.0-SNAPSHOT</evo-sp-base-mybatis.version>
+		<evo-sp-base-dao-mybatis-xml.version>1.0.0-SNAPSHOT</evo-sp-base-dao-mybatis-xml.version>
 	</properties>
 
 	<dependencies>
