@@ -42,9 +42,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-sp-base-dao-mybatis-xml</artifactId>
-			<version>${evo-sp-base-dao-mybatis-xml.version}</version>
-			<scope>compile</scope>
+			<artifactId>evo-sp-base-mybatis-xml</artifactId>
+			<version>${evo-sp-base-mybatis-xml.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.alibaba</groupId>

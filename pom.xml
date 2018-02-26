@@ -50,7 +50,7 @@
 		<evo-common.version>1.0.0-SNAPSHOT</evo-common.version>
 		<evo-sp-base.version>1.0.0-SNAPSHOT</evo-sp-base.version>
 		<evo-sp-base-mybatis.version>1.0.0-SNAPSHOT</evo-sp-base-mybatis.version>
-		<evo-sp-base-dao-mybatis-xml.version>1.0.0-SNAPSHOT</evo-sp-base-dao-mybatis-xml.version>
+		<evo-sp-base-mybatis-xml.version>1.0.0-SNAPSHOT</evo-sp-base-mybatis-xml.version>
 	</properties>
 
 	<dependencies>

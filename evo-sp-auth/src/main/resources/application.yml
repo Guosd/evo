@@ -24,4 +24,4 @@ mybatis:
   mapper-locations: classpath:mapper/**/*.xml
   configuration:
     map-underscore-to-camel-case: true
-    interceptors:
+    interceptors: com.ritoinfo.framework.evo.sp.base.mybatis.interceptor.PageInterceptor
