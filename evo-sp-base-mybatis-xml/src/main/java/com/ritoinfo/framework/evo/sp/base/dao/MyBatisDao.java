@@ -3,6 +3,8 @@ package com.ritoinfo.framework.evo.sp.base.dao;
 import com.ritoinfo.framework.evo.sp.base.condition.BaseCondition;
 import com.ritoinfo.framework.evo.sp.base.entity.BaseEntity;
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
+import com.ritoinfo.framework.evo.sp.base.mybatis.interceptor.PageInterceptor;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -52,6 +54,21 @@ public abstract class MyBatisDao<E extends BaseEntity<PK>, PK extends Serializab
 
 	@Override
 	public PageList<E> readPage(C condition, PageList<E> pageList) {
+		List<Interceptor> interceptorList = sqlSession.getConfiguration().getInterceptors();
+
+		boolean exist = false;
+		for (Interceptor interceptor : interceptorList) {
+			if (interceptor instanceof PageInterceptor) {
+				exist = true;
+				break;
+			}
+		}
+
+		if (!exist) {
+			sqlSession.getConfiguration().addInterceptor(new PageInterceptor());
+		}
+
+		sqlSession.selectList(getStatement(SQL_ID_READ_BY_CONDITION), condition);
 		return null;
 	}
 

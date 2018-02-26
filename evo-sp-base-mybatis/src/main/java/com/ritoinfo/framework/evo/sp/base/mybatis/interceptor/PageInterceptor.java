@@ -15,11 +15,12 @@ import java.util.Properties;
  * Date: 2018-02-26 23:12
  */
 @Intercepts({
-	@Signature(method = "prepare", type = StatementHandler.class, args = {Connection.class})
+	@Signature(method = "prepare", type = StatementHandler.class, args = {Connection.class, Integer.class})
 })
 public class PageInterceptor implements Interceptor {
 	@Override
 	public Object intercept(Invocation invocation) throws Throwable {
+		// http://blog.csdn.net/moshenglv/article/details/52699976
 		return null;
 	}
 

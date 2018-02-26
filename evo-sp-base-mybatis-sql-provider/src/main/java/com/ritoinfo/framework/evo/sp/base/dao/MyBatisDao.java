@@ -32,7 +32,7 @@ public interface MyBatisDao<E extends BaseEntity<PK>, PK extends Serializable, C
 	List<E> readByCondition(C condition);
 
 	@SelectProvider(type = ReadSqlProvider.class, method = "readPage")
-	PageList<E> readPage(C condition, PageList<E> pageList);
+	PageList<E> readPage(C condition);
 
 	@UpdateProvider(type = UpdateSqlProvider.class, method = "update")
 	int update(E entity);

@@ -25,8 +25,8 @@
 		<module>evo-zipkin</module>
 		<module>evo-sp-base</module>
 		<module>evo-sp-base-mybatis</module>
-		<module>evo-sp-base-mybatis-xml</module>
 		<module>evo-sp-base-mybatis-sql-provider</module>
+		<module>evo-sp-base-mybatis-xml</module>
 		<module>evo-sp-auth</module>
 		<module>evo-sp-org</module>
 	</modules>
