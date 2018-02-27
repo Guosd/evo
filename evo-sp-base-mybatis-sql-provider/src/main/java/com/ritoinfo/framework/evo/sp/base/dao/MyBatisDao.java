@@ -22,8 +22,8 @@ public interface MyBatisDao<E extends BaseEntity<PK>, PK extends Serializable, C
 	@InsertProvider(type = CreateSqlProvider.class, method = "create")
 	PK create(E entity);
 
-	@SelectProvider(type = ReadSqlProvider.class, method = "readByPK")
-	E readByPK(PK id);
+	@SelectProvider(type = ReadSqlProvider.class, method = "readById")
+	E readById(PK id);
 
 	@SelectProvider(type = ReadSqlProvider.class, method = "readAll")
 	List<E> readAll();

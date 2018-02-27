@@ -3,8 +3,6 @@ package com.ritoinfo.framework.evo.sp.base.dao;
 import com.ritoinfo.framework.evo.sp.base.condition.BaseCondition;
 import com.ritoinfo.framework.evo.sp.base.entity.BaseEntity;
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
-import com.ritoinfo.framework.evo.sp.base.mybatis.interceptor.PageInterceptor;
-import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -19,14 +17,10 @@ import java.util.Map;
  */
 public abstract class MyBatisDao<E extends BaseEntity<PK>, PK extends Serializable, C extends BaseCondition> implements BaseDao<E, PK, C> {
 	private static final String SQL_ID_CREATE = "insert";
-	private static final String SQL_ID_READ_BY_PK = "select";
-	private static final String SQL_ID_READ_ALL = "select";
-	private static final String SQL_ID_READ_BY_CONDITION = "select";
-	private static final String SQL_ID_READ_PAGE = "select";
+	private static final String SQL_ID_READ = "select";
 	private static final String SQL_ID_UPDATE = "update";
 	private static final String SQL_ID_DELETE = "delete";
-	private static final String SQL_ID_COUNT_ALL = "count";
-	private static final String SQL_ID_COUNT_BY_CONDITION = "count";
+	private static final String SQL_ID_COUNT = "count";
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -38,38 +32,34 @@ public abstract class MyBatisDao<E extends BaseEntity<PK>, PK extends Serializab
 	}
 
 	@Override
-	public E readByPK(PK id) {
-		return sqlSession.selectOne(getStatement(SQL_ID_READ_BY_PK), id);
+	public E readById(PK id) {
+		return sqlSession.selectOne(getStatement(SQL_ID_READ), id);
 	}
 
 	@Override
 	public List<E> readAll() {
-		return sqlSession.selectList(getStatement(SQL_ID_READ_ALL));
+		return sqlSession.selectList(getStatement(SQL_ID_READ));
 	}
 
 	@Override
 	public List<E> readByCondition(C condition) {
-		return sqlSession.selectList(getStatement(SQL_ID_READ_BY_CONDITION), condition);
+		return sqlSession.selectList(getStatement(SQL_ID_READ), condition);
 	}
 
 	@Override
-	public PageList<E> readPage(C condition, PageList<E> pageList) {
-		List<Interceptor> interceptorList = sqlSession.getConfiguration().getInterceptors();
+	public PageList<E> readPage(C condition) {
+		PageList<E> pageList = new PageList<>();
+		pageList.setPageNo(condition.getPageNo());
+		pageList.setPageSize(condition.getPageSize());
 
-		boolean exist = false;
-		for (Interceptor interceptor : interceptorList) {
-			if (interceptor instanceof PageInterceptor) {
-				exist = true;
-				break;
-			}
+		int totalRecord = countByCondition(condition);
+		pageList.setTotalRecord(totalRecord);
+
+		if (totalRecord > 0) {
+			pageList.setDataList(readByCondition(condition));
 		}
 
-		if (!exist) {
-			sqlSession.getConfiguration().addInterceptor(new PageInterceptor());
-		}
-
-		sqlSession.selectList(getStatement(SQL_ID_READ_BY_CONDITION), condition);
-		return null;
+		return pageList;
 	}
 
 	@Override
@@ -84,13 +74,13 @@ public abstract class MyBatisDao<E extends BaseEntity<PK>, PK extends Serializab
 
 	@Override
 	public int countAll() {
-		Map<String, Object> map = sqlSession.selectMap(getStatement(SQL_ID_COUNT_ALL), "count");
+		Map<String, Object> map = sqlSession.selectMap(getStatement(SQL_ID_COUNT), "count");
 		return ((BigDecimal) map.get("count")).intValue();
 	}
 
 	@Override
 	public int countByCondition(C condition) {
-		Map<String, Object> map = sqlSession.selectMap(getStatement(SQL_ID_COUNT_BY_CONDITION), "count");
+		Map<String, Object> map = sqlSession.selectMap(getStatement(SQL_ID_COUNT), condition, "count");
 		return ((BigDecimal) map.get("count")).intValue();
 	}
 

@@ -8,7 +8,7 @@ import org.apache.ibatis.mapping.MappedStatement;
  * Date: 2018-02-13 13:36
  */
 public class ReadSqlProvider {
-	public String readByPK(MappedStatement mappedStatement) {
+	public String readById(MappedStatement mappedStatement) {
 		return new SQL() {{
 			SELECT("P.ID, P.USERNAME, P.PASSWORD, P.FULL_NAME");
 		}}.toString();

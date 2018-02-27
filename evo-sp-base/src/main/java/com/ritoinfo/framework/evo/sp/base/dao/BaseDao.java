@@ -14,13 +14,13 @@ import java.util.List;
 public interface BaseDao<E extends BaseEntity<PK>, PK extends Serializable, C extends BaseCondition> {
 	PK create(E entity);
 
-	E readByPK(PK id);
+	E readById(PK id);
 
 	List<E> readAll();
 
 	List<E> readByCondition(C condition);
 
-	PageList<E> readPage(C condition, PageList<E> pageList);
+	PageList<E> readPage(C condition);
 
 	int update(E entity);
 

@@ -24,7 +24,7 @@ public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity
 	}
 
 	public E read(PK id) {
-		return dao.readByPK(id);
+		return dao.readById(id);
 	}
 
 	public List<E> read() {
@@ -36,7 +36,7 @@ public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity
 	}
 
 	public PageList<E> read(C condition, PageList<E> pageList) {
-		return dao.readPage(condition, pageList);
+		return dao.readPage(condition);
 	}
 
 	@Transactional
