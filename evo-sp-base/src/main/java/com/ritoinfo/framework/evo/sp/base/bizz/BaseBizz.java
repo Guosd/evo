@@ -18,25 +18,44 @@ public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity
 	@Autowired
 	private D dao;
 
+	public E get(PK id) {
+		return dao.get(id);
+	}
+
+	public List<E> find() {
+		return dao.find(null);
+	}
+
+	public List<E> find(C condition) {
+		return dao.find(condition);
+	}
+
+	public PageList<E> findPage(C condition) {
+		PageList<E> pageList = new PageList<>();
+
+		int count = dao.count(condition);
+		pageList.setTotalRecord(count);
+		pageList.setPageNo(condition.getPageNo());
+		pageList.setPageSize(condition.getPageSize());
+
+		if (count > 0) {
+			pageList.setDataList(dao.find(condition));
+		}
+
+		return pageList;
+	}
+
+	public int count() {
+		return dao.count(null);
+	}
+
+	public int count(C condition) {
+		return dao.count(condition);
+	}
+
 	@Transactional
 	public void create(E entity) {
-		dao.create(entity);
-	}
-
-	public E read(PK id) {
-		return dao.readById(id);
-	}
-
-	public List<E> read() {
-		return dao.readAll();
-	}
-
-	public List<E> read(C condition) {
-		return dao.readByCondition(condition);
-	}
-
-	public PageList<E> read(C condition, PageList<E> pageList) {
-		return dao.readPage(condition);
+		dao.insert(entity);
 	}
 
 	@Transactional
@@ -49,13 +68,5 @@ public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity
 		for (PK id : ids) {
 			dao.delete(id);
 		}
-	}
-
-	public int count() {
-		return dao.countAll();
-	}
-
-	public int count(C condition) {
-		return dao.countByCondition(condition);
 	}
 }

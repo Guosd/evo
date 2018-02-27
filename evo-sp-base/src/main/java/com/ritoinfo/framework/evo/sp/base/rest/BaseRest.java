@@ -3,7 +3,6 @@ package com.ritoinfo.framework.evo.sp.base.rest;
 import com.ritoinfo.framework.evo.sp.base.bizz.BaseBizz;
 import com.ritoinfo.framework.evo.sp.base.condition.BaseCondition;
 import com.ritoinfo.framework.evo.sp.base.entity.BaseEntity;
-import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,33 +19,33 @@ public abstract class BaseRest<B extends BaseBizz, E extends BaseEntity, PK exte
 	@Autowired
 	private B bizz;
 
-	@RequestMapping(method = RequestMethod.POST)
-	public ServiceResponse create(E entity) {
-		bizz.create(entity);
-		return null;
-	}
-
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ServiceResponse read(@PathVariable PK id) {
-		bizz.read(id);
+	public ServiceResponse get(@PathVariable PK id) {
+		bizz.get(id);
 		return null;
 	}
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
-	public ServiceResponse read() {
-		bizz.read();
+	public ServiceResponse find() {
+		bizz.find();
 		return null;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ServiceResponse read(C condition) {
-		bizz.read(condition);
+	public ServiceResponse find(C condition) {
+		bizz.find(condition);
 		return null;
 	}
 
 	@RequestMapping(value = "/page", method = RequestMethod.GET)
-	public ServiceResponse read(C condition, PageList<E> pageList) {
-		bizz.read(condition, pageList);
+	public ServiceResponse findPage(C condition) {
+		bizz.findPage(condition);
+		return null;
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public ServiceResponse create(E entity) {
+		bizz.create(entity);
 		return null;
 	}
 

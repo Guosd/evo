@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ritoinfo.framework.evo.sp.auth.dao.UserDao">
-	<resultMap id="UserResultMap" type="com.ritoinfo.framework.evo.sp.auth.entity.User">
+
+	<resultMap id="UserResultMap" type="User">
 		<id column="id" property="id"/>
 		<result column="username" property="username"/>
 		<result column="password" property="password"/>
@@ -23,19 +24,27 @@
 				AND t.password = #{password}
 			</if>
 		</where>
-		<if test="pageSort != null">
-			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
-		</if>
 	</sql>
 
-	<select id="select" resultMap="UserResultMap">
+	<sql id="select">
 		SELECT
 		<include refid="columns"/>
 		  FROM auth_user t
 		<include refid="condition"/>
+	</sql>
+
+	<select id="get" resultMap="UserResultMap">
+		<include refid="select"/>
 	</select>
 
-	<select id="count" resultType="map">
+	<select id="find" resultMap="UserResultMap">
+		<include refid="select"/>
+		<if test="pageSort != null">
+			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
+		</if>
+	</select>
+
+	<select id="count" resultType="int">
 		SELECT count(1) count
 		  FROM auth_user t
 		<include refid="condition"/>
