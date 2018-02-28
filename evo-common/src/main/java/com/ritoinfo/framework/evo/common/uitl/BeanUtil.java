@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
  * Date: 2018-02-27 14:36
  */
 @Slf4j
-public class BeanAssist {
+public class BeanUtil {
 	public static Field getField(Object object, String fieldName) {
 		Class clazz = null;
 		Field field = null;

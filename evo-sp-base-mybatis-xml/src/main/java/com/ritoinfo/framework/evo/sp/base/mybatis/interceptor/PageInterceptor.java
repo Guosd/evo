@@ -1,7 +1,7 @@
 package com.ritoinfo.framework.evo.sp.base.mybatis.interceptor;
 
-import com.ritoinfo.framework.evo.common.uitl.BeanAssist;
-import com.ritoinfo.framework.evo.common.uitl.SqlAssist;
+import com.ritoinfo.framework.evo.common.uitl.BeanUtil;
+import com.ritoinfo.framework.evo.common.uitl.SqlUtil;
 import com.ritoinfo.framework.evo.sp.base.model.Page;
 import org.apache.ibatis.executor.statement.RoutingStatementHandler;
 import org.apache.ibatis.executor.statement.StatementHandler;
@@ -32,9 +32,9 @@ public class PageInterceptor implements Interceptor {
 		if (target instanceof RoutingStatementHandler) {
 			BoundSql boundSql = ((RoutingStatementHandler) target).getBoundSql();
 
-			Page page = (Page) BeanAssist.getFieldValue(boundSql.getParameterObject(), "page");
+			Page page = (Page) BeanUtil.getFieldValue(boundSql.getParameterObject(), "page");
 			if (page != null) {
-				BeanAssist.setFieldValue(boundSql, "sql", getPageSql(boundSql.getSql(), getJdbcUrl(target), page));
+				BeanUtil.setFieldValue(boundSql, "sql", getPageSql(boundSql.getSql(), getJdbcUrl(target), page));
 			}
 		}
 		return invocation.proceed();
@@ -50,16 +50,16 @@ public class PageInterceptor implements Interceptor {
 	}
 
 	private String getJdbcUrl(Object target) {
-		Configuration configuration = (Configuration) BeanAssist.getFieldValue(BeanAssist.getFieldValue(target, "delegate"), "configuration");
-		return (String) BeanAssist.getFieldValue(configuration.getEnvironment().getDataSource(), "jdbcUrl");
+		Configuration configuration = (Configuration) BeanUtil.getFieldValue(BeanUtil.getFieldValue(target, "delegate"), "configuration");
+		return (String) BeanUtil.getFieldValue(configuration.getEnvironment().getDataSource(), "jdbcUrl");
 	}
 
 	private String getPageSql(String sql, String jdbcUrl, Page page) throws Exception {
 		String pageSql;
 		if (jdbcUrl.contains(":oracle:")) {
-			pageSql = SqlAssist.toPageForOracle(sql, page.getPageNo(), page.getPageSize());
+			pageSql = SqlUtil.toPageForOracle(sql, page.getPageNo(), page.getPageSize());
 		} else if (jdbcUrl.contains(":mysql:")) {
-			pageSql = SqlAssist.toPageForMySql(sql, page.getPageNo(), page.getPageSize());
+			pageSql = SqlUtil.toPageForMySql(sql, page.getPageNo(), page.getPageSize());
 		} else {
 			throw new Exception("不支持的数据库");
 		}
