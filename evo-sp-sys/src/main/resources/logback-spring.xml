@@ -2,7 +2,7 @@
 <configuration>
 	<include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-	<property name="contextName" value="evo-eureka"/>
+	<property name="contextName" value="evo-sp-auth"/>
 	<property name="logdir" value="logs"/>
 
 	<contextName>${contextName}</contextName>
@@ -22,7 +22,7 @@
 		</encoder>
 	</appender>
 
-	<logger name="com.ritoinfo.framework.evo.eureka" level="DEBUG" additivity="false">
+	<logger name="com.ritoinfo.framework.evo.sp.sys" level="DEBUG" additivity="false">
 		<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="ROLLINGFILE"/>
 	</logger>

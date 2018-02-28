@@ -1,4 +1,4 @@
-package com.ritoinfo.framework.evo.sp.auth.condition;
+package com.ritoinfo.framework.evo.sp.sys.condition;
 
 import com.ritoinfo.framework.evo.sp.base.condition.BaseCondition;
 import lombok.Getter;

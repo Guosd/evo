@@ -1,7 +1,7 @@
-package com.ritoinfo.framework.evo.sp.auth.dao;
+package com.ritoinfo.framework.evo.sp.sys.dao;
 
-import com.ritoinfo.framework.evo.sp.auth.condition.UserCondition;
-import com.ritoinfo.framework.evo.sp.auth.entity.User;
+import com.ritoinfo.framework.evo.sp.sys.condition.UserCondition;
+import com.ritoinfo.framework.evo.sp.sys.entity.User;
 import com.ritoinfo.framework.evo.sp.base.dao.MyBatisDao;
 import org.apache.ibatis.annotations.Mapper;
 

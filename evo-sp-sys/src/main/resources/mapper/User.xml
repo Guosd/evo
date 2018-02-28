@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ritoinfo.framework.evo.sp.sys.dao.UserDao">
+
+	<resultMap id="UserResultMap" type="User">
+		<id column="id" property="id"/>
+		<result column="username" property="username"/>
+		<result column="password" property="password"/>
+		<result column="name" property="name"/>
+		<result column="code" property="code"/>
+		<result column="email" property="email"/>
+		<result column="phone" property="phone"/>
+		<result column="can_login" property="canLogin"/>
+		<result column="last_login_time" property="lastLoginTime"/>
+		<result column="last_login_ip" property="lastLoginIp"/>
+		<result column="create_by" property="createBy"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_by" property="updateBy"/>
+		<result column="update_time" property="updateTime"/>
+	</resultMap>
+
+	<sql id="columns">
+		t.id, t.username, t.password, t.name, t.code, t.email, t.phone, t.can_login, t.last_login_time, t.last_login_ip
+	</sql>
+
+	<sql id="condition">
+		<where>
+			<if test="id != null">
+				AND t.id = #{id}
+			</if>
+			<if test="username != null">
+				AND t.username = #{username}
+			</if>
+			<if test="password != null">
+				AND t.password = #{password}
+			</if>
+			<if test="name != null">
+				AND t.name = #{name}
+			</if>
+			<if test="code != null">
+				AND t.code = #{code}
+			</if>
+			<if test="email != null">
+				AND t.email = #{email}
+			</if>
+			<if test="phone != null">
+				AND t.phone = #{phone}
+			</if>
+			<if test="can_login != null">
+				AND t.can_login = #{can_login}
+			</if>
+			<if test="last_login_time != null">
+				AND t.last_login_time = #{last_login_time}
+			</if>
+			<if test="password != null">
+				AND t.last_login_ip = #{last_login_ip}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="select">
+		SELECT
+		<include refid="columns"/>
+		  FROM sys_user t
+		<include refid="condition"/>
+	</sql>
+
+	<select id="get" resultMap="UserResultMap">
+		<include refid="select"/>
+	</select>
+
+	<select id="find" resultMap="UserResultMap">
+		<include refid="select"/>
+		<if test="pageSort != null">
+			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
+		</if>
+	</select>
+
+	<select id="count" resultType="int">
+		SELECT count(1) count
+		  FROM sys_user t
+		<include refid="condition"/>
+	</select>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO sys_user (
+			username, password, name, code, email, phone, can_login, last_login_time, last_login_ip, create_by, create_time, update_by, update_time
+		) VALUES (
+			#{username}, #{password}, #{name}, #{code}, #{email}, #{phone}, #{can_login}, #{last_login_time}, #{last_login_ip}, #{create_by}, #{create_time}, #{update_by}, #{update_time}
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE sys_user SET
+			username = #{username},
+			password = #{password},
+			name = #{name},
+			code = #{code},
+			email = #{email},
+			phone = #{phone},
+			can_login = #{canLogin},
+			last_login_time = #{lastLoginTime},
+			last_login_ip = #{lastLoginIp},
+			update_by = #{updateBy},
+			update_time = #{updateTime},
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM sys_user WHERE id = #{id}
+	</delete>
+
+</mapper>
