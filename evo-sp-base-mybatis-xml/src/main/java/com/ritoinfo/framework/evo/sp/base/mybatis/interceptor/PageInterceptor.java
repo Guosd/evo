@@ -1,6 +1,8 @@
 package com.ritoinfo.framework.evo.sp.base.mybatis.interceptor;
 
 import com.ritoinfo.framework.evo.common.uitl.BeanAssist;
+import com.ritoinfo.framework.evo.common.uitl.SqlAssist;
+import com.ritoinfo.framework.evo.sp.base.model.Page;
 import org.apache.ibatis.executor.statement.RoutingStatementHandler;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
@@ -9,6 +11,7 @@ import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
 import org.apache.ibatis.plugin.Plugin;
 import org.apache.ibatis.plugin.Signature;
+import org.apache.ibatis.session.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -27,21 +30,11 @@ public class PageInterceptor implements Interceptor {
 	public Object intercept(Invocation invocation) throws Throwable {
 		Object target = invocation.getTarget();
 		if (target instanceof RoutingStatementHandler) {
-			RoutingStatementHandler routingStatementHandler = (RoutingStatementHandler) target;
-			BoundSql boundSql = routingStatementHandler.getBoundSql();
+			BoundSql boundSql = ((RoutingStatementHandler) target).getBoundSql();
 
-			String sql = boundSql.getSql();
-			if (sql.matches("^\\s*(?!)select\\s+(?!)count\\(.+\\).+(?!)from\\s+")) {
-
-			}
-
-			Object parameterObject = boundSql.getParameterObject();
-
-			Integer pageNo = (Integer) BeanAssist.getFieldValue(parameterObject, "pageNo");
-			Integer pageSize = (Integer) BeanAssist.getFieldValue(parameterObject, "pageSize");
-			if (pageNo != null && pageSize != null) {
-
-				System.out.println(sql);
+			Page page = (Page) BeanAssist.getFieldValue(boundSql.getParameterObject(), "page");
+			if (page != null) {
+				BeanAssist.setFieldValue(boundSql, "sql", getPageSql(boundSql.getSql(), getJdbcUrl(target), page));
 			}
 		}
 		return invocation.proceed();
@@ -54,17 +47,22 @@ public class PageInterceptor implements Interceptor {
 
 	@Override
 	public void setProperties(Properties properties) {
-
 	}
 
-	public static void main(String[] args) {
-	//	String sql = "select count(1) count from ";
-		String sql = " select count(*)  from";
-	//	if (sql.matches("\\s*(?!)select\\s+(?!)count\\(.+\\)\\s*.+(?!)from\\s+")) {
-		if (sql.matches("\\s*select\\s+count\\(.+\\)\\s+(\\w*|_*)\\s+from")) {
-			System.out.println(true);
+	private String getJdbcUrl(Object target) {
+		Configuration configuration = (Configuration) BeanAssist.getFieldValue(BeanAssist.getFieldValue(target, "delegate"), "configuration");
+		return (String) BeanAssist.getFieldValue(configuration.getEnvironment().getDataSource(), "jdbcUrl");
+	}
+
+	private String getPageSql(String sql, String jdbcUrl, Page page) throws Exception {
+		String pageSql;
+		if (jdbcUrl.contains(":oracle:")) {
+			pageSql = SqlAssist.toPageForOracle(sql, page.getPageNo(), page.getPageSize());
+		} else if (jdbcUrl.contains(":mysql:")) {
+			pageSql = SqlAssist.toPageForMySql(sql, page.getPageNo(), page.getPageSize());
 		} else {
-			System.out.println(false);
+			throw new Exception("不支持的数据库");
 		}
+		return pageSql;
 	}
 }

@@ -13,6 +13,10 @@ public class PageList<T> {
 	@Getter @Setter private Integer pageNo;
 	@Getter @Setter private Integer pageSize;
 	@Getter @Setter private Integer totalRecord;
-	@Getter @Setter private Integer totalPage;
+	private Integer totalPage;
 	@Getter @Setter private List<T> dataList;
+
+	public Integer getTotalRecord() {
+		return totalRecord % pageSize == 0 ? totalRecord / pageSize : totalRecord / pageSize + 1;
+	}
 }

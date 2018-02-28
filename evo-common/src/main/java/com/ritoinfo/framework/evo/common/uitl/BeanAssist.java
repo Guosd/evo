@@ -11,11 +11,17 @@ import java.lang.reflect.Field;
 @Slf4j
 public class BeanAssist {
 	public static Field getField(Object object, String fieldName) {
+		Class clazz = null;
 		Field field = null;
-		try {
-			field = object.getClass().getField(fieldName);
-		} catch (NoSuchFieldException ignored) {
-		}
+		do {
+			clazz = clazz == null ? object.getClass() : clazz.getSuperclass();
+
+			try {
+				field = clazz.getDeclaredField(fieldName);
+			} catch (NoSuchFieldException ignored) {
+			}
+		} while (field == null);
+
 		return field;
 	}
 
@@ -34,5 +40,18 @@ public class BeanAssist {
 		}
 
 		return value;
+	}
+
+	public static void setFieldValue(Object object, String fieldName, Object fieldValue) {
+		Field field = getField(object, fieldName);
+		if (field != null) {
+			field.setAccessible(true);
+
+			try {
+				field.set(object, fieldValue);
+			} catch (IllegalAccessException e) {
+				log.error("设置 Bean 中的属性值失败", e);
+			}
+		}
 	}
 }

@@ -28,8 +28,13 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-sp-base-mybatis</artifactId>
-			<version>${evo-sp-base-mybatis.version}</version>
+			<artifactId>evo-sp-base</artifactId>
+			<version>${evo-sp-base.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>${mybatis-spring-boot-starter.version}</version>
 		</dependency>
 	</dependencies>
 

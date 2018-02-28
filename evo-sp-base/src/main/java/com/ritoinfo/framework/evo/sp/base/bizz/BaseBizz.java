@@ -16,7 +16,7 @@ import java.util.List;
  */
 public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity<PK>, PK extends Serializable, C extends BaseCondition> {
 	@Autowired
-	private D dao;
+	protected D dao;
 
 	public E get(PK id) {
 		return dao.get(id);
@@ -33,13 +33,13 @@ public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity
 	public PageList<E> findPage(C condition) {
 		PageList<E> pageList = new PageList<>();
 
-		int count = dao.count(condition);
+		int count = dao.count(condition.count());
 		pageList.setTotalRecord(count);
 		pageList.setPageNo(condition.getPageNo());
 		pageList.setPageSize(condition.getPageSize());
 
 		if (count > 0) {
-			pageList.setDataList(dao.find(condition));
+			pageList.setDataList(dao.find(condition.page()));
 		}
 
 		return pageList;

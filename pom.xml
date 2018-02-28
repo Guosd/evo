@@ -24,8 +24,6 @@
 		<module>evo-admin</module>
 		<module>evo-zipkin</module>
 		<module>evo-sp-base</module>
-		<module>evo-sp-base-mybatis</module>
-		<module>evo-sp-base-mybatis-sql-provider</module>
 		<module>evo-sp-base-mybatis-xml</module>
 		<module>evo-sp-auth</module>
 		<module>evo-sp-org</module>
@@ -49,7 +47,6 @@
 		<mysql-connector-java.version>5.1.24</mysql-connector-java.version>
 		<evo-common.version>1.0.0-SNAPSHOT</evo-common.version>
 		<evo-sp-base.version>1.0.0-SNAPSHOT</evo-sp-base.version>
-		<evo-sp-base-mybatis.version>1.0.0-SNAPSHOT</evo-sp-base-mybatis.version>
 		<evo-sp-base-mybatis-xml.version>1.0.0-SNAPSHOT</evo-sp-base-mybatis-xml.version>
 	</properties>
 
