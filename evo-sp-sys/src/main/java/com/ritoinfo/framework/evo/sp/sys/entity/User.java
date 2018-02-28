@@ -2,6 +2,7 @@ package com.ritoinfo.framework.evo.sp.sys.entity;
 
 import com.ritoinfo.framework.evo.sp.base.entity.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.Date;
  */
 @Data
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class User extends BaseEntity<Long> {
 	private String username;// 用户名称
 	private String password;// 密码
