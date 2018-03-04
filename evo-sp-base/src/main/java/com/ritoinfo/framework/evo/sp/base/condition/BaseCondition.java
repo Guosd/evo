@@ -9,6 +9,7 @@ import lombok.Setter;
  * Date: 2018-02-12 14:07
  */
 public abstract class BaseCondition {
+	@Getter @Setter private Long id;
 	@Getter @Setter private Integer pageNo;
 	@Getter @Setter private Integer pageSize;
 	@Getter @Setter private String pageSort;

@@ -64,9 +64,7 @@ public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity
 	}
 
 	@Transactional
-	public void delete(PK... ids) {
-		for (PK id : ids) {
-			dao.delete(id);
-		}
+	public void delete(PK id) {
+		dao.delete(id);
 	}
 }

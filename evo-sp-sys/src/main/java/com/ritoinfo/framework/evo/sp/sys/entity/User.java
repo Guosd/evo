@@ -19,9 +19,9 @@ public class User extends BaseEntity<Long> {
 	private String password;// 密码
 	private String name;// 姓名
 	private String code;// 编码
-	private String email;//Email地址
+	private String email;// Email地址
 	private String phone;// 电话号码
-	private String canLogin;//能否登录
+	private String freeze;// 是否冻结 0 否， 1 是
 	private Date lastLoginTime;// 最后登录时间
 	private String lastLoginIp;// 最后登录IP
 }

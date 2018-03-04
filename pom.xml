@@ -27,6 +27,7 @@
 		<module>evo-sp-base-mybatis-xml</module>
 		<module>evo-sp-sys</module>
 		<module>evo-sp-auth</module>
+		<module>evo-data-redis</module>
 	</modules>
 
 	<properties>
@@ -48,6 +49,7 @@
 		<evo-common.version>1.0.0-SNAPSHOT</evo-common.version>
 		<evo-sp-base.version>1.0.0-SNAPSHOT</evo-sp-base.version>
 		<evo-sp-base-mybatis-xml.version>1.0.0-SNAPSHOT</evo-sp-base-mybatis-xml.version>
+		<evo-data-redis.version>1.0.0-SNAPSHOT</evo-data-redis.version>
 	</properties>
 
 	<dependencies>
