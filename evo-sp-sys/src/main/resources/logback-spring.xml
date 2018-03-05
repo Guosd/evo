@@ -2,7 +2,7 @@
 <configuration>
 	<include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-	<property name="contextName" value="evo-sp-auth"/>
+	<property name="contextName" value="evo-sp-sys"/>
 	<property name="logdir" value="logs"/>
 
 	<contextName>${contextName}</contextName>

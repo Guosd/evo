@@ -1,21 +1,37 @@
 package com.ritoinfo.framework.evo.sp.base.condition;
 
 import com.ritoinfo.framework.evo.sp.base.model.Page;
+import com.ritoinfo.framework.evo.sp.base.validate.group.ListGroup;
+import com.ritoinfo.framework.evo.sp.base.validate.group.PageGroup;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 
 /**
  * User: Kyll
  * Date: 2018-02-12 14:07
  */
 public abstract class BaseCondition<PK> {
-	@Getter @Setter private PK id;
-	@Getter @Setter @NotNull(groups = com.ritoinfo.framework.evo.sp.base.validate.group.Page.class) private Integer pageNo;
-	@Getter @Setter @NotNull(groups = com.ritoinfo.framework.evo.sp.base.validate.group.Page.class) private Integer pageSize;
-	@Getter @Setter @NotNull(groups = com.ritoinfo.framework.evo.sp.base.validate.group.Page.class) private String pageSort;
-	@Getter @Setter @NotNull(groups = com.ritoinfo.framework.evo.sp.base.validate.group.Page.class) private String pageOrder;
+	@Getter @Setter
+	private PK id;
+	@Getter @Setter
+	@Null(groups = ListGroup.class)
+	@NotNull(groups = PageGroup.class)
+	private Integer pageNo;
+	@Getter @Setter
+	@Null(groups = ListGroup.class)
+	@NotNull(groups = PageGroup.class)
+	private Integer pageSize;
+	@Getter @Setter
+	@Null(groups = ListGroup.class)
+	@NotNull(groups = PageGroup.class)
+	private String pageSort;
+	@Getter @Setter
+	@Null(groups = ListGroup.class)
+	@NotNull(groups = PageGroup.class)
+	private String pageOrder;
 
 	private Page page;
 

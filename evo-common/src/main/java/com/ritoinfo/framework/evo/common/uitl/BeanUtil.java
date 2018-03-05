@@ -1,8 +1,11 @@
 package com.ritoinfo.framework.evo.common.uitl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cglib.beans.BeanCopier;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * User: Kyll
@@ -10,6 +13,22 @@ import java.lang.reflect.Field;
  */
 @Slf4j
 public class BeanUtil {
+	private static final Map<String, BeanCopier> BEAN_COPIER_MAP = new HashMap<>();
+
+	public static void copy(Object dest, Object orig) {
+		String beanKey = dest.getClass().getName() + "_" + orig.getClass().getName();
+
+		BeanCopier copier;
+		if (BEAN_COPIER_MAP.containsKey(beanKey)) {
+			copier = BEAN_COPIER_MAP.get(beanKey);
+		} else {
+			copier = BeanCopier.create(orig.getClass(), dest.getClass(), false);
+			BEAN_COPIER_MAP.put(beanKey, copier);
+		}
+
+		copier.copy(orig, dest, null);
+	}
+
 	public static Field getField(Object object, String fieldName) {
 		Class clazz = null;
 		Field field = null;
