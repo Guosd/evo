@@ -21,6 +21,14 @@ public class ServiceResponse {
 		return of(Const.SRC_OK, Const.getSrm(Const.SRC_OK), data);
 	}
 
+	public static ServiceResponse badRequest() {
+		return badRequest(null);
+	}
+
+	public static ServiceResponse badRequest(Object data) {
+		return of(Const.SRC_BAD_REQUEST, Const.getSrm(Const.SRC_BAD_REQUEST), data);
+	}
+
 	public static ServiceResponse of(String code, String message, Object data) {
 		ServiceResponse serviceResponse = new ServiceResponse();
 		serviceResponse.setCode(code);

@@ -5,10 +5,15 @@ import com.ritoinfo.framework.evo.sp.base.condition.BaseCondition;
 import com.ritoinfo.framework.evo.sp.base.dao.BaseDao;
 import com.ritoinfo.framework.evo.sp.base.entity.BaseEntity;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
+import com.ritoinfo.framework.evo.sp.base.validate.group.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.io.Serializable;
 
@@ -20,41 +25,55 @@ public abstract class BaseRest<B extends BaseBizz<D, E, PK, C>, D extends BaseDa
 	@Autowired
 	private B bizz;
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	@GetMapping("/{id}")
 	public ServiceResponse get(@PathVariable PK id) {
 		return ServiceResponse.ok(bizz.get(id));
 	}
 
-	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	@GetMapping("/all")
 	public ServiceResponse find() {
 		return ServiceResponse.ok(bizz.find());
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
+	@GetMapping
 	public ServiceResponse find(C condition) {
 		return ServiceResponse.ok(bizz.find(condition));
 	}
 
-	@RequestMapping(value = "/page", method = RequestMethod.GET)
-	public ServiceResponse findPage(C condition) {
+	@GetMapping("/page")
+	public ServiceResponse findPage(@Validated(Page.class) C condition) {
 		return ServiceResponse.ok(bizz.findPage(condition));
 	}
 
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
 	public ServiceResponse create(E entity) {
 		bizz.create(entity);
 		return ServiceResponse.ok();
 	}
 
-	@RequestMapping(method = RequestMethod.PUT)
+	@PutMapping
 	public ServiceResponse update(E entity) {
 		bizz.update(entity);
 		return ServiceResponse.ok();
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@DeleteMapping("/{id}")
 	public ServiceResponse delete(@PathVariable PK id) {
 		bizz.delete(id);
 		return ServiceResponse.ok();
+	}
+
+	@ExceptionHandler
+	//@ResponseStatus(HttpStatus.BAD_REQUEST)
+	// https://lmonkiewicz.com/programming/get-noticed-2017/spring-boot-rest-request-validation/
+	// http/www.importnew.com/27186.html
+	public ServiceResponse handleException(Exception e) {
+		return ServiceResponse.badRequest(e.getMessage());
+	}
+
+	@ExceptionHandler
+	//@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	public ServiceResponse handleException2(E e) {
+		return ServiceResponse.badRequest(e.toString());
 	}
 }

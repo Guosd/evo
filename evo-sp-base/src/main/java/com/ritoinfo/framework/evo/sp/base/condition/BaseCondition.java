@@ -4,16 +4,18 @@ import com.ritoinfo.framework.evo.sp.base.model.Page;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * User: Kyll
  * Date: 2018-02-12 14:07
  */
 public abstract class BaseCondition<PK> {
 	@Getter @Setter private PK id;
-	@Getter @Setter private Integer pageNo;
-	@Getter @Setter private Integer pageSize;
-	@Getter @Setter private String pageSort;
-	@Getter @Setter private String pageOrder;
+	@Getter @Setter @NotNull(groups = com.ritoinfo.framework.evo.sp.base.validate.group.Page.class) private Integer pageNo;
+	@Getter @Setter @NotNull(groups = com.ritoinfo.framework.evo.sp.base.validate.group.Page.class) private Integer pageSize;
+	@Getter @Setter @NotNull(groups = com.ritoinfo.framework.evo.sp.base.validate.group.Page.class) private String pageSort;
+	@Getter @Setter @NotNull(groups = com.ritoinfo.framework.evo.sp.base.validate.group.Page.class) private String pageOrder;
 
 	private Page page;
 
