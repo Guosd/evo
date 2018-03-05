@@ -16,7 +16,7 @@ import java.io.Serializable;
  * User: Kyll
  * Date: 2018-02-09 15:58
  */
-public abstract class BaseRest<B extends BaseBizz<D, E, PK, C>, D extends BaseDao<E, PK, C>, E extends BaseEntity<PK>, PK extends Serializable, C extends BaseCondition> {
+public abstract class BaseRest<B extends BaseBizz<D, E, PK, C>, D extends BaseDao<E, PK, C>, E extends BaseEntity<PK>, PK extends Serializable, C extends BaseCondition<PK>> {
 	@Autowired
 	private B bizz;
 

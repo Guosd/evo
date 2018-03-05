@@ -32,9 +32,12 @@ public class PageInterceptor implements Interceptor {
 		if (target instanceof RoutingStatementHandler) {
 			BoundSql boundSql = ((RoutingStatementHandler) target).getBoundSql();
 
-			Page page = (Page) BeanUtil.getFieldValue(boundSql.getParameterObject(), "page");
-			if (page != null) {
-				BeanUtil.setFieldValue(boundSql, "sql", getPageSql(boundSql.getSql(), getJdbcUrl(target), page));
+			Object parameterObject = boundSql.getParameterObject();
+			if (parameterObject != null) {
+				Page page = (Page) BeanUtil.getFieldValue(parameterObject, "page");
+				if (page != null) {
+					BeanUtil.setFieldValue(boundSql, "sql", getPageSql(boundSql.getSql(), getJdbcUrl(target), page));
+				}
 			}
 		}
 		return invocation.proceed();

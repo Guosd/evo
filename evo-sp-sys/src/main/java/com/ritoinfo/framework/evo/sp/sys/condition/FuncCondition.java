@@ -8,7 +8,7 @@ import lombok.Setter;
  * User: Kyll
  * Date: 2018-03-04 17:59
  */
-public class FuncCondition extends BaseCondition {
+public class FuncCondition extends BaseCondition<Long> {
 	@Getter @Setter private String name;
 	@Getter @Setter private String code;
 	@Getter @Setter private Long parentId;

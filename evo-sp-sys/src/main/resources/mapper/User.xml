@@ -10,7 +10,7 @@
 		<result column="code" property="code"/>
 		<result column="email" property="email"/>
 		<result column="phone" property="phone"/>
-		<result column="can_login" property="canLogin"/>
+		<result column="freeze" property="freeze"/>
 		<result column="last_login_time" property="lastLoginTime"/>
 		<result column="last_login_ip" property="lastLoginIp"/>
 		<result column="create_by" property="createBy"/>
@@ -20,7 +20,7 @@
 	</resultMap>
 
 	<sql id="columns">
-		t.id, t.username, t.password, t.name, t.code, t.email, t.phone, t.can_login, t.last_login_time, t.last_login_ip
+		t.id, t.username, t.password, t.name, t.code, t.email, t.phone, t.freeze, t.last_login_time, t.last_login_ip
 	</sql>
 
 	<sql id="condition">
@@ -46,47 +46,45 @@
 			<if test="phone != null">
 				AND t.phone = #{phone}
 			</if>
-			<if test="can_login != null">
-				AND t.can_login = #{can_login}
+			<if test="freeze != null">
+				AND t.freeze = #{freeze}
 			</if>
-			<if test="last_login_time != null">
-				AND t.last_login_time = #{last_login_time}
+			<if test="lastLoginTime != null">
+				AND t.last_login_time = #{lastLoginTime}
 			</if>
-			<if test="password != null">
-				AND t.last_login_ip = #{last_login_ip}
+			<if test="lastLoginIp != null">
+				AND t.last_login_ip = #{lastLoginIp}
 			</if>
 		</where>
 	</sql>
 
 	<sql id="select">
-		SELECT
-		<include refid="columns"/>
-		  FROM sys_user t
-		<include refid="condition"/>
+		SELECT <include refid="columns"/> FROM sys_user t
 	</sql>
 
 	<select id="get" resultMap="UserResultMap">
 		<include refid="select"/>
+		WHERE t.id = #{value}
 	</select>
 
 	<select id="find" resultMap="UserResultMap">
 		<include refid="select"/>
+		<include refid="condition"/>
 		<if test="pageSort != null">
 			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
 		</if>
 	</select>
 
 	<select id="count" resultType="int">
-		SELECT count(1) count
-		  FROM sys_user t
+		SELECT count(1) count FROM sys_user t
 		<include refid="condition"/>
 	</select>
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO sys_user (
-			username, password, name, code, email, phone, can_login, last_login_time, last_login_ip, create_by, create_time, update_by, update_time
+			username, password, name, code, email, phone, freeze, last_login_time, last_login_ip, create_by, create_time, update_by, update_time
 		) VALUES (
-			#{username}, #{password}, #{name}, #{code}, #{email}, #{phone}, #{can_login}, #{last_login_time}, #{last_login_ip}, #{create_by}, #{create_time}, #{update_by}, #{update_time}
+			#{username}, #{password}, #{name}, #{code}, #{email}, #{phone}, #{freeze}, #{lastLoginTime}, #{lastLoginIp}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}
 		)
 	</insert>
 
@@ -98,11 +96,11 @@
 			code = #{code},
 			email = #{email},
 			phone = #{phone},
-			can_login = #{canLogin},
+			freeze = #{freeze},
 			last_login_time = #{lastLoginTime},
 			last_login_ip = #{lastLoginIp},
 			update_by = #{updateBy},
-			update_time = #{updateTime},
+			update_time = #{updateTime}
 		WHERE
 			id = #{id}
 	</update>

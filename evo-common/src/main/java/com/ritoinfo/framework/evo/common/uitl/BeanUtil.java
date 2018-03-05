@@ -13,8 +13,13 @@ public class BeanUtil {
 	public static Field getField(Object object, String fieldName) {
 		Class clazz = null;
 		Field field = null;
+
 		do {
 			clazz = clazz == null ? object.getClass() : clazz.getSuperclass();
+
+			if (clazz == null) {
+				break;
+			}
 
 			try {
 				field = clazz.getDeclaredField(fieldName);

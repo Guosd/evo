@@ -14,7 +14,7 @@ import java.util.List;
  * User: Kyll
  * Date: 2018-02-09 16:52
  */
-public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity<PK>, PK extends Serializable, C extends BaseCondition> {
+public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity<PK>, PK extends Serializable, C extends BaseCondition<PK>> {
 	@Autowired
 	protected D dao;
 

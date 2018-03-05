@@ -8,7 +8,7 @@ import lombok.Setter;
  * User: Kyll
  * Date: 2018-02-13 13:39
  */
-public class UserCondition extends BaseCondition {
+public class UserCondition extends BaseCondition<Long> {
 	@Getter @Setter private String username;
 	@Getter @Setter private String password;
 	@Getter @Setter private String name;
