@@ -29,6 +29,16 @@ public class BeanUtil {
 		copier.copy(orig, dest, null);
 	}
 
+	public static <T> T newInstance(Class<T> clazz) {
+		T t = null;
+		try {
+			t = clazz.newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			log.error("实例化对象失败", e);
+		}
+		return t;
+	}
+
 	public static Field getField(Object object, String fieldName) {
 		Class clazz = null;
 		Field field = null;
@@ -59,7 +69,7 @@ public class BeanUtil {
 			try {
 				value = field.get(object);
 			} catch (IllegalAccessException e) {
-				log.error("获取 Bean 中的属性值失败", e);
+				log.error("获取对象中的属性值失败", e);
 			}
 		}
 
@@ -74,7 +84,7 @@ public class BeanUtil {
 			try {
 				field.set(object, fieldValue);
 			} catch (IllegalAccessException e) {
-				log.error("设置 Bean 中的属性值失败", e);
+				log.error("设置对象中的属性值失败", e);
 			}
 		}
 	}
