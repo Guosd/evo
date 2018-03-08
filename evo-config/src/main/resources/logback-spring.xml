@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+	
+	<!-- 用于动态控制日志级别 -->
+	<jmxConfigurator/>
+	
+	<property name="contextName" value="scfw-config"/>
+	<property name="logdir" value="logs"/>
+
+	<contextName>${contextName}</contextName>
+
+	<appender name="ROLLINGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${logdir}/${contextName}.log</File>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${logdir}/${contextName}.%d{yyyy-MM-dd}.log</FileNamePattern>
+			<maxHistory>3</maxHistory>
+			<totalSizeCap>1GB</totalSizeCap>
+		</rollingPolicy>
+
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID} --- [%t] %logger : %m%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.yqjr.scfw.config" level="DEBUG" additivity="false">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="ROLLINGFILE"/>
+	</logger>
+
+	<root level="INFO">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="ROLLINGFILE"/>
+	</root>
+
+</configuration>

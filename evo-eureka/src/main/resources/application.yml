@@ -1,8 +1,8 @@
+server:
+  port: 50101
 spring:
   application:
     name: evo-eureka
-server:
-  port: 50101
 eureka:
   server:
     response-cache-update-interval-ms: 3000

@@ -1,8 +1,10 @@
 package com.ritoinfo.framework.evo.sp.base.rest;
 
+import com.ritoinfo.framework.evo.sp.base.assist.BaseHelper;
 import com.ritoinfo.framework.evo.sp.base.bizz.BaseBizz;
 import com.ritoinfo.framework.evo.sp.base.condition.BaseCondition;
 import com.ritoinfo.framework.evo.sp.base.dao.BaseDao;
+import com.ritoinfo.framework.evo.sp.base.dto.BaseDto;
 import com.ritoinfo.framework.evo.sp.base.entity.BaseEntity;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import com.ritoinfo.framework.evo.sp.base.validate.group.ListGroup;
@@ -21,7 +23,7 @@ import java.io.Serializable;
  * User: Kyll
  * Date: 2018-02-09 15:58
  */
-public abstract class BaseRest<B extends BaseBizz<D, E, PK, C>, D extends BaseDao<E, PK, C>, E extends BaseEntity<PK>, PK extends Serializable, C extends BaseCondition<PK>> {
+public abstract class BaseRest<B extends BaseBizz<D, E, PK, C>, D extends BaseDao<E, PK, C>, E extends BaseEntity<PK>, PK extends Serializable, C extends BaseCondition<PK>, T extends BaseDto> {
 	@Autowired
 	private B bizz;
 
@@ -46,13 +48,17 @@ public abstract class BaseRest<B extends BaseBizz<D, E, PK, C>, D extends BaseDa
 	}
 
 	@PostMapping
-	public ServiceResponse create(E entity) {
+	public ServiceResponse create(T dto) {
+		E entity = BaseHelper.toEntity(dto);
+
 		bizz.create(entity);
 		return ServiceResponse.ok();
 	}
 
 	@PutMapping
-	public ServiceResponse update(E entity) {
+	public ServiceResponse update(T dto) {
+		E entity = BaseHelper.toEntity(dto);
+
 		bizz.update(entity);
 		return ServiceResponse.ok();
 	}

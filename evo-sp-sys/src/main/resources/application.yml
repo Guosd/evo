@@ -1,3 +1,5 @@
+server:
+  port: 50201
 spring:
   application:
     name: evo-sp-sys
@@ -5,11 +7,9 @@ spring:
     name: test
     url: jdbc:mysql://127.0.0.1:3306/eco?useUnicode=true&characterEncoding=UTF8
     username: root
-    password: root
+    password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
-server:
-  port: 50201
 eureka:
   instance:
     lease-expiration-duration-in-seconds: 15

@@ -4,6 +4,7 @@ import com.ritoinfo.framework.evo.sp.base.rest.BaseRest;
 import com.ritoinfo.framework.evo.sp.sys.bizz.FuncBizz;
 import com.ritoinfo.framework.evo.sp.sys.condition.FuncCondition;
 import com.ritoinfo.framework.evo.sp.sys.dao.FuncDao;
+import com.ritoinfo.framework.evo.sp.sys.dto.FuncDto;
 import com.ritoinfo.framework.evo.sp.sys.entity.Func;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,5 +17,5 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("func")
 @RestController
-public class FuncRest extends BaseRest<FuncBizz, FuncDao, Func, Long, FuncCondition> {
+public class FuncRest extends BaseRest<FuncBizz, FuncDao, Func, Long, FuncCondition, FuncDto> {
 }

@@ -1,0 +1,147 @@
+server:
+  port: 50001
+  tomcat:
+    max-threads: 128
+    min-spare-threads: 64
+  error:
+    include-stacktrace: always
+spring:
+  application:
+    name: evo-zuul
+  cloud:
+    config:
+      name: config
+      discovery:
+        enabled: true
+        service-id: evo-config
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+  redis:
+    cluster:
+      nodes: 10.20.133.85:7000, 10.20.133.85:7002, 10.20.133.85:7003, 10.20.133.85:7004, 10.20.133.85:7005
+zuul:
+  retryable: true
+  #ribbon:
+  #  eager-load:
+  #    enabled: true
+  sensitiveHeaders:
+  ignoredServices: '*'
+  routes:
+    sp-auth:
+      path: /auth/**
+      serviceId: sp-auth
+    sp-base:
+      path: /base/**
+      serviceId: sp-base
+    sp-ui:
+      path: /ui/**
+      serviceId: sp-ui
+    sp-eco-base:
+      path: /eco/base/**
+      serviceId: sp-eco-base
+    sp-eco-product:
+      path: /eco/prod/**
+      serviceId: sp-eco-product
+    sp-eco-store:
+      path: /eco/store/**
+      serviceId: sp-eco-store
+    sp-eco-ui:
+      path: /eco/ui/**
+      serviceId: sp-eco-ui
+    sp-eco-ware:
+      path: /eco/ware/**
+      serviceId: sp-eco-ware
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+    sp-auth:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+    sp-base:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+    sp-ui:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+    sp-eco-base:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+    sp-eco-product:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+    sp-eco-store:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+    sp-eco-ui:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+    sp-eco-ware:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
+feign:
+  httpclient:
+    connection-timeout: 10000
+sp-base:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.yqjr.scfw.zuul.loadbalancer.BackToSelfRule
+sp-ui:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.yqjr.scfw.zuul.loadbalancer.BackToSelfRule
+sp-eco-base:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.yqjr.scfw.zuul.loadbalancer.BackToSelfRule
+sp-eco-product:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.yqjr.scfw.zuul.loadbalancer.BackToSelfRule
+sp-eco-store:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.yqjr.scfw.zuul.loadbalancer.BackToSelfRule
+sp-eco-ui:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.yqjr.scfw.zuul.loadbalancer.BackToSelfRule
+sp-eco-ware:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.yqjr.scfw.zuul.loadbalancer.BackToSelfRule
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+  client:
+    initial-instance-info-replication-interval-seconds: 5
+    registry-fetch-interval-seconds: 5
+    serviceUrl:
+      defaultZone: http://localhost:50101/eureka
+---
+spring:
+  profiles: sit
+eureka:
+  instance:
+    ip-address: 10.20.133.30
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://10.20.133.30:50101/eureka

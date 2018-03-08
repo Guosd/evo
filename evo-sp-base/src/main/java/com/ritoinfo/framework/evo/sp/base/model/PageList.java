@@ -12,7 +12,7 @@ import java.util.List;
 public class PageList<T> {
 	@Getter @Setter private Integer pageNo;
 	@Getter @Setter private Integer pageSize;
-	@Getter @Setter private Integer totalRecord;
+	@Setter private Integer totalRecord;
 	private Integer totalPage;
 	@Getter @Setter private List<T> dataList;
 

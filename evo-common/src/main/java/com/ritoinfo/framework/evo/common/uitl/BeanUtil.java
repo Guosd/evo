@@ -29,6 +29,25 @@ public class BeanUtil {
 		copier.copy(orig, dest, null);
 	}
 
+	public static String getClassName(Object object) {
+		return object.getClass().getName();
+	}
+
+	public static Class getClass(String className) {
+		Class clazz = null;
+		try {
+			clazz = Class.forName(className);
+		} catch (ClassNotFoundException e) {
+			log.error("获取对象Class失败", e);
+		}
+		return clazz;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T> T newInstance(String className) {
+		return (T) newInstance(getClass(className));
+	}
+
 	public static <T> T newInstance(Class<T> clazz) {
 		T t = null;
 		try {

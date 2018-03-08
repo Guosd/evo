@@ -15,23 +15,23 @@ import javax.validation.constraints.Null;
  */
 public abstract class BaseCondition<PK> {
 	@Getter @Setter
-	private PK id;
+	protected PK id;
 	@Getter @Setter
 	@Null(groups = ListGroup.class)
 	@NotNull(groups = PageGroup.class)
-	private Integer pageNo;
+	protected Integer pageNo;
 	@Getter @Setter
 	@Null(groups = ListGroup.class)
 	@NotNull(groups = PageGroup.class)
-	private Integer pageSize;
+	protected Integer pageSize;
 	@Getter @Setter
 	@Null(groups = ListGroup.class)
 	@NotNull(groups = PageGroup.class)
-	private String pageSort;
+	protected String pageSort;
 	@Getter @Setter
 	@Null(groups = ListGroup.class)
 	@NotNull(groups = PageGroup.class)
-	private String pageOrder;
+	protected String pageOrder;
 
 	private Page page;
 
