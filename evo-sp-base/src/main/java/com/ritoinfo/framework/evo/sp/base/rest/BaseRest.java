@@ -7,8 +7,10 @@ import com.ritoinfo.framework.evo.sp.base.dao.BaseDao;
 import com.ritoinfo.framework.evo.sp.base.dto.BaseDto;
 import com.ritoinfo.framework.evo.sp.base.entity.BaseEntity;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
+import com.ritoinfo.framework.evo.sp.base.validate.group.CreateGroup;
 import com.ritoinfo.framework.evo.sp.base.validate.group.ListGroup;
 import com.ritoinfo.framework.evo.sp.base.validate.group.PageGroup;
+import com.ritoinfo.framework.evo.sp.base.validate.group.UpdateGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -48,7 +50,7 @@ public abstract class BaseRest<B extends BaseBizz<D, E, PK, C>, D extends BaseDa
 	}
 
 	@PostMapping
-	public ServiceResponse create(T dto) {
+	public ServiceResponse create(@Validated(CreateGroup.class) T dto) {
 		E entity = BaseHelper.toEntity(dto);
 
 		bizz.create(entity);
@@ -56,7 +58,7 @@ public abstract class BaseRest<B extends BaseBizz<D, E, PK, C>, D extends BaseDa
 	}
 
 	@PutMapping
-	public ServiceResponse update(T dto) {
+	public ServiceResponse update(@Validated(UpdateGroup.class) T dto) {
 		E entity = BaseHelper.toEntity(dto);
 
 		bizz.update(entity);
