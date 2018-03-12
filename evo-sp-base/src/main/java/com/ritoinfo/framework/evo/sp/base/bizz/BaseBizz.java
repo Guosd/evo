@@ -1,5 +1,6 @@
 package com.ritoinfo.framework.evo.sp.base.bizz;
 
+import com.ritoinfo.framework.evo.common.uitl.DateUtil;
 import com.ritoinfo.framework.evo.sp.base.condition.BaseCondition;
 import com.ritoinfo.framework.evo.sp.base.dao.BaseDao;
 import com.ritoinfo.framework.evo.sp.base.entity.BaseEntity;
@@ -55,6 +56,8 @@ public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity
 
 	@Transactional
 	public void create(E entity) {
+		entity.setCreateTime(DateUtil.now());
+		entity.setUpdateTime(entity.getCreateTime());
 		dao.insert(entity);
 	}
 

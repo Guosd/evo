@@ -10,9 +10,8 @@ import lombok.Setter;
  * 调用异常
  * 业务异常不要直接抛出，必须转换为此异常的子类
  */
-public class RestException extends RuntimeException {
+public class RestException extends BaseException {
 	@Getter @Setter protected String code;
-	@Getter @Setter protected Object data;
 
 	public RestException(String code, String message) {
 		this(code, message, null);
@@ -23,9 +22,8 @@ public class RestException extends RuntimeException {
 	}
 
 	public RestException(String code, String message, Object data, Throwable e) {
-		super(message, e);
+		super(message, data, e);
 
 		this.code = code;
-		this.data = data;
 	}
 }

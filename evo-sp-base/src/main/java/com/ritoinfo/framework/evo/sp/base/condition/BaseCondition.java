@@ -6,6 +6,7 @@ import com.ritoinfo.framework.evo.sp.base.validate.group.PageGroup;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
@@ -26,11 +27,11 @@ public abstract class BaseCondition<PK> {
 	protected Integer pageSize;
 	@Getter @Setter
 	@Null(groups = ListGroup.class)
-	@NotNull(groups = PageGroup.class)
+	@NotBlank(groups = PageGroup.class)
 	protected String pageSort;
 	@Getter @Setter
 	@Null(groups = ListGroup.class)
-	@NotNull(groups = PageGroup.class)
+	@NotBlank(groups = PageGroup.class)
 	protected String pageOrder;
 
 	private Page page;

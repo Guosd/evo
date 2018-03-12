@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * User: Kyll
  * Date: 2018-03-04 18:05
@@ -16,4 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 @Service
 public class RoleBizz extends BaseBizz<RoleDao, Role, Long, RoleCondition> {
+	public List<Role> getByUserId(Long userId) {
+		return dao.getByUserId(userId);
+	}
 }

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ritoinfo.framework.evo.sp.sys.dao.RoleDao">
+
+	<resultMap id="RoleResultMap" type="Role">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="code" property="code"/>
+		<result column="create_by" property="createBy"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_by" property="updateBy"/>
+		<result column="update_time" property="updateTime"/>
+	</resultMap>
+
+	<sql id="columns">
+		t.id, t.name, t.code,
+		t.create_by, t.create_time, t.update_by, t.update_time
+	</sql>
+
+	<sql id="condition">
+		<where>
+			<if test="id != null">
+				AND t.id = #{id}
+			</if>
+			<if test="name != null">
+				AND t.name = #{name}
+			</if>
+			<if test="code != null">
+				AND t.code = #{code}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="select">
+		SELECT <include refid="columns"/> FROM sys_role t
+	</sql>
+
+	<select id="get" resultMap="RoleResultMap">
+		<include refid="select"/>
+		WHERE t.id = #{value}
+	</select>
+
+	<select id="getByUserId" resultMap="RoleResultMap">
+		<include refid="select"/>
+		JOIN sys_user_role t0 ON t.id = t0.role_id
+		WHERE t0.user_id = #{value}
+	</select>
+
+	<select id="find" resultMap="RoleResultMap">
+		<include refid="select"/>
+		<include refid="condition"/>
+		<if test="pageSort != null">
+			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
+		</if>
+	</select>
+
+	<select id="count" resultType="int">
+		SELECT count(1) count FROM sys_role t
+		<include refid="condition"/>
+	</select>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO sys_role (
+			name, code, create_by, create_time, update_by, update_time
+		) VALUES (
+			#{name}, #{code}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE sys_role SET
+			name = #{name},
+			code = #{code},
+			update_by = #{updateBy},
+			update_time = #{updateTime}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM sys_role WHERE id = #{id}
+	</delete>
+
+</mapper>

@@ -6,6 +6,7 @@ import com.ritoinfo.framework.evo.sp.base.condition.BaseCondition;
 import com.ritoinfo.framework.evo.sp.base.dao.BaseDao;
 import com.ritoinfo.framework.evo.sp.base.dto.BaseDto;
 import com.ritoinfo.framework.evo.sp.base.entity.BaseEntity;
+import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import com.ritoinfo.framework.evo.sp.base.validate.group.CreateGroup;
 import com.ritoinfo.framework.evo.sp.base.validate.group.ListGroup;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * User: Kyll
@@ -27,26 +29,26 @@ import java.io.Serializable;
  */
 public abstract class BaseRest<B extends BaseBizz<D, E, PK, C>, D extends BaseDao<E, PK, C>, E extends BaseEntity<PK>, PK extends Serializable, C extends BaseCondition<PK>, T extends BaseDto> {
 	@Autowired
-	private B bizz;
+	protected B bizz;
 
 	@GetMapping("/{id}")
-	public ServiceResponse get(@PathVariable PK id) {
-		return ServiceResponse.ok(bizz.get(id));
+	public ServiceResponse<T> get(@PathVariable PK id) {
+		return ServiceResponse.ok(BaseHelper.toDto(bizz.get(id)));
 	}
 
 	@GetMapping("/all")
-	public ServiceResponse find() {
-		return ServiceResponse.ok(bizz.find());
+	public ServiceResponse<List<T>> find() {
+		return ServiceResponse.ok(BaseHelper.toDto(bizz.find()));
 	}
 
 	@GetMapping
-	public ServiceResponse find(@Validated(ListGroup.class)C condition) {
-		return ServiceResponse.ok(bizz.find(condition));
+	public ServiceResponse<List<T>> find(@Validated(ListGroup.class)C condition) {
+		return ServiceResponse.ok(BaseHelper.toDto(bizz.find(condition)));
 	}
 
 	@GetMapping("/page")
-	public ServiceResponse findPage(@Validated(PageGroup.class) C condition) {
-		return ServiceResponse.ok(bizz.findPage(condition));
+	public ServiceResponse<PageList<T>> findPage(@Validated(PageGroup.class) C condition) {
+		return ServiceResponse.ok(BaseHelper.toDto(bizz.findPage(condition)));
 	}
 
 	@PostMapping

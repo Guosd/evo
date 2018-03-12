@@ -48,6 +48,11 @@
 			<version>${evo-sp-base-mybatis-xml.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-common-password</artifactId>
+			<version>${evo-common-password.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql-connector-java.version}</version>

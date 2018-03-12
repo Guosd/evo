@@ -44,13 +44,28 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-sp-base-mybatis-xml</artifactId>
-			<version>${evo-sp-base-mybatis-xml.version}</version>
+			<artifactId>evo-sp-base</artifactId>
+			<version>${evo-sp-base.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-common-jwt</artifactId>
+			<version>${evo-common-jwt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-common-password</artifactId>
+			<version>${evo-common-password.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
 			<artifactId>evo-data-redis</artifactId>
 			<version>${evo-data-redis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.version}</version>
 		</dependency>
 	</dependencies>
 

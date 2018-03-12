@@ -20,7 +20,8 @@
 	</resultMap>
 
 	<sql id="columns">
-		t.id, t.username, t.password, t.name, t.code, t.email, t.phone, t.freeze, t.last_login_time, t.last_login_ip
+		t.id, t.username, t.password, t.name, t.code, t.email, t.phone, t.freeze, t.last_login_time, t.last_login_ip,
+		t.create_by, t.create_time, t.update_by, t.update_time
 	</sql>
 
 	<sql id="condition">

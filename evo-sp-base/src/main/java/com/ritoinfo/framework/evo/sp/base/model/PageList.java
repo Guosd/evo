@@ -12,11 +12,10 @@ import java.util.List;
 public class PageList<T> {
 	@Getter @Setter private Integer pageNo;
 	@Getter @Setter private Integer pageSize;
-	@Setter private Integer totalRecord;
-	private Integer totalPage;
+	@Getter @Setter private Integer totalRecord;
 	@Getter @Setter private List<T> dataList;
 
-	public Integer getTotalRecord() {
+	public Integer getTotalPage() {
 		return totalRecord % pageSize == 0 ? totalRecord / pageSize : totalRecord / pageSize + 1;
 	}
 }

@@ -14,6 +14,9 @@ public class Const {
 
 	public static final String RC_BASE_SPECIFICATION = "BASE-0001";
 
+	public static final String JWT_TOKEN = "token";
+	public static final String JWT_REFRESH_TOKEN = "refreshToken";
+
 	private static final Map<String, String> SRM_MAP = new HashMap<>();
 	private static final Map<String, String> RCM_MAP = new HashMap<>();
 

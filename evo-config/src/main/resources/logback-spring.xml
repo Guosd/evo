@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 	<include resource="org/springframework/boot/logging/logback/base.xml"/>
-	
+
 	<!-- 用于动态控制日志级别 -->
 	<jmxConfigurator/>
-	
-	<property name="contextName" value="scfw-config"/>
+
+	<property name="contextName" value="evo-config"/>
 	<property name="logdir" value="logs"/>
 
 	<contextName>${contextName}</contextName>
@@ -25,7 +25,7 @@
 		</encoder>
 	</appender>
 
-	<logger name="com.yqjr.scfw.config" level="DEBUG" additivity="false">
+	<logger name="com.ritoinfo.framework.evo.config" level="DEBUG" additivity="false">
 		<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="ROLLINGFILE"/>
 	</logger>
