@@ -10,6 +10,7 @@ import com.ritoinfo.framework.evo.sp.auth.exception.UserNotFoundException;
 import com.ritoinfo.framework.evo.sp.auth.infa.SysUserInfa;
 import com.ritoinfo.framework.evo.sp.auth.infa.dto.UserDto;
 import com.ritoinfo.framework.evo.sp.base.infa.model.ServiceResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
  * User: Kyll
  * Date: 2018-03-08 14:33
  */
+@Slf4j
 @Service
 public class AuthBizz {
 	@Autowired
