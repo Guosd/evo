@@ -13,6 +13,7 @@ public class Const {
 	public static final String SRC_INTERNAL_SERVER_ERROR = "500";
 
 	public static final String RC_BASE_SPECIFICATION = "BASE-0001";
+	public static final String RC_AUTH_LOGIN = "AUTH-0001";
 
 	public static final String JWT_TOKEN = "token";
 	public static final String JWT_REFRESH_TOKEN = "refreshToken";
@@ -26,6 +27,7 @@ public class Const {
 		SRM_MAP.put(SRC_INTERNAL_SERVER_ERROR, "Internal Server Error");
 
 		RCM_MAP.put(RC_BASE_SPECIFICATION, "代码风格不符合框架规范");
+		RCM_MAP.put(RC_AUTH_LOGIN, "用户名或密码无效");
 	}
 
 	public static String getSrm(String src) {

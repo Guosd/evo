@@ -1,4 +1,4 @@
-package com.ritoinfo.framework.evo.zuul;
+package com.ritoinfo.framework.evo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,7 +20,7 @@ import org.springframework.web.filter.CorsFilter;
 @EnableZuulProxy
 @EnableDiscoveryClient
 @SpringBootApplication
-public class Application {
+public class EvoZuulApplication {
 	@LoadBalanced
 	@Bean
 	public RestTemplate restTemplate() {
@@ -43,6 +43,6 @@ public class Application {
 	}
 
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(EvoZuulApplication.class, args);
 	}
 }

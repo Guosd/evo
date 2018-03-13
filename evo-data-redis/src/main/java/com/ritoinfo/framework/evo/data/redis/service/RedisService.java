@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -14,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class RedisService {
 	@Autowired
-	private RedisTemplate<String, String> redisTemplate;
+	private RedisTemplate<Serializable, Serializable> redisTemplate;
 
 	public void add(String key, String value, Date expire) {
 		redisTemplate.opsForValue().set(key, value);

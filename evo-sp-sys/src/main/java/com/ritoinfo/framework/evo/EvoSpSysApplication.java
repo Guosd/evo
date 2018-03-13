@@ -1,21 +1,19 @@
-package com.ritoinfo.framework.evo.sp.auth;
+package com.ritoinfo.framework.evo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.openfeign.EnableFeignClients;
-import org.springframework.context.annotation.ComponentScan;
 
 /**
  * User: Kyll
  * Date: 2017-11-27 11:57
  */
-@ComponentScan(basePackages = {"com.ritoinfo.framework.evo.sp"})
 @EnableFeignClients
 @EnableCircuitBreaker
 @SpringBootApplication
-public class Application {
+public class EvoSpSysApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(EvoSpSysApplication.class, args);
 	}
 }

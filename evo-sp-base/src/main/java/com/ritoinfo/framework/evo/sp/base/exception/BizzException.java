@@ -12,8 +12,8 @@ public class BizzException extends BaseException {
 		this(message, null);
 	}
 
-	public BizzException(String message, Object data) {
-		this(message, data, null);
+	public BizzException(String message, Throwable e) {
+		this(message, null, e);
 	}
 
 	public BizzException(String message, Object data, Throwable e) {

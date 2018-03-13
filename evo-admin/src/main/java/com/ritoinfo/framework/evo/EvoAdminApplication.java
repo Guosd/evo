@@ -1,4 +1,4 @@
-package com.ritoinfo.framework.evo.common.jwt;
+package com.ritoinfo.framework.evo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Date: 2018-02-26 20:53
  */
 @SpringBootApplication
-public class Application {
+public class EvoAdminApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
+		SpringApplication.run(EvoAdminApplication.class, args);
 	}
 }

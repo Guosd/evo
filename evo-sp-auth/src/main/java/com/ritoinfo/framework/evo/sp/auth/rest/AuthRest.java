@@ -1,7 +1,10 @@
 package com.ritoinfo.framework.evo.sp.auth.rest;
 
+import com.ritoinfo.framework.evo.common.Const;
 import com.ritoinfo.framework.evo.sp.auth.bizz.AuthBizz;
 import com.ritoinfo.framework.evo.sp.auth.condition.AuthCondition;
+import com.ritoinfo.framework.evo.sp.base.exception.BizzException;
+import com.ritoinfo.framework.evo.sp.base.exception.RestException;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import com.ritoinfo.framework.evo.sp.base.validate.group.LoginGroup;
 import com.ritoinfo.framework.evo.sp.base.validate.group.LogoutGroup;
@@ -25,7 +28,11 @@ public class AuthRest {
 
 	@GetMapping("login")
 	public ServiceResponse login(@Validated(LoginGroup.class) AuthCondition authCondition) {
-		return ServiceResponse.ok(authBizz.authorize(authCondition));
+		try {
+			return ServiceResponse.ok(authBizz.authorize(authCondition));
+		} catch (BizzException e) {
+			throw new RestException(Const.RC_AUTH_LOGIN, Const.getRcm(Const.RC_AUTH_LOGIN));
+		}
 	}
 
 	@GetMapping("logout")

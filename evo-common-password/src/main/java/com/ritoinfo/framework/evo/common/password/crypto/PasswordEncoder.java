@@ -11,12 +11,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class PasswordEncoder {
-	//private final PasswordConfig passwordConfig;
 	private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Autowired
 	public PasswordEncoder(PasswordConfig passwordConfig) {
-		//this.passwordConfig = passwordConfig;
 		this.bCryptPasswordEncoder = new BCryptPasswordEncoder(passwordConfig.getSalt());
 	}
 

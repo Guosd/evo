@@ -17,8 +17,8 @@ public class RestException extends BaseException {
 		this(code, message, null);
 	}
 
-	public RestException(String code, String message, Object data) {
-		this(code, message, data, null);
+	public RestException(String code, String message, Throwable e) {
+		this(code, message, null, e);
 	}
 
 	public RestException(String code, String message, Object data, Throwable e) {

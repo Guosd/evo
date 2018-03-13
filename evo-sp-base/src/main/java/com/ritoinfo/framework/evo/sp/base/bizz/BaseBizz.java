@@ -63,6 +63,7 @@ public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity
 
 	@Transactional
 	public void update(E entity) {
+		entity.setUpdateTime(DateUtil.now());
 		dao.update(entity);
 	}
 

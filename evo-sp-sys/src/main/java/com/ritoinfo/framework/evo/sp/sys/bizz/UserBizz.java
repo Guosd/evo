@@ -30,6 +30,13 @@ public class UserBizz extends BaseBizz<UserDao, User, Long, UserCondition> {
 		super.create(entity);
 	}
 
+	@Transactional
+	@Override
+	public void update(User entity) {
+		entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+		super.update(entity);
+	}
+
 	public User getByUsername(String username) {
 		UserCondition condition = new UserCondition();
 		condition.setUsername(username);

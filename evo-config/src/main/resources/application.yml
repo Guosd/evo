@@ -26,6 +26,17 @@ spring:
           default-label: /src/scfw/scfw-config-file
 ---
 spring:
+  profiles:
+    active: git
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/kyllyang/evo-config-file
+          username: kyllyang
+          password: ky40010628ll
+---
+spring:
   profiles: sit
 eureka:
   instance:
