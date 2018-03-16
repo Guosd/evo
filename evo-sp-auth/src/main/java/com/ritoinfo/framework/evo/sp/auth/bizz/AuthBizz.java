@@ -1,18 +1,23 @@
 package com.ritoinfo.framework.evo.sp.auth.bizz;
 
 import com.ritoinfo.framework.evo.common.jwt.model.TokenInfo;
+import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
 import com.ritoinfo.framework.evo.common.jwt.token.JwtToken;
 import com.ritoinfo.framework.evo.common.password.crypto.PasswordEncoder;
 import com.ritoinfo.framework.evo.data.redis.service.RedisService;
 import com.ritoinfo.framework.evo.sp.auth.condition.AuthCondition;
 import com.ritoinfo.framework.evo.sp.auth.exception.PasswordInvalidException;
 import com.ritoinfo.framework.evo.sp.auth.exception.UserNotFoundException;
-import com.ritoinfo.framework.evo.sp.auth.infa.SysUserInfa;
+import com.ritoinfo.framework.evo.sp.auth.infa.ISysFuncService;
+import com.ritoinfo.framework.evo.sp.auth.infa.ISysUserService;
+import com.ritoinfo.framework.evo.sp.auth.infa.dto.FuncDto;
 import com.ritoinfo.framework.evo.sp.auth.infa.dto.UserDto;
 import com.ritoinfo.framework.evo.sp.base.infa.model.ServiceResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * User: Kyll
@@ -22,7 +27,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthBizz {
 	@Autowired
-	private SysUserInfa sysUserInfa;
+	private ISysUserService sysUserService;
+	@Autowired
+	private ISysFuncService sysFuncService;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	@Autowired
@@ -31,7 +38,7 @@ public class AuthBizz {
 	private RedisService redisService;
 
 	public TokenInfo authorize(AuthCondition condition) {
-		ServiceResponse<UserDto> serviceResponse = sysUserInfa.getByUsername(condition.getUsername());
+		ServiceResponse<UserDto> serviceResponse = sysUserService.getByUsername(condition.getUsername());
 		UserDto userDto = serviceResponse.getData();
 
 		if (userDto == null) {
@@ -57,5 +64,14 @@ public class AuthBizz {
 
 	public void clear(String username) {
 		redisService.delete(username);
+	}
+
+	public boolean verify(String uri, String token) {
+		for (FuncDto funcDto : sysFuncService.getByUsername(jwtToken.parse(token).getUsername()).getData()) {
+			if (uri.equals(funcDto.getPrefix() + funcDto.getUri())) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

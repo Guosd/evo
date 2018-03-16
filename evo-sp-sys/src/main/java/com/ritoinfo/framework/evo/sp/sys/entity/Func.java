@@ -16,6 +16,7 @@ public class Func extends BaseEntity<Long> {
 	private String name;// 功能名称
 	private String code;// 功能编码
 	private Long parentId;// 上级功能ID
-	private String url;// 请求地址
+	private String prefix;// 系统上下文前缀
+	private String uri;// 请求地址
 	private Integer sort;// 排序号
 }

@@ -1,5 +1,6 @@
 package com.ritoinfo.framework.evo.common.jwt.token;
 
+import com.ritoinfo.framework.evo.common.Const;
 import com.ritoinfo.framework.evo.common.jwt.config.JwtConfig;
 import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
 import com.ritoinfo.framework.evo.common.uitl.DateUtil;
@@ -10,6 +11,8 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.UUID;
 
@@ -63,6 +66,29 @@ public class JwtToken {
 				.name(claims.get(CLAIMS_USER_NAME, String.class))
 				.code(claims.get(CLAIMS_USER_CODE, String.class)).jwtExpiration(claims.getExpiration())
 				.build();
+	}
+
+	public String get(HttpServletRequest request) {
+		String token = null;
+
+		String header = request.getHeader(jwtConfig.getHeader());
+		if (StringUtil.isNotBlank(header)) {
+			token = header;
+		}
+
+		if (StringUtil.isBlank(token)) {
+			Cookie[] cookies = request.getCookies();
+			if (cookies != null) {
+				for (Cookie cookie : cookies) {
+					if (Const.JWT_TOKEN.equals(cookie.getName())) {
+						token = cookie.getValue();
+						break;
+					}
+				}
+			}
+		}
+
+		return token;
 	}
 
 	public boolean verify(String token) {

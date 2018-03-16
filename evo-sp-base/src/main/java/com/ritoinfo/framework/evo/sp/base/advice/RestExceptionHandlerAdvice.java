@@ -1,7 +1,7 @@
 package com.ritoinfo.framework.evo.sp.base.advice;
 
 import com.ritoinfo.framework.evo.sp.base.exception.RestException;
-import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
+import com.ritoinfo.framework.evo.common.model.ServiceResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

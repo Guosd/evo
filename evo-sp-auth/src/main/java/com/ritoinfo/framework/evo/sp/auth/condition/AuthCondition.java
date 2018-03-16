@@ -1,12 +1,11 @@
 package com.ritoinfo.framework.evo.sp.auth.condition;
 
-import com.ritoinfo.framework.evo.sp.base.validate.group.LoginGroup;
-import com.ritoinfo.framework.evo.sp.base.validate.group.LogoutGroup;
+import com.ritoinfo.framework.evo.sp.auth.validate.group.LoginGroup;
+import com.ritoinfo.framework.evo.sp.auth.validate.group.LogoutGroup;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Null;
 
 /**
  * User: Kyll
@@ -14,10 +13,9 @@ import javax.validation.constraints.Null;
  */
 public class AuthCondition {
 	@Getter @Setter
-	@NotBlank(groups = LoginGroup.class)
+	@NotBlank(groups = {LoginGroup.class, LogoutGroup.class})
 	private String username;
 	@Getter @Setter
-	@Null(groups = LogoutGroup.class)
 	@NotBlank(groups = LoginGroup.class)
 	private String password;
 }

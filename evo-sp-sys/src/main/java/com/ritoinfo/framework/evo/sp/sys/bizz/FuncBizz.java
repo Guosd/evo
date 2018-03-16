@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * User: Kyll
  * Date: 2018-03-04 18:05
@@ -16,4 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 @Service
 public class FuncBizz extends BaseBizz<FuncDao, Func, Long, FuncCondition> {
+	public List<Func> getByUsername(String username) {
+		return dao.getByUsername(username);
+	}
 }

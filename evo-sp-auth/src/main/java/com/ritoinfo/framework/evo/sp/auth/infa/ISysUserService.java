@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * Date: 2018-03-08 14:59
  */
 @FeignClient(value = "evo-sp-sys", path = "/user")
-public interface SysUserInfa {
+public interface ISysUserService {
 	@GetMapping("/username/{username}")
 	ServiceResponse<UserDto> getByUsername(@PathVariable("username") String username);
 }

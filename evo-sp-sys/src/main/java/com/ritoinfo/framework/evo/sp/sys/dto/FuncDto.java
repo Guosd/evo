@@ -12,6 +12,7 @@ public class FuncDto extends BaseDto<Long> {
 	@Getter @Setter private String name;
 	@Getter @Setter private String code;
 	@Getter @Setter private Long parentId;
-	@Getter @Setter private String url;
+	@Getter @Setter private String prefix;
+	@Getter @Setter private String uri;
 	@Getter @Setter private Integer sort;
 }

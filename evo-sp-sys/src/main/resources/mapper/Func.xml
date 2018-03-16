@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ritoinfo.framework.evo.sp.sys.dao.FuncDao">
+
+	<resultMap id="FuncResultMap" type="Func">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="code" property="code"/>
+		<result column="parent_id" property="parentId"/>
+		<result column="prefix" property="prefix"/>
+		<result column="uri" property="uri"/>
+		<result column="sort" property="sort"/>
+		<result column="create_by" property="createBy"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_by" property="updateBy"/>
+		<result column="update_time" property="updateTime"/>
+	</resultMap>
+
+	<sql id="columns">
+		t.id, t.name, t.code, t.parent_id, t.prefix, t.uri, t.sort,
+		t.create_by, t.create_time, t.update_by, t.update_time
+	</sql>
+
+	<sql id="condition">
+		<where>
+			<if test="id != null">
+				AND t.id = #{id}
+			</if>
+			<if test="name != null">
+				AND t.name = #{name}
+			</if>
+			<if test="code != null">
+				AND t.code = #{code}
+			</if>
+			<if test="parent_id != null">
+				AND t.parent_id = #{parent_id}
+			</if>
+			<if test="prefix != null">
+				AND t.prefix = #{prefix}
+			</if>
+			<if test="uri != null">
+				AND t.uri = #{uri}
+			</if>
+			<if test="sort != null">
+				AND t.sort = #{sort}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="select">
+		SELECT <include refid="columns"/> FROM sys_func t
+	</sql>
+
+	<select id="get" resultMap="FuncResultMap">
+		<include refid="select"/>
+		WHERE t.id = #{value}
+	</select>
+
+	<select id="getByUsername" resultMap="FuncResultMap">
+		<include refid="select"/>
+		JOIN sys_role_func t0 ON t.id = t0.func_id
+		JOIN sys_user_role t1 ON t0.role_id = t1.role_id
+		JOIN sys_user t2 ON t1.user_id = t2.id
+		WHERE t2.username = #{value}
+	</select>
+
+	<select id="find" resultMap="FuncResultMap">
+		<include refid="select"/>
+		<include refid="condition"/>
+		<if test="pageSort != null">
+			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
+		</if>
+	</select>
+
+	<select id="count" resultType="int">
+		SELECT count(1) count FROM sys_func t
+		<include refid="condition"/>
+	</select>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO sys_func (
+			name, code, parent_id, prefix, uri, sort, create_by, create_time, update_by, update_time
+		) VALUES (
+			#{name}, #{code}, #{parentId}, #{prefix}, #{uri}, #{sort}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE sys_func SET
+			name = #{name},
+			code = #{code},
+			parent_id = #{parentId},
+			prefix = #{prefix},
+			uri = #{uri},
+			sort = #{sort},
+			update_by = #{updateBy},
+			update_time = #{updateTime}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM sys_func WHERE id = #{id}
+	</delete>
+
+</mapper>

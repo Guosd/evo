@@ -1,4 +1,4 @@
-package com.ritoinfo.framework.evo.sp.base.model;
+package com.ritoinfo.framework.evo.common.model;
 
 import com.ritoinfo.framework.evo.common.Const;
 import com.ritoinfo.framework.evo.common.uitl.StringUtil;

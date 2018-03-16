@@ -7,7 +7,7 @@ import com.ritoinfo.framework.evo.sp.base.dao.BaseDao;
 import com.ritoinfo.framework.evo.sp.base.dto.BaseDto;
 import com.ritoinfo.framework.evo.sp.base.entity.BaseEntity;
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
-import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
+import com.ritoinfo.framework.evo.common.model.ServiceResponse;
 import com.ritoinfo.framework.evo.sp.base.validate.group.CreateGroup;
 import com.ritoinfo.framework.evo.sp.base.validate.group.ListGroup;
 import com.ritoinfo.framework.evo.sp.base.validate.group.PageGroup;

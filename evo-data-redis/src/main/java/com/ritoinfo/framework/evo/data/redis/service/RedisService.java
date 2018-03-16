@@ -19,16 +19,24 @@ public class RedisService {
 	@Autowired
 	private RedisTemplate<Serializable, Serializable> redisTemplate;
 
-	public void add(String key, String value, Date expire) {
+	public Serializable get(Serializable key) {
+		return redisTemplate.opsForValue().get(key);
+	}
+
+	public String getString(Serializable key) {
+		return (String) get(key);
+	}
+
+	public void add(Serializable key, Serializable value, Date expire) {
 		redisTemplate.opsForValue().set(key, value);
 		redisTemplate.expire(key, expire.getTime() - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
 	}
 
-	public void delete(String key) {
+	public void delete(Serializable key) {
 		redisTemplate.delete(key);
 	}
 
-	public boolean exists(String key) {
+	public boolean exists(Serializable key) {
 		return redisTemplate.hasKey(key);
 	}
 }

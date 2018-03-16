@@ -1,4 +1,4 @@
-package com.ritoinfo.framework.evo.sp.base.validate.group;
+package com.ritoinfo.framework.evo.sp.auth.validate.group;
 
 /**
  * User: Kyll
