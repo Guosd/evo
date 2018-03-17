@@ -6,6 +6,7 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.cors.CorsConfiguration;
@@ -16,6 +17,7 @@ import org.springframework.web.filter.CorsFilter;
  * User: Kyll
  * Date: 2018-02-26 20:53
  */
+@EnableFeignClients
 @EnableCircuitBreaker
 @EnableZuulProxy
 @EnableDiscoveryClient

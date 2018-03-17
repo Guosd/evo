@@ -1,5 +1,5 @@
 server:
-  port: 50101
+  port: 20000
 spring:
   application:
     name: evo-eureka

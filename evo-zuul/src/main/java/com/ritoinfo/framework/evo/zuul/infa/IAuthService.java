@@ -12,5 +12,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(value = "evo-sp-auth", path = "/auth")
 public interface IAuthService {
 	@GetMapping("verify")
-	ServiceResponse<Boolean> verify(@RequestParam String uri, @RequestParam String token);
+	ServiceResponse<Boolean> verify(@RequestParam("uri") String uri, @RequestParam("token") String token);
 }
