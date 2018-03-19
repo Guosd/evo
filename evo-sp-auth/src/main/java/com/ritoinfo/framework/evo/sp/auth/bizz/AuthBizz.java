@@ -1,7 +1,6 @@
 package com.ritoinfo.framework.evo.sp.auth.bizz;
 
 import com.ritoinfo.framework.evo.common.jwt.model.TokenInfo;
-import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
 import com.ritoinfo.framework.evo.common.jwt.token.JwtToken;
 import com.ritoinfo.framework.evo.common.password.crypto.PasswordEncoder;
 import com.ritoinfo.framework.evo.data.redis.service.RedisService;
@@ -12,12 +11,10 @@ import com.ritoinfo.framework.evo.sp.auth.infa.ISysFuncService;
 import com.ritoinfo.framework.evo.sp.auth.infa.ISysUserService;
 import com.ritoinfo.framework.evo.sp.auth.infa.dto.FuncDto;
 import com.ritoinfo.framework.evo.sp.auth.infa.dto.UserDto;
-import com.ritoinfo.framework.evo.sp.base.infa.model.ServiceResponse;
+import com.ritoinfo.framework.evo.sp.base.infa.model.ServiceResponseWrapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * User: Kyll
@@ -38,8 +35,8 @@ public class AuthBizz {
 	private RedisService redisService;
 
 	public TokenInfo authorize(AuthCondition condition) {
-		ServiceResponse<UserDto> serviceResponse = sysUserService.getByUsername(condition.getUsername());
-		UserDto userDto = serviceResponse.getData();
+		ServiceResponseWrapper<UserDto> serviceResponseWrapper = sysUserService.getByUsername(condition.getUsername());
+		UserDto userDto = serviceResponseWrapper.getData();
 
 		if (userDto == null) {
 			throw new UserNotFoundException(condition.getUsername());

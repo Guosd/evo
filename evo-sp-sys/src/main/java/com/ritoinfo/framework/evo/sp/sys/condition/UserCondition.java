@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.sys.condition;
 
-import com.ritoinfo.framework.evo.sp.base.condition.BaseCondition;
+import com.ritoinfo.framework.evo.sp.base.starter.condition.BaseCondition;
 import lombok.Getter;
 import lombok.Setter;
 

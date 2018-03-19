@@ -1,5 +1,5 @@
 server:
-  port: 50201
+  port: 20100
 spring:
   application:
     name: evo-sp-sys

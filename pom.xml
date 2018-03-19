@@ -2,13 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.0.0.RELEASE</version>
 	</parent>
+	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.ritoinfo.framework</groupId>
 	<artifactId>evo</artifactId>
@@ -26,7 +25,8 @@
 		<module>evo-zipkin</module>
 		<module>evo-admin</module>
 		<module>evo-sp-base</module>
-		<module>evo-sp-base-mybatis-xml</module>
+		<module>evo-sp-base-starter</module>
+		<module>evo-sp-base-starter-mybatis-xml</module>
 		<module>evo-sp-sys</module>
 		<module>evo-sp-auth</module>
 		<module>evo-data-redis</module>
@@ -56,7 +56,8 @@
 		<evo-common-password.version>1.0.0-SNAPSHOT</evo-common-password.version>
 		<evo-common-jwt.version>1.0.0-SNAPSHOT</evo-common-jwt.version>
 		<evo-sp-base.version>1.0.0-SNAPSHOT</evo-sp-base.version>
-		<evo-sp-base-mybatis-xml.version>1.0.0-SNAPSHOT</evo-sp-base-mybatis-xml.version>
+		<evo-sp-base-starter.version>1.0.0-SNAPSHOT</evo-sp-base-starter.version>
+		<evo-sp-base-starter-mybatis-xml.version>1.0.0-SNAPSHOT</evo-sp-base-starter-mybatis-xml.version>
 		<evo-data-redis.version>1.0.0-SNAPSHOT</evo-data-redis.version>
 	</properties>
 

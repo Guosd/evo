@@ -2,13 +2,13 @@ package com.ritoinfo.framework.evo.sp.auth.rest;
 
 import com.ritoinfo.framework.evo.common.Const;
 import com.ritoinfo.framework.evo.common.jwt.model.TokenInfo;
-import com.ritoinfo.framework.evo.common.model.ServiceResponse;
 import com.ritoinfo.framework.evo.sp.auth.bizz.AuthBizz;
 import com.ritoinfo.framework.evo.sp.auth.condition.AuthCondition;
 import com.ritoinfo.framework.evo.sp.auth.validate.group.LoginGroup;
 import com.ritoinfo.framework.evo.sp.auth.validate.group.LogoutGroup;
 import com.ritoinfo.framework.evo.sp.base.exception.BizzException;
 import com.ritoinfo.framework.evo.sp.base.exception.RestException;
+import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;

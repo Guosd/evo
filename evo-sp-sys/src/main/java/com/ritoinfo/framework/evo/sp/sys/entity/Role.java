@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.sys.entity;
 
-import com.ritoinfo.framework.evo.sp.base.entity.BaseEntity;
+import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

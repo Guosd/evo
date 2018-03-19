@@ -9,6 +9,8 @@ spring:
   redis:
     cluster:
       nodes: 10.20.133.85:7000, 10.20.133.85:7002, 10.20.133.85:7003, 10.20.133.85:7004, 10.20.133.85:7005
+  jackson:
+    time-zone: GMT+8
 zuul:
   retryable: true
   sensitiveHeaders:
@@ -37,10 +39,10 @@ hystrix:
             timeoutInMilliseconds: 30000
 evo-sp-auth:
   ribbon:
-    NFLoadBalancerRuleClassName: com.yqjr.scfw.zuul.loadbalancer.BackToSelfRule
+    NFLoadBalancerRuleClassName: com.ritoinfo.framework.evo.zuul.loadbalancer.BackToSelfRule
 evo-sp-sys:
   ribbon:
-    NFLoadBalancerRuleClassName: com.yqjr.scfw.zuul.loadbalancer.BackToSelfRule
+    NFLoadBalancerRuleClassName: com.ritoinfo.framework.evo.zuul.loadbalancer.BackToSelfRule
 ribbon:
   ReadTimeout: 5000
   ConnectTimeout: 5000

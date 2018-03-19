@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.sys.dto;
 
-import com.ritoinfo.framework.evo.sp.base.dto.BaseDto;
+import com.ritoinfo.framework.evo.sp.base.starter.dto.BaseDto;
 import lombok.Getter;
 import lombok.Setter;
 

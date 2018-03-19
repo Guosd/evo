@@ -1,7 +1,7 @@
 package com.ritoinfo.framework.evo.sp.auth.infa;
 
 import com.ritoinfo.framework.evo.sp.auth.infa.dto.UserDto;
-import com.ritoinfo.framework.evo.sp.base.infa.model.ServiceResponse;
+import com.ritoinfo.framework.evo.sp.base.infa.model.ServiceResponseWrapper;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,5 +13,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(value = "evo-sp-sys", path = "/user")
 public interface ISysUserService {
 	@GetMapping("/username/{username}")
-	ServiceResponse<UserDto> getByUsername(@PathVariable("username") String username);
+	ServiceResponseWrapper<UserDto> getByUsername(@PathVariable("username") String username);
 }

@@ -8,6 +8,8 @@ import com.netflix.zuul.context.RequestContext;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Random;
 
 /**
  * User: Kyll
@@ -26,7 +28,7 @@ public class BackToSelfRule extends AbstractLoadBalancerRule {
 
 	private Server choose(ILoadBalancer loadBalancer, Object key) {
 		if (loadBalancer == null) {
-			log.warn("no load balancer");
+			log.warn("No load balancer");
 			return null;
 		}
 
@@ -35,10 +37,16 @@ public class BackToSelfRule extends AbstractLoadBalancerRule {
 		String remoteHost = request.getRemoteHost();
 		String headerHostPort = request.getHeader("host");
 
-		log.info("Client Request Info: " + request.getRequestURL() + ", addr: " + request.getRemoteAddr() + ", host: " + remoteHost + ", port: " + request.getRemotePort() + ", headerHost: " + headerHostPort);
+		log.info("Client request: " + request.getRequestURL() + ", addr: " + request.getRemoteAddr() + ", host: " + remoteHost + ", port: " + request.getRemotePort() + ", headerHost: " + headerHostPort);
 
 		Server finalServer = null;
-		for (Server server : loadBalancer.getReachableServers()) {
+		List<Server> serverList = loadBalancer.getReachableServers();
+		if (serverList == null) {
+			log.warn("Server list is null");
+			return null;
+		}
+
+		for (Server server : serverList) {
 			if (server.getHost().equals(remoteHost)) {
 				finalServer = server;
 				break;
@@ -46,16 +54,20 @@ public class BackToSelfRule extends AbstractLoadBalancerRule {
 		}
 
 		if (finalServer == null) {
-			for (Server server : loadBalancer.getReachableServers()) {
+			for (Server server : serverList) {
 				if (server.getHost().equals(headerHostPort.split(":")[0])) {
 					finalServer = server;
 					break;
 				}
 			}
+		}
 
-			log.warn("server on " + remoteHost + " is not exist, use default server");
+		if (finalServer == null) {
+			finalServer = serverList.get(new Random().nextInt(serverList.size()));
+
+			log.warn("Server on " + remoteHost + " is not exist, use random server: " + finalServer.getHostPort());
 		} else {
-			log.info("find server on " + remoteHost);
+			log.info("Find server on " + remoteHost);
 		}
 
 		return finalServer;

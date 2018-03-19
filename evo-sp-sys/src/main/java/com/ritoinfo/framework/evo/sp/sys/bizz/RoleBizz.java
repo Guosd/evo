@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.sys.bizz;
 
-import com.ritoinfo.framework.evo.sp.base.bizz.BaseBizz;
+import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseBizz;
 import com.ritoinfo.framework.evo.sp.sys.condition.RoleCondition;
 import com.ritoinfo.framework.evo.sp.sys.dao.RoleDao;
 import com.ritoinfo.framework.evo.sp.sys.entity.Role;

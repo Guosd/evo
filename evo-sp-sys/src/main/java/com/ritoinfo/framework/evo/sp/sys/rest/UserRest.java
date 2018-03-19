@@ -1,8 +1,8 @@
 package com.ritoinfo.framework.evo.sp.sys.rest;
 
-import com.ritoinfo.framework.evo.sp.base.assist.BaseHelper;
-import com.ritoinfo.framework.evo.common.model.ServiceResponse;
-import com.ritoinfo.framework.evo.sp.base.rest.BaseRest;
+import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
+import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
+import com.ritoinfo.framework.evo.sp.base.starter.rest.BaseRest;
 import com.ritoinfo.framework.evo.sp.sys.bizz.UserBizz;
 import com.ritoinfo.framework.evo.sp.sys.condition.UserCondition;
 import com.ritoinfo.framework.evo.sp.sys.dao.UserDao;

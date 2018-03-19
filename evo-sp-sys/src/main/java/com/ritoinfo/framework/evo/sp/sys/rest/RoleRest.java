@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.sys.rest;
 
-import com.ritoinfo.framework.evo.sp.base.rest.BaseRest;
+import com.ritoinfo.framework.evo.sp.base.starter.rest.BaseRest;
 import com.ritoinfo.framework.evo.sp.sys.bizz.RoleBizz;
 import com.ritoinfo.framework.evo.sp.sys.condition.RoleCondition;
 import com.ritoinfo.framework.evo.sp.sys.dao.RoleDao;

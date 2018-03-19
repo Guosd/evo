@@ -44,8 +44,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-sp-base-mybatis-xml</artifactId>
-			<version>${evo-sp-base-mybatis-xml.version}</version>
+			<artifactId>evo-sp-base-starter-mybatis-xml</artifactId>
+			<version>${evo-sp-base-starter-mybatis-xml.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>

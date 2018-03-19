@@ -1,5 +1,5 @@
 server:
-  port: 50205
+  port: 20105
 spring:
   application:
     name: evo-sp-auth
