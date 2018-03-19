@@ -18,5 +18,6 @@ public class Func extends BaseEntity<Long> {
 	private String code;// 功能编码
 	private String prefix;// 系统上下文前缀
 	private String uri;// 请求地址
+	private String method;// GET,POST.PUT.DELETE方法
 	private Integer sort;// 排序号
 }

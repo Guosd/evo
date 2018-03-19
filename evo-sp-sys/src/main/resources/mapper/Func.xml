@@ -9,6 +9,7 @@
 		<result column="parent_id" property="parentId"/>
 		<result column="prefix" property="prefix"/>
 		<result column="uri" property="uri"/>
+		<result column="method" property="method"/>
 		<result column="sort" property="sort"/>
 		<result column="create_by" property="createBy"/>
 		<result column="create_time" property="createTime"/>
@@ -17,7 +18,7 @@
 	</resultMap>
 
 	<sql id="columns">
-		t.id, t.name, t.code, t.parent_id, t.prefix, t.uri, t.sort,
+		t.id, t.name, t.code, t.parent_id, t.prefix, t.uri, t.method, t.sort,
 		t.create_by, t.create_time, t.update_by, t.update_time
 	</sql>
 
@@ -79,7 +80,7 @@
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO sys_func (
-			name, code, parent_id, prefix, uri, sort, create_by, create_time, update_by, update_time
+			name, code, parent_id, prefix, uri, method, sort, create_by, create_time, update_by, update_time
 		) VALUES (
 			#{name}, #{code}, #{parentId}, #{prefix}, #{uri}, #{sort}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}
 		)
@@ -92,6 +93,7 @@
 			parent_id = #{parentId},
 			prefix = #{prefix},
 			uri = #{uri},
+			method = #{method},
 			sort = #{sort},
 			update_by = #{updateBy},
 			update_time = #{updateTime}
