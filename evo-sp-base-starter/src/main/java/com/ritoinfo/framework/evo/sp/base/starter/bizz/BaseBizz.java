@@ -1,10 +1,12 @@
 package com.ritoinfo.framework.evo.sp.base.starter.bizz;
 
+import com.ritoinfo.framework.evo.common.uitl.BeanUtil;
 import com.ritoinfo.framework.evo.common.uitl.DateUtil;
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import com.ritoinfo.framework.evo.sp.base.starter.condition.BaseCondition;
 import com.ritoinfo.framework.evo.sp.base.starter.dao.BaseDao;
 import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseEntity;
+import com.ritoinfo.framework.evo.sp.base.starter.session.SessionHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,6 +58,8 @@ public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity
 
 	@Transactional
 	public void create(E entity) {
+		entity.setCreateBy(SessionHolder.getUserContext().getId(BeanUtil.getGenericClass(entity)));
+		entity.setUpdateBy(entity.getCreateBy());
 		entity.setCreateTime(DateUtil.now());
 		entity.setUpdateTime(entity.getCreateTime());
 		dao.insert(entity);
@@ -63,6 +67,7 @@ public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity
 
 	@Transactional
 	public void update(E entity) {
+		entity.setUpdateBy(SessionHolder.getUserContext().getId(BeanUtil.getGenericClass(entity)));
 		entity.setUpdateTime(DateUtil.now());
 		dao.update(entity);
 	}

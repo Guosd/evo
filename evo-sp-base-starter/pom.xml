@@ -31,6 +31,11 @@
 			<version>${evo-sp-base.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-common-jwt</artifactId>
+			<version>${evo-common-jwt.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>

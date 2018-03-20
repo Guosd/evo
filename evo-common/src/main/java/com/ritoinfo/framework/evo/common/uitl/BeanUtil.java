@@ -2,8 +2,10 @@ package com.ritoinfo.framework.evo.common.uitl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cglib.beans.BeanCopier;
+import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,9 +40,18 @@ public class BeanUtil {
 		try {
 			clazz = Class.forName(className);
 		} catch (ClassNotFoundException e) {
-			log.error("获取对象Class失败", e);
+			log.error("加载Class失败", e);
 		}
 		return clazz;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T> Class<T> getGenericClass(Object object) {
+		return getClass(getGenericTypes(object)[0].getTypeName());
+	}
+
+	public static Type[] getGenericTypes(Object object) {
+		return ((ParameterizedTypeImpl) object.getClass().getGenericSuperclass()).getActualTypeArguments();
 	}
 
 	@SuppressWarnings("unchecked")
