@@ -1,3 +1,5 @@
+CREATE DATABASE evo_sys DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
 insert into sys_func values(null, null, '系统管理', 'SYS', '/sys', null, null, '1', null, now(), null, now());
 insert into sys_func values(null, '1', '用户管理', 'SYS_USER', '/sys', '/user', 'GET', '1', null, now(), null, now());
 insert into sys_func values(null, '1', '用户管理', 'SYS_USER_ALL', '/sys', '/user/all', 'GET', '1', null, now(), null, now());

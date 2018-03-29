@@ -1,0 +1,20 @@
+server:
+  port: 20025
+spring:
+  application:
+    name: evo-activiti
+  datasource:
+    name: test
+    url: jdbc:mysql://127.0.0.1:3306/evo_activiti?useUnicode=true&characterEncoding=UTF8
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+  jackson:
+    time-zone: GMT+8
+  activiti:
+    database-schema: evo_activiti # 数据库名称
+    database-schema-update: none # 如果设置为 true， 数据库中没有表时会新建
+    check-process-definitions: false # 是否检测流程定义文件
+    async-executor-activate: false
+    async-executor-enabled: false
