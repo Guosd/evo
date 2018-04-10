@@ -40,6 +40,8 @@ public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity
 		pageList.setTotalRecord(count);
 		pageList.setPageNo(condition.getPageNo());
 		pageList.setPageSize(condition.getPageSize());
+		pageList.setPageSort(condition.getPageSort());
+		pageList.setPageOrder(condition.getPageOrder());
 
 		if (count > 0) {
 			pageList.setDataList(dao.find(condition.page()));

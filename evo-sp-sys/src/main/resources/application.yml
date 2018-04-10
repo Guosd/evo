@@ -5,7 +5,7 @@ spring:
     name: evo-sp-sys
   datasource:
     name: test
-    url: jdbc:mysql://127.0.0.1:3306/eco_sys?useUnicode=true&characterEncoding=UTF8
+    url: jdbc:mysql://127.0.0.1:3306/evo_sys?useUnicode=true&characterEncoding=UTF8
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource

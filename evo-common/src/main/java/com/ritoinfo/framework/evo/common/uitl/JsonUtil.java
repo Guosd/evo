@@ -1,0 +1,171 @@
+package com.ritoinfo.framework.evo.common.uitl;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+/**
+ * User: Kyll
+ * Date: 2018-04-02 09:16
+ */
+@Slf4j
+public class JsonUtil {
+	private static final ObjectMapper mapper = new ObjectMapper();
+
+	static {
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.setDefaultPropertyInclusion(JsonInclude.Value.construct(JsonInclude.Include.ALWAYS, JsonInclude.Include.NON_NULL));
+		mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+	}
+
+	/**
+	 * 生成集合类型
+	 * @param collectionClass 集合类型
+	 * @param elementClass 元素类型
+	 * @return JSON 转换时所需的 JavaType
+	 */
+	public static JavaType getCollectionType(Class collectionClass, Class elementClass) {
+		return mapper.getTypeFactory().constructParametricType(collectionClass, elementClass);
+	}
+
+	/**
+	 * 读取 JSON 字符串， 转换为节点树
+	 * @param json JSON 字符串
+	 * @return JsonNode
+	 */
+	public static JsonNode jsonToNode(String json) {
+		try {
+			return mapper.readTree(json);
+		} catch (IOException e) {
+			log.error("读取 JSON 失败", e);
+		}
+		return null;
+	}
+
+	/**
+	 * 读取 JSON 输入流， 转换为节点树
+	 * @param inputStream JSON 输入流
+	 * @return JsonNode
+	 */
+	public static JsonNode jsonToNode(InputStream inputStream) {
+		try {
+			return mapper.readTree(inputStream);
+		} catch (IOException e) {
+			log.error("读取 JSON 失败", e);
+		}
+		return null;
+	}
+
+	/**
+	 * JSON 字符串转换为特定类型对象
+	 * @param json JSON 字符串
+	 * @param clazz 对象类
+	 * @param <T> 对象类型
+	 * @return 特定类型对象
+	 */
+	public static <T> T jsonToObject(String json, Class<T> clazz) {
+		T t = null;
+		try {
+			t = mapper.readValue(json, clazz);
+		} catch (IOException e) {
+			log.error("JSON 转换对象失败", e);
+		}
+		return t;
+	}
+
+	/**
+	 * JSON 字符串转换为特定类型对象
+	 * @param json JSON 字符串
+	 * @param clazz 对象类
+	 * @param <T> 对象类型
+	 * @return 特定类型对象
+	 * @throws IOException JSON 转换对象失败失败时抛出
+	 */
+	public static <T> T jsonToObjectWithException(String json, Class<T> clazz) throws IOException {
+		return mapper.readValue(json, clazz);
+	}
+
+	/**
+	 * JSON 字符串转换为特定类型对象
+	 * @param inputStream JSON 输入流
+	 * @param clazz 对象类
+	 * @param <T> 对象类型
+	 * @return 特定类型对象
+	 */
+	public static <T> T jsonToObject(InputStream inputStream, Class<T> clazz) {
+		T t = null;
+		try {
+			t = mapper.readValue(inputStream, clazz);
+		} catch (IOException e) {
+			log.error("JSON 转换对象失败", e);
+		}
+		return t;
+	}
+
+	/**
+	 * JSON 字符串转换为特定集合类型
+	 * @param json JSON 字符串
+	 * @param collectionClass 集合类
+	 * @param elementClass 元素类
+	 * @param <C> 集合类型
+	 * @param <E> 元素类型
+	 * @return 特定集合类型
+	 */
+	public static <C, E> C jsonToCollection(String json, Class<C> collectionClass, Class<E> elementClass) {
+		try {
+			return mapper.readValue(json, getCollectionType(collectionClass, elementClass));
+		} catch (IOException e) {
+			log.error("JSON 转换对象失败", e);
+		}
+		return null;
+	}
+
+	/**
+	 * JSON 字符串转换为特定集合类型
+	 * @param inputStream JSON 输入流
+	 * @param collectionClass 集合类
+	 * @param elementClass 元素类
+	 * @param <C> 集合类型
+	 * @param <E> 元素类型
+	 * @return 特定集合类型
+	 */
+	public static <C, E> C jsonToCollection(InputStream inputStream, Class<C> collectionClass, Class<E> elementClass) {
+		try {
+			return mapper.readValue(inputStream, getCollectionType(collectionClass, elementClass));
+		} catch (IOException e) {
+			log.error("JSON 转换对象失败", e);
+		}
+		return null;
+	}
+
+	/**
+	 * 对象转换为字符串
+	 * @param object 输入对象
+	 * @return String JSON 字符串
+	 */
+	public static String objectToJson(Object object) {
+		try {
+			return mapper.writeValueAsString(object);
+		} catch (JsonProcessingException e) {
+			log.error("对象转换 JSON 失败", e);
+		}
+		return null;
+	}
+
+	/**
+	 * 对象转换为字符串
+	 * @param object 输入对象
+	 * @return String JSON 字符串
+	 * @throws JsonProcessingException 对象转换 JSON 失败时抛出
+	 */
+	public static String objectToJsonWithException(Object object) throws JsonProcessingException {
+		return mapper.writeValueAsString(object);
+	}
+}

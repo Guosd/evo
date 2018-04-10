@@ -1,6 +1,11 @@
 package com.ritoinfo.framework.evo.activiti.rest;
 
+import com.ritoinfo.framework.evo.activiti.bizz.ProcessInstanceBizz;
+import com.ritoinfo.framework.evo.activiti.dto.StartDto;
+import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,4 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("process-instance")
 @RestController
 public class ProcessInstanceRest {
+	@Autowired
+	private ProcessInstanceBizz processInstanceBizz;
+
+	@PostMapping("/start")
+	public ServiceResponse start(StartDto... startDtos) {
+		processInstanceBizz.start(startDtos);
+		return ServiceResponse.ok();
+	}
 }

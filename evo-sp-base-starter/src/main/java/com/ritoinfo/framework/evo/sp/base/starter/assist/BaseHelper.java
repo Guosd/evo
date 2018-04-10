@@ -69,4 +69,31 @@ public class BaseHelper {
 		className = className.replace(".dto.", ".entity.");
 		return BeanUtil.newInstance(className.substring(0, className.length() - 3));
 	}
+
+	public static <T, E> T toAnyDto(E entity, Class<T> clazz) {
+		return toAnyDto(entity, clazz, null);
+	}
+
+	public static <T, E> T toAnyDto(E entity, Class<T> clazz, Converter<T, E> converter) {
+		T target = BeanUtil.newInstance(clazz);
+		BeanUtil.copy(target, entity);
+
+		if (converter != null) {
+			converter.convert(target, entity);
+		}
+
+		return target;
+	}
+
+	public static <T, E> List<T> toAnyDto(List<E> entityList, Class<T> clazz) {
+		return toAnyDto(entityList, clazz, (Converter<T, E>) (t, e) -> {});
+	}
+
+	public static <T, E> List<T> toAnyDto(List<E> entityList, Class<T> clazz, Converter<T, E> converter) {
+		List<T> targetList = new ArrayList<>();
+		for (E entity : entityList) {
+			targetList.add(toAnyDto(entity, clazz, converter));
+		}
+		return targetList;
+	}
 }

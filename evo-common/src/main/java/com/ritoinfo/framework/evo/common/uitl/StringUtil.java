@@ -14,4 +14,8 @@ public class StringUtil {
 	public static boolean isNotBlank(String str) {
 		return StringUtils.isNotBlank(str);
 	}
+
+	public static String toEmpty(Object object) {
+		return object == null ? "" : object.toString();
+	}
 }

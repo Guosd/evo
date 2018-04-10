@@ -14,4 +14,8 @@ public class SqlUtil {
 		int offset = (pageNo - 1) * pageSize;
 		return sql + " limit " + offset + "," + pageSize;
 	}
+
+	public static String toLike(String str) {
+		return "%" + str + "%";
+	}
 }
