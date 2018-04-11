@@ -3,6 +3,7 @@ package com.ritoinfo.framework.evo.sp.base.starter.bizz;
 import com.ritoinfo.framework.evo.common.uitl.BeanUtil;
 import com.ritoinfo.framework.evo.common.uitl.DateUtil;
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
+import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
 import com.ritoinfo.framework.evo.sp.base.starter.condition.BaseCondition;
 import com.ritoinfo.framework.evo.sp.base.starter.dao.BaseDao;
 import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseEntity;
@@ -37,11 +38,7 @@ public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity
 		PageList<E> pageList = new PageList<>();
 
 		int count = dao.count(condition.count());
-		pageList.setTotalRecord(count);
-		pageList.setPageNo(condition.getPageNo());
-		pageList.setPageSize(condition.getPageSize());
-		pageList.setPageSort(condition.getPageSort());
-		pageList.setPageOrder(condition.getPageOrder());
+		BaseHelper.copyPage(pageList, count, condition);
 
 		if (count > 0) {
 			pageList.setDataList(dao.find(condition.page()));

@@ -2,6 +2,7 @@ package com.ritoinfo.framework.evo.sp.base.starter.assist;
 
 import com.ritoinfo.framework.evo.common.uitl.BeanUtil;
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
+import com.ritoinfo.framework.evo.sp.base.starter.condition.BaseCondition;
 import com.ritoinfo.framework.evo.sp.base.starter.dto.BaseDto;
 import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseEntity;
 
@@ -95,5 +96,13 @@ public class BaseHelper {
 			targetList.add(toAnyDto(entity, clazz, converter));
 		}
 		return targetList;
+	}
+
+	public static void copyPage(PageList pageList, int count, BaseCondition condition) {
+		pageList.setTotalRecord(count);
+		pageList.setPageNo(condition.getPageNo());
+		pageList.setPageSize(condition.getPageSize());
+		pageList.setPageSort(condition.getPageSort());
+		pageList.setPageOrder(condition.getPageOrder());
 	}
 }
