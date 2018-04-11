@@ -1,7 +1,6 @@
 package com.ritoinfo.framework.evo.sp.sys.rest;
 
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
-import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
 import com.ritoinfo.framework.evo.sp.base.starter.rest.BaseRest;
 import com.ritoinfo.framework.evo.sp.sys.bizz.UserBizz;
 import com.ritoinfo.framework.evo.sp.sys.condition.UserCondition;
@@ -24,6 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserRest extends BaseRest<UserBizz, UserDao, User, Long, UserCondition, UserDto> {
 	@GetMapping("/username/{username}")
 	public ServiceResponse<UserDto> username(@PathVariable String username) {
-		return ServiceResponse.ok(BaseHelper.toDto(bizz.getByUsername(username)));
+		return ServiceResponse.ok(bizz.getByUsername(username));
 	}
 }

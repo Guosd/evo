@@ -2,7 +2,6 @@ package com.ritoinfo.framework.evo.sp.base.starter.rest;
 
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
-import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
 import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseBizz;
 import com.ritoinfo.framework.evo.sp.base.starter.condition.BaseCondition;
 import com.ritoinfo.framework.evo.sp.base.starter.dao.BaseDao;
@@ -27,43 +26,39 @@ import java.util.List;
  * User: Kyll
  * Date: 2018-02-09 15:58
  */
-public abstract class BaseRest<B extends BaseBizz<D, E, PK, C>, D extends BaseDao<E, PK, C>, E extends BaseEntity<PK>, PK extends Serializable, C extends BaseCondition<PK>, T extends BaseDto> {
+public abstract class BaseRest<B extends BaseBizz<D, E, PK, C, T>, D extends BaseDao<E, PK, C>, E extends BaseEntity<PK>, PK extends Serializable, C extends BaseCondition<PK>, T extends BaseDto<PK>> {
 	@Autowired
 	protected B bizz;
 
 	@GetMapping("/{id}")
 	public ServiceResponse<T> get(@PathVariable PK id) {
-		return ServiceResponse.ok(BaseHelper.toDto(bizz.get(id)));
+		return ServiceResponse.ok(bizz.get(id));
 	}
 
 	@GetMapping("/all")
 	public ServiceResponse<List<T>> find() {
-		return ServiceResponse.ok(BaseHelper.toDto(bizz.find()));
+		return ServiceResponse.ok(bizz.find());
 	}
 
 	@GetMapping
 	public ServiceResponse<List<T>> find(@Validated(ListGroup.class)C condition) {
-		return ServiceResponse.ok(BaseHelper.toDto(bizz.find(condition)));
+		return ServiceResponse.ok(bizz.find(condition));
 	}
 
 	@GetMapping("/page")
 	public ServiceResponse<PageList<T>> findPage(@Validated(PageGroup.class) C condition) {
-		return ServiceResponse.ok(BaseHelper.toDto(bizz.findPage(condition)));
+		return ServiceResponse.ok(bizz.findPage(condition));
 	}
 
 	@PostMapping
 	public ServiceResponse create(@Validated(CreateGroup.class) T dto) {
-		E entity = BaseHelper.toEntity(dto);
-
-		bizz.create(entity);
+		bizz.create(dto);
 		return ServiceResponse.ok();
 	}
 
 	@PutMapping
 	public ServiceResponse update(@Validated(UpdateGroup.class) T dto) {
-		E entity = BaseHelper.toEntity(dto);
-
-		bizz.update(entity);
+		bizz.update(dto);
 		return ServiceResponse.ok();
 	}
 

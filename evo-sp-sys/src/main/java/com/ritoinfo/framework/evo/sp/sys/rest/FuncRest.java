@@ -1,7 +1,6 @@
 package com.ritoinfo.framework.evo.sp.sys.rest;
 
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
-import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
 import com.ritoinfo.framework.evo.sp.base.starter.rest.BaseRest;
 import com.ritoinfo.framework.evo.sp.sys.bizz.FuncBizz;
 import com.ritoinfo.framework.evo.sp.sys.condition.FuncCondition;
@@ -26,6 +25,6 @@ import java.util.List;
 public class FuncRest extends BaseRest<FuncBizz, FuncDao, Func, Long, FuncCondition, FuncDto> {
 	@GetMapping("/user/{username}")
 	public ServiceResponse<List<FuncDto>> username(@PathVariable String username) {
-		return ServiceResponse.ok(BaseHelper.toDto(bizz.getByUsername(username)));
+		return ServiceResponse.ok(bizz.getByUsername(username));
 	}
 }
