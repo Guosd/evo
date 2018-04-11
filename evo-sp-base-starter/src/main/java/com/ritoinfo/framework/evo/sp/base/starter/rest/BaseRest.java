@@ -41,7 +41,7 @@ public abstract class BaseRest<B extends BaseBizz<D, E, PK, C, T>, D extends Bas
 	}
 
 	@GetMapping
-	public ServiceResponse<List<T>> find(@Validated(ListGroup.class)C condition) {
+	public ServiceResponse<List<T>> find(@Validated(ListGroup.class) C condition) {
 		return ServiceResponse.ok(bizz.find(condition));
 	}
 
