@@ -1,6 +1,7 @@
 package com.ritoinfo.framework.evo.activiti.proxy.service;
 
 import com.ritoinfo.framework.evo.activiti.condition.TaskCondition;
+import com.ritoinfo.framework.evo.activiti.dto.VariableDto;
 import com.ritoinfo.framework.evo.activiti.proxy.entity.CommentProxy;
 import com.ritoinfo.framework.evo.activiti.proxy.entity.TaskProxy;
 import com.ritoinfo.framework.evo.activiti.proxy.entity.VariableProxy;
@@ -278,16 +279,16 @@ public class TaskServiceProxy {
 			query.taskWithoutTenantId();
 		}
 
-		List<VariableProxy> processInstanceVariables = condition.getProcessInstanceVariables();
+		List<VariableDto> processInstanceVariables = condition.getProcessInstanceVariables();
 		if (processInstanceVariables != null) {
-			for (VariableProxy variableProxy : processInstanceVariables) {
-				query.processVariableValueEquals(variableProxy.getName(), variableProxy.getValue());
+			for (VariableDto variableDto : processInstanceVariables) {
+				query.processVariableValueEquals(variableDto.getName(), variableDto.getValue());
 			}
 		}
-		List<VariableProxy> taskVariables = condition.getTaskVariables();
+		List<VariableDto> taskVariables = condition.getTaskVariables();
 		if (taskVariables != null) {
-			for (VariableProxy variableProxy : taskVariables) {
-				query.taskVariableValueEquals(variableProxy.getName(), variableProxy.getValue());
+			for (VariableDto variableDto : taskVariables) {
+				query.taskVariableValueEquals(variableDto.getName(), variableDto.getValue());
 			}
 		}
 

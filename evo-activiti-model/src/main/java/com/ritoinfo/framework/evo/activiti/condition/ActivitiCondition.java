@@ -1,7 +1,7 @@
 package com.ritoinfo.framework.evo.activiti.condition;
 
 
-import com.ritoinfo.framework.evo.activiti.proxy.entity.VariableProxy;
+import com.ritoinfo.framework.evo.activiti.dto.VariableDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,7 +14,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class ActivitiCondition extends ActivitiPageCondition {
-	// 任务是否完成（已办true or 待办false）
+	// 任务是否完成（已办true or待办false）
 	private boolean taskComplete;
 
 	// 公共查询条件
@@ -49,7 +49,7 @@ public class ActivitiCondition extends ActivitiPageCondition {
 	private String tenantId;
 	private String tenantIdLike;
 	private Boolean withoutTenantId;
-	private List<VariableProxy> taskVariables;
+	private List<VariableDto> taskVariables;
 	// 待办任务查询条件
 	private String description;
 	private Integer priority;
@@ -76,7 +76,7 @@ public class ActivitiCondition extends ActivitiPageCondition {
 	private Boolean excludeSubTasks;
 	private Boolean active;
 	private String candidateOrAssigned;
-	private List<VariableProxy> processInstanceVariables;
+	private List<VariableDto> processInstanceVariables;
 	// 已办任务查询条件
 	private String taskId;
 	private String processBusinessKey;
@@ -108,7 +108,7 @@ public class ActivitiCondition extends ActivitiPageCondition {
 	private String taskCompletedOn;
 	private String taskCompletedBefore;
 	private String taskCompletedAfter;
-	private List<VariableProxy> processVariables;
+	private List<VariableDto> processVariables;
 	// 历史变量查询条件
 	private Boolean excludeTaskVariables;
 	private String variableName;

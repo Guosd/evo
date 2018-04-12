@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.activiti.condition;
 
-import com.ritoinfo.framework.evo.activiti.proxy.entity.VariableProxy;
+import com.ritoinfo.framework.evo.activiti.dto.VariableDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -31,7 +31,7 @@ public class TaskCondition extends ActivitiPageCondition {
 	private String tenantId;
 	private String tenantIdLike;
 	private Boolean withoutTenantId;
-	private List<VariableProxy> taskVariables;
+	private List<VariableDto> taskVariables;
 
 	private String description;
 	private Integer priority;
@@ -58,5 +58,5 @@ public class TaskCondition extends ActivitiPageCondition {
 	private Boolean excludeSubTasks;
 	private Boolean active;
 	private String candidateOrAssigned;
-	private List<VariableProxy> processInstanceVariables;
+	private List<VariableDto> processInstanceVariables;
 }

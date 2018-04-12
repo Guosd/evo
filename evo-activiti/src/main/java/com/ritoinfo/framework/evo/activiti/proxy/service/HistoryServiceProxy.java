@@ -1,9 +1,8 @@
 package com.ritoinfo.framework.evo.activiti.proxy.service;
 
 import com.ritoinfo.framework.evo.activiti.condition.HistoricTaskInstanceCondition;
-import com.ritoinfo.framework.evo.activiti.condition.TaskCondition;
+import com.ritoinfo.framework.evo.activiti.dto.VariableDto;
 import com.ritoinfo.framework.evo.activiti.proxy.entity.HistoricTaskInstanceProxy;
-import com.ritoinfo.framework.evo.activiti.proxy.entity.TaskProxy;
 import com.ritoinfo.framework.evo.activiti.proxy.entity.VariableProxy;
 import com.ritoinfo.framework.evo.activiti.proxy.model.ActivitiPage;
 import com.ritoinfo.framework.evo.activiti.util.ActivitiUtil;
@@ -15,10 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.history.HistoricTaskInstanceQuery;
-import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sun.misc.Signal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -238,16 +235,16 @@ public class HistoryServiceProxy {
 			query.taskWithoutTenantId();
 		}
 
-		List<VariableProxy> processInstanceVariables = condition.getProcessVariables();
+		List<VariableDto> processInstanceVariables = condition.getProcessVariables();
 		if (processInstanceVariables != null) {
-			for (VariableProxy variable : processInstanceVariables) {
-				query.processVariableValueEquals(variable.getName(), variable.getValue());
+			for (VariableDto variableDto : processInstanceVariables) {
+				query.processVariableValueEquals(variableDto.getName(), variableDto.getValue());
 			}
 		}
-		List<VariableProxy> taskVariables = condition.getTaskVariables();
+		List<VariableDto> taskVariables = condition.getTaskVariables();
 		if (taskVariables != null) {
-			for (VariableProxy variable : taskVariables) {
-				query.taskVariableValueEquals(variable.getName(), variable.getValue());
+			for (VariableDto variableDto : taskVariables) {
+				query.taskVariableValueEquals(variableDto.getName(), variableDto.getValue());
 			}
 		}
 

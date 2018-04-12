@@ -24,13 +24,16 @@
 		<module>evo-zuul</module>
 		<module>evo-zipkin</module>
 		<module>evo-admin</module>
+		<module>evo-activiti</module>
+		<module>evo-activiti-model</module>
+		<module>evo-api</module>
 		<module>evo-sp-base</module>
 		<module>evo-sp-base-starter</module>
 		<module>evo-sp-base-starter-mybatis-xml</module>
 		<module>evo-sp-sys</module>
 		<module>evo-sp-auth</module>
 		<module>evo-data-redis</module>
-		<module>evo-activiti</module>
+
 	</modules>
 
 	<properties>
@@ -62,6 +65,7 @@
 		<evo-sp-base.version>1.0.0-SNAPSHOT</evo-sp-base.version>
 		<evo-sp-base-starter.version>1.0.0-SNAPSHOT</evo-sp-base-starter.version>
 		<evo-sp-base-starter-mybatis-xml.version>1.0.0-SNAPSHOT</evo-sp-base-starter-mybatis-xml.version>
+		<evo-activiti-model.version>1.0.0-SNAPSHOT</evo-activiti-model.version>
 		<evo-data-redis.version>1.0.0-SNAPSHOT</evo-data-redis.version>
 	</properties>
 

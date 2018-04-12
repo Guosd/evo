@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.activiti.condition;
 
-import com.ritoinfo.framework.evo.activiti.proxy.entity.VariableProxy;
+import com.ritoinfo.framework.evo.activiti.dto.VariableDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -27,7 +27,7 @@ public class HistoricTaskInstanceCondition extends ActivitiPageCondition {
 	private String tenantId;
 	private String tenantIdLike;
 	private Boolean withoutTenantId;
-	private List<VariableProxy> taskVariables;
+	private List<VariableDto> taskVariables;
 
 	private String taskId;
 	private String processBusinessKey;
@@ -59,5 +59,5 @@ public class HistoricTaskInstanceCondition extends ActivitiPageCondition {
 	private String taskCompletedOn;
 	private String taskCompletedBefore;
 	private String taskCompletedAfter;
-	private List<VariableProxy> processVariables;
+	private List<VariableDto> processVariables;
 }

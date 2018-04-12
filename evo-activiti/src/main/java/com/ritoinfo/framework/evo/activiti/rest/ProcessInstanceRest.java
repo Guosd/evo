@@ -6,6 +6,7 @@ import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,7 +22,7 @@ public class ProcessInstanceRest {
 	private ProcessInstanceBizz processInstanceBizz;
 
 	@PostMapping("/start")
-	public ServiceResponse start(StartDto... startDtos) {
+	public ServiceResponse start(@RequestBody StartDto... startDtos) {
 		processInstanceBizz.start(startDtos);
 		return ServiceResponse.ok();
 	}
