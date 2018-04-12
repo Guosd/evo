@@ -1,5 +1,7 @@
 package com.ritoinfo.framework.evo.sp.base.exception;
 
+import com.ritoinfo.framework.evo.common.exception.BaseException;
+
 /**
  * User: Kyll
  * Date: 2018-03-05 21:47

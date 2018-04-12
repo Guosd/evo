@@ -51,7 +51,7 @@ public class AuthBizz {
 					.refreshToken(jwtToken.createRefresh(userId, userDto.getUsername(), userDto.getName(), userDto.getCode()))
 					.build();
 
-			redisService.add(userId, token, jwtToken.parse(token).getJwtExpiration());
+			redisService.set(userId, token, jwtToken.parse(token).getJwtExpiration());
 
 			return tokenInfo;
 		} else {

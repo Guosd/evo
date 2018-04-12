@@ -1,5 +1,6 @@
 package com.ritoinfo.framework.evo.sp.base.exception;
 
+import com.ritoinfo.framework.evo.common.exception.BaseException;
 import lombok.Getter;
 import lombok.Setter;
 

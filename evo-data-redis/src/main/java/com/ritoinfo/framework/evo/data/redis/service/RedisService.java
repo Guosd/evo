@@ -1,11 +1,15 @@
 package com.ritoinfo.framework.evo.data.redis.service;
 
+import com.ritoinfo.framework.evo.common.uitl.JsonUtil;
+import com.ritoinfo.framework.evo.common.uitl.StringUtil;
+import com.ritoinfo.framework.evo.data.redis.exception.RedisOperateException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -17,26 +21,103 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class RedisService {
 	@Autowired
-	private RedisTemplate<Serializable, Serializable> redisTemplate;
+	private RedisTemplate<String, Object> redisTemplate;
 
-	public Serializable get(Serializable key) {
-		return redisTemplate.opsForValue().get(key);
+	public void set(String key, Object value) {
+		try {
+			redisTemplate.opsForValue().set(key, value);
+		} catch (Exception e) {
+			throw new RedisOperateException("写入失败", e);
+		}
 	}
 
-	public String getString(Serializable key) {
-		return (String) get(key);
+	public void set(String key, Object value, Date expire) {
+		set(key, value, expire.getTime() - System.currentTimeMillis());
 	}
 
-	public void add(Serializable key, Serializable value, Date expire) {
-		redisTemplate.opsForValue().set(key, value);
-		redisTemplate.expire(key, expire.getTime() - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+	public boolean set(String key, Object value, Long expire) {
+		Boolean result;
+		try {
+			redisTemplate.opsForValue().set(key, value);
+			result = redisTemplate.expire(key, expire, TimeUnit.MILLISECONDS);
+		} catch (Exception e) {
+			throw new RedisOperateException("写入并设置超时失败", e);
+		}
+		return result == null ? false : result;
 	}
 
-	public void delete(Serializable key) {
-		redisTemplate.delete(key);
+	public Object get(String key) {
+		Object value;
+		try {
+			value = redisTemplate.opsForValue().get(key);
+		} catch (Exception e) {
+			throw new RedisOperateException("读取失败", e);
+		}
+		return value;
 	}
 
-	public boolean exists(Serializable key) {
-		return redisTemplate.hasKey(key);
+	public <T> T get(String key, Class<T> clazz) {
+		String value = getString(key);
+		return StringUtil.isBlank(value) ? null : JsonUtil.jsonToObject(value, clazz);
+	}
+
+	public String getString(String key) {
+		Object value = get(key);
+		return value == null ? null : value.toString();
+	}
+
+	public Long getLong(String key) {
+		String value = getString(key);
+		return StringUtil.isBlank(value) ? null : Long.parseLong(value);
+	}
+
+	public Integer getInteger(String key) {
+		String value = getString(key);
+		return StringUtil.isBlank(value) ? null : Integer.parseInt(value);
+	}
+
+	public BigDecimal getBigDecimal(String key) {
+		String value = getString(key);
+		return StringUtil.isBlank(value) ? null : new BigDecimal(value);
+	}
+
+	public Double getDouble(String key) {
+		BigDecimal value = getBigDecimal(key);
+		return value == null ? null : value.doubleValue();
+	}
+
+	public Float getFloat(String key) {
+		BigDecimal value = getBigDecimal(key);
+		return value == null ? null : value.floatValue();
+	}
+
+	public boolean delete(String key) {
+		Boolean result;
+		try {
+			result = redisTemplate.delete(key);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+		return result == null ? false : result;
+	}
+
+	public Long delete(Collection<String> keys) {
+		Long result;
+		try {
+			result = redisTemplate.delete(keys);
+		} catch (Exception e) {
+			throw new RedisOperateException("删除失败", e);
+		}
+		return result;
+	}
+
+	public boolean exist(String key) {
+		Boolean result;
+		try {
+			result = redisTemplate.hasKey(key);
+		} catch (Exception e) {
+			throw new RedisOperateException("判断是否存在失败", e);
+		}
+		return result == null ? false : result;
 	}
 }
