@@ -14,18 +14,6 @@
 	<artifactId>evo-common-jwt</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<classifier>exec</classifier>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
