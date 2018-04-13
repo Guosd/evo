@@ -1,6 +1,5 @@
 package com.ritoinfo.framework.evo.data.redis.service;
 
-import com.ritoinfo.framework.evo.common.uitl.JsonUtil;
 import com.ritoinfo.framework.evo.common.uitl.StringUtil;
 import com.ritoinfo.framework.evo.data.redis.exception.RedisOperateException;
 import lombok.extern.slf4j.Slf4j;
@@ -56,9 +55,9 @@ public class RedisService {
 		return value;
 	}
 
-	public <T> T get(String key, Class<T> clazz) {
-		String value = getString(key);
-		return StringUtil.isBlank(value) ? null : JsonUtil.jsonToObject(value, clazz);
+	@SuppressWarnings("unchecked")
+	public <T> T getRealObject(String key) {
+		return (T) get(key);
 	}
 
 	public String getString(String key) {

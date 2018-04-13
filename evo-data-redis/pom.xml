@@ -19,6 +19,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
+		<!--<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>${jedis.version}</version>
+		</dependency>-->
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
 			<artifactId>evo-common</artifactId>
