@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.Serializable;
 import java.util.List;
@@ -41,23 +42,23 @@ public abstract class BaseRest<B extends BaseBizz<D, E, PK, C, T>, D extends Bas
 	}
 
 	@GetMapping
-	public ServiceResponse<List<T>> find(@Validated(ListGroup.class) C condition) {
+	public ServiceResponse<List<T>> find(@Validated(ListGroup.class) @RequestBody C condition) {
 		return ServiceResponse.ok(bizz.find(condition));
 	}
 
 	@GetMapping("/page")
-	public ServiceResponse<PageList<T>> findPage(@Validated(PageGroup.class) C condition) {
+	public ServiceResponse<PageList<T>> findPage(@Validated(PageGroup.class) @RequestBody C condition) {
 		return ServiceResponse.ok(bizz.findPage(condition));
 	}
 
 	@PostMapping
-	public ServiceResponse create(@Validated(CreateGroup.class) T dto) {
+	public ServiceResponse create(@Validated(CreateGroup.class) @RequestBody T dto) {
 		bizz.create(dto);
 		return ServiceResponse.ok();
 	}
 
 	@PutMapping
-	public ServiceResponse update(@Validated(UpdateGroup.class) T dto) {
+	public ServiceResponse update(@Validated(UpdateGroup.class) @RequestBody T dto) {
 		bizz.update(dto);
 		return ServiceResponse.ok();
 	}

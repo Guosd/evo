@@ -4,7 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cglib.beans.BeanCopier;
 import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
@@ -117,5 +119,23 @@ public class BeanUtil {
 				log.error("设置对象中的属性值失败", e);
 			}
 		}
+	}
+
+	public static <T extends Annotation> T getAnnotation(Method method, int paramIndex, Class<T> annotationClass) {
+		T result = null;
+
+		try {
+			Annotation[] annotations = method.getParameterAnnotations()[paramIndex];
+			for (Annotation annotation : annotations) {
+				if (annotation.annotationType() == annotationClass) {
+					result = (T) annotation;
+					break;
+				}
+			}
+		} catch (Exception e) {
+			log.error("获取注解失败", e);
+		}
+
+		return result;
 	}
 }

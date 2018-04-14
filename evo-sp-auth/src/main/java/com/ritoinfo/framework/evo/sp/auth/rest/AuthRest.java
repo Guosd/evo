@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +28,7 @@ public class AuthRest {
 	private AuthBizz authBizz;
 
 	@PostMapping("login")
-	public ServiceResponse<TokenInfo> login(@Validated(LoginGroup.class) AuthCondition authCondition) {
+	public ServiceResponse<TokenInfo> login(@Validated(LoginGroup.class) @RequestBody AuthCondition authCondition) {
 		try {
 			return ServiceResponse.ok(authBizz.authorize(authCondition));
 		} catch (BizzException e) {
@@ -36,7 +37,7 @@ public class AuthRest {
 	}
 
 	@PostMapping("logout")
-	public ServiceResponse logout(@Validated(LogoutGroup.class) AuthCondition authCondition) {
+	public ServiceResponse logout(@Validated(LogoutGroup.class) @RequestBody AuthCondition authCondition) {
 		authBizz.clear(authCondition.getUsername());
 		return ServiceResponse.ok();
 	}

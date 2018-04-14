@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ritoinfo.framework.evo.sp.datadict.dao.DataDictDao">
+
+	<resultMap id="DataDictResultMap" type="DataDict">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="code" property="code"/>
+		<result column="key_" property="key"/>
+		<result column="value" property="value"/>
+		<result column="sort" property="sort"/>
+		<result column="create_by" property="createBy"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_by" property="updateBy"/>
+		<result column="update_time" property="updateTime"/>
+	</resultMap>
+
+	<sql id="columns">
+		t.id, t.name, t.code, t.key_, t.value, t.sort,
+		t.create_by, t.create_time, t.update_by, t.update_time
+	</sql>
+
+	<sql id="condition">
+		<where>
+			<if test="id != null">
+				AND t.id = #{id}
+			</if>
+			<if test="name != null">
+				AND t.name = #{name}
+			</if>
+			<if test="code != null">
+				AND t.code = #{code}
+			</if>
+			<if test="key != null">
+				AND t.key_ = #{key}
+			</if>
+			<if test="value != null">
+				AND t.value = #{value}
+			</if>
+			<if test="sort != null">
+				AND t.sort = #{sort}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="select">
+		SELECT <include refid="columns"/> FROM sys_data_dict t
+	</sql>
+
+	<select id="get" resultMap="DataDictResultMap">
+		<include refid="select"/>
+		WHERE t.id = #{value}
+	</select>
+
+	<select id="find" resultMap="DataDictResultMap">
+		<include refid="select"/>
+		<include refid="condition"/>
+		<if test="pageSort != null">
+			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
+		</if>
+	</select>
+
+	<select id="count" resultType="int">
+		SELECT count(1) count FROM sys_data_dict t
+		<include refid="condition"/>
+	</select>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO sys_data_dict (
+			name, code, key_, value, sort, create_by, create_time, update_by, update_time
+		) VALUES (
+			#{name}, #{code}, #{key}, #{value}, #{sort}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE sys_data_dict SET
+			name = #{name},
+			code = #{code},
+			key_ = #{key},
+			value = #{value},
+			sort = #{sort},
+			update_by = #{updateBy},
+			update_time = #{updateTime}
+		WHERE
+		id = #{id}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM sys_data_dict WHERE id = #{id}
+	</delete>
+
+</mapper>
