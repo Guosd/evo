@@ -1,7 +1,6 @@
 package com.ritoinfo.framework.evo.sp.auth.infa.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.io.Serializable;
 
@@ -9,10 +8,11 @@ import java.io.Serializable;
  * User: Kyll
  * Date: 2018-03-08 15:58
  */
+@Data
 public class UserDto implements Serializable {
-	@Getter @Setter private Long id;
-	@Getter @Setter private String username;
-	@Getter @Setter private String password;
-	@Getter @Setter private String name;
-	@Getter @Setter private String code;
+	private Long id;
+	private String username;
+	private String password;
+	private String name;
+	private String code;
 }

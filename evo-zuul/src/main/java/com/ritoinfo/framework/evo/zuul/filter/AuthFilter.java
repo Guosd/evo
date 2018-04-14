@@ -64,7 +64,7 @@ public class AuthFilter extends ZuulFilter {
 		} else {
 			String token = jwtToken.get(request);
 
-			if (jwtToken.verify(token) && token.equals(redisService.getString(jwtToken.parse(token).getId()))) {
+			if (jwtToken.verify(token) && redisService.exist(token)) {
 				if (!authService.verify(uri, token).getData()) {
 					log.info("缺少权限: " + uri);
 
