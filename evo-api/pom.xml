@@ -17,13 +17,15 @@
 
 	<modules>
 		<module>evo-activiti-api</module>
+		<module>evo-sp-sys-api</module>
+		<module>evo-sp-auth-api</module>
 	</modules>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-sp-base</artifactId>
-			<version>${evo-sp-base.version}</version>
+			<artifactId>evo-sp-base-starter-model</artifactId>
+			<version>${evo-sp-base-starter-model.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>

@@ -65,6 +65,11 @@
 			<version>${evo-common-password.version}</version>
 		</dependency>
 		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-sp-sys-model</artifactId>
+			<version>${evo-sp-sys-model.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql-connector-java.version}</version>

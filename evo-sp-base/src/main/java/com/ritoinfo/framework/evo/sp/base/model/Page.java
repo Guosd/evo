@@ -1,15 +1,15 @@
 package com.ritoinfo.framework.evo.sp.base.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /**
  * User: Kyll
  * Date: 2018-02-28 10:14
  */
+@Data
 public class Page {
-	@Getter @Setter private Integer pageNo;
-	@Getter @Setter private Integer pageSize;
-	@Getter @Setter private String pageSort;
-	@Getter @Setter private String pageOrder;
+	private Integer pageNo;
+	private Integer pageSize;
+	private String pageSort;
+	private String pageOrder;
 }

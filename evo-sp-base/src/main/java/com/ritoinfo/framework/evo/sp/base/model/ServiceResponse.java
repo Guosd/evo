@@ -2,17 +2,17 @@ package com.ritoinfo.framework.evo.sp.base.model;
 
 import com.ritoinfo.framework.evo.common.Const;
 import com.ritoinfo.framework.evo.common.uitl.StringUtil;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /**
  * User: Kyll
  * Date: 2018-02-13 13:57
  */
+@Data
 public class ServiceResponse<T> {
-	@Getter @Setter private String code;
-	@Getter @Setter private String message;
-	@Getter @Setter private T data;
+	private String code;
+	private String message;
+	private T data;
 
 	public static <T> ServiceResponse<T> ok() {
 		return ok(null, null);

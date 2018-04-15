@@ -71,8 +71,18 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-sp-auth-model</artifactId>
+			<version>${evo-sp-auth-model.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
 			<artifactId>evo-data-redis</artifactId>
 			<version>${evo-data-redis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-sp-sys-api</artifactId>
+			<version>${evo-sp-sys-api.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>

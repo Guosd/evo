@@ -60,8 +60,8 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-sp-base</artifactId>
-			<version>${evo-sp-base.version}</version>
+			<artifactId>evo-sp-base-starter</artifactId>
+			<version>${evo-sp-base-starter.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
@@ -72,6 +72,11 @@
 			<groupId>com.ritoinfo.framework</groupId>
 			<artifactId>evo-data-redis</artifactId>
 			<version>${evo-data-redis.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-sp-auth-api</artifactId>
+			<version>${evo-sp-auth-api.version}</version>
 		</dependency>
 	</dependencies>
 

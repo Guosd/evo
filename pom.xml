@@ -21,50 +21,66 @@
 		<module>evo-zipkin</module>
 		<module>evo-admin</module>
 		<module>evo-activiti</module>
-		<module>evo-activiti-model</module>
 		<module>evo-api</module>
+		<module>evo-model</module>
+		<module>evo-data-redis</module>
 		<module>evo-sp-base</module>
 		<module>evo-sp-base-starter</module>
+		<module>evo-sp-base-starter-validate</module>
+		<module>evo-sp-base-starter-model</module>
 		<module>evo-sp-base-starter-mybatis-xml</module>
 		<module>evo-sp-sys</module>
 		<module>evo-sp-auth</module>
-		<module>evo-data-redis</module>
 		<module>evo-sp-datadict</module>
-
 	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+
 		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
 		<maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
 		<buildnumber-maven-plugin.version>1.4</buildnumber-maven-plugin.version>
 		<spring-boot-maven-plugin.version>2.0.0.M7</spring-boot-maven-plugin.version>
 		<svnkit.version>1.9.0</svnkit.version>
+
 		<lombok.version>1.16.16</lombok.version>
 		<commons-lang3.version>3.7</commons-lang3.version>
+		<commons-pool2.version>2.5.0</commons-pool2.version>
 		<joda-time.version>2.9.9</joda-time.version>
 		<jackson-databind.version>2.9.3</jackson-databind.version>
 		<h2.version>1.4.196</h2.version>
+		<jjwt.version>0.9.0</jjwt.version>
+		<validation-api.version>2.0.1.Final</validation-api.version>
+
 		<springfox-swagger-ui.version>2.7.0</springfox-swagger-ui.version>
 		<springfox-swagger2.version>2.7.0</springfox-swagger2.version>
-		<jjwt.version>0.9.0</jjwt.version>
+		<activiti-spring-boot-starter-basic.version>5.22.0</activiti-spring-boot-starter-basic.version>
+		<activiti-spring-boot-starter-jpa.version>5.22.0</activiti-spring-boot-starter-jpa.version>
+
 		<mybatis-spring-boot-starter.version>1.3.1</mybatis-spring-boot-starter.version>
 		<druid.version>1.1.6</druid.version>
 		<mysql-connector-java.version>5.1.24</mysql-connector-java.version>
-		<commons-pool2.version>2.5.0</commons-pool2.version>
-		<jedis.version>2.9.0</jedis.version>
-		<activiti-spring-boot-starter-basic.version>5.22.0</activiti-spring-boot-starter-basic.version>
-		<activiti-spring-boot-starter-jpa.version>5.22.0</activiti-spring-boot-starter-jpa.version>
+
+		<evo-data-redis.version>1.0.0-SNAPSHOT</evo-data-redis.version>
+
 		<evo-common.version>1.0.0-SNAPSHOT</evo-common.version>
 		<evo-common-password.version>1.0.0-SNAPSHOT</evo-common-password.version>
 		<evo-common-jwt.version>1.0.0-SNAPSHOT</evo-common-jwt.version>
 		<evo-sp-base.version>1.0.0-SNAPSHOT</evo-sp-base.version>
 		<evo-sp-base-starter.version>1.0.0-SNAPSHOT</evo-sp-base-starter.version>
+		<evo-sp-base-starter-validate.version>1.0.0-SNAPSHOT</evo-sp-base-starter-validate.version>
+		<evo-sp-base-starter-model.version>1.0.0-SNAPSHOT</evo-sp-base-starter-model.version>
 		<evo-sp-base-starter-mybatis-xml.version>1.0.0-SNAPSHOT</evo-sp-base-starter-mybatis-xml.version>
+
 		<evo-activiti-model.version>1.0.0-SNAPSHOT</evo-activiti-model.version>
-		<evo-data-redis.version>1.0.0-SNAPSHOT</evo-data-redis.version>
+		<evo-sp-sys-model.version>1.0.0-SNAPSHOT</evo-sp-sys-model.version>
+		<evo-sp-auth-model.version>1.0.0-SNAPSHOT</evo-sp-auth-model.version>
+
+		<evo-activiti-api.version>1.0.0-SNAPSHOT</evo-activiti-api.version>
+		<evo-sp-sys-api.version>1.0.0-SNAPSHOT</evo-sp-sys-api.version>
+		<evo-sp-auth-api.version>1.0.0-SNAPSHOT</evo-sp-auth-api.version>
 	</properties>
 
 	<dependencies>
