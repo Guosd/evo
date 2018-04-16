@@ -3,6 +3,10 @@ server:
 spring:
   application:
     name: evo-sp-datadict
+  cache:
+    redis:
+      time-to-live: 3600s
+      use-key-prefix: false
   redis:
 #    cluster:
 #      nodes: 10.20.133.85:7000, 10.20.133.85:7002, 10.20.133.85:7003, 10.20.133.85:7004, 10.20.133.85:7005

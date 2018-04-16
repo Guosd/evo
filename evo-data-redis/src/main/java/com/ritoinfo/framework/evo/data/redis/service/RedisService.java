@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
@@ -20,9 +21,9 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class RedisService {
 	@Autowired
-	private RedisTemplate<String, Object> redisTemplate;
+	private RedisTemplate<String, Serializable> redisTemplate;
 
-	public void set(String key, Object value) {
+	public void set(String key, Serializable value) {
 		try {
 			redisTemplate.opsForValue().set(key, value);
 		} catch (Exception e) {
@@ -30,11 +31,11 @@ public class RedisService {
 		}
 	}
 
-	public void set(String key, Object value, Date expire) {
+	public void set(String key, Serializable value, Date expire) {
 		set(key, value, expire.getTime() - System.currentTimeMillis());
 	}
 
-	public boolean set(String key, Object value, Long expire) {
+	public boolean set(String key, Serializable value, Long expire) {
 		Boolean result;
 		try {
 			redisTemplate.opsForValue().set(key, value);
@@ -45,8 +46,8 @@ public class RedisService {
 		return result == null ? false : result;
 	}
 
-	public Object get(String key) {
-		Object value;
+	public Serializable get(String key) {
+		Serializable value;
 		try {
 			value = redisTemplate.opsForValue().get(key);
 		} catch (Exception e) {
@@ -61,7 +62,7 @@ public class RedisService {
 	}
 
 	public String getString(String key) {
-		Object value = get(key);
+		Serializable value = get(key);
 		return value == null ? null : value.toString();
 	}
 
