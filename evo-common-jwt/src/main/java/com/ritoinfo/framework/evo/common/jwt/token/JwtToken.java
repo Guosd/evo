@@ -52,7 +52,7 @@ public class JwtToken {
 				.setIssuer(jwtConfig.getIssuer())
 				.setId(UUID.randomUUID().toString())
 				.setIssuedAt(now)
-				.setExpiration(DateUtil.plusMinutes(now, jwtConfig.getExpirationTime()))
+				.setExpiration(DateUtil.plusMinutes(now, jwtConfig.getRefreshExpirationTime()))
 				.signWith(SignatureAlgorithm.forName(jwtConfig.getAlgorithm()), jwtConfig.getSigningKey())
 				.compact();
 	}
