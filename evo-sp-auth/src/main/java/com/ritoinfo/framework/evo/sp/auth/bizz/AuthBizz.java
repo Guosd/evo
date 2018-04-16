@@ -1,10 +1,10 @@
 package com.ritoinfo.framework.evo.sp.auth.bizz;
 
-import com.ritoinfo.framework.evo.sp.auth.dto.TokenDto;
 import com.ritoinfo.framework.evo.common.jwt.token.JwtToken;
 import com.ritoinfo.framework.evo.common.password.crypto.PasswordEncoder;
 import com.ritoinfo.framework.evo.data.redis.service.RedisService;
 import com.ritoinfo.framework.evo.sp.auth.dto.LoginDto;
+import com.ritoinfo.framework.evo.sp.auth.dto.TokenDto;
 import com.ritoinfo.framework.evo.sp.auth.dto.VerifyDto;
 import com.ritoinfo.framework.evo.sp.auth.exception.PasswordInvalidException;
 import com.ritoinfo.framework.evo.sp.auth.exception.UserNotFoundException;
@@ -45,7 +45,7 @@ public class AuthBizz {
 			String userId = String.valueOf(userDto.getId());
 			String token = jwtToken.create(userId, userDto.getUsername(), userDto.getName(), userDto.getCode());
 
-			redisService.set(token, userDto, jwtToken.parse(token).getJwtExpiration());
+			redisService.set(AuthBizz.class, "AUTH", token, userDto, jwtToken.parse(token).getJwtExpiration());
 
 			return TokenDto.builder()
 					.token(token)
@@ -56,16 +56,19 @@ public class AuthBizz {
 		}
 	}
 
-	public void clear(String username) {
-		redisService.delete(username);
+	public void clear(String token) {
+		redisService.delete(AuthBizz.class, "AUTH", token);
 	}
 
 	public boolean verify(VerifyDto verifyDto) {
-		for (FuncDto funcDto : funcApi.username(jwtToken.parse(verifyDto.getToken()).getUsername()).getData()) {
-			if (verifyDto.getUri().equals(funcDto.getPrefix() + funcDto.getUri())) {
-				return true;
+		if (redisService.exist(AuthBizz.class, "AUTH", verifyDto.getToken())) {
+			for (FuncDto funcDto : funcApi.username(jwtToken.parse(verifyDto.getToken()).getUsername()).getData()) {
+				if (verifyDto.getUri().equals(funcDto.getPrefix() + funcDto.getUri())) {
+					return true;
+				}
 			}
 		}
+
 		return false;
 	}
 }

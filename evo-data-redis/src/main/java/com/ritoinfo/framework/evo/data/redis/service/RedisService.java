@@ -1,6 +1,7 @@
 package com.ritoinfo.framework.evo.data.redis.service;
 
 import com.ritoinfo.framework.evo.common.uitl.StringUtil;
+import com.ritoinfo.framework.evo.data.redis.config.RedisKeyGenerator;
 import com.ritoinfo.framework.evo.data.redis.exception.RedisOperateException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,5 +120,25 @@ public class RedisService {
 			throw new RedisOperateException("判断是否存在失败", e);
 		}
 		return result == null ? false : result;
+	}
+
+	public void set(Class clazz, String bizzFlag, String key, Serializable value) {
+		set(RedisKeyGenerator.generate(clazz, bizzFlag, key), value);
+	}
+
+	public void set(Class clazz, String bizzFlag, String key, Serializable value, Date expire) {
+		set(RedisKeyGenerator.generate(clazz, bizzFlag, key), value, expire);
+	}
+
+	public void set(Class clazz, String bizzFlag, String key, Serializable value, Long expire) {
+		set(RedisKeyGenerator.generate(clazz, bizzFlag, key), value, expire);
+	}
+
+	public boolean delete(Class clazz, String bizzFlag, String key) {
+		return delete(RedisKeyGenerator.generate(clazz, bizzFlag, key));
+	}
+
+	public boolean exist(Class clazz, String bizzFlag, String key) {
+		return exist(RedisKeyGenerator.generate(clazz, bizzFlag, key));
 	}
 }

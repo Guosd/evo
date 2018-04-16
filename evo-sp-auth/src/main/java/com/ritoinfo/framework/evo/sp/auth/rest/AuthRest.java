@@ -1,9 +1,9 @@
 package com.ritoinfo.framework.evo.sp.auth.rest;
 
 import com.ritoinfo.framework.evo.common.Const;
-import com.ritoinfo.framework.evo.sp.auth.dto.TokenDto;
 import com.ritoinfo.framework.evo.sp.auth.bizz.AuthBizz;
 import com.ritoinfo.framework.evo.sp.auth.dto.LoginDto;
+import com.ritoinfo.framework.evo.sp.auth.dto.TokenDto;
 import com.ritoinfo.framework.evo.sp.auth.dto.VerifyDto;
 import com.ritoinfo.framework.evo.sp.base.exception.BizzException;
 import com.ritoinfo.framework.evo.sp.base.exception.RestException;
@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,10 +35,10 @@ public class AuthRest {
 		}
 	}
 
-	@GetMapping("logout/{username}")
-	public ServiceResponse logout(@PathVariable String username) {
+	@GetMapping("logout")
+	public ServiceResponse logout(@RequestBody String token) {
 		try {
-			authBizz.clear(username);
+			authBizz.clear(token);
 			return ServiceResponse.ok();
 		} catch (Exception e) {
 			throw new RestException(Const.RC_AUTH_LOGOUT, Const.getRcm(Const.RC_AUTH_LOGOUT));

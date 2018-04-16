@@ -70,11 +70,6 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-data-redis</artifactId>
-			<version>${evo-data-redis.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
 			<artifactId>evo-sp-auth-api</artifactId>
 			<version>${evo-sp-auth-api.version}</version>
 		</dependency>

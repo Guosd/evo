@@ -3,7 +3,6 @@ package com.ritoinfo.framework.evo.zuul.filter;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.ritoinfo.framework.evo.common.jwt.token.JwtToken;
-import com.ritoinfo.framework.evo.data.redis.service.RedisService;
 import com.ritoinfo.framework.evo.sp.auth.api.AuthApi;
 import com.ritoinfo.framework.evo.sp.auth.dto.VerifyDto;
 import com.ritoinfo.framework.evo.zuul.config.AuthConfig;
@@ -27,8 +26,6 @@ public class AuthFilter extends ZuulFilter {
 	private AuthConfig authConfig;
 	@Autowired
 	private JwtToken jwtToken;
-	@Autowired
-	private RedisService redisService;
 
 	@Override
 	public String filterType() {
@@ -65,7 +62,7 @@ public class AuthFilter extends ZuulFilter {
 		} else {
 			String token = jwtToken.get(request);
 
-			if (jwtToken.verify(token) && redisService.exist(token)) {
+			if (jwtToken.verify(token)) {
 				if (!authApi.verify(VerifyDto.builder().uri(uri).token(token).build()).getData()) {
 					log.info("缺少权限: " + uri);
 

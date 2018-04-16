@@ -5,7 +5,6 @@ import com.ritoinfo.framework.evo.common.uitl.StringUtil;
 import com.ritoinfo.framework.evo.data.redis.annotation.RedisKey;
 import com.ritoinfo.framework.evo.data.redis.exception.RedisOperateException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
@@ -31,8 +30,6 @@ import java.util.Arrays;
 @EnableCaching
 @Configuration
 public class RedisConfig extends CachingConfigurerSupport {
-	@Value("${spring.application.name}")
-	private String springApplicationName;
 	@Autowired
 	private RedisConnectionFactory redisConnectionFactory;
 
@@ -139,7 +136,7 @@ public class RedisConfig extends CachingConfigurerSupport {
 				}
 			}
 
-			return springApplicationName + ":" + o.getClass().getName() + ":" + cacheConfig.cacheNames()[0] + ":" + key;
+			return RedisKeyGenerator.generate(o, cacheConfig.cacheNames()[0], key);
 		};
 	}
 }
