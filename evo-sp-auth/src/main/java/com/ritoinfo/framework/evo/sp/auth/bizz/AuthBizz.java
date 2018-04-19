@@ -1,12 +1,16 @@
 package com.ritoinfo.framework.evo.sp.auth.bizz;
 
+import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
+import com.ritoinfo.framework.evo.common.jwt.model.VerifyResult;
 import com.ritoinfo.framework.evo.common.jwt.token.JwtToken;
 import com.ritoinfo.framework.evo.common.password.crypto.PasswordEncoder;
+import com.ritoinfo.framework.evo.common.uitl.StringUtil;
 import com.ritoinfo.framework.evo.data.redis.service.RedisService;
 import com.ritoinfo.framework.evo.sp.auth.dto.LoginDto;
-import com.ritoinfo.framework.evo.sp.auth.dto.TokenDto;
 import com.ritoinfo.framework.evo.sp.auth.dto.VerifyDto;
 import com.ritoinfo.framework.evo.sp.auth.exception.PasswordInvalidException;
+import com.ritoinfo.framework.evo.sp.auth.exception.RefreshTokenNotFoundException;
+import com.ritoinfo.framework.evo.sp.auth.exception.RefreshTokenVerifyException;
 import com.ritoinfo.framework.evo.sp.auth.exception.UserNotFoundException;
 import com.ritoinfo.framework.evo.sp.sys.api.FuncApi;
 import com.ritoinfo.framework.evo.sp.sys.api.UserApi;
@@ -34,41 +38,67 @@ public class AuthBizz {
 	@Autowired
 	private RedisService redisService;
 
-	public TokenDto authorize(LoginDto condition) {
-		UserDto userDto = userApi.username(condition.getUsername()).getData();
-
+	public String authorize(LoginDto loginDto) {
+		UserDto userDto = userApi.username(loginDto.getUsername()).getData();
 		if (userDto == null) {
-			throw new UserNotFoundException(condition.getUsername());
+			throw new UserNotFoundException(loginDto.getUsername());
 		}
 
-		if (passwordEncoder.matches(condition.getPassword(), userDto.getPassword())) {
-			String userId = String.valueOf(userDto.getId());
-			String token = jwtToken.create(userId, userDto.getUsername(), userDto.getName(), userDto.getCode());
-
-			redisService.set(AuthBizz.class, "AUTH", token, userDto, jwtToken.parse(token).getJwtExpiration());
-
-			return TokenDto.builder()
-					.token(token)
-					.refreshToken(jwtToken.createRefresh(userId, userDto.getUsername(), userDto.getName(), userDto.getCode()))
-					.build();
+		if (passwordEncoder.matches(loginDto.getPassword(), userDto.getPassword())) {
+			return createAndSaveToken(UserContext.builder()
+					.id(String.valueOf(userDto.getId()))
+					.username(userDto.getUsername())
+					.name(userDto.getName())
+					.code(userDto.getCode()).build());
 		} else {
-			throw new PasswordInvalidException(condition.getUsername());
+			throw new PasswordInvalidException(loginDto.getUsername());
 		}
 	}
 
-	public void clear(String token) {
-		redisService.delete(AuthBizz.class, "AUTH", token);
+	public boolean clear(String token) {
+		if (VerifyResult.SUCCESS == jwtToken.verify(token)) {
+			return redisService.delete(AuthBizz.class, "TOKEN", token) && redisService.delete(AuthBizz.class, "REFRESH_TOKEN", token);
+		}
+		return false;
+	}
+
+	public String tryRefresh(String token) {
+		return redisService.getString(AuthBizz.class, "OLD_TOKEN", token);
+	}
+
+	public String refresh(String token) {
+		String refreshToken = redisService.getString(AuthBizz.class, "REFRESH_TOKEN", token);
+		if (StringUtil.isBlank(refreshToken)) {
+			throw new RefreshTokenNotFoundException(token);
+		}
+
+		VerifyResult verifyResult = jwtToken.verify(refreshToken);
+		if (VerifyResult.SUCCESS == verifyResult) {
+			String newToken = createAndSaveToken(jwtToken.parse(refreshToken));
+			redisService.set(AuthBizz.class, "OLD_TOKEN", token, newToken, 30000L);
+			redisService.delete(AuthBizz.class, "REFRESH_TOKEN", token);
+			return newToken;
+		} else {
+			throw new RefreshTokenVerifyException(refreshToken);
+		}
 	}
 
 	public boolean verify(VerifyDto verifyDto) {
-		if (redisService.exist(AuthBizz.class, "AUTH", verifyDto.getToken())) {
+		if (redisService.exist(AuthBizz.class, "TOKEN", verifyDto.getToken())) {
 			for (FuncDto funcDto : funcApi.username(jwtToken.parse(verifyDto.getToken()).getUsername()).getData()) {
 				if (verifyDto.getUri().equals(funcDto.getPrefix() + funcDto.getUri())) {
 					return true;
 				}
 			}
 		}
-
 		return false;
+	}
+
+	private String createAndSaveToken(UserContext userContext) {
+		String token = jwtToken.create(userContext.getId(), userContext.getUsername(), userContext.getName(), userContext.getCode());
+		String refreshToken = jwtToken.createRefresh(userContext.getId(), userContext.getUsername(), userContext.getName(), userContext.getCode());
+		redisService.set(AuthBizz.class, "TOKEN", token, userContext, jwtToken.parse(token).getJwtExpiration());
+		redisService.set(AuthBizz.class, "REFRESH_TOKEN", token, refreshToken, jwtToken.parse(refreshToken).getJwtExpiration());
+		return token;
 	}
 }

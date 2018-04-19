@@ -2,7 +2,8 @@ package com.ritoinfo.framework.evo.sp.auth.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
+
+import javax.validation.constraints.NotBlank;
 
 /**
  * User: Kyll
@@ -11,6 +12,8 @@ import lombok.Getter;
 @Builder
 @Data
 public class TokenDto {
-	@Getter private String token;
-	@Getter private String refreshToken;
+	@NotBlank
+	private String token;
+	@NotBlank
+	private String refreshToken;
 }

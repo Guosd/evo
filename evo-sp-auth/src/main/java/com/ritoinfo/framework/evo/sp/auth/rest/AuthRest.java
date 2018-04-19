@@ -3,7 +3,6 @@ package com.ritoinfo.framework.evo.sp.auth.rest;
 import com.ritoinfo.framework.evo.common.Const;
 import com.ritoinfo.framework.evo.sp.auth.bizz.AuthBizz;
 import com.ritoinfo.framework.evo.sp.auth.dto.LoginDto;
-import com.ritoinfo.framework.evo.sp.auth.dto.TokenDto;
 import com.ritoinfo.framework.evo.sp.auth.dto.VerifyDto;
 import com.ritoinfo.framework.evo.sp.base.exception.BizzException;
 import com.ritoinfo.framework.evo.sp.base.exception.RestException;
@@ -11,7 +10,6 @@ import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,26 +25,47 @@ public class AuthRest {
 	private AuthBizz authBizz;
 
 	@PostMapping("login")
-	public ServiceResponse<TokenDto> login(@Validated @RequestBody LoginDto loginDto) {
+	public ServiceResponse<String> login(@Validated @RequestBody LoginDto loginDto) {
 		try {
 			return ServiceResponse.ok(authBizz.authorize(loginDto));
 		} catch (BizzException e) {
-			throw new RestException(Const.RC_AUTH_LOGIN, Const.getRcm(Const.RC_AUTH_LOGIN));
+			throw new RestException(Const.RC_AUTH_LOGIN);
 		}
 	}
 
-	@GetMapping("logout")
-	public ServiceResponse logout(@RequestBody String token) {
+	@PostMapping("logout")
+	public ServiceResponse<Boolean> logout(@RequestBody String token) {
 		try {
-			authBizz.clear(token);
-			return ServiceResponse.ok();
+			return ServiceResponse.ok(authBizz.clear(token));
 		} catch (Exception e) {
-			throw new RestException(Const.RC_AUTH_LOGOUT, Const.getRcm(Const.RC_AUTH_LOGOUT));
+			throw new RestException(Const.RC_AUTH_LOGOUT);
+		}
+	}
+
+	@PostMapping("try")
+	public ServiceResponse<String> tryRefresh(@RequestBody String token) {
+		try {
+			return ServiceResponse.ok(authBizz.tryRefresh(token));
+		} catch (Exception e) {
+			throw new RestException(Const.RC_AUTH_TRY_REFRESH);
+		}
+	}
+
+	@PostMapping("refresh")
+	public ServiceResponse<String> refresh(@RequestBody String token) {
+		try {
+			return ServiceResponse.ok(authBizz.refresh(token));
+		} catch (Exception e) {
+			throw new RestException(Const.RC_AUTH_REFRESH, e);
 		}
 	}
 
 	@PostMapping("verify")
 	public ServiceResponse<Boolean> verify(@Validated @RequestBody VerifyDto verifyDto) {
-		return ServiceResponse.ok(authBizz.verify(verifyDto));
+		try {
+			return ServiceResponse.ok(authBizz.verify(verifyDto));
+		} catch (Exception e) {
+			throw new RestException(Const.RC_AUTH_VERIFY);
+		}
 	}
 }

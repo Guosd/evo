@@ -2,7 +2,10 @@ package com.ritoinfo.framework.evo.zuul.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
+import com.ritoinfo.framework.evo.common.Const;
+import com.ritoinfo.framework.evo.common.jwt.model.VerifyResult;
 import com.ritoinfo.framework.evo.common.jwt.token.JwtToken;
+import com.ritoinfo.framework.evo.common.uitl.StringUtil;
 import com.ritoinfo.framework.evo.sp.auth.api.AuthApi;
 import com.ritoinfo.framework.evo.sp.auth.dto.VerifyDto;
 import com.ritoinfo.framework.evo.zuul.config.AuthConfig;
@@ -12,6 +15,7 @@ import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * User: Kyll
@@ -60,20 +64,52 @@ public class AuthFilter extends ZuulFilter {
 		if (exclude) {
 			log.info("忽略验证: " + uri);
 		} else {
-			String token = jwtToken.get(request);
+			String token = jwtToken.getToken(request);
 
-			if (jwtToken.verify(token)) {
-				if (!authApi.verify(VerifyDto.builder().uri(uri).token(token).build()).getData()) {
-					log.info("缺少权限: " + uri);
-
-					requestContext.setSendZuulResponse(false);
-					requestContext.setResponseStatusCode(403);
-				}
-			} else {
+			if (StringUtil.isBlank(token)) {
 				log.info("缺少授权: " + uri);
 
 				requestContext.setSendZuulResponse(false);
 				requestContext.setResponseStatusCode(401);
+			} else {
+				VerifyResult verifyResult = jwtToken.verify(token);
+
+				if (VerifyResult.SUCCESS == verifyResult || VerifyResult.EXPIRED == verifyResult) {
+					if (VerifyResult.EXPIRED == verifyResult) {
+						String newToken = authApi.tryRefresh(token).getData();
+						if (StringUtil.isBlank(newToken)) {
+							newToken = authApi.refresh(token).getData();
+						}
+
+						if (StringUtil.isBlank(newToken)) {
+							log.info("缺少授权: " + uri);
+
+							requestContext.setSendZuulResponse(false);
+							requestContext.setResponseStatusCode(401);
+						} else {
+							requestContext.addZuulRequestHeader(Const.JWT_TOKEN_HEADER, newToken);
+
+							HttpServletResponse response = requestContext.getResponse();
+							response.setHeader("Cache-Control", "no-store");
+							response.setHeader("Access-Control-Expose-Headers", Const.JWT_TOKEN_HEADER);
+							response.setHeader(Const.JWT_TOKEN_HEADER, newToken);
+
+							token = newToken;
+						}
+					}
+
+					if (StringUtil.isNotBlank(token) && !authApi.verify(VerifyDto.builder().uri(uri).token(token).build()).getData()) {
+						log.info("缺少权限: " + uri);
+
+						requestContext.setSendZuulResponse(false);
+						requestContext.setResponseStatusCode(403);
+					}
+				} else {
+					log.info("缺少授权: " + uri);
+
+					requestContext.setSendZuulResponse(false);
+					requestContext.setResponseStatusCode(401);
+				}
 			}
 		}
 

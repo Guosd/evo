@@ -134,6 +134,10 @@ public class RedisService {
 		set(RedisKeyGenerator.generate(clazz, bizzFlag, key), value, expire);
 	}
 
+	public String getString(Class clazz, String bizzFlag, String key) {
+		return getString(RedisKeyGenerator.generate(clazz, bizzFlag, key));
+	}
+
 	public boolean delete(Class clazz, String bizzFlag, String key) {
 		return delete(RedisKeyGenerator.generate(clazz, bizzFlag, key));
 	}

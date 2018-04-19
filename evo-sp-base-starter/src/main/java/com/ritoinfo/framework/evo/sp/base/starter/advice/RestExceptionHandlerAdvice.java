@@ -1,5 +1,7 @@
 package com.ritoinfo.framework.evo.sp.base.starter.advice;
 
+import com.ritoinfo.framework.evo.common.Const;
+import com.ritoinfo.framework.evo.sp.base.exception.BizzException;
 import com.ritoinfo.framework.evo.sp.base.exception.RestException;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -13,9 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * User: Kyll
@@ -25,8 +25,8 @@ import java.util.Map;
 @ControllerAdvice(annotations = RestController.class)
 public class RestExceptionHandlerAdvice {
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<ServiceResponse> handle(Exception exception) {
-		ServiceResponse serviceResponse;
+	public ResponseEntity handle(Exception exception) {
+		ResponseEntity responseEntity;
 		if (exception instanceof BindException) {
 			BindException bindException = (BindException) exception;
 
@@ -43,21 +43,21 @@ public class RestExceptionHandlerAdvice {
 				messageList.add(message);
 			}
 
-			serviceResponse = ServiceResponse.badRequest(messageList);
+			responseEntity = new ResponseEntity<>(ServiceResponse.of(Const.RC_FAIL_REQUEST_PARAM, messageList), HttpStatus.valueOf(Const.HTTP_STATUS_BAD_REQUEST));
 		} else if (exception instanceof RestException) {
 			RestException restException = (RestException) exception;
 
-			Map<String, Object> map = new HashMap<>();
-			map.put("errorCode", restException.getCode());
-			map.put("errorMessage", restException.getMessage());
-			map.put("errorData", restException.getData());
+			log.warn("REST Exception: " + restException.getCode() + " " + exception.getMessage() + " " + restException.getCause());
+			responseEntity = new ResponseEntity<>(ServiceResponse.of(restException.getCode(), restException.getData()), HttpStatus.valueOf(Const.HTTP_STATUS_OK));
+		} else if (exception instanceof BizzException) {
+			BizzException bizzException = (BizzException) exception;
 
-			serviceResponse = ServiceResponse.internalServerError(map);
+			log.error("未按要求转换业务异常", exception);
+			responseEntity = new ResponseEntity<>(ServiceResponse.of(Const.RC_BASE_EXCEPTION, bizzException.getData()), HttpStatus.valueOf(Const.HTTP_STATUS_INTERNAL_SERVER_ERROR));
 		} else {
-			log.error("不期望的异常", exception);
-
-			serviceResponse = ServiceResponse.internalServerError();
+			log.error("不期望的内部服务异常", exception);
+			responseEntity = new ResponseEntity<>(ServiceResponse.of(Const.RC_FAIL_UNEXPECT), HttpStatus.valueOf(Const.HTTP_STATUS_INTERNAL_SERVER_ERROR));
 		}
-		return new ResponseEntity<>(serviceResponse, HttpStatus.valueOf(Integer.parseInt(serviceResponse.getCode())));
+		return responseEntity;
 	}
 }

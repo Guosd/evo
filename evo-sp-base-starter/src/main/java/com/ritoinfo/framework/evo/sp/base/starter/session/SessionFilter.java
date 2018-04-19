@@ -41,13 +41,13 @@ public class SessionFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 		String uri = request.getRequestURI();
 
-		String token = jwtToken.get(request);
+		String token = jwtToken.getToken(request);
 		if (StringUtils.isNotBlank(token)) {
 			UserContext userContext = null;
 			try {
 				userContext = jwtToken.parse(token);
 			} catch (Exception e) {
-				log.warn("令牌解析失败: " + uri, e);
+				log.warn("令牌解析失败: " + uri + " " + e.getMessage());
 			}
 
 			if (userContext != null) {
