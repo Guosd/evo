@@ -93,9 +93,9 @@ public class AuthFilter extends ZuulFilter {
 							response.setHeader("Cache-Control", "no-store");
 							response.setHeader("Access-Control-Expose-Headers", Const.JWT_TOKEN_HEADER);
 							response.setHeader(Const.JWT_TOKEN_HEADER, newToken);
-
-							token = newToken;
 						}
+
+						token = newToken;
 					}
 
 					if (StringUtil.isNotBlank(token) && !authApi.verify(VerifyDto.builder().uri(uri).token(token).build()).getData()) {

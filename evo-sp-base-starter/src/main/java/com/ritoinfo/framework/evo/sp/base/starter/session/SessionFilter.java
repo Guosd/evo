@@ -41,6 +41,8 @@ public class SessionFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 		String uri = request.getRequestURI();
 
+		System.out.println(request.getHeader("X-Authorization"));
+
 		String token = jwtToken.getToken(request);
 		if (StringUtils.isNotBlank(token)) {
 			UserContext userContext = null;
