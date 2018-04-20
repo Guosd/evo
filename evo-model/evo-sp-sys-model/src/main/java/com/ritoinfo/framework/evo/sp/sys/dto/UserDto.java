@@ -18,7 +18,7 @@ public class UserDto extends BaseDto<Long> {
 	private String name;
 	private String code;
 	private String email;
-	private String cellPhone;
+	private String mobilePhone;
 	private String freeze;
 	private Date loginTime;
 	private String loginIp;

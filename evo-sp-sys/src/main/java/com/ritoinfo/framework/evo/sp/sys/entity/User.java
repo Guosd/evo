@@ -20,7 +20,7 @@ public class User extends BaseEntity<Long> {
 	private String name;// 姓名
 	private String code;// 编码
 	private String email;// Email地址
-	private String cellPhone;// 电话号码
+	private String mobilePhone;// 电话号码
 	private String freeze;// 是否冻结 0 否， 1 是
 	private Date loginTime;// 登录时间
 	private String loginIp;// 登录IP
