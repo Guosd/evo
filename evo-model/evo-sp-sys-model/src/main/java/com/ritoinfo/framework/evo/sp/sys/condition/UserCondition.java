@@ -16,7 +16,7 @@ public class UserCondition extends BaseCondition<Long> {
 	private String name;
 	private String code;
 	private String email;
-	private String phone;
+	private String cellPhone;
 	private String freeze;
 	private String loginTime;
 	private String loginIp;
