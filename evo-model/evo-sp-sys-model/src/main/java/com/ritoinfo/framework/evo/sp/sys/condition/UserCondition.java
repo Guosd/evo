@@ -18,6 +18,8 @@ public class UserCondition extends BaseCondition<Long> {
 	private String email;
 	private String phone;
 	private String freeze;
+	private String loginTime;
+	private String loginIp;
 	private String lastLoginTime;
 	private String lastLoginIp;
 }

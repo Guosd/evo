@@ -27,9 +27,9 @@ public class UserBizz extends BaseBizz<UserDao, User, Long, UserCondition, UserD
 
 	@Transactional
 	@Override
-	public void create(UserDto dto) {
+	public Long create(UserDto dto) {
 		dto.setPassword(passwordEncoder.encode(dto.getPassword()));
-		super.create(dto);
+		return super.create(dto);
 	}
 
 	@Transactional

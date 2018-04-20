@@ -20,6 +20,8 @@ public class UserDto extends BaseDto<Long> {
 	private String email;
 	private String phone;
 	private String freeze;
+	private Date loginTime;
+	private String loginIp;
 	private Date lastLoginTime;
 	private String lastLoginIp;
 }

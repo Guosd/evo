@@ -57,7 +57,7 @@ public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity
 	}
 
 	@Transactional
-	public void create(T dto) {
+	public PK create(T dto) {
 		E entity = BaseHelper.toEntity(dto);
 
 		entity.setCreateBy(SessionHolder.getUserContext().getId(BeanUtil.getGenericClass(entity)));
@@ -66,6 +66,8 @@ public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity
 		entity.setUpdateTime(entity.getCreateTime());
 
 		dao.insert(entity);
+
+		return entity.getId();
 	}
 
 	@Transactional

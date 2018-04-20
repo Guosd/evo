@@ -11,6 +11,8 @@
 		<result column="email" property="email"/>
 		<result column="phone" property="phone"/>
 		<result column="freeze" property="freeze"/>
+		<result column="login_time" property="loginTime"/>
+		<result column="login_ip" property="loginIp"/>
 		<result column="last_login_time" property="lastLoginTime"/>
 		<result column="last_login_ip" property="lastLoginIp"/>
 		<result column="create_by" property="createBy"/>
@@ -20,7 +22,7 @@
 	</resultMap>
 
 	<sql id="columns">
-		t.id, t.username, t.password, t.name, t.code, t.email, t.phone, t.freeze, t.last_login_time, t.last_login_ip,
+		t.id, t.username, t.password, t.name, t.code, t.email, t.phone, t.freeze, t.login_time, t.login_ip, t.last_login_time, t.last_login_ip,
 		t.create_by, t.create_time, t.update_by, t.update_time
 	</sql>
 
@@ -49,6 +51,12 @@
 			</if>
 			<if test="freeze != null">
 				AND t.freeze = #{freeze}
+			</if>
+			<if test="loginTime != null">
+				AND t.login_time = #{loginTime}
+			</if>
+			<if test="loginIp != null">
+				AND t.login_ip = #{loginIp}
 			</if>
 			<if test="lastLoginTime != null">
 				AND t.last_login_time = #{lastLoginTime}
@@ -83,9 +91,9 @@
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO sys_user (
-			username, password, name, code, email, phone, freeze, last_login_time, last_login_ip, create_by, create_time, update_by, update_time
+			username, password, name, code, email, phone, freeze, login_time, login_ip, last_login_time, last_login_ip, create_by, create_time, update_by, update_time
 		) VALUES (
-			#{username}, #{password}, #{name}, #{code}, #{email}, #{phone}, #{freeze}, #{lastLoginTime}, #{lastLoginIp}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}
+			#{username}, #{password}, #{name}, #{code}, #{email}, #{phone}, #{freeze}, #{loginTime}, #{loginIp}, #{lastLoginTime}, #{lastLoginIp}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}
 		)
 	</insert>
 
@@ -98,6 +106,8 @@
 			email = #{email},
 			phone = #{phone},
 			freeze = #{freeze},
+			login_time = #{loginTime},
+			login_ip = #{loginIp},
 			last_login_time = #{lastLoginTime},
 			last_login_ip = #{lastLoginIp},
 			update_by = #{updateBy},

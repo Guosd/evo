@@ -52,9 +52,8 @@ public abstract class BaseRest<B extends BaseBizz<D, E, PK, C, T>, D extends Bas
 	}
 
 	@PostMapping
-	public ServiceResponse create(@Validated(CreateGroup.class) @RequestBody T dto) {
-		bizz.create(dto);
-		return ServiceResponse.ok();
+	public ServiceResponse<PK> create(@Validated(CreateGroup.class) @RequestBody T dto) {
+		return ServiceResponse.ok(bizz.create(dto));
 	}
 
 	@PutMapping

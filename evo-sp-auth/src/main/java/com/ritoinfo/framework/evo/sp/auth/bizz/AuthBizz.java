@@ -4,6 +4,8 @@ import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
 import com.ritoinfo.framework.evo.common.jwt.model.VerifyResult;
 import com.ritoinfo.framework.evo.common.jwt.token.JwtToken;
 import com.ritoinfo.framework.evo.common.password.crypto.PasswordEncoder;
+import com.ritoinfo.framework.evo.common.uitl.DateUtil;
+import com.ritoinfo.framework.evo.common.uitl.NetUtil;
 import com.ritoinfo.framework.evo.common.uitl.StringUtil;
 import com.ritoinfo.framework.evo.data.redis.service.RedisService;
 import com.ritoinfo.framework.evo.sp.auth.dto.LoginDto;
@@ -19,6 +21,8 @@ import com.ritoinfo.framework.evo.sp.sys.dto.UserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * User: Kyll
@@ -38,18 +42,32 @@ public class AuthBizz {
 	@Autowired
 	private RedisService redisService;
 
-	public String authorize(LoginDto loginDto) {
+	public String authorize(LoginDto loginDto, HttpServletRequest request) {
 		UserDto userDto = userApi.username(loginDto.getUsername()).getData();
 		if (userDto == null) {
 			throw new UserNotFoundException(loginDto.getUsername());
 		}
 
 		if (passwordEncoder.matches(loginDto.getPassword(), userDto.getPassword())) {
-			return createAndSaveToken(UserContext.builder()
+			userDto.setLastLoginTime(userDto.getLoginTime());
+			userDto.setLastLoginIp(userDto.getLoginIp());
+			userDto.setLoginTime(DateUtil.now());
+			userDto.setLoginIp(NetUtil.getRemoteAddr(request));
+
+			if (userDto.getLastLoginTime() == null || StringUtil.isBlank(userDto.getLastLoginIp())) {
+				userDto.setLastLoginTime(userDto.getLoginTime());
+				userDto.setLastLoginIp(userDto.getLoginIp());
+			}
+
+			String token = createAndSaveToken(UserContext.builder()
 					.id(String.valueOf(userDto.getId()))
 					.username(userDto.getUsername())
 					.name(userDto.getName())
 					.code(userDto.getCode()).build());
+
+			userApi.update(userDto, token);
+
+			return token;
 		} else {
 			throw new PasswordInvalidException(loginDto.getUsername());
 		}

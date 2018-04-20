@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * User: Kyll
  * Date: 2018-03-08 14:33
@@ -25,9 +27,9 @@ public class AuthRest {
 	private AuthBizz authBizz;
 
 	@PostMapping("login")
-	public ServiceResponse<String> login(@Validated @RequestBody LoginDto loginDto) {
+	public ServiceResponse<String> login(@Validated @RequestBody LoginDto loginDto, HttpServletRequest request) {
 		try {
-			return ServiceResponse.ok(authBizz.authorize(loginDto));
+			return ServiceResponse.ok(authBizz.authorize(loginDto, request));
 		} catch (BizzException e) {
 			throw new RestException(Const.RC_AUTH_LOGIN);
 		}
