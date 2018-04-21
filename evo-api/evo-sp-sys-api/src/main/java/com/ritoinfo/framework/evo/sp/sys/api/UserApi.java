@@ -21,6 +21,9 @@ public interface UserApi {
 	@GetMapping("/username/{username}")
 	ServiceResponse<UserDto> username(@PathVariable("username") String username);
 
+	@GetMapping("/mobile-number/{mobileNumber}")
+	ServiceResponse<UserDto> mobileNumber(@PathVariable("mobileNumber") String mobileNumber);
+
 	@PutMapping
 	ServiceResponse update(@RequestBody UserDto dto, @RequestHeader(Const.JWT_TOKEN_HEADER) String token);
 }

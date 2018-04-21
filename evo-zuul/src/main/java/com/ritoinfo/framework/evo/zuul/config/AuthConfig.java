@@ -12,7 +12,5 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConfigurationProperties(prefix = "auth")
 public class AuthConfig {
-	private String loginPath;
-	private String logoutPath;
 	private String[] excludePaths;
 }

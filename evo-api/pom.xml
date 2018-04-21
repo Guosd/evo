@@ -17,8 +17,9 @@
 
 	<modules>
 		<module>evo-activiti-api</module>
+		<module>evo-sms-api</module>
+		<module>evo-sp-auth-common-api</module>
 		<module>evo-sp-sys-api</module>
-		<module>evo-sp-auth-api</module>
 	</modules>
 
 	<dependencies>

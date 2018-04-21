@@ -32,6 +32,11 @@ public class UserRest extends BaseRest<UserBizz, UserDao, User, Long, UserCondit
 		return ServiceResponse.ok(bizz.getByUsername(username));
 	}
 
+	@GetMapping("/mobile-number/{mobileNumber}")
+	public ServiceResponse<UserDto> mobileNumber(@PathVariable String mobileNumber) {
+		return ServiceResponse.ok(bizz.getByMobileNumber(mobileNumber));
+	}
+
 	@PostMapping("/with-password")
 	public ServiceResponse<Long> createWithPassword(@Validated(CreateGroup.class) @RequestBody UserDto dto) {
 		return ServiceResponse.ok(bizz.createWithPassword(dto));

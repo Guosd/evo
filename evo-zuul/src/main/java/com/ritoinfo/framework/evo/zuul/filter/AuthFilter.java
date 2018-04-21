@@ -6,7 +6,7 @@ import com.ritoinfo.framework.evo.common.Const;
 import com.ritoinfo.framework.evo.common.jwt.model.VerifyResult;
 import com.ritoinfo.framework.evo.common.jwt.token.JwtToken;
 import com.ritoinfo.framework.evo.common.uitl.StringUtil;
-import com.ritoinfo.framework.evo.sp.auth.api.AuthApi;
+import com.ritoinfo.framework.evo.sp.auth.api.AuthCommonApi;
 import com.ritoinfo.framework.evo.sp.auth.dto.VerifyDto;
 import com.ritoinfo.framework.evo.zuul.config.AuthConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 @Configuration
 public class AuthFilter extends ZuulFilter {
 	@Autowired
-	private AuthApi authApi;
+	private AuthCommonApi authCommonApi;
 	@Autowired
 	private AuthConfig authConfig;
 	@Autowired
@@ -76,9 +76,9 @@ public class AuthFilter extends ZuulFilter {
 
 				if (VerifyResult.SUCCESS == verifyResult || VerifyResult.EXPIRED == verifyResult) {
 					if (VerifyResult.EXPIRED == verifyResult) {
-						String newToken = authApi.tryRefresh(token).getData();
+						String newToken = authCommonApi.tryRefresh(token).getData();
 						if (StringUtil.isBlank(newToken)) {
-							newToken = authApi.refresh(token).getData();
+							newToken = authCommonApi.refresh(token).getData();
 						}
 
 						if (StringUtil.isBlank(newToken)) {
@@ -98,7 +98,7 @@ public class AuthFilter extends ZuulFilter {
 						token = newToken;
 					}
 
-					if (StringUtil.isNotBlank(token) && !authApi.verify(VerifyDto.builder().uri(uri).token(token).build()).getData()) {
+					if (StringUtil.isNotBlank(token) && !authCommonApi.verify(VerifyDto.builder().uri(uri).token(token).build()).getData()) {
 						log.info("缺少权限: " + uri);
 
 						requestContext.setSendZuulResponse(false);

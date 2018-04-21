@@ -21,6 +21,14 @@ public class RedisKeyGenerator {
 	}
 
 	public static String generate(Class clazz, String bizzFlag, String key) {
-		return springApplicationName + ":" + clazz.getName() + ":" + bizzFlag + ":" + key;
+		return generate(springApplicationName, clazz, bizzFlag, key);
+	}
+
+	public static String generate(String springApplicationName, Class clazz, String bizzFlag, String key) {
+		return generate(springApplicationName, clazz.getName(), bizzFlag, key);
+	}
+
+	public static String generate(String springApplicationName, String clazzName, String bizzFlag, String key) {
+		return springApplicationName + ":" + clazzName + ":" + bizzFlag + ":" + key;
 	}
 }

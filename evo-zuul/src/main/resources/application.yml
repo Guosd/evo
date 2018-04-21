@@ -13,10 +13,18 @@ zuul:
   sensitiveHeaders:
   ignoredServices: '*'
   routes:
-    evo-sp-auth:
-      path: /auth/**
+    evo-activiti:
+      path: /activiti/**
+    evo-sp-auth-common:
+      path: /auth/common/**
+    evo-sp-auth-pc:
+      path: /auth/pc/**
+    evo-sp-auth-mobile:
+      path: /auth/mobile/**
     evo-sp-sys:
       path: /sys/**
+    evo-sp-datadict:
+      path: /datadict/**
 hystrix:
   command:
     default:
@@ -24,7 +32,22 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 30000
-    evo-sp-auth:
+    evo-activiti:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+    evo-sp-auth-common:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+    evo-sp-auth-pc:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+    evo-sp-auth-mobile:
       execution:
         isolation:
           thread:
@@ -34,10 +57,27 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 30000
-evo-sp-auth:
+    evo-sp-datadict:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+evo-activiti:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.ritoinfo.framework.evo.zuul.loadbalancer.BackToSelfRule
+evo-sp-auth-common:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.ritoinfo.framework.evo.zuul.loadbalancer.BackToSelfRule
+evo-sp-auth-pc:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.ritoinfo.framework.evo.zuul.loadbalancer.BackToSelfRule
+evo-sp-auth-mobile:
   ribbon:
     NFLoadBalancerRuleClassName: com.ritoinfo.framework.evo.zuul.loadbalancer.BackToSelfRule
 evo-sp-sys:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.ritoinfo.framework.evo.zuul.loadbalancer.BackToSelfRule
+evo-sp-datadict:
   ribbon:
     NFLoadBalancerRuleClassName: com.ritoinfo.framework.evo.zuul.loadbalancer.BackToSelfRule
 ribbon:

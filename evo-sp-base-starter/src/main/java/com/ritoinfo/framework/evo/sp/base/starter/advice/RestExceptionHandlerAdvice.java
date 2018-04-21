@@ -47,7 +47,7 @@ public class RestExceptionHandlerAdvice {
 		} else if (exception instanceof RestException) {
 			RestException restException = (RestException) exception;
 
-			log.warn("REST Exception: " + restException.getCode() + " " + exception.getMessage() + " " + restException.getCause());
+			log.warn("REST Exception: " + restException.getCode() + " " + exception.getMessage() + " " + restException.getCause(), exception);
 			responseEntity = new ResponseEntity<>(ServiceResponse.of(restException.getCode(), restException.getData()), HttpStatus.valueOf(Const.HTTP_STATUS_OK));
 		} else if (exception instanceof BizzException) {
 			BizzException bizzException = (BizzException) exception;

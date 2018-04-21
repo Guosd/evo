@@ -12,12 +12,4 @@
 	<artifactId>evo-sp-sys-model</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-sp-base-starter-model</artifactId>
-			<version>${evo-sp-base-starter-model.version}</version>
-		</dependency>
-	</dependencies>
-
 </project>

@@ -4,6 +4,7 @@ import com.ritoinfo.framework.evo.common.Const;
 import com.ritoinfo.framework.evo.common.jwt.config.JwtConfig;
 import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
 import com.ritoinfo.framework.evo.common.jwt.model.VerifyResult;
+import com.ritoinfo.framework.evo.common.uitl.BeanUtil;
 import com.ritoinfo.framework.evo.common.uitl.DateUtil;
 import com.ritoinfo.framework.evo.common.uitl.StringUtil;
 import io.jsonwebtoken.Claims;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -29,11 +31,6 @@ import java.util.UUID;
 @Slf4j
 @Component
 public class JwtToken {
-	private static final String CLAIMS_USER_ID = "user_id";
-	private static final String CLAIMS_USER_USERNAME = "user_username";
-	private static final String CLAIMS_USER_NAME = "user_name";
-	private static final String CLAIMS_USER_CODE = "user_code";
-
 	private final JwtConfig jwtConfig;
 
 	@Autowired
@@ -41,10 +38,10 @@ public class JwtToken {
 		this.jwtConfig = jwtConfig;
 	}
 
-	public String create(String id, String username, String name, String code) {
+	public String create(String username, Map<String, Object> map) {
 		Date now = DateUtil.now();
 		return Jwts.builder()
-				.setClaims(createClaims(id, username, name, code))
+				.setClaims(createClaims(username, map))
 				.setIssuer(jwtConfig.getIssuer())
 				.setIssuedAt(now)
 				.setExpiration(DateUtil.plusMinutes(now, jwtConfig.getExpirationTime()))
@@ -52,10 +49,10 @@ public class JwtToken {
 				.compact();
 	}
 
-	public String createRefresh(String id, String username, String name, String code) {
+	public String createRefresh(String username, Map<String, Object> map) {
 		Date now = DateUtil.now();
 		return Jwts.builder()
-				.setClaims(createClaims(id, username, name, code))
+				.setClaims(createClaims(username, map))
 				.setIssuer(jwtConfig.getIssuer())
 				.setId(UUID.randomUUID().toString())
 				.setIssuedAt(now)
@@ -66,13 +63,9 @@ public class JwtToken {
 
 	public UserContext parse(String token) {
 		Claims claims = parseToken(token);
-
-		return UserContext.builder()
-				.id(claims.get(CLAIMS_USER_ID, String.class))
-				.username(claims.getSubject())
-				.name(claims.get(CLAIMS_USER_NAME, String.class))
-				.code(claims.get(CLAIMS_USER_CODE, String.class)).jwtExpiration(claims.getExpiration())
-				.build();
+		UserContext userContext = BeanUtil.mapToBean(claims, UserContext.class);
+		userContext.setJwtExpiration(claims.getExpiration());
+		return userContext;
 	}
 
 	public String getToken(HttpServletRequest request) {
@@ -123,12 +116,9 @@ public class JwtToken {
 		return verifyResult;
 	}
 
-	private Claims createClaims(String id, String username, String name, String code) {
+	private Claims createClaims(String username, Map<String, Object> map) {
 		Claims claims = Jwts.claims().setSubject(username);
-		claims.put(CLAIMS_USER_ID, id);
-		claims.put(CLAIMS_USER_USERNAME, username);
-		claims.put(CLAIMS_USER_NAME, name);
-		claims.put(CLAIMS_USER_CODE, code);
+		map.forEach(claims::put);
 		return claims;
 	}
 

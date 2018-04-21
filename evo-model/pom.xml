@@ -2,23 +2,33 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
 	<parent>
 		<groupId>com.ritoinfo.framework</groupId>
 		<artifactId>evo</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
-
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>evo-model</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<modules>
-		<module>evo-activiti-model</module>
-		<module>evo-sp-sys-model</module>
-		<module>evo-sp-auth-model</module>
-	</modules>
 
 	<packaging>pom</packaging>
+
+	<modules>
+		<module>evo-activiti-model</module>
+		<module>evo-sms-model</module>
+		<module>evo-sp-auth-pc-model</module>
+		<module>evo-sp-auth-common-model</module>
+		<module>evo-sp-auth-mobile-model</module>
+		<module>evo-sp-sys-model</module>
+	</modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-sp-base-starter-model</artifactId>
+			<version>${evo-sp-base-starter-model.version}</version>
+		</dependency>
+	</dependencies>
 
 </project>

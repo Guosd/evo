@@ -1,6 +1,7 @@
 package com.ritoinfo.framework.evo.common.uitl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.cglib.beans.BeanCopier;
 import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
@@ -8,6 +9,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +33,39 @@ public class BeanUtil {
 		}
 
 		copier.copy(orig, dest, null);
+	}
+
+	/**
+	 * bean 转换为 map， 排除掉 org.slf4j.Logger 属性
+	 * @param object bean 对象
+	 * @return 属性 map
+	 */
+	public static Map<String, Object> beanToMap(Object object) {
+		Map<String, Object> map = new HashMap<>();
+		Arrays.stream(object.getClass().getDeclaredFields()).forEach(field -> {
+			if (field.getType() != Logger.class) {
+				map.put(field.getName(), getFieldValue(object, field));
+			}
+		});
+		return map;
+	}
+
+	/**
+	 * map 转换为 bean， 排除掉 org.slf4j.Logger 属性
+	 * @param map bean属性键值对
+	 * @param clazz 将要转换的对象类
+	 * @param <T> 将要转换的对象类型
+	 * @return 将要转换的对象
+	 */
+	public static <T> T mapToBean(Map<String, Object> map, Class<T> clazz) {
+		T t = newInstance(clazz);
+		Arrays.stream(clazz.getDeclaredFields()).forEach(field -> {
+			if (field.getType() != Logger.class) {
+				String fieldName = field.getName();
+				setFieldValue(t, fieldName, map.get(fieldName));
+			}
+		});
+		return t;
 	}
 
 	public static String getClassName(Object object) {
@@ -92,9 +127,12 @@ public class BeanUtil {
 	}
 
 	public static Object getFieldValue(Object object, String fieldName) {
+		return getFieldValue(object, getField(object, fieldName));
+	}
+
+	public static Object getFieldValue(Object object, Field field) {
 		Object value = null;
 
-		Field field = getField(object, fieldName);
 		if (field != null) {
 			field.setAccessible(true);
 
@@ -121,6 +159,7 @@ public class BeanUtil {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public static <T extends Annotation> T getAnnotation(Method method, int paramIndex, Class<T> annotationClass) {
 		T result = null;
 

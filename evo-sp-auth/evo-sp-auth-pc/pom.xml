@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<groupId>com.ritoinfo.framework</groupId>
+		<artifactId>evo-sp-auth</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>evo-sp-auth-pc</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring-boot-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>${maven-antrun-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>package</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target name="run">
+								<echo message="copy ${basedir}/src/main/docker/Dockerfile"/>
+								<copy todir="${project.build.directory}/docker" file="${basedir}/src/main/docker/Dockerfile" overwrite="true"/>
+								<echo message="copy ${project.build.directory}/${project.build.finalName}.jar"/>
+								<copy todir="${project.build.directory}/docker" file="${project.build.directory}/${project.build.finalName}.jar" overwrite="true"/>
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-sp-base-starter</artifactId>
+			<version>${evo-sp-base-starter.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-common-password</artifactId>
+			<version>${evo-common-password.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-sp-auth-pc-model</artifactId>
+			<version>${evo-sp-auth-pc-model.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-sp-auth-assist</artifactId>
+			<version>${evo-sp-auth-assist.version}</version>
+		</dependency>
+	</dependencies>
+
+</project>

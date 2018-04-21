@@ -25,6 +25,22 @@ public class UserBizz extends BaseBizz<UserDao, User, Long, UserCondition, UserD
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	public UserDto getByUsername(String username) {
+		UserCondition condition = new UserCondition();
+		condition.setUsername(username);
+
+		List<User> list = dao.find(condition);
+		return list.isEmpty() ? null : BaseHelper.toDto(list.get(0));
+	}
+
+	public UserDto getByMobileNumber(String mobileNumber) {
+		UserCondition condition = new UserCondition();
+		condition.setMobileNumber(mobileNumber);
+
+		List<User> list = dao.find(condition);
+		return list.isEmpty() ? null : BaseHelper.toDto(list.get(0));
+	}
+
 	@Transactional
 	public Long createWithPassword(UserDto dto) {
 		dto.setPassword(passwordEncoder.encode(dto.getPassword()));
@@ -35,13 +51,5 @@ public class UserBizz extends BaseBizz<UserDao, User, Long, UserCondition, UserD
 	public void updateWithPassowrd(UserDto dto) {
 		dto.setPassword(passwordEncoder.encode(dto.getPassword()));
 		super.update(dto);
-	}
-
-	public UserDto getByUsername(String username) {
-		UserCondition condition = new UserCondition();
-		condition.setUsername(username);
-
-		List<User> list = dao.find(condition);
-		return list.isEmpty() ? null : BaseHelper.toDto(list.get(0));
 	}
 }

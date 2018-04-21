@@ -46,8 +46,8 @@ public class DataDictBizz extends BaseBizz<DataDictDao, DataDict, Long, DataDict
 	@CacheEvict
 	@Transactional
 	@Override
-	public void create(@RedisKey("code") DataDictDto dto) {
-		super.create(dto);
+	public Long create(@RedisKey("code") DataDictDto dto) {
+		return super.create(dto);
 	}
 
 	@CacheEvict

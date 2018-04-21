@@ -9,7 +9,7 @@
 		<result column="name" property="name"/>
 		<result column="code" property="code"/>
 		<result column="email" property="email"/>
-		<result column="mobile_phone" property="mobilePhone"/>
+		<result column="mobile_number" property="mobileNumber"/>
 		<result column="freeze" property="freeze"/>
 		<result column="login_time" property="loginTime"/>
 		<result column="login_ip" property="loginIp"/>
@@ -22,7 +22,7 @@
 	</resultMap>
 
 	<sql id="columns">
-		t.id, t.username, t.password, t.name, t.code, t.email, t.mobile_phone, t.freeze, t.login_time, t.login_ip, t.last_login_time, t.last_login_ip,
+		t.id, t.username, t.password, t.name, t.code, t.email, t.mobile_number, t.freeze, t.login_time, t.login_ip, t.last_login_time, t.last_login_ip,
 		t.create_by, t.create_time, t.update_by, t.update_time
 	</sql>
 
@@ -46,8 +46,8 @@
 			<if test="email != null">
 				AND t.email = #{email}
 			</if>
-			<if test="mobilePhone != null">
-				AND t.mobile_phone = #{mobilePhone}
+			<if test="mobileNumber != null">
+				AND t.mobile_number = #{mobileNumber}
 			</if>
 			<if test="freeze != null">
 				AND t.freeze = #{freeze}
@@ -91,9 +91,9 @@
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO sys_user (
-			username, password, name, code, email, mobile_phone, freeze, login_time, login_ip, last_login_time, last_login_ip, create_by, create_time, update_by, update_time
+			username, password, name, code, email, mobile_number, freeze, login_time, login_ip, last_login_time, last_login_ip, create_by, create_time, update_by, update_time
 		) VALUES (
-			#{username}, #{password}, #{name}, #{code}, #{email}, #{mobilePhone}, #{freeze}, #{loginTime}, #{loginIp}, #{lastLoginTime}, #{lastLoginIp}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}
+			#{username}, #{password}, #{name}, #{code}, #{email}, #{mobileNumber}, #{freeze}, #{loginTime}, #{loginIp}, #{lastLoginTime}, #{lastLoginIp}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}
 		)
 	</insert>
 
@@ -104,7 +104,7 @@
 			name = #{name},
 			code = #{code},
 			email = #{email},
-			mobile_phone = #{mobilePhone},
+			mobile_number = #{mobileNumber},
 			freeze = #{freeze},
 			login_time = #{loginTime},
 			login_ip = #{loginIp},
