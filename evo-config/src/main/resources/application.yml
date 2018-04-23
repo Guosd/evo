@@ -23,7 +23,7 @@ spring:
           uri: https://apptestaf.faf.com.cn/svn/SVN_faf/SVN_faf_scfw
           username: yanglei
           password: yanglei
-          default-label: /src/scfw/scfw-config-file
+          default-label: /src/evo-config-file
 ---
 spring:
   profiles:
