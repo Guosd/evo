@@ -6,6 +6,7 @@ import com.ritoinfo.framework.evo.sp.sys.entity.Func;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: Kyll
@@ -13,5 +14,5 @@ import java.util.List;
  */
 @Mapper
 public interface FuncDao extends MyBatisDao<Func, Long, FuncCondition> {
-	List<Func> getByUsername(String username);
+	List<Map<String, Object>> getByUsername(String username);
 }

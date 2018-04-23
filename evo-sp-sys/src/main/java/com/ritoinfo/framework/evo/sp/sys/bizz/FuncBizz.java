@@ -5,6 +5,7 @@ import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseBizz;
 import com.ritoinfo.framework.evo.sp.sys.condition.FuncCondition;
 import com.ritoinfo.framework.evo.sp.sys.dao.FuncDao;
 import com.ritoinfo.framework.evo.sp.sys.dto.FuncDto;
+import com.ritoinfo.framework.evo.sp.sys.dto.PermissionDto;
 import com.ritoinfo.framework.evo.sp.sys.entity.Func;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 @Service
 public class FuncBizz extends BaseBizz<FuncDao, Func, Long, FuncCondition, FuncDto> {
-	public List<FuncDto> getByUsername(String username) {
-		return BaseHelper.toDto(dao.getByUsername(username));
+	public List<PermissionDto> getByUsername(String username) {
+		return BaseHelper.mapToDto(dao.getByUsername(username), PermissionDto.class);
 	}
 }

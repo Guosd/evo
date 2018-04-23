@@ -7,15 +7,15 @@ import lombok.NoArgsConstructor;
 
 /**
  * User: Kyll
- * Date: 2018-02-28 15:27
+ * Date: 2018-04-23 21:07
  */
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class Func extends BaseEntity<Long> {
-	private Long microId;// 微服务ID
-	private String uri;// 请求地址
-	private String method;// GET,POST.PUT.DELETE方法
-	private String menu;// 是否是菜单 YN01是， YN02否
+public class Menu extends BaseEntity<Long> {
+	private Long parentId;// 上级菜单ID
+	private Long funcId;// 功能ID
+	private String name;// 菜单名称
+	private String code;// 菜单编码
 	private Integer sort;// 排序号
 }

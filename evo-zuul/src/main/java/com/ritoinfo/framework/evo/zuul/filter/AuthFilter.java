@@ -98,7 +98,7 @@ public class AuthFilter extends ZuulFilter {
 						token = newToken;
 					}
 
-					if (StringUtil.isNotBlank(token) && !authCommonApi.verify(VerifyDto.builder().uri(uri).token(token).build()).getData()) {
+					if (StringUtil.isNotBlank(token) && !authCommonApi.verify(VerifyDto.builder().uri(uri).method(request.getMethod()).token(token).build()).getData()) {
 						log.info("缺少权限: " + uri);
 
 						requestContext.setSendZuulResponse(false);

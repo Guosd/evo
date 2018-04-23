@@ -6,8 +6,10 @@ import com.ritoinfo.framework.evo.sp.base.starter.condition.BaseCondition;
 import com.ritoinfo.framework.evo.sp.base.starter.dto.BaseDto;
 import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseEntity;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: Kyll
@@ -94,6 +96,36 @@ public class BaseHelper {
 		List<T> targetList = new ArrayList<>();
 		for (E entity : entityList) {
 			targetList.add(toAnyDto(entity, clazz, converter));
+		}
+		return targetList;
+	}
+
+	public static <T> T toAnyDto(Map<String, Object> map, Class<T> clazz) {
+		return toAnyDto(map, clazz, null);
+	}
+
+	public static <T> T mapToDto(Map<String, Object> map, Class<T> clazz, Converter<T, Map<String, Object>> converter) {
+		T target = BeanUtil.newInstance(clazz);
+
+		for (Field field : BeanUtil.getFields(target)) {
+			BeanUtil.setFieldValue(target, field, map.get(field.getName()));
+		}
+
+		if (converter != null) {
+			converter.convert(target, map);
+		}
+
+		return target;
+	}
+
+	public static <T> List<T> mapToDto(List<Map<String, Object>> list, Class<T> clazz) {
+		return mapToDto(list, clazz, null);
+	}
+
+	public static <T> List<T> mapToDto(List<Map<String, Object>> list, Class<T> clazz, Converter<T, Map<String, Object>> converter) {
+		List<T> targetList = new ArrayList<>();
+		for (Map<String, Object> map : list) {
+			targetList.add(mapToDto(map, clazz, converter));
 		}
 		return targetList;
 	}

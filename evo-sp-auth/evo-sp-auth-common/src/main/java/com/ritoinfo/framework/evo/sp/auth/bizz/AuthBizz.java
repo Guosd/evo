@@ -9,7 +9,7 @@ import com.ritoinfo.framework.evo.sp.auth.dto.VerifyDto;
 import com.ritoinfo.framework.evo.sp.auth.exception.RefreshTokenNotFoundException;
 import com.ritoinfo.framework.evo.sp.auth.exception.RefreshTokenVerifyException;
 import com.ritoinfo.framework.evo.sp.sys.api.FuncApi;
-import com.ritoinfo.framework.evo.sp.sys.dto.FuncDto;
+import com.ritoinfo.framework.evo.sp.sys.dto.PermissionDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,8 +60,8 @@ public class AuthBizz {
 
 	public boolean verify(VerifyDto verifyDto) {
 		if (redisService.exist(RedisKeyAssist.generate("TOKEN", verifyDto.getToken()))) {
-			for (FuncDto funcDto : funcApi.username(jwtToken.parse(verifyDto.getToken()).getUsername()).getData()) {
-				if (verifyDto.getUri().equals(funcDto.getPrefix() + funcDto.getUri())) {
+			for (PermissionDto permissionDto : funcApi.username(jwtToken.parse(verifyDto.getToken()).getUsername()).getData()) {
+				if (verifyDto.getUri().equals(permissionDto.getPrefix() + permissionDto.getUri()) && verifyDto.getMethod().equalsIgnoreCase(permissionDto.getMethod())) {
 					return true;
 				}
 			}

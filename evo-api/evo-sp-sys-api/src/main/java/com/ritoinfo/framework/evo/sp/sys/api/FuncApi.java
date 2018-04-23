@@ -1,7 +1,7 @@
 package com.ritoinfo.framework.evo.sp.sys.api;
 
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
-import com.ritoinfo.framework.evo.sp.sys.dto.FuncDto;
+import com.ritoinfo.framework.evo.sp.sys.dto.PermissionDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,5 +17,5 @@ import java.util.List;
 @FeignClient(value = "evo-sp-sys", path = "/func")
 public interface FuncApi {
 	@GetMapping("/user/{username}")
-	ServiceResponse<List<FuncDto>> username(@PathVariable("username") String username);
+	ServiceResponse<List<PermissionDto>> username(@PathVariable("username") String username);
 }

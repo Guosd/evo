@@ -6,13 +6,13 @@ import lombok.EqualsAndHashCode;
 
 /**
  * User: Kyll
- * Date: 2018-03-04 17:59
+ * Date: 2018-04-23 20:01
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class FuncCondition extends BaseCondition<Long> {
-	private Long microId;
-	private String uri;
-	private String method;
+public class MicroCondition extends BaseCondition<Long> {
+	private String name;
+	private String code;
+	private String prefix;
 	private Integer sort;
 }

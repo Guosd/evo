@@ -9,8 +9,10 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -106,6 +108,18 @@ public class BeanUtil {
 		return t;
 	}
 
+	public static List<Field> getFields(Object object) {
+		List<Field> fieldList = new ArrayList<>();
+
+		Class clazz = object.getClass();
+		do {
+			fieldList.addAll(Arrays.asList(clazz.getDeclaredFields()));
+			clazz = clazz.getSuperclass();
+		} while (clazz != null);
+
+		return fieldList;
+	}
+
 	public static Field getField(Object object, String fieldName) {
 		Class clazz = null;
 		Field field = null;
@@ -147,7 +161,10 @@ public class BeanUtil {
 	}
 
 	public static void setFieldValue(Object object, String fieldName, Object fieldValue) {
-		Field field = getField(object, fieldName);
+		setFieldValue(object, getField(object, fieldName), fieldValue);
+	}
+
+	public static void setFieldValue(Object object, Field field, Object fieldValue) {
 		if (field != null) {
 			field.setAccessible(true);
 

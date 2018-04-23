@@ -1,7 +1,7 @@
 package com.ritoinfo.framework.evo.common.jwt.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
@@ -12,8 +12,8 @@ import java.util.Date;
  * Date: 2018-03-09 15:15
  */
 @Slf4j
-@AllArgsConstructor
 @Data
+@NoArgsConstructor
 public class UserContext implements Serializable {
 	private String id;
 	private String username;
@@ -21,9 +21,6 @@ public class UserContext implements Serializable {
 	private String code;
 	private String mobileNumber;
 	private Date jwtExpiration;
-
-	public UserContext() {
-	}
 
 	@SuppressWarnings("unchecked")
 	public <PK> PK getId(Class clazz) {

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ritoinfo.framework.evo.sp.sys.dao.FuncDao">
+<mapper namespace="com.ritoinfo.framework.evo.sp.sys.dao.MicroDao">
 
-	<resultMap id="FuncResultMap" type="Func">
+	<resultMap id="MicroResultMap" type="Micro">
 		<id column="id" property="id"/>
-		<result column="micro_id" property="microId"/>
-		<result column="uri" property="uri"/>
-		<result column="method" property="method"/>
+		<result column="name" property="name"/>
+		<result column="code" property="code"/>
+		<result column="prefix" property="prefix"/>
 		<result column="sort" property="sort"/>
 		<result column="create_by" property="createBy"/>
 		<result column="create_time" property="createTime"/>
@@ -15,7 +15,7 @@
 	</resultMap>
 
 	<sql id="columns">
-		t.id, t.micro_id, t.uri, t.method, t.sort,
+		t.id, t.name, t.code, t.prefix, t.sort,
 		t.create_by, t.create_time, t.update_by, t.update_time
 	</sql>
 
@@ -24,14 +24,14 @@
 			<if test="id != null">
 				AND t.id = #{id}
 			</if>
-			<if test="microId != null">
-				AND t.micro_id = #{microId}
+			<if test="name != null">
+				AND t.name = #{name}
 			</if>
-			<if test="uri != null">
-				AND t.uri = #{uri}
+			<if test="code != null">
+				AND t.code = #{code}
 			</if>
-			<if test="method != null">
-				AND t.method = #{method}
+			<if test="prefix != null">
+				AND t.prefix = #{prefix}
 			</if>
 			<if test="sort != null">
 				AND t.sort = #{sort}
@@ -40,28 +40,15 @@
 	</sql>
 
 	<sql id="select">
-		SELECT <include refid="columns"/> FROM sys_func t
+		SELECT <include refid="columns"/> FROM sys_micro t
 	</sql>
 
-	<select id="get" resultMap="FuncResultMap">
+	<select id="get" resultMap="MicroResultMap">
 		<include refid="select"/>
 		WHERE t.id = #{value}
 	</select>
 
-	<select id="getByUsername" resultType="map">
-		SELECT
-			t0.prefix,
-			t1.uri,
-			t1.method
-		  FROM sys_micro t0
-		  JOIN sys_func t1 ON t0.id = t1.micro_id
-		  JOIN sys_role_func t2 ON t1.id = t2.func_id
-		  JOIN sys_user_role t3 ON t2.role_id = t3.role_id
-		  JOIN sys_user t4 ON t3.user_id = t4.id
-		 WHERE t4.username = #{value}
-	</select>
-
-	<select id="find" resultMap="FuncResultMap">
+	<select id="find" resultMap="MicroResultMap">
 		<include refid="select"/>
 		<include refid="condition"/>
 		<if test="pageSort != null">
@@ -70,23 +57,23 @@
 	</select>
 
 	<select id="count" resultType="int">
-		SELECT count(1) count FROM sys_func t
+		SELECT count(1) count FROM sys_micro t
 		<include refid="condition"/>
 	</select>
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO sys_func (
-			micro_id, uri, method, sort, create_by, create_time, update_by, update_time
+		INSERT INTO sys_micro (
+			name, code, prefix, sort, create_by, create_time, update_by, update_time
 		) VALUES (
-			#{microId}, #{uri}, #{method}, #{sort}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}
+			#{name}, #{code}, #{prefix}, #{sort}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}
 		)
 	</insert>
 
 	<update id="update">
-		UPDATE sys_func SET
-			micro_id = #{microId},
-			uri = #{uri},
-			method = #{method},
+		UPDATE sys_micro SET
+			name = #{name},
+			code = #{code},
+			prefix = #{prefix},
 			sort = #{sort},
 			update_by = #{updateBy},
 			update_time = #{updateTime}
@@ -95,7 +82,7 @@
 	</update>
 
 	<delete id="delete">
-		DELETE FROM sys_func WHERE id = #{id}
+		DELETE FROM sys_micro WHERE id = #{id}
 	</delete>
 
 </mapper>

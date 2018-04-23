@@ -7,15 +7,14 @@ import lombok.NoArgsConstructor;
 
 /**
  * User: Kyll
- * Date: 2018-02-28 15:27
+ * Date: 2018-04-23 19:37
  */
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class Func extends BaseEntity<Long> {
-	private Long microId;// 微服务ID
-	private String uri;// 请求地址
-	private String method;// GET,POST.PUT.DELETE方法
-	private String menu;// 是否是菜单 YN01是， YN02否
+public class Micro extends BaseEntity<Long> {
+	private String name;// 微服务名称
+	private String code;// 微服务编码 spring.application.name
+	private String prefix;// 微服务在ZUUL映射的前缀 zuul.route.routes.XXXX.path
 	private Integer sort;// 排序号
 }

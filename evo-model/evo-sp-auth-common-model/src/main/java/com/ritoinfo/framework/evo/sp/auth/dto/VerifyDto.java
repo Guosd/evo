@@ -15,5 +15,7 @@ public class VerifyDto {
 	@NotBlank
 	private String uri;
 	@NotBlank
+	private String method;
+	@NotBlank
 	private String token;
 }

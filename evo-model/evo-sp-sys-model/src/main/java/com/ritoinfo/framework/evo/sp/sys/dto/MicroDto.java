@@ -6,13 +6,13 @@ import lombok.EqualsAndHashCode;
 
 /**
  * User: Kyll
- * Date: 2018-03-08 11:43
+ * Date: 2018-04-23 19:37
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class FuncDto extends BaseDto<Long> {
-	private Long microId;
-	private String uri;
-	private String method;
+public class MicroDto extends BaseDto<Long> {
+	private String name;
+	private String code;
+	private String prefix;
 	private Integer sort;
 }

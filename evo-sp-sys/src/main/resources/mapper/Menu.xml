@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ritoinfo.framework.evo.sp.sys.dao.MenuDao">
+
+	<resultMap id="MenuResultMap" type="Menu">
+		<id column="id" property="id"/>
+		<result column="parent_id" property="parentId"/>
+		<result column="func_id" property="funcId"/>
+		<result column="name" property="name"/>
+		<result column="code" property="code"/>
+		<result column="sort" property="sort"/>
+		<result column="create_by" property="createBy"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_by" property="updateBy"/>
+		<result column="update_time" property="updateTime"/>
+	</resultMap>
+
+	<sql id="columns">
+		t.id, t.parent_id, t.func_id, t.name, t.code, t.sort,
+		t.create_by, t.create_time, t.update_by, t.update_time
+	</sql>
+
+	<sql id="condition">
+		<where>
+			<if test="id != null">
+				AND t.id = #{id}
+			</if>
+			<if test="parentId != null">
+				AND t.parent_id = #{parentId}
+			</if>
+			<if test="funcId != null">
+				AND t.func_id = #{funcId}
+			</if>
+			<if test="name != null">
+				AND t.name = #{name}
+			</if>
+			<if test="code != null">
+				AND t.code = #{code}
+			</if>
+			<if test="sort != null">
+				AND t.sort = #{sort}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="select">
+		SELECT <include refid="columns"/> FROM sys_menu t
+	</sql>
+
+	<select id="get" resultMap="MenuResultMap">
+		<include refid="select"/>
+		WHERE t.id = #{value}
+	</select>
+
+	<select id="getByUsername" resultType="map">
+		SELECT
+			t0.id,
+			t0.parent_id,
+			t0.name,
+			t0.code,
+			t2.prefix,
+			t1.uri,
+			t1.method
+		  FROM sys_menu t0
+		  JOIN sys_func t1 ON t0.func_id = t1.id
+		  JOIN sys_micro t2 ON t1.micro_id = t2.id
+		  JOIN sys_role_func t3 ON t1.id = t3.func_id
+		  JOIN sys_user_role t4 ON t3.role_id = t4.role_id
+		  JOIN sys_user t5 ON t4.user_id = t5.id
+		  JOIN sys_menu t6 ON t0.parent_id = t6.id
+		 WHERE t5.username = 'admin'
+		 ORDER BY t6.sort ASC, t0.sort ASC
+	</select>
+
+	<select id="find" resultMap="MenuResultMap">
+		<include refid="select"/>
+		<include refid="condition"/>
+		<if test="pageSort != null">
+			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
+		</if>
+	</select>
+
+	<select id="count" resultType="int">
+		SELECT count(1) count FROM sys_menu t
+		<include refid="condition"/>
+	</select>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO sys_menu (
+			parent_id, func_id, name, code, sort, create_by, create_time, update_by, update_time
+		) VALUES (
+			#{parentId}, #{funcId}, #{name}, #{code}, #{sort}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}
+		)
+	</insert>
+
+	<update id="update">
+		UPDATE sys_menu SET
+			func_id = #{funcId},
+			parent_id = #{parentId},
+			name = #{name},
+			code = #{code},
+			sort = #{sort},
+			update_by = #{updateBy},
+			update_time = #{updateTime}
+		WHERE
+			id = #{id}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM sys_menu WHERE id = #{id}
+	</delete>
+
+</mapper>

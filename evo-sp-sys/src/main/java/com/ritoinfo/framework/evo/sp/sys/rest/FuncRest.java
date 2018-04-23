@@ -6,6 +6,7 @@ import com.ritoinfo.framework.evo.sp.sys.bizz.FuncBizz;
 import com.ritoinfo.framework.evo.sp.sys.condition.FuncCondition;
 import com.ritoinfo.framework.evo.sp.sys.dao.FuncDao;
 import com.ritoinfo.framework.evo.sp.sys.dto.FuncDto;
+import com.ritoinfo.framework.evo.sp.sys.dto.PermissionDto;
 import com.ritoinfo.framework.evo.sp.sys.entity.Func;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,7 @@ import java.util.List;
 @RestController
 public class FuncRest extends BaseRest<FuncBizz, FuncDao, Func, Long, FuncCondition, FuncDto> {
 	@GetMapping("/user/{username}")
-	public ServiceResponse<List<FuncDto>> username(@PathVariable String username) {
+	public ServiceResponse<List<PermissionDto>> username(@PathVariable String username) {
 		return ServiceResponse.ok(bizz.getByUsername(username));
 	}
 }
