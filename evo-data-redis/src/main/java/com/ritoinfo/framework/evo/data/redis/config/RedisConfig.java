@@ -21,6 +21,7 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.io.Serializable;
+import java.time.Duration;
 import java.util.Arrays;
 
 /**
@@ -53,7 +54,9 @@ public class RedisConfig extends CachingConfigurerSupport {
 				.cacheDefaults(
 						RedisCacheConfiguration.defaultCacheConfig()
 								.serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
-								.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer())))
+								.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()))
+								.disableKeyPrefix()
+								.entryTtl(Duration.ofHours(1)))
 				.build();
 	}
 
