@@ -17,7 +17,6 @@
 	<modules>
 		<module>evo-sp-auth-assist</module>
 		<module>evo-sp-auth-common</module>
-		<module>evo-sp-auth-mobile-phone</module>
 		<module>evo-sp-auth-pc</module>
 		<module>evo-sp-auth-mobile</module>
 	</modules>
