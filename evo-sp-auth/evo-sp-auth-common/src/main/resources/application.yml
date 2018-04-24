@@ -3,10 +3,19 @@ server:
 spring:
   application:
     name: evo-sp-auth-common
+  cache:
+    redis:
+      time-to-live: 3600s
+      use-key-prefix: false
   redis:
-#    cluster:
-#      nodes: 10.20.133.85:7000, 10.20.133.85:7002, 10.20.133.85:7003, 10.20.133.85:7004, 10.20.133.85:7005
     host: 127.0.0.1
     password: 123456
   jackson:
     time-zone: GMT+8
+---
+spring:
+  profiles: sit
+  redis:
+    cluster:
+      nodes: 10.20.133.85:7000, 10.20.133.85:7002, 10.20.133.85:7003, 10.20.133.85:7004, 10.20.133.85:7005
+    password:
