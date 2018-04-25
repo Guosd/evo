@@ -18,6 +18,5 @@ public class Func extends BaseEntity<Long> {
 	private String code;// 功能编码
 	private String uri;// 请求地址
 	private String method;// GET,POST.PUT.DELETE方法
-	private String menu;// 是否是菜单 YN01是， YN02否
 	private Integer sort;// 排序号
 }
