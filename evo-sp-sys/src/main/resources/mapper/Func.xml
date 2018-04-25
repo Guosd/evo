@@ -5,6 +5,8 @@
 	<resultMap id="FuncResultMap" type="Func">
 		<id column="id" property="id"/>
 		<result column="micro_id" property="microId"/>
+		<result column="name" property="name"/>
+		<result column="code" property="code"/>
 		<result column="uri" property="uri"/>
 		<result column="method" property="method"/>
 		<result column="sort" property="sort"/>
@@ -15,7 +17,7 @@
 	</resultMap>
 
 	<sql id="columns">
-		t.id, t.micro_id, t.uri, t.method, t.sort,
+		t.id, t.micro_id, t.name, t.code, t.uri, t.method, t.sort,
 		t.create_by, t.create_time, t.update_by, t.update_time
 	</sql>
 
@@ -26,6 +28,12 @@
 			</if>
 			<if test="microId != null">
 				AND t.micro_id = #{microId}
+			</if>
+			<if test="name != null">
+				AND t.name = #{name}
+			</if>
+			<if test="code != null">
+				AND t.code = #{code}
 			</if>
 			<if test="uri != null">
 				AND t.uri = #{uri}
@@ -76,15 +84,17 @@
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO sys_func (
-			micro_id, uri, method, sort, create_by, create_time, update_by, update_time
+			micro_id, name, code, uri, method, sort, create_by, create_time, update_by, update_time
 		) VALUES (
-			#{microId}, #{uri}, #{method}, #{sort}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}
+			#{microId}, #{name}, #{code}, #{uri}, #{method}, #{sort}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}
 		)
 	</insert>
 
 	<update id="update">
 		UPDATE sys_func SET
 			micro_id = #{microId},
+			name = #{name},
+			code = #{code},
 			uri = #{uri},
 			method = #{method},
 			sort = #{sort},

@@ -11,6 +11,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class FuncDto extends BaseDto<Long> {
+	private String name;
+	private String code;
 	private Long microId;
 	private String uri;
 	private String method;
