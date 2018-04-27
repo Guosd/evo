@@ -41,19 +41,22 @@ public class SessionFilter implements Filter {
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 		String uri = request.getRequestURI();
 
-		String token = jwtToken.getToken(request);
-		if (StringUtils.isNotBlank(token)) {
-			UserContext userContext = null;
-			try {
-				userContext = jwtToken.parse(token);
-			} catch (Exception e) {
-				log.warn("令牌解析失败: " + uri + " " + e.getMessage());
-			}
+		if (!(uri.endsWith(".js") || uri.endsWith(".css")
+				|| uri.endsWith(".png") || uri.endsWith(".jpg") || uri.endsWith(".gif"))) {
+			String token = jwtToken.getToken(request);
+			if (StringUtils.isNotBlank(token)) {
+				UserContext userContext = null;
+				try {
+					userContext = jwtToken.parse(token);
+				} catch (Exception e) {
+					log.warn("令牌解析失败: " + uri + " " + e.getMessage());
+				}
 
-			if (userContext != null) {
-				SessionContext.getCurrentContext().unset();
-				SessionContext.setContextClass(SessionHolder.class);
-				SessionHolder.getCurrentHolder().setUserContext(userContext);
+				if (userContext != null) {
+					SessionContext.getCurrentContext().unset();
+					SessionContext.setContextClass(SessionHolder.class);
+					SessionHolder.getCurrentHolder().setUserContext(userContext);
+				}
 			}
 		}
 

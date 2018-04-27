@@ -1,6 +1,7 @@
 package com.ritoinfo.framework.evo.sp.base.starter.assist;
 
 import com.ritoinfo.framework.evo.common.uitl.BeanUtil;
+import com.ritoinfo.framework.evo.common.uitl.StringUtil;
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import com.ritoinfo.framework.evo.sp.base.starter.condition.BaseCondition;
 import com.ritoinfo.framework.evo.sp.base.starter.dto.BaseDto;
@@ -108,7 +109,7 @@ public class BaseHelper {
 		T target = BeanUtil.newInstance(clazz);
 
 		for (Field field : BeanUtil.getFields(target)) {
-			BeanUtil.setFieldValue(target, field, map.get(field.getName()));
+			BeanUtil.setFieldValue(target, field, map.get(StringUtil.camelStringInsertUnderline(field.getName()).toLowerCase()));
 		}
 
 		if (converter != null) {

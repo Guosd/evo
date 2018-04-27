@@ -1,8 +1,11 @@
 package com.ritoinfo.framework.evo.sp.sys.bizz;
 
+import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
 import com.ritoinfo.framework.evo.common.password.crypto.PasswordEncoder;
 import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
 import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseBizz;
+import com.ritoinfo.framework.evo.sp.base.starter.exception.UserContextNotExistException;
+import com.ritoinfo.framework.evo.sp.base.starter.session.SessionHolder;
 import com.ritoinfo.framework.evo.sp.sys.condition.UserCondition;
 import com.ritoinfo.framework.evo.sp.sys.dao.UserDao;
 import com.ritoinfo.framework.evo.sp.sys.dto.UserDto;
@@ -39,6 +42,22 @@ public class UserBizz extends BaseBizz<UserDao, User, Long, UserCondition, UserD
 
 		List<User> list = dao.find(condition);
 		return list.isEmpty() ? null : BaseHelper.toDto(list.get(0));
+	}
+
+	// TODO 兼容 SCFW
+	public UserDto getUserContext() {
+		UserContext userContext = SessionHolder.getUserContext();
+		if (userContext == null) {
+			throw new UserContextNotExistException();
+		}
+
+		UserDto userDto = new UserDto();
+		userDto.setId(userContext.getId(Long.class));
+		userDto.setUsername(userContext.getUsername());
+		userDto.setName(userContext.getName());
+		userDto.setCode(userContext.getCode());
+		userDto.setMobileNumber(userContext.getMobileNumber());
+		return userDto;
 	}
 
 	@Transactional

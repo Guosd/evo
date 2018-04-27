@@ -25,6 +25,8 @@ zuul:
       path: /sys/**
     evo-sp-datadict:
       path: /datadict/**
+    sp-ui: # TODO 兼容 SCFW
+      path: /ui/**
 hystrix:
   command:
     default:
@@ -62,6 +64,11 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 30000
+    sp-ui:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
 evo-activiti:
   ribbon:
     NFLoadBalancerRuleClassName: com.ritoinfo.framework.evo.zuul.loadbalancer.BackToSelfRule
@@ -78,6 +85,9 @@ evo-sp-sys:
   ribbon:
     NFLoadBalancerRuleClassName: com.ritoinfo.framework.evo.zuul.loadbalancer.BackToSelfRule
 evo-sp-datadict:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.ritoinfo.framework.evo.zuul.loadbalancer.BackToSelfRule
+sp-ui:
   ribbon:
     NFLoadBalancerRuleClassName: com.ritoinfo.framework.evo.zuul.loadbalancer.BackToSelfRule
 ribbon:

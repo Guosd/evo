@@ -37,6 +37,12 @@ public class UserRest extends BaseRest<UserBizz, UserDao, User, Long, UserCondit
 		return ServiceResponse.ok(bizz.getByMobileNumber(mobileNumber));
 	}
 
+	// TODO 兼容 SCFW
+	@GetMapping("/user-context")
+	public ServiceResponse<UserDto> userContext() {
+		return ServiceResponse.ok(bizz.getUserContext());
+	}
+
 	@PostMapping("/with-password")
 	public ServiceResponse<Long> createWithPassword(@Validated(CreateGroup.class) @RequestBody UserDto dto) {
 		return ServiceResponse.ok(bizz.createWithPassword(dto));

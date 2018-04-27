@@ -30,6 +30,7 @@ public class Const {
 	public static final String RC_AUTH_VERIFY = "AUTH-0005";
 	public static final String RC_AUTH_M_VERIFY_CODE = "AUTH-0006";
 	public static final String RC_AUTH_M_LOGIN = "AUTH-0007";
+	public static final String RC_SYS_MENU_MY = "SYS-0007";
 
 	public static String[] NUMBER_CHARS = new String[] {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
 	public static String[] WORD_CHARS = new String[] {
@@ -55,6 +56,7 @@ public class Const {
 		RCM_MAP.put(RC_AUTH_VERIFY, "校验令牌失败");
 		RCM_MAP.put(RC_AUTH_M_VERIFY_CODE, "获取验证码失败");
 		RCM_MAP.put(RC_AUTH_M_LOGIN, "登录失败");
+		RCM_MAP.put(RC_SYS_MENU_MY, "当前用户无效");
 	}
 
 	public static String getRcm(String rc) {
