@@ -20,6 +20,7 @@
 		<module>evo-sms-api</module>
 		<module>evo-sp-auth-common-api</module>
 		<module>evo-sp-sys-api</module>
+		<module>evo-sp-datadict-api</module>
 	</modules>
 
 	<dependencies>

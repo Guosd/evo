@@ -10,3 +10,4 @@
 20110 ~ 20114 sp-auth-pc # 认证服务，PC端登录
 20115 ~ 20119 sp-auth-mobile # 认证服务，移动端登录
 20120 ~ 20124 sp-datadict # 数据字典
+20500 ~ 20504 sp-sys-ui # sp-sys模块的UI

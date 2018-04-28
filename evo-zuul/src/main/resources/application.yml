@@ -1,5 +1,5 @@
 server:
-  port: 20010
+  port: 50001
   tomcat:
     max-threads: 128
     min-spare-threads: 64
