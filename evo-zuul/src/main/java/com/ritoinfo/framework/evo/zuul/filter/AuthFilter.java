@@ -82,7 +82,7 @@ public class AuthFilter extends ZuulFilter {
 						}
 
 						if (StringUtil.isBlank(newToken)) {
-							log.info("缺少授权: " + uri);
+							log.info("刷新失败: " + uri);
 
 							requestContext.setSendZuulResponse(false);
 							requestContext.setResponseStatusCode(401);
@@ -105,7 +105,7 @@ public class AuthFilter extends ZuulFilter {
 						requestContext.setResponseStatusCode(403);
 					}
 				} else {
-					log.info("缺少授权: " + uri);
+					log.info("令牌失效: " + uri);
 
 					requestContext.setSendZuulResponse(false);
 					requestContext.setResponseStatusCode(401);
