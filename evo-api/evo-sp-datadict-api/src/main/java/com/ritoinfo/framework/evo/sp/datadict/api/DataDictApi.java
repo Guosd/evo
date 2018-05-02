@@ -3,7 +3,6 @@ package com.ritoinfo.framework.evo.sp.datadict.api;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import com.ritoinfo.framework.evo.sp.datadict.dto.DataDictDto;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,7 +13,6 @@ import java.util.List;
  * User: Kyll
  * Date: 2018-04-13 09:57
  */
-@Component
 @FeignClient(value = "evo-sp-datadict", path = "/data-dict")
 public interface DataDictApi {
 	@GetMapping("/code/{code}")

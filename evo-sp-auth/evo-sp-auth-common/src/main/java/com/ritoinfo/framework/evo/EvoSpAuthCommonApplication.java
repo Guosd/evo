@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * User: Kyll
  * Date: 2017-11-27 11:57
  */
-@EnableFeignClients
+@EnableFeignClients(basePackages = {"com.ritoinfo.framework.evo"})
 @EnableCircuitBreaker
 @SpringBootApplication
 public class EvoSpAuthCommonApplication {
