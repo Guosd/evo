@@ -23,4 +23,8 @@ public class RoleBizz extends BaseBizz<RoleDao, Role, Long, RoleCondition, RoleD
 	public List<RoleDto> getByUserId(Long userId) {
 		return BaseHelper.toDto(dao.getByUserId(userId));
 	}
+
+	public List<RoleDto> getByUsername(String username) {
+		return BaseHelper.toDto(dao.getByUsername(username));
+	}
 }

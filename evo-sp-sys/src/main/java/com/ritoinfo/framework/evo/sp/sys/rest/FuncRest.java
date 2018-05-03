@@ -24,7 +24,7 @@ import java.util.List;
 @RequestMapping("func")
 @RestController
 public class FuncRest extends BaseRest<FuncBizz, FuncDao, Func, Long, FuncCondition, FuncDto> {
-	@GetMapping("/user/{username}")
+	@GetMapping("/user/username/{username}")
 	public ServiceResponse<List<PermissionDto>> username(@PathVariable String username) {
 		return ServiceResponse.ok(bizz.getByUsername(username));
 	}

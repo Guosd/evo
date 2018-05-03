@@ -14,4 +14,6 @@ import java.util.List;
 @Mapper
 public interface RoleDao extends MyBatisDao<Role, Long, RoleCondition> {
 	List<Role> getByUserId(Long userId);
+
+	List<Role> getByUsername(String username);
 }

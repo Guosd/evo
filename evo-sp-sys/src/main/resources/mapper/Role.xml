@@ -46,6 +46,13 @@
 		WHERE t0.user_id = #{value}
 	</select>
 
+	<select id="getByUsername" resultMap="RoleResultMap">
+		<include refid="select"/>
+		JOIN sys_user_role t0 ON t.id = t0.role_id
+		JOIN sys_user t1 ON t0.user_id = t1.id
+		WHERE t1.username = #{value}
+	</select>
+
 	<select id="find" resultMap="RoleResultMap">
 		<include refid="select"/>
 		<include refid="condition"/>
