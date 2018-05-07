@@ -2,7 +2,9 @@ package com.ritoinfo.framework.evo.sp.base.mybatis.interceptor;
 
 import com.ritoinfo.framework.evo.common.uitl.BeanUtil;
 import com.ritoinfo.framework.evo.common.uitl.SqlUtil;
+import com.ritoinfo.framework.evo.common.uitl.StringUtil;
 import com.ritoinfo.framework.evo.sp.base.model.Page;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.executor.statement.RoutingStatementHandler;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
@@ -14,13 +16,16 @@ import org.apache.ibatis.plugin.Signature;
 import org.apache.ibatis.session.Configuration;
 import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Properties;
 
 /**
  * User: Kyll
  * Date: 2018-02-26 23:12
  */
+@Slf4j
 @Component
 @Intercepts({
 	@Signature(type = StatementHandler.class, method = "prepare", args = {Connection.class, Integer.class})
@@ -54,7 +59,18 @@ public class PageInterceptor implements Interceptor {
 
 	private String getJdbcUrl(Object target) {
 		Configuration configuration = (Configuration) BeanUtil.getFieldValue(BeanUtil.getFieldValue(target, "delegate"), "configuration");
-		return (String) BeanUtil.getFieldValue(configuration.getEnvironment().getDataSource(), "jdbcUrl");
+		DataSource dataSource = configuration.getEnvironment().getDataSource();
+		String jdbcUrl = (String) BeanUtil.getFieldValue(dataSource, "jdbcUrl");
+
+		if (StringUtil.isBlank(jdbcUrl)) {
+			try {
+				jdbcUrl = dataSource.getConnection().getMetaData().getURL();
+			} catch (SQLException e) {
+				log.error("分页查询失败，无法获取数据库连接", e);
+			}
+		}
+
+		return jdbcUrl;
 	}
 
 	private String getPageSql(String sql, String jdbcUrl, Page page) throws Exception {
