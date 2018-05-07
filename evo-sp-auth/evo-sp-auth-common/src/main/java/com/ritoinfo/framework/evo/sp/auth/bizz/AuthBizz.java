@@ -61,7 +61,10 @@ public class AuthBizz {
 	public boolean verify(VerifyDto verifyDto) {
 		if (redisService.exist(RedisKeyAssist.generate("TOKEN", verifyDto.getToken()))) {
 			for (PermissionDto permissionDto : funcApi.username(jwtToken.parse(verifyDto.getToken()).getUsername()).getData()) {
-				if (verifyDto.getUri().equals(permissionDto.getPrefix() + permissionDto.getUri()) && verifyDto.getMethod().equalsIgnoreCase(permissionDto.getMethod())) {
+				String uri = permissionDto.getUri();
+				uri = uri.contains("?") ? uri.substring(0, uri.indexOf('?')) : uri;
+
+				if (verifyDto.getUri().equals(permissionDto.getPrefix() + uri) && verifyDto.getMethod().equalsIgnoreCase(permissionDto.getMethod())) {
 					return true;
 				}
 			}
