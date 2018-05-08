@@ -22,23 +22,40 @@
 
 	<sql id="condition">
 		<where>
-			<if test="id != null">
+			<if test="id != null and id != ''">
 				AND t.id = #{id}
 			</if>
-			<if test="parentId != null">
+			<if test="parentId != null and parentId != ''">
 				AND t.parent_id = #{parentId}
 			</if>
-			<if test="funcId != null">
+			<if test="funcId != null and funcId != ''">
 				AND t.func_id = #{funcId}
 			</if>
-			<if test="name != null">
+			<if test="name != null and name != ''">
 				AND t.name = #{name}
 			</if>
-			<if test="code != null">
+			<if test="code != null and code != ''">
 				AND t.code = #{code}
 			</if>
-			<if test="sort != null">
+			<if test="sort != null and sort != ''">
 				AND t.sort = #{sort}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="conditionLike">
+		<where>
+			<if test="parentId != null and parentId != ''">
+				AND t.parent_id = #{parentId}
+			</if>
+			<if test="funcId != null and funcId != ''">
+				AND t.func_id = #{funcId}
+			</if>
+			<if test="name != null and name != ''">
+				AND t.name like '%${name}%'
+			</if>
+			<if test="code != null and code != ''">
+				AND t.code like '%${code}%'
 			</if>
 		</where>
 	</sql>
@@ -98,9 +115,22 @@
 		</if>
 	</select>
 
+	<select id="findLike" resultMap="MenuResultMap">
+		<include refid="select"/>
+		<include refid="conditionLike"/>
+		<if test="pageSort != null">
+			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
+		</if>
+	</select>
+
 	<select id="count" resultType="int">
 		SELECT count(1) count FROM sys_menu t
 		<include refid="condition"/>
+	</select>
+
+	<select id="countLike" resultType="int">
+		SELECT count(1) count FROM sys_menu t
+		<include refid="conditionLike"/>
 	</select>
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">

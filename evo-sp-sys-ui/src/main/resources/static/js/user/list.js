@@ -6,12 +6,12 @@ $(function() {
 		reset();
 	});
 	$('button#create').click(function() {
-		location.href = '/sys-ui/micro/form';
+		location.href = '/sys-ui/user/form';
 	});
 	$('button#update').click(function() {
 		var ids = jqGridSelectIds();
 		if (ids.length == 0) {
-			location.href = '/sys-ui/micro/form?id=' + ids[0];
+			location.href = '/sys-ui/user/form?id=' + ids[0];
 		} else {
 			alert('请选择一条记录');
 		}
@@ -21,17 +21,26 @@ $(function() {
 	});
 
 	$(gridSelector).jqGrid({
-		url: '/sys/micro/page',
+		url: '/sys/user/page',
 		datatype: 'local',
 		colModel: [{
-			label: '名称',
+			label: '用户名称',
+			name: 'username'
+		}, {
+			label: '姓名',
 			name: 'name'
 		}, {
 			label: '编码',
 			name: 'code'
 		}, {
-			label: '前缀',
-			name: 'prefix'
+			label: '邮箱',
+			name: 'email'
+		}, {
+			label: '手机号码',
+			name: 'mobileNumber'
+		}, {
+			label: '冻结',
+			name: 'freeze'
 		}],
 		sortname: 'id',
 		sortorder: 'asc'

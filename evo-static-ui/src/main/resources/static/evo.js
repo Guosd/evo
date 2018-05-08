@@ -80,14 +80,29 @@ function resetHeight() {
 	parent.document.getElementById("mainFrame").height = document.body.scrollHeight;
 }
 
-function jqGridQuery(postData) {
-	$(gridSelector).setGridParam({
+function jqGridQuery(postData, customGridSelector) {
+	$(customGridSelector || gridSelector).setGridParam({
 		datatype: 'json',
 		pageNo: 1,
 		postData: postData
 	}).trigger('reloadGrid');
 }
 
-function jqGridSelectIds() {
-	return $(gridSelector).jqGrid('getGridParam', 'selarrrow');
+function jqGridSelectIds(customGridSelector) {
+	return $(customGridSelector || gridSelector).jqGrid('getGridParam', 'selarrrow');
+}
+
+function jqGridSelectRowData(id, customGridSelector) {
+	return $(customGridSelector || gridSelector).jqGrid('getRowData', id)
+}
+
+function jqGridSelectRowDatas(customGridSelector) {
+	var ids = jqGridSelectIds(customGridSelector);
+
+	var rowDatas = [];
+	for (var i = 0; i < ids.length; i++) {
+		rowDatas.push(jqGridSelectRowData(id, customGridSelector));
+	}
+
+	return rowDatas;
 }

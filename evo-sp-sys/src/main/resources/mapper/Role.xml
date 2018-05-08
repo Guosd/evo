@@ -19,14 +19,25 @@
 
 	<sql id="condition">
 		<where>
-			<if test="id != null">
+			<if test="id != null and id != ''">
 				AND t.id = #{id}
 			</if>
-			<if test="name != null">
+			<if test="name != null and name != ''">
 				AND t.name = #{name}
 			</if>
-			<if test="code != null">
+			<if test="code != null and code != ''">
 				AND t.code = #{code}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="conditionLike">
+		<where>
+			<if test="name != null and id != ''">
+				AND t.name like '%${name}%'
+			</if>
+			<if test="code != null and id != ''">
+				AND t.code like '%${code}%'
 			</if>
 		</where>
 	</sql>
@@ -61,9 +72,22 @@
 		</if>
 	</select>
 
+	<select id="findLike" resultMap="RoleResultMap">
+		<include refid="select"/>
+		<include refid="conditionLike"/>
+		<if test="pageSort != null">
+			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
+		</if>
+	</select>
+
 	<select id="count" resultType="int">
 		SELECT count(1) count FROM sys_role t
 		<include refid="condition"/>
+	</select>
+
+	<select id="countLike" resultType="int">
+		SELECT count(1) count FROM sys_role t
+		<include refid="conditionLike"/>
 	</select>
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">

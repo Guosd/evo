@@ -6,12 +6,12 @@ $(function() {
 		reset();
 	});
 	$('button#create').click(function() {
-		location.href = '/sys-ui/micro/form';
+		location.href = '/sys-ui/menu/form';
 	});
 	$('button#update').click(function() {
 		var ids = jqGridSelectIds();
 		if (ids.length == 0) {
-			location.href = '/sys-ui/micro/form?id=' + ids[0];
+			location.href = '/sys-ui/menu/form?id=' + ids[0];
 		} else {
 			alert('请选择一条记录');
 		}
@@ -21,19 +21,22 @@ $(function() {
 	});
 
 	$(gridSelector).jqGrid({
-		url: '/sys/micro/page',
+		url: '/sys/menu/page',
 		datatype: 'local',
 		colModel: [{
+			label: '上级菜单',
+			name: 'parentId'
+		}, {
 			label: '名称',
 			name: 'name'
 		}, {
 			label: '编码',
 			name: 'code'
 		}, {
-			label: '前缀',
-			name: 'prefix'
+			label: '功能',
+			name: 'funcId'
 		}],
-		sortname: 'id',
+		sortname: 'sort',
 		sortorder: 'asc'
 	});
 

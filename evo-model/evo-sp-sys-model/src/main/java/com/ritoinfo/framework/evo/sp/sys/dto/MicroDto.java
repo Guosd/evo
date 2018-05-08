@@ -14,5 +14,4 @@ public class MicroDto extends BaseDto<Long> {
 	private String name;
 	private String code;
 	private String prefix;
-	private Integer sort;
 }

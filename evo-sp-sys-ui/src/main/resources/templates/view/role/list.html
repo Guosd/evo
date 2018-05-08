@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>服务管理</title>
+	<title>角色管理</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -15,24 +15,23 @@
 	<script type="text/javascript" src="/static/jqGrid/js/i18n/grid.locale-cn.js"></script>
 	<script type="text/javascript" src="/static/jqGrid/js/jquery.jqGrid.min.js"></script>
 	<script type="text/javascript" src="/static/evo.js"></script>
-	<script type="text/javascript" src="/sys-ui/js/micro/list.js"></script>
+	<script type="text/javascript" src="/sys-ui/js/role/list.js"></script>
 </head>
 <body>
-	<div id="form">
-		名称:<input type="text" id="name"/>
-		编码:<input type="text" id="code"/>
-		前缀:<input type="text" id="prefix"/>
-		<button id="query">查询</button>
-		<button id="reset">重置</button>
-	</div>
-	<br/>
-	<div id="toolbar">
-		<button id="create">新增</button>
-		<button id="update">修改</button>
-		<button id="delete">删除</button>
-	</div>
-	<br/>
-	<table id="grid-table"></table>
-	<div id="grid-pager"></div>
+<div id="form">
+	名称:<input type="text" id="name"/>
+	编码:<input type="text" id="code"/>
+	<button id="query">查询</button>
+	<button id="reset">重置</button>
+</div>
+<br/>
+<div id="toolbar">
+	<button id="create">新增</button>
+	<button id="update">修改</button>
+	<button id="delete">删除</button>
+</div>
+<br/>
+<table id="grid-table"></table>
+<div id="grid-pager"></div>
 </body>
 </html>

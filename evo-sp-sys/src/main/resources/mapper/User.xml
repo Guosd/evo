@@ -28,40 +28,72 @@
 
 	<sql id="condition">
 		<where>
-			<if test="id != null">
+			<if test="id != null and id != ''">
 				AND t.id = #{id}
 			</if>
-			<if test="username != null">
+			<if test="username != null and username != ''">
 				AND t.username = #{username}
 			</if>
-			<if test="password != null">
-				AND t.password = #{password}
-			</if>
-			<if test="name != null">
+			<if test="name != null and name != ''">
 				AND t.name = #{name}
 			</if>
-			<if test="code != null">
+			<if test="code != null and code != ''">
 				AND t.code = #{code}
 			</if>
-			<if test="email != null">
+			<if test="email != null and email != ''">
 				AND t.email = #{email}
 			</if>
-			<if test="mobileNumber != null">
+			<if test="mobileNumber != null and mobileNumber != ''">
 				AND t.mobile_number = #{mobileNumber}
 			</if>
-			<if test="freeze != null">
+			<if test="freeze != null and freeze != ''">
 				AND t.freeze = #{freeze}
 			</if>
-			<if test="loginTime != null">
+			<if test="loginTime != null and loginTime != ''">
 				AND t.login_time = #{loginTime}
 			</if>
-			<if test="loginIp != null">
+			<if test="loginIp != null and loginIp != ''">
 				AND t.login_ip = #{loginIp}
 			</if>
-			<if test="lastLoginTime != null">
+			<if test="lastLoginTime != null and lastLoginTime != ''">
 				AND t.last_login_time = #{lastLoginTime}
 			</if>
-			<if test="lastLoginIp != null">
+			<if test="lastLoginIp != null and lastLoginIp != ''">
+				AND t.last_login_ip = #{lastLoginIp}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="conditionLike">
+		<where>
+			<if test="username != null and username != ''">
+				AND t.username like '%${username}%'
+			</if>
+			<if test="name != null and name != ''">
+				AND t.name like '%${name}%'
+			</if>
+			<if test="code != null and code != ''">
+				AND t.code like '%${code}%'
+			</if>
+			<if test="email != null and email != ''">
+				AND t.email like '%${email}%'
+			</if>
+			<if test="mobileNumber != null and mobileNumber != ''">
+				AND t.mobile_number like '%${mobileNumber}%'
+			</if>
+			<if test="freeze != null and freeze != ''">
+				AND t.freeze = #{freeze}
+			</if>
+			<if test="loginTime != null and loginTime != ''">
+				AND t.login_time = #{loginTime}
+			</if>
+			<if test="loginIp != null and loginIp != ''">
+				AND t.login_ip = #{loginIp}
+			</if>
+			<if test="lastLoginTime != null and lastLoginTime != ''">
+				AND t.last_login_time = #{lastLoginTime}
+			</if>
+			<if test="lastLoginIp != null and lastLoginIp != ''">
 				AND t.last_login_ip = #{lastLoginIp}
 			</if>
 		</where>
@@ -84,9 +116,22 @@
 		</if>
 	</select>
 
+	<select id="findLike" resultMap="UserResultMap">
+		<include refid="select"/>
+		<include refid="conditionLike"/>
+		<if test="pageSort != null">
+			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
+		</if>
+	</select>
+
 	<select id="count" resultType="int">
 		SELECT count(1) count FROM sys_user t
 		<include refid="condition"/>
+	</select>
+
+	<select id="countLike" resultType="int">
+		SELECT count(1) count FROM sys_user t
+		<include refid="conditionLike"/>
 	</select>
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">

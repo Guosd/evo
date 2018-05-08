@@ -16,5 +16,4 @@ public class FuncDto extends BaseDto<Long> {
 	private String code;
 	private String uri;
 	private String method;
-	private Integer sort;
 }

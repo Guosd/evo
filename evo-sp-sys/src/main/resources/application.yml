@@ -10,6 +10,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     hikari:
       connection-test-query: select 1
+      maximum-pool-size: 50
   jackson:
     time-zone: GMT+8
 mybatis:

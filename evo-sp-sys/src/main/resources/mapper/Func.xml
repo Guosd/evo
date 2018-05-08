@@ -9,7 +9,6 @@
 		<result column="code" property="code"/>
 		<result column="uri" property="uri"/>
 		<result column="method" property="method"/>
-		<result column="sort" property="sort"/>
 		<result column="create_by" property="createBy"/>
 		<result column="create_time" property="createTime"/>
 		<result column="update_by" property="updateBy"/>
@@ -17,32 +16,49 @@
 	</resultMap>
 
 	<sql id="columns">
-		t.id, t.micro_id, t.name, t.code, t.uri, t.method, t.sort,
+		t.id, t.micro_id, t.name, t.code, t.uri, t.method,
 		t.create_by, t.create_time, t.update_by, t.update_time
 	</sql>
 
 	<sql id="condition">
 		<where>
-			<if test="id != null">
+			<if test="id != null and id != ''">
 				AND t.id = #{id}
 			</if>
-			<if test="microId != null">
+			<if test="microId != null and microId != ''">
 				AND t.micro_id = #{microId}
 			</if>
-			<if test="name != null">
+			<if test="name != null and name != ''">
 				AND t.name = #{name}
 			</if>
-			<if test="code != null">
+			<if test="code != null and code != ''">
 				AND t.code = #{code}
 			</if>
-			<if test="uri != null">
+			<if test="uri != null and uri != ''">
 				AND t.uri = #{uri}
 			</if>
-			<if test="method != null">
+			<if test="method != null and method != ''">
 				AND t.method = #{method}
 			</if>
-			<if test="sort != null">
-				AND t.sort = #{sort}
+		</where>
+	</sql>
+
+	<sql id="conditionLike">
+		<where>
+			<if test="microId != null and microId != ''">
+				AND t.micro_id = #{microId}
+			</if>
+			<if test="name != null and name != ''">
+				AND t.name like '%${name}%'
+			</if>
+			<if test="code != null and code != ''">
+				AND t.code like '%${code}%'
+			</if>
+			<if test="uri != null and uri != ''">
+				AND t.uri like '%${uri}%'
+			</if>
+			<if test="method != null and method != ''">
+				AND t.method = #{method}
 			</if>
 		</where>
 	</sql>
@@ -77,16 +93,29 @@
 		</if>
 	</select>
 
+	<select id="findLike" resultMap="FuncResultMap">
+		<include refid="select"/>
+		<include refid="conditionLike"/>
+		<if test="pageSort != null">
+			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
+		</if>
+	</select>
+
 	<select id="count" resultType="int">
 		SELECT count(1) count FROM sys_func t
 		<include refid="condition"/>
 	</select>
 
+	<select id="countLike" resultType="int">
+		SELECT count(1) count FROM sys_func t
+		<include refid="conditionLike"/>
+	</select>
+
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO sys_func (
-			micro_id, name, code, uri, method, sort, create_by, create_time, update_by, update_time
+			micro_id, name, code, uri, method, create_by, create_time, update_by, update_time
 		) VALUES (
-			#{microId}, #{name}, #{code}, #{uri}, #{method}, #{sort}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}
+			#{microId}, #{name}, #{code}, #{uri}, #{method}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime}
 		)
 	</insert>
 
@@ -97,7 +126,6 @@
 			code = #{code},
 			uri = #{uri},
 			method = #{method},
-			sort = #{sort},
 			update_by = #{updateBy},
 			update_time = #{updateTime}
 		WHERE
