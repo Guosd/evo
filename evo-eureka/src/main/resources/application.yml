@@ -5,10 +5,14 @@ spring:
     name: evo-eureka
 eureka:
   server:
-    response-cache-update-interval-ms: 3000
-    eviction-interval-timer-in-ms: 3000
+    enable-self-preservation: false # 小规模应用下关闭自我保护模式
+    eviction-interval-timer-in-ms: 3000 # 主动失效检测间隔
+    #renewal-threshold-update-interval-ms: 120000 enable-self-preservation 为 true 的时候设置
+    use-read-only-response-cache: false
   instance:
     hostname: localhost
+    lease-expiration-duration-in-seconds: 10 # 没有心跳的淘汰时间
+    lease-renewal-interval-in-seconds: 5 # 心跳间隔
   client:
     register-with-eureka: false
     fetch-registry: false
