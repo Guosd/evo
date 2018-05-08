@@ -31,7 +31,7 @@ public abstract class BaseRest<B extends BaseBizz<D, E, PK, C, T>, D extends Bas
 	@Autowired
 	protected B bizz;
 
-	@GetMapping("/{id}")
+	@GetMapping("/id/{id}")
 	public ServiceResponse<T> get(@PathVariable PK id) {
 		return ServiceResponse.ok(bizz.get(id));
 	}
@@ -42,12 +42,12 @@ public abstract class BaseRest<B extends BaseBizz<D, E, PK, C, T>, D extends Bas
 	}
 
 	@GetMapping
-	public ServiceResponse<List<T>> find(@Validated(ListGroup.class) @RequestBody C condition) {
+	public ServiceResponse<List<T>> find(@Validated(ListGroup.class) C condition) {
 		return ServiceResponse.ok(bizz.find(condition));
 	}
 
 	@GetMapping("/page")
-	public ServiceResponse<PageList<T>> findPage(@Validated(PageGroup.class) @RequestBody C condition) {
+	public ServiceResponse<PageList<T>> findPage(@Validated(PageGroup.class) C condition) {
 		return ServiceResponse.ok(bizz.findPage(condition));
 	}
 

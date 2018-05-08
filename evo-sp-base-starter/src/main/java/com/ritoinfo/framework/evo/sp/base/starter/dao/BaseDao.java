@@ -15,7 +15,11 @@ public interface BaseDao<E extends BaseEntity<PK>, PK extends Serializable, C ex
 
 	List<E> find(C condition);
 
+	List<E> findLike(C condition);
+
 	int count(C condition);
+
+	int countLike(C condition);
 
 	int insert(E entity);
 

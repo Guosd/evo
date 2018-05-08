@@ -33,6 +33,7 @@
 		<module>evo-sp-sys</module>
 		<module>evo-sp-datadict</module>
 		<module>evo-sp-sys-ui</module>
+		<module>evo-static-ui</module>
 	</modules>
 
 	<properties>

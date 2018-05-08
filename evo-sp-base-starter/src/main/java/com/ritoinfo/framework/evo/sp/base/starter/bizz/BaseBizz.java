@@ -38,11 +38,11 @@ public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity
 	public PageList<T> findPage(C condition) {
 		PageList<T> pageList = new PageList<>();
 
-		int count = dao.count(condition.count());
+		int count = dao.countLike(condition.count());
 		BaseHelper.copyPage(pageList, count, condition);
 
 		if (count > 0) {
-			pageList.setDataList(BaseHelper.toDto(dao.find(condition.page())));
+			pageList.setDataList(BaseHelper.toDto(dao.findLike(condition.page())));
 		}
 
 		return pageList;
