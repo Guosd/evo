@@ -77,7 +77,8 @@ $.extend($.jgrid.defaults, {
 });
 
 function resetHeight() {
-	parent.document.getElementById("mainFrame").height = document.body.scrollHeight;
+//	parent.document.getElementById('mainFrame').height = document.body.scrollHeight;
+	parent.document.getElementById('mainFrame').height = $(parent).height() - 5 - parent.$('#navbar').height() - parent.$('#sidebar-shortcuts').height();
 }
 
 function jqGridQuery(postData, customGridSelector) {

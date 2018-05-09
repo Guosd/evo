@@ -1,4 +1,29 @@
 $(function() {
+	$(gridSelector).jqGrid({
+		url: '/sys/func/page',
+		datatype: 'local',
+		colModel: [{
+			label: '服务',
+			name: 'microId'
+		}, {
+			label: '名称',
+			name: 'name'
+		}, {
+			label: '编码',
+			name: 'code'
+		}, {
+			label: 'URI',
+			name: 'uri'
+		}, {
+			label: '方法',
+			name: 'method'
+		}],
+		sortname: 'id',
+		sortorder: 'asc'
+	});
+
+	query();
+
 	$('#microText').attr('readonly', 'readonly').click(function() {
 		$('#dialog').dialog({
 			width: 850,
@@ -10,11 +35,12 @@ $(function() {
 					if (ids.length == 1) {
 						$('#microId').val(ids[0]);
 						$('#microText').val(jqGridSelectRowData(ids[0], '#grid-table-micro').name);
-
-						$(this).dialog('close');
 					} else {
-						alert('请选择一条记录');
+						$('#microId').val('');
+						$('#microText').val('');
 					}
+
+					$(this).dialog('close');
 				}
 			}, {
 				text: "取消",
@@ -79,31 +105,6 @@ $(function() {
 	$('button#delete').click(function() {
 		alert('暂未实现');
 	});
-
-	$(gridSelector).jqGrid({
-		url: '/sys/func/page',
-		datatype: 'local',
-		colModel: [{
-			label: '服务',
-			name: 'microId'
-		}, {
-			label: '名称',
-			name: 'name'
-		}, {
-			label: '编码',
-			name: 'code'
-		}, {
-			label: 'URI',
-			name: 'uri'
-		}, {
-			label: '方法',
-			name: 'method'
-		}],
-		sortname: 'id',
-		sortorder: 'asc'
-	});
-
-	query();
 
 	resetHeight();
 });

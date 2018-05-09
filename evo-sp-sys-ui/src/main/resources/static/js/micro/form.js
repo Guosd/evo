@@ -1,6 +1,19 @@
 $(function() {
 	var id = $.getUrlParam('id');
 
+	if (id) {
+		$.ajax({
+			url: '/sys/micro/id/' + id,
+			method: 'get',
+			success: function(result, textStatus, jqXHR) {
+				$('#id').val(result.data.id);
+				$('#name').val(result.data.name);
+				$('#code').val(result.data.code);
+				$('#prefix').val(result.data.prefix);
+			}
+		});
+	}
+
 	$('button#submit').click(function() {
 		$.ajax({
 			url: '/sys/micro',
@@ -9,8 +22,7 @@ $(function() {
 				id: $('#id').val(),
 				name: $('#name').val(),
 				code: $('#code').val(),
-				prefix: $('#prefix').val(),
-				sort: $('#sort').val()
+				prefix: $('#prefix').val()
 			}),
 			success: function(result, textStatus, jqXHR) {
 				alert('提交成功');
@@ -21,20 +33,6 @@ $(function() {
 	$('button#back').click(function() {
 		back();
 	});
-
-	if (id) {
-		$.ajax({
-			url: '/sys/micro/id/' + id,
-			method: 'get',
-			success: function(result, textStatus, jqXHR) {
-				$('#id').val(result.data.id);
-				$('#name').val(result.data.name);
-				$('#code').val(result.data.code);
-				$('#prefix').val(result.data.prefix);
-				$('#sort').val(result.data.sort);
-			}
-		});
-	}
 
 	resetHeight();
 });
