@@ -62,11 +62,15 @@ public class BackToSelfRule extends AbstractLoadBalancerRule {
 			}
 		}
 
-		int serverCount = serverList.size();
-		if (finalServer == null || serverCount > 0) {
-			finalServer = serverList.get(new Random().nextInt(serverCount));
 
-			log.info("Server on " + remoteHost + " is not exist, use random server: " + finalServer.getHostPort());
+		if (finalServer == null) {
+			int serverCount = serverList.size();
+			if (serverCount > 0) {
+				finalServer = serverList.get(new Random().nextInt(serverCount));
+				log.info("Server on " + remoteHost + " is not exist, use random server: " + finalServer.getHostPort());
+			} else {
+				log.info("Server on " + remoteHost + " is not exist, from eureka server list is not exist");
+			}
 		} else {
 			log.info("Find server on " + remoteHost);
 		}
