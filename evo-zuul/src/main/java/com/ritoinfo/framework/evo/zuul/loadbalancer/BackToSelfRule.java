@@ -69,7 +69,7 @@ public class BackToSelfRule extends AbstractLoadBalancerRule {
 				finalServer = serverList.get(new Random().nextInt(serverCount));
 				log.info("Server on " + remoteHost + " is not exist, use random server: " + finalServer.getHostPort());
 			} else {
-				log.info("Server on " + remoteHost + " is not exist, from eureka server list is not exist");
+				log.warn("Server on " + remoteHost + " and eureka server list is not exist");
 			}
 		} else {
 			log.info("Find server on " + remoteHost);
