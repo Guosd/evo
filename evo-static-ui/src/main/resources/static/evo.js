@@ -94,7 +94,7 @@ function jqGridSelectIds(customGridSelector) {
 }
 
 function jqGridSelectRowData(id, customGridSelector) {
-	return $(customGridSelector || gridSelector).jqGrid('getRowData', id)
+	return $(customGridSelector || gridSelector).jqGrid('getRowData', id);
 }
 
 function jqGridSelectRowDatas(customGridSelector) {
@@ -102,8 +102,16 @@ function jqGridSelectRowDatas(customGridSelector) {
 
 	var rowDatas = [];
 	for (var i = 0; i < ids.length; i++) {
-		rowDatas.push(jqGridSelectRowData(id, customGridSelector));
+		rowDatas.push(jqGridSelectRowData(ids[i], customGridSelector));
 	}
 
 	return rowDatas;
+}
+
+function getAllPropertyNames(obj) {
+	var props = [];
+	do {
+		props = props.concat(Object.getOwnPropertyNames(obj));
+	} while (obj = Object.getPrototypeOf(obj));
+	return props.join('\r\n');
 }

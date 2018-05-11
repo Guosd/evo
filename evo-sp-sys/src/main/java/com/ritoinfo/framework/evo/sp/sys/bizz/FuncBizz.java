@@ -24,4 +24,8 @@ public class FuncBizz extends BaseBizz<FuncDao, Func, Long, FuncCondition, FuncD
 	public List<PermissionDto> getByUsername(String username) {
 		return BaseHelper.mapToDto(dao.getByUsername(username), PermissionDto.class);
 	}
+
+	public List<FuncDto> getByRole(Long roleId) {
+		return BaseHelper.toDto(dao.getByRole(roleId));
+	}
 }

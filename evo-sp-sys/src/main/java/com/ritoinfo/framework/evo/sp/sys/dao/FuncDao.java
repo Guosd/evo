@@ -15,4 +15,6 @@ import java.util.Map;
 @Mapper
 public interface FuncDao extends MyBatisDao<Func, Long, FuncCondition> {
 	List<Map<String, Object>> getByUsername(String username);
+
+	List<Func> getByRole(Long roleId);
 }

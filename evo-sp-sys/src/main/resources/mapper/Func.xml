@@ -85,6 +85,15 @@
 		 WHERE t4.username = #{value}
 	</select>
 
+	<select id="getByRole" resultMap="FuncResultMap">
+		SELECT
+			t0.id, t0.micro_id, t0.name, t0.code, t0.uri, t0.method,
+			t0.create_by, t0.create_time, t0.update_by, t0.update_time
+		  FROM sys_func t0
+		  JOIN sys_role_func t1 ON t0.id = t1.func_id
+		 WHERE t1.role_id = #{value}
+	</select>
+
 	<select id="find" resultMap="FuncResultMap">
 		<include refid="select"/>
 		<include refid="condition"/>

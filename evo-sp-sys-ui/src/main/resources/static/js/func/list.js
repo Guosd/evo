@@ -114,7 +114,8 @@ function query() {
 		microId: $('#microId').val(),
 		name: $('#name').val(),
 		code: $('#code').val(),
-		prefix: $('#uri').val()
+		uri: $('#uri').val(),
+		method: $('#method').val()
 	});
 }
 
@@ -124,6 +125,7 @@ function reset() {
 	$('#name').val('');
 	$('#code').val('');
 	$('#uri').val('');
+	$('#method').val('');
 	query();
 }
 

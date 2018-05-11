@@ -33,10 +33,10 @@
 
 	<sql id="conditionLike">
 		<where>
-			<if test="name != null and id != ''">
+			<if test="name != null and name != ''">
 				AND t.name like '%${name}%'
 			</if>
-			<if test="code != null and id != ''">
+			<if test="code != null and code != ''">
 				AND t.code like '%${code}%'
 			</if>
 		</where>
@@ -98,6 +98,15 @@
 		)
 	</insert>
 
+	<insert id="insertRoleFunc" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO sys_role_func (
+			role_id, func_id
+		) VALUES
+		<foreach collection="funcIds" separator="," item="funcId">
+			(#{id}, #{funcId})
+		</foreach>
+	</insert>
+
 	<update id="update">
 		UPDATE sys_role SET
 			name = #{name},
@@ -110,6 +119,10 @@
 
 	<delete id="delete">
 		DELETE FROM sys_role WHERE id = #{id}
+	</delete>
+
+	<delete id="deleteRoleFunc">
+		DELETE FROM sys_role_func WHERE role_id = #{id}
 	</delete>
 
 </mapper>

@@ -9,6 +9,7 @@ import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseEntity;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -129,6 +130,18 @@ public class BaseHelper {
 			targetList.add(mapToDto(map, clazz, converter));
 		}
 		return targetList;
+	}
+
+	public static <T extends BaseDto> Map<String, Object> dtoToMap(T dto) {
+		Map<String, Object> map = null;
+		if (dto != null) {
+			map = new HashMap<>();
+
+			for (Field field : BeanUtil.getFields(dto)) {
+				map.put(field.getName(), BeanUtil.getFieldValue(dto, field));
+			}
+		}
+		return map;
 	}
 
 	public static void copyPage(PageList pageList, int count, BaseCondition condition) {

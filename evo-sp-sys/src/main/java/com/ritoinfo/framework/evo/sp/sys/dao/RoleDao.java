@@ -6,6 +6,7 @@ import com.ritoinfo.framework.evo.sp.sys.entity.Role;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: Kyll
@@ -16,4 +17,8 @@ public interface RoleDao extends MyBatisDao<Role, Long, RoleCondition> {
 	List<Role> getByUserId(Long userId);
 
 	List<Role> getByUsername(String username);
+
+	void insertRoleFunc(Map<String, Object> map);
+
+	void deleteRoleFunc(Long id);
 }
