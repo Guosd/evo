@@ -13,7 +13,9 @@ import java.util.Map;
  */
 @Mapper
 public interface UserDao extends MyBatisDao<User, Long, UserCondition> {
-	void insertUserRole(Map<String, Object> map);
+	void insertWithRole(Map<String, Object> map);
 
-	void deleteUserRole(Long userId);
+	void deleteWithRole(Long id);
+
+	void deleteByRole(Long roleId);
 }

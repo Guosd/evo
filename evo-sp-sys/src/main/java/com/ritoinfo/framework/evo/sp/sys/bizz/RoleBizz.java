@@ -26,19 +26,21 @@ import java.util.List;
 public class RoleBizz extends BaseBizz<RoleDao, Role, Long, RoleCondition, RoleDto> {
 	@Autowired
 	private FuncBizz funcBizz;
+	@Autowired
+	private UserBizz userBizz;
 
 	public RoleDto getWithFunc(Long id) {
 		RoleDto roleDto = super.get(id);
-		roleDto.setFuncDtoList(funcBizz.getByRole(id));
+		roleDto.setFuncDtoList(funcBizz.findByRole(id));
 		return roleDto;
 	}
 
-	public List<RoleDto> getByUserId(Long userId) {
-		return BaseHelper.toDto(dao.getByUserId(userId));
+	public List<RoleDto> findByUserId(Long userId) {
+		return BaseHelper.toDto(dao.findByUserId(userId));
 	}
 
-	public List<RoleDto> getByUsername(String username) {
-		return BaseHelper.toDto(dao.getByUsername(username));
+	public List<RoleDto> findByUsername(String username) {
+		return BaseHelper.toDto(dao.findByUsername(username));
 	}
 
 	@Transactional
@@ -75,5 +77,19 @@ public class RoleBizz extends BaseBizz<RoleDao, Role, Long, RoleCondition, RoleD
 				throw new RoleFuncInvalidException(Arrays.toString(funcIds));
 			}
 		}
+	}
+
+	@Override
+	public void delete(Long id) {
+		dao.deleteWithFunc(id);
+
+		userBizz.deleteByRole(id);
+
+		super.delete(id);
+	}
+
+	@Transactional
+	public void deleteByFunc(Long funcId) {
+		dao.deleteByFunc(funcId);
 	}
 }

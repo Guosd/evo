@@ -33,7 +33,7 @@ public class MenuRest extends BaseRest<MenuBizz, MenuDao, Menu, Long, MenuCondit
 	@GetMapping("/my")
 	public ServiceResponse<List<MyMenuDto>> my() {
 		try {
-			return ServiceResponse.ok(bizz.getByUsername());
+			return ServiceResponse.ok(bizz.findByUsername());
 		} catch (BizzException e) {
 			throw new RestException(Const.RC_SYS_MENU_MY, e);
 		}
@@ -44,7 +44,7 @@ public class MenuRest extends BaseRest<MenuBizz, MenuDao, Menu, Long, MenuCondit
 	public Map<String, Object> scfwMy() {
 		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("isSuccess", true);
-		resultMap.put("result", getScfwMenu(null, bizz.getByUsername()));
+		resultMap.put("result", getScfwMenu(null, bizz.findByUsername()));
 
 		return resultMap;
 	}

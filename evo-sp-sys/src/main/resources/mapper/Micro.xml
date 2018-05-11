@@ -104,7 +104,7 @@
 	</update>
 
 	<delete id="delete">
-		DELETE FROM sys_micro WHERE id = #{id}
+		DELETE FROM sys_micro WHERE id = #{value}
 	</delete>
 
 </mapper>

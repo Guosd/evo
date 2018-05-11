@@ -129,7 +129,7 @@ $(function() {
 				id: $('#id').val(),
 				name: $('#name').val(),
 				code: $('#code').val(),
-				funcIds: $('#funcIds').val().split(',')
+				funcIds: $('#funcIds').val() ? $('#funcIds').val().split(',') : undefined
 			}),
 			success: function(result, textStatus, jqXHR) {
 				alert('提交成功');

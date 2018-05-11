@@ -28,16 +28,16 @@ import java.util.Set;
 @Transactional(readOnly = true)
 @Service
 public class MenuBizz extends BaseBizz<MenuDao, Menu, Long, MenuCondition, MenuDto> {
-	public List<MyMenuDto> getByUsername() {
+	public List<MyMenuDto> findByUsername() {
 		UserContext userContext = SessionHolder.getUserContext();
 		if (userContext == null) {
 			throw new UserContextNotExistException();
 		}
-		return getByUsername(userContext.getUsername());
+		return findByUsername(userContext.getUsername());
 	}
 
-	public List<MyMenuDto> getByUsername(String username) {
-		return BaseHelper.mapToDto(recurParentMenu(dao.getByUsername(username)), MyMenuDto.class);
+	public List<MyMenuDto> findByUsername(String username) {
+		return BaseHelper.mapToDto(recurParentMenu(dao.findByUsername(username)), MyMenuDto.class);
 	}
 
 	private List<Map<String, Object>> recurParentMenu(List<Map<String, Object>> mapList) {
@@ -63,9 +63,25 @@ public class MenuBizz extends BaseBizz<MenuDao, Menu, Long, MenuCondition, MenuD
 		}
 
 		if (!parentIdSet.isEmpty()) {
-			resultList.addAll(recurParentMenu(dao.getByIds(parentIdSet.toArray(new Long[0]))));
+			resultList.addAll(recurParentMenu(dao.findByIds(parentIdSet.toArray(new Long[0]))));
 		}
 
 		return resultList;
+	}
+
+	public List<MenuDto> findByFunc(Long funcId) {
+		MenuCondition condition = new MenuCondition();
+		condition.setFuncId(funcId);
+		return BaseHelper.toDto(dao.find(condition));
+	}
+
+	@Override
+	public void delete(Long id) {
+		MenuCondition condition = new MenuCondition();
+		condition.setParentId(id);
+		for (Menu menu : dao.find(condition)) {
+			delete(menu.getId());
+		}
+		super.delete(id);
 	}
 }

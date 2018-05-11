@@ -1,5 +1,8 @@
 package com.ritoinfo.framework.evo.sp.sys.rest;
 
+import com.ritoinfo.framework.evo.common.Const;
+import com.ritoinfo.framework.evo.sp.base.exception.BizzException;
+import com.ritoinfo.framework.evo.sp.base.exception.RestException;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import com.ritoinfo.framework.evo.sp.base.starter.rest.BaseRest;
 import com.ritoinfo.framework.evo.sp.base.starter.validate.group.CreateGroup;
@@ -34,16 +37,20 @@ public class RoleRest extends BaseRest<RoleBizz, RoleDao, Role, Long, RoleCondit
 
 	@GetMapping("/user/id/{userId}")
 	public ServiceResponse<List<RoleDto>> userId(@PathVariable Long userId) {
-		return ServiceResponse.ok(bizz.getByUserId(userId));
+		return ServiceResponse.ok(bizz.findByUserId(userId));
 	}
 
 	@GetMapping("/user/username/{username}")
 	public ServiceResponse<List<RoleDto>> username(@PathVariable String username) {
-		return ServiceResponse.ok(bizz.getByUsername(username));
+		return ServiceResponse.ok(bizz.findByUsername(username));
 	}
 
 	@PostMapping
 	public ServiceResponse<Long> create(@Validated(CreateGroup.class) @RequestBody RoleDto roleDto) {
-		return ServiceResponse.ok(bizz.create(roleDto));
+		try {
+			return ServiceResponse.ok(bizz.create(roleDto));
+		} catch (BizzException e) {
+			throw new RestException(Const.RC_SYS_ROLE_FUNC);
+		}
 	}
 }

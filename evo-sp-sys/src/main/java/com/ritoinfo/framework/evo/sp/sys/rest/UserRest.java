@@ -1,5 +1,8 @@
 package com.ritoinfo.framework.evo.sp.sys.rest;
 
+import com.ritoinfo.framework.evo.common.Const;
+import com.ritoinfo.framework.evo.sp.base.exception.BizzException;
+import com.ritoinfo.framework.evo.sp.base.exception.RestException;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import com.ritoinfo.framework.evo.sp.base.starter.rest.BaseRest;
 import com.ritoinfo.framework.evo.sp.base.starter.validate.group.CreateGroup;
@@ -50,7 +53,11 @@ public class UserRest extends BaseRest<UserBizz, UserDao, User, Long, UserCondit
 
 	@PostMapping("/all")
 	public ServiceResponse<Long> createAll(@Validated(CreateGroup.class) @RequestBody UserDto dto) {
-		return ServiceResponse.ok(bizz.createAll(dto));
+		try {
+			return ServiceResponse.ok(bizz.createAll(dto));
+		} catch (BizzException e) {
+			throw new RestException(Const.RC_SYS_USER_ROLE);
+		}
 	}
 
 	@PutMapping("/with-role")

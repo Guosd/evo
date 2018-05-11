@@ -25,7 +25,7 @@ $.ajaxSetup({
 		if (401 === jqXHR.status) {
 			top.location.href = '/ui/comm/login';
 		} else {
-			alert((jqXHR.responseJSON.code + (jqXHR.responseJSON.message || '')) || jqXHR.responseText);
+			alert((jqXHR.responseJSON.code + (' ' + jqXHR.responseJSON.message || '')) || jqXHR.responseText);
 		}
 	},
 	complete: function(jqXHR, textStatus) {

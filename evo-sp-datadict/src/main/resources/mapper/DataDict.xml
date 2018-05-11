@@ -87,7 +87,7 @@
 	</update>
 
 	<delete id="delete">
-		DELETE FROM sys_data_dict WHERE id = #{id}
+		DELETE FROM sys_data_dict WHERE id = #{value}
 	</delete>
 
 </mapper>

@@ -103,7 +103,21 @@ $(function() {
 		}
 	});
 	$('button#delete').click(function() {
-		alert('暂未实现');
+		var ids = jqGridSelectIds();
+		if (ids.length == 1) {
+			if (confirm('此操作会级联删除角色功能关系、功能相关菜单。是否继续？')) {
+				$.ajax({
+					url: '/sys/func/' + ids[0],
+					method: 'delete',
+					success: function(result, textStatus, jqXHR) {
+						alert('删除成功');
+						query();
+					}
+				});
+			}
+		} else {
+			alert('请选择一条记录');
+		}
 	});
 
 	resetHeight();

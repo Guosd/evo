@@ -35,7 +35,7 @@ public class UserBizz extends BaseBizz<UserDao, User, Long, UserCondition, UserD
 
 	public UserDto getWithRole(Long id) {
 		UserDto userDto = super.get(id);
-		userDto.setRoleDtoList(roleBizz.getByUserId(id));
+		userDto.setRoleDtoList(roleBizz.findByUserId(id));
 		return userDto;
 	}
 
@@ -80,7 +80,7 @@ public class UserBizz extends BaseBizz<UserDao, User, Long, UserCondition, UserD
 		Long[] roleIds = dto.getRoleIds();
 		if (ArrayUtil.isNotEmpty(roleIds)) {
 			if (ArrayUtil.isValid(roleIds)) {
-				dao.insertUserRole(BaseHelper.dtoToMap(dto));
+				dao.insertWithRole(BaseHelper.dtoToMap(dto));
 			} else {
 				throw new UserRoleInvalidException(Arrays.toString(roleIds));
 			}
@@ -97,11 +97,11 @@ public class UserBizz extends BaseBizz<UserDao, User, Long, UserCondition, UserD
 
 		Long[] roleIds = dto.getRoleIds();
 		if (ArrayUtil.isEmpty(roleIds)) {
-			dao.deleteUserRole(dto.getId());
+			dao.deleteWithRole(dto.getId());
 		} else {
 			if (ArrayUtil.isValid(roleIds)) {
-				dao.deleteUserRole(dto.getId());
-				dao.insertUserRole(BaseHelper.dtoToMap(dto));
+				dao.deleteWithRole(dto.getId());
+				dao.insertWithRole(BaseHelper.dtoToMap(dto));
 			} else {
 				throw new UserRoleInvalidException(Arrays.toString(roleIds));
 			}
@@ -113,5 +113,18 @@ public class UserBizz extends BaseBizz<UserDao, User, Long, UserCondition, UserD
 		UserDto oldUserDto = this.get(dto.getId());
 		oldUserDto.setPassword(passwordEncoder.encode(dto.getPassword()));
 		this.update(oldUserDto);
+	}
+
+	@Transactional
+	@Override
+	public void delete(Long id) {
+		dao.deleteWithRole(id);
+
+		super.delete(id);
+	}
+
+	@Transactional
+	public void deleteByRole(Long roleId) {
+		dao.deleteByRole(roleId);
 	}
 }

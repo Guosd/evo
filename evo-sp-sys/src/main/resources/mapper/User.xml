@@ -142,7 +142,7 @@
 		)
 	</insert>
 
-	<insert id="insertUserRole" useGeneratedKeys="true" keyProperty="id">
+	<insert id="insertWithRole" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO sys_user_role (
 			user_id, role_id
 		) VALUES
@@ -171,11 +171,15 @@
 	</update>
 
 	<delete id="delete">
-		DELETE FROM sys_user WHERE id = #{id}
+		DELETE FROM sys_user WHERE id = #{value}
 	</delete>
 
-	<delete id="deleteUserRole">
-		DELETE FROM sys_user_role WHERE user_id = #{id}
+	<delete id="deleteWithRole">
+		DELETE FROM sys_user_role WHERE user_id = #{value}
+	</delete>
+
+	<delete id="deleteByRole">
+		DELETE FROM sys_user_role WHERE role_id = #{value}
 	</delete>
 
 </mapper>

@@ -152,7 +152,7 @@ $(function() {
 				email: $('#email').val(),
 				mobileNumber: $('#mobileNumber').val(),
 				freeze: $('#freeze').val(),
-				roleIds: $('#roleIds').val().split(',')
+				roleIds: $('#roleIds').val() ? $('#roleIds').val().split(',') : undefined
 			}),
 			success: function(result, textStatus, jqXHR) {
 				alert('提交成功');

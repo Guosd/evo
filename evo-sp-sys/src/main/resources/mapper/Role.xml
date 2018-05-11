@@ -51,19 +51,6 @@
 		WHERE t.id = #{value}
 	</select>
 
-	<select id="getByUserId" resultMap="RoleResultMap">
-		<include refid="select"/>
-		JOIN sys_user_role t0 ON t.id = t0.role_id
-		WHERE t0.user_id = #{value}
-	</select>
-
-	<select id="getByUsername" resultMap="RoleResultMap">
-		<include refid="select"/>
-		JOIN sys_user_role t0 ON t.id = t0.role_id
-		JOIN sys_user t1 ON t0.user_id = t1.id
-		WHERE t1.username = #{value}
-	</select>
-
 	<select id="find" resultMap="RoleResultMap">
 		<include refid="select"/>
 		<include refid="condition"/>
@@ -78,6 +65,19 @@
 		<if test="pageSort != null">
 			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
 		</if>
+	</select>
+
+	<select id="findByUserId" resultMap="RoleResultMap">
+		<include refid="select"/>
+		JOIN sys_user_role t0 ON t.id = t0.role_id
+		WHERE t0.user_id = #{value}
+	</select>
+
+	<select id="findByUsername" resultMap="RoleResultMap">
+		<include refid="select"/>
+		JOIN sys_user_role t0 ON t.id = t0.role_id
+		JOIN sys_user t1 ON t0.user_id = t1.id
+		WHERE t1.username = #{value}
 	</select>
 
 	<select id="count" resultType="int">
@@ -118,11 +118,15 @@
 	</update>
 
 	<delete id="delete">
-		DELETE FROM sys_role WHERE id = #{id}
+		DELETE FROM sys_role WHERE id = #{value}
 	</delete>
 
 	<delete id="deleteWithFunc">
-		DELETE FROM sys_role_func WHERE role_id = #{id}
+		DELETE FROM sys_role_func WHERE role_id = #{value}
+	</delete>
+
+	<delete id="deleteByFunc">
+		DELETE FROM sys_role_func WHERE func_id = #{value}
 	</delete>
 
 </mapper>

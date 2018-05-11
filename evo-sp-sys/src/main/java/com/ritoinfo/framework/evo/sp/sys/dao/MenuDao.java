@@ -14,7 +14,7 @@ import java.util.Map;
  */
 @Mapper
 public interface MenuDao extends MyBatisDao<Menu, Long, MenuCondition> {
-	List<Map<String, Object>> getByIds(Long... ids);
+	List<Map<String, Object>> findByIds(Long... ids);
 
-	List<Map<String, Object>> getByUsername(String username);
+	List<Map<String, Object>> findByUsername(String username);
 }

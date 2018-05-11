@@ -14,7 +14,7 @@ public class ArrayUtil {
 	}
 
 	public static boolean isEmpty(Object[] values) {
-		return isNotNull(values) && values.length == 0;
+		return isNull(values) || values.length == 0;
 	}
 
 	public static boolean isNotEmpty(Object[] values) {

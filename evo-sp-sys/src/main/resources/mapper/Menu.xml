@@ -69,7 +69,23 @@
 		WHERE t.id = #{value}
 	</select>
 
-	<select id="getByIds" resultType="map">
+	<select id="find" resultMap="MenuResultMap">
+		<include refid="select"/>
+		<include refid="condition"/>
+		<if test="pageSort != null">
+			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
+		</if>
+	</select>
+
+	<select id="findLike" resultMap="MenuResultMap">
+		<include refid="select"/>
+		<include refid="conditionLike"/>
+		<if test="pageSort != null">
+			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
+		</if>
+	</select>
+
+	<select id="findByIds" resultType="map">
 		SELECT
 			t0.id,
 			t0.parent_id,
@@ -87,7 +103,7 @@
 		</foreach>
 	</select>
 
-	<select id="getByUsername" resultType="map">
+	<select id="findByUsername" resultType="map">
 		SELECT
 			t0.id,
 			t0.parent_id,
@@ -105,22 +121,6 @@
 		  JOIN sys_menu t6 ON t0.parent_id = t6.id
 		 WHERE t5.username = #{value}
 		 ORDER BY t6.sort ASC, t0.sort ASC
-	</select>
-
-	<select id="find" resultMap="MenuResultMap">
-		<include refid="select"/>
-		<include refid="condition"/>
-		<if test="pageSort != null">
-			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
-		</if>
-	</select>
-
-	<select id="findLike" resultMap="MenuResultMap">
-		<include refid="select"/>
-		<include refid="conditionLike"/>
-		<if test="pageSort != null">
-			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
-		</if>
 	</select>
 
 	<select id="count" resultType="int">
@@ -155,7 +155,7 @@
 	</update>
 
 	<delete id="delete">
-		DELETE FROM sys_menu WHERE id = #{id}
+		DELETE FROM sys_menu WHERE id = #{value}
 	</delete>
 
 </mapper>

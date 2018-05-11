@@ -14,11 +14,13 @@ import java.util.Map;
  */
 @Mapper
 public interface RoleDao extends MyBatisDao<Role, Long, RoleCondition> {
-	List<Role> getByUserId(Long userId);
+	List<Role> findByUserId(Long userId);
 
-	List<Role> getByUsername(String username);
+	List<Role> findByUsername(String username);
 
 	void insertWithFunc(Map<String, Object> map);
 
 	void deleteWithFunc(Long id);
+
+	void deleteByFunc(Long funcId);
 }
