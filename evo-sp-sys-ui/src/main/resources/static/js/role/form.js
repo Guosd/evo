@@ -51,7 +51,7 @@ $(function() {
 		});
 
 		$('#grid-table-func').jqGrid({
-			url: '/sys/func/page',
+			url: '/sys/func/page/micro',
 			datatype: 'local',
 			rowNum: 10,
 			pager: '#grid-pager-func',
@@ -59,8 +59,11 @@ $(function() {
 				name: 'id',
 				hidden: true
 			}, {
+				name: 'microId',
+				hidden: true
+			}, {
 				label: '服务',
-				name: 'microId'
+				name: 'microName'
 			}, {
 				label: '名称',
 				name: 'name'

@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="/static/jquery-ui/jquery-ui.min.css" />
 	<link rel="stylesheet" type="text/css" href="/static/jqGrid/css/ui.jqgrid.css" />
 	<script type="text/javascript" src="/static/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="/static/jquery-ui/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="/static/jqGrid/js/i18n/grid.locale-cn.js"></script>
 	<script type="text/javascript" src="/static/jqGrid/js/jquery.jqGrid.min.js"></script>
 	<script type="text/javascript" src="/static/evo.js"></script>
@@ -19,8 +20,8 @@
 </head>
 <body>
 <div id="form">
-	上级菜单:<input type="text" id="parentId"/>
-	功能:<input type="text" id="funcId"/>
+	上级菜单:<input type="text" id="parentText"/><input type="hidden" id="parentId"/>
+	功能:<input type="text" id="funcText"/><input type="hidden" id="funcId"/>
 	名称:<input type="text" id="name"/>
 	编码:<input type="text" id="code"/>
 	<button id="query">查询</button>
@@ -35,5 +36,32 @@
 <br/>
 <table id="grid-table"></table>
 <div id="grid-pager"></div>
+<div id="dialogMenu" title="选择上级菜单" style="display: none;">
+	<div id="menuForm">
+		上级菜单:<input type="text" id="menuParentText"/><input type="hidden" id="menuParentId"/>
+		功能:<input type="text" id="menuFuncText"/><input type="hidden" id="menuFuncId"/><br/>
+		名称:<input type="text" id="menuName"/>
+		编码:<input type="text" id="menuCode"/>
+		<button id="menuQuery">查询</button>
+		<button id="menuReset">重置</button>
+	</div>
+	<br/>
+	<table id="grid-table-menu"></table>
+	<div id="grid-pager-menu"></div>
+</div>
+<div id="dialogFunc" title="选择功能" style="display: none;">
+	<div id="funcForm">
+		服务:<input type="text" id="microText"/><input type="hidden" id="microId"/>
+		名称:<input type="text" id="funcName"/>
+		编码:<input type="text" id="funcCode"/><br/>
+		URI:<input type="text" id="funcUri"/>
+		方法:<input type="text" id="funcMethod"/>
+		<button id="funcQuery">查询</button>
+		<button id="funcReset">重置</button>
+	</div>
+	<br/>
+	<table id="grid-table-func"></table>
+	<div id="grid-pager-func"></div>
+</div>
 </body>
 </html>

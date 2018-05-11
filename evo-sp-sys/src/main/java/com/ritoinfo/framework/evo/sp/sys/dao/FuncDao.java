@@ -14,6 +14,10 @@ import java.util.Map;
  */
 @Mapper
 public interface FuncDao extends MyBatisDao<Func, Long, FuncCondition> {
+	int countWithMicro(FuncCondition condition);
+
+	List<Map<String, Object>> findPageWithMicro(FuncCondition condition);
+
 	List<Func> findByRole(Long roleId);
 
 	List<Map<String, Object>> findByUsername(String username);

@@ -1,10 +1,23 @@
 $(function() {
+	$.ajax({
+		url: '/datadict/code/HTTP_METHOD',
+		method: 'get',
+		success: function(result, textStatus, jqXHR) {
+			for (var i = 0; i < result.data.length; i++) {
+				$("#method").append('<option value=\"' + result.data[i].key + '\">' + result.data[i].value + '</option>');
+			}
+		}
+	});
+
 	$(gridSelector).jqGrid({
-		url: '/sys/func/page',
+		url: '/sys/func/page/micro',
 		datatype: 'local',
 		colModel: [{
+			name: 'microId',
+			hidden: true
+		}, {
 			label: '服务',
-			name: 'microId'
+			name: 'microName'
 		}, {
 			label: '名称',
 			name: 'name'

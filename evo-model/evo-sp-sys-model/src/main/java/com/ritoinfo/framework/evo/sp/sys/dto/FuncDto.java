@@ -12,6 +12,7 @@ import lombok.EqualsAndHashCode;
 @Data
 public class FuncDto extends BaseDto<Long> {
 	private Long microId;
+	private String microName;
 	private String name;
 	private String code;
 	private String uri;

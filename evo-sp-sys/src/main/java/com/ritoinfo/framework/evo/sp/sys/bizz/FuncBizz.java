@@ -1,5 +1,6 @@
 package com.ritoinfo.framework.evo.sp.sys.bizz;
 
+import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
 import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseBizz;
 import com.ritoinfo.framework.evo.sp.sys.condition.FuncCondition;
@@ -40,6 +41,19 @@ public class FuncBizz extends BaseBizz<FuncDao, Func, Long, FuncCondition, FuncD
 
 	public List<PermissionDto> findByUsername(String username) {
 		return BaseHelper.mapToDto(dao.findByUsername(username), PermissionDto.class);
+	}
+
+	public PageList<FuncDto> findPageWithMicro(FuncCondition condition) {
+		PageList<FuncDto> pageList = new PageList<>();
+
+		int count = dao.countWithMicro(condition.count());
+		BaseHelper.copyPage(pageList, count, condition);
+
+		if (count > 0) {
+			pageList.setDataList(BaseHelper.mapToDto(dao.findPageWithMicro(condition.page()), FuncDto.class));
+		}
+
+		return pageList;
 	}
 
 	@Transactional
