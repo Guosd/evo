@@ -27,6 +27,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("user")
 @RestController
 public class UserRest extends BaseRest<UserBizz, UserDao, User, Long, UserCondition, UserDto> {
+	@GetMapping("/id/{id}/role")
+	public ServiceResponse<UserDto> withRole(@PathVariable Long id) {
+		return ServiceResponse.ok(bizz.getWithRole(id));
+	}
+
 	@GetMapping("/username/{username}")
 	public ServiceResponse<UserDto> username(@PathVariable String username) {
 		return ServiceResponse.ok(bizz.getByUsername(username));
@@ -43,14 +48,20 @@ public class UserRest extends BaseRest<UserBizz, UserDao, User, Long, UserCondit
 		return ServiceResponse.ok(bizz.getUserContext());
 	}
 
-	@PostMapping("/with-password")
-	public ServiceResponse<Long> createWithPassword(@Validated(CreateGroup.class) @RequestBody UserDto dto) {
-		return ServiceResponse.ok(bizz.createWithPassword(dto));
+	@PostMapping("/all")
+	public ServiceResponse<Long> createAll(@Validated(CreateGroup.class) @RequestBody UserDto dto) {
+		return ServiceResponse.ok(bizz.createAll(dto));
 	}
 
-	@PutMapping("/with-password")
-	public ServiceResponse updateWithPassword(@Validated(UpdateGroup.class) @RequestBody UserDto dto) {
-		bizz.updateWithPassowrd(dto);
+	@PutMapping("/with-role")
+	public ServiceResponse<Long> updateWithRole(@Validated(CreateGroup.class) @RequestBody UserDto dto) {
+		bizz.updateWithRole(dto);
+		return ServiceResponse.ok();
+	}
+
+	@PutMapping("/password")
+	public ServiceResponse updatePassword(@Validated(UpdateGroup.class) @RequestBody UserDto dto) {
+		bizz.updatePassowrd(dto);
 		return ServiceResponse.ok();
 	}
 }

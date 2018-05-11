@@ -1,16 +1,19 @@
 package com.ritoinfo.framework.evo.sp.sys.bizz;
 
+import com.ritoinfo.framework.evo.common.uitl.ArrayUtil;
 import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
 import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseBizz;
 import com.ritoinfo.framework.evo.sp.sys.condition.RoleCondition;
 import com.ritoinfo.framework.evo.sp.sys.dao.RoleDao;
 import com.ritoinfo.framework.evo.sp.sys.dto.RoleDto;
 import com.ritoinfo.framework.evo.sp.sys.entity.Role;
+import com.ritoinfo.framework.evo.sp.sys.exception.RoleFuncInvalidException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -44,7 +47,15 @@ public class RoleBizz extends BaseBizz<RoleDao, Role, Long, RoleCondition, RoleD
 		Long id = super.create(dto);
 		dto.setId(id);
 
-		dao.insertRoleFunc(BaseHelper.dtoToMap(dto));
+		Long[] funcIds = dto.getFuncIds();
+		if (ArrayUtil.isNotEmpty(funcIds)) {
+			if (ArrayUtil.isValid(funcIds)) {
+				dao.insertWithFunc(BaseHelper.dtoToMap(dto));
+			} else {
+				throw new RoleFuncInvalidException(Arrays.toString(funcIds));
+			}
+		}
+
 		return id;
 	}
 
@@ -53,7 +64,16 @@ public class RoleBizz extends BaseBizz<RoleDao, Role, Long, RoleCondition, RoleD
 	public void update(RoleDto dto) {
 		super.update(dto);
 
-		dao.deleteRoleFunc(dto.getId());
-		dao.insertRoleFunc(BaseHelper.dtoToMap(dto));
+		Long[] funcIds = dto.getFuncIds();
+		if (ArrayUtil.isEmpty(funcIds)) {
+			dao.deleteWithFunc(dto.getId());
+		} else {
+			if (ArrayUtil.isValid(funcIds)) {
+				dao.deleteWithFunc(dto.getId());
+				dao.insertWithFunc(BaseHelper.dtoToMap(dto));
+			} else {
+				throw new RoleFuncInvalidException(Arrays.toString(funcIds));
+			}
+		}
 	}
 }

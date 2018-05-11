@@ -1,4 +1,14 @@
 $(function() {
+	$.ajax({
+		url: '/datadict/code/COMM_YN',
+		method: 'get',
+		success: function(result, textStatus, jqXHR) {
+			for (var i = 0; i < result.data.length; i++) {
+				$("#freeze").append('<option value=\"' + result.data[i].key + '\">' + result.data[i].value + '</option>');
+			}
+		}
+	});
+
 	$('button#query').click(function() {
 		query();
 	});
@@ -10,7 +20,7 @@ $(function() {
 	});
 	$('button#update').click(function() {
 		var ids = jqGridSelectIds();
-		if (ids.length == 0) {
+		if (ids.length == 1) {
 			location.href = '/sys-ui/user/form?id=' + ids[0];
 		} else {
 			alert('请选择一条记录');
@@ -53,15 +63,21 @@ $(function() {
 
 function query() {
 	jqGridQuery({
+		username: $('#username').val(),
 		name: $('#name').val(),
 		code: $('#code').val(),
-		prefix: $('#prefix').val()
+		email: $('#email').val(),
+		mobileNumber: $('#mobileNumber').val(),
+		freeze: $('#freeze').val()
 	});
 }
 
 function reset() {
+	$('#username').val('');
 	$('#name').val('');
 	$('#code').val('');
-	$('#prefix').val('');
+	$('#email').val('');
+	$('#mobileNumber').val('');
+	$('#freeze').val('');
 	query();
 }

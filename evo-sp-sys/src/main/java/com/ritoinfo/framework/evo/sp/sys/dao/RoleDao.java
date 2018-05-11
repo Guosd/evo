@@ -18,7 +18,7 @@ public interface RoleDao extends MyBatisDao<Role, Long, RoleCondition> {
 
 	List<Role> getByUsername(String username);
 
-	void insertRoleFunc(Map<String, Object> map);
+	void insertWithFunc(Map<String, Object> map);
 
-	void deleteRoleFunc(Long id);
+	void deleteWithFunc(Long id);
 }

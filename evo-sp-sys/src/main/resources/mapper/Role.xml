@@ -98,7 +98,7 @@
 		)
 	</insert>
 
-	<insert id="insertRoleFunc" useGeneratedKeys="true" keyProperty="id">
+	<insert id="insertWithFunc" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO sys_role_func (
 			role_id, func_id
 		) VALUES
@@ -121,7 +121,7 @@
 		DELETE FROM sys_role WHERE id = #{id}
 	</delete>
 
-	<delete id="deleteRoleFunc">
+	<delete id="deleteWithFunc">
 		DELETE FROM sys_role_func WHERE role_id = #{id}
 	</delete>
 

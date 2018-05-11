@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * User: Kyll
@@ -24,4 +25,6 @@ public class UserDto extends BaseDto<Long> {
 	private String loginIp;
 	private Date lastLoginTime;
 	private String lastLoginIp;
+	private Long[] roleIds;
+	private List<RoleDto> roleDtoList;
 }
