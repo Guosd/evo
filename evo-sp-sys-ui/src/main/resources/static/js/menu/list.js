@@ -10,7 +10,7 @@ $(function() {
 	});
 	$('button#update').click(function() {
 		var ids = jqGridSelectIds();
-		if (ids.length == 0) {
+		if (ids.length == 1) {
 			location.href = '/sys-ui/menu/form?id=' + ids[0];
 		} else {
 			alert('请选择一条记录');

@@ -89,10 +89,7 @@ $(function() {
 				name: 'prefix'
 			}],
 			sortname: 'id',
-			sortorder: 'asc',
-			loadComplete: function(xhr) {
-				$('#grid-table-micro').closest('.ui-jqgrid-bdiv').css({'overflow-x': 'scroll'});
-			}
+			sortorder: 'asc'
 		});
 
 		queryMicro();
