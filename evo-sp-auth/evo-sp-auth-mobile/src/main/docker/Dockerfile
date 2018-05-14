@@ -1,5 +1,5 @@
 FROM java:8
-VOLUME /logs
+VOLUME ["/tmp", "/logs"]
 ADD evo-sp-auth-mobile-1.0.0-SNAPSHOT.jar app.jar
 RUN bash -c 'touch /app.jar'
 EXPOSE 20115
