@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,24 +31,17 @@ public class RestExceptionHandlerAdvice {
 		if (exception instanceof BindException) {
 			BindException bindException = (BindException) exception;
 
-			List<ObjectError> objectErrorList = bindException.getAllErrors();
-			List<String> messageList = new ArrayList<>();
-			for (ObjectError objectError : objectErrorList) {
-				String message;
-				if (objectError instanceof FieldError) {
-					FieldError fieldError = (FieldError) objectError;
-					message = fieldError.getField() + fieldError.getDefaultMessage();
-				} else {
-					message = objectError.getDefaultMessage();
-				}
-				messageList.add(message);
-			}
+			log.warn("参数绑定无效", exception);
+			responseEntity = new ResponseEntity<>(ServiceResponse.of(Const.RC_FAIL_REQUEST_PARAM, toMessageList(bindException.getAllErrors())), HttpStatus.valueOf(Const.HTTP_STATUS_BAD_REQUEST));
+		} else if (exception instanceof MethodArgumentNotValidException) {
+			MethodArgumentNotValidException methodArgumentNotValidException = (MethodArgumentNotValidException) exception;
 
-			responseEntity = new ResponseEntity<>(ServiceResponse.of(Const.RC_FAIL_REQUEST_PARAM, messageList), HttpStatus.valueOf(Const.HTTP_STATUS_BAD_REQUEST));
+			log.warn("方法参数无效", exception);
+			responseEntity = new ResponseEntity<>(ServiceResponse.of(Const.RC_FAIL_REQUEST_PARAM, toMessageList(methodArgumentNotValidException.getBindingResult().getAllErrors())), HttpStatus.valueOf(Const.HTTP_STATUS_BAD_REQUEST));
 		} else if (exception instanceof RestException) {
 			RestException restException = (RestException) exception;
 
-			log.warn("REST Exception: " + restException.getCode() + " " + exception.getMessage() + " " + restException.getCause(), exception);
+			log.warn("REST 异常: " + restException.getCode() + " " + exception.getMessage() + " " + restException.getCause(), exception);
 			responseEntity = new ResponseEntity<>(ServiceResponse.of(restException.getCode(), restException.getData()), HttpStatus.valueOf(Const.HTTP_STATUS_INTERNAL_SERVER_ERROR));
 		} else if (exception instanceof BizzException) {
 			BizzException bizzException = (BizzException) exception;
@@ -59,5 +53,22 @@ public class RestExceptionHandlerAdvice {
 			responseEntity = new ResponseEntity<>(ServiceResponse.of(Const.RC_FAIL_UNEXPECT), HttpStatus.valueOf(Const.HTTP_STATUS_INTERNAL_SERVER_ERROR));
 		}
 		return responseEntity;
+	}
+
+	private List<String> toMessageList(List<ObjectError> objectErrorList) {
+		List<String> messageList = new ArrayList<>();
+
+		for (ObjectError objectError : objectErrorList) {
+			String message;
+			if (objectError instanceof FieldError) {
+				FieldError fieldError = (FieldError) objectError;
+				message = fieldError.getField() + fieldError.getDefaultMessage();
+			} else {
+				message = objectError.getDefaultMessage();
+			}
+			messageList.add(message);
+		}
+
+		return messageList;
 	}
 }

@@ -12,6 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="/static/jquery-ui/jquery-ui.min.css" />
 	<link rel="stylesheet" type="text/css" href="/static/jqGrid/css/ui.jqgrid.css" />
 	<script type="text/javascript" src="/static/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="/static/jquery-ui/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="/static/jqGrid/js/i18n/grid.locale-cn.js"></script>
 	<script type="text/javascript" src="/static/jqGrid/js/jquery.jqGrid.min.js"></script>
 	<script type="text/javascript" src="/static/evo.js"></script>
@@ -33,9 +34,16 @@
 	<button id="create">新增</button>
 	<button id="update">修改</button>
 	<button id="delete">删除</button>
+	<button id="passwrd">修改密码</button>
 </div>
 <br/>
 <table id="grid-table"></table>
 <div id="grid-pager"></div>
+<div id="dialog" title="修改密码" style="display: none;">
+	<div id="passwordForm">
+		<div>密码:<input type="password" id="password"/><span style="color: #FF0000;">*</span></div><br/>
+		<div>确认密码:<input type="password" id="confirmPassword"/><span style="color: #FF0000;">*</span></div>
+	</div>
+</div>
 </body>
 </html>

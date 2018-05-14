@@ -43,6 +43,40 @@ $(function() {
 			alert('请选择一条记录');
 		}
 	});
+	$('button#passwrd').click(function() {
+		var ids = jqGridSelectIds();
+		if (ids.length == 1) {
+			$('#dialog').dialog({
+				width: 320,
+				height: 200,
+				buttons: [{
+					text: "确定",
+					click: function() {
+						$.ajax({
+							url: '/sys/user/password',
+							method: 'put',
+							data: JSON.stringify({
+								id: ids[0],
+								password: $('#password').val()
+							}),
+							success: function(result, textStatus, jqXHR) {
+								alert('提交成功');
+							}
+						});
+
+						$(this).dialog('close');
+					}
+				}, {
+					text: "取消",
+					click: function() {
+						$(this).dialog('close');
+					}
+				}]
+			});
+		} else {
+			alert('请选择一条记录');
+		}
+	});
 
 	$(gridSelector).jqGrid({
 		url: '/sys/user/page',

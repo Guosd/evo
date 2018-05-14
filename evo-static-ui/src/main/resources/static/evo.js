@@ -25,7 +25,10 @@ $.ajaxSetup({
 		if (401 === jqXHR.status) {
 			top.location.href = '/ui/comm/login';
 		} else {
-			alert((jqXHR.responseJSON.code + (' ' + jqXHR.responseJSON.message || '')) || jqXHR.responseText);
+			var result = jqXHR.responseJSON.code || '';
+			result = (result ? result + ' ' : '') + (jqXHR.responseJSON.message || '');
+			result = (result ? result + '\r\n' : '') + (jqXHR.responseJSON.data || '');
+			alert(result || jqXHR.responseText);
 		}
 	},
 	complete: function(jqXHR, textStatus) {
