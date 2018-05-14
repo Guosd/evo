@@ -27,6 +27,11 @@ import java.util.List;
 @RequestMapping("func")
 @RestController
 public class FuncRest extends BaseRest<FuncBizz, FuncDao, Func, Long, FuncCondition, FuncDto> {
+	@GetMapping("/id/{id}/micro")
+	public ServiceResponse<FuncDto> getWithMicro(@PathVariable Long id) {
+		return ServiceResponse.ok(bizz.getWithMicro(id));
+	}
+
 	@GetMapping("/page/micro")
 	public ServiceResponse<PageList<FuncDto>> findPageWithMicro(@Validated(PageGroup.class) FuncCondition condition) {
 		return ServiceResponse.ok(bizz.findPageWithMicro(condition));

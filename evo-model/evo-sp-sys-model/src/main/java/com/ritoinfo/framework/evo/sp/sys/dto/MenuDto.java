@@ -12,7 +12,12 @@ import lombok.EqualsAndHashCode;
 @Data
 public class MenuDto extends BaseDto<Long> {
 	private Long parentId;
+	private String parentName;
 	private Long funcId;
+	private String funcName;
+	private String funcCode;
+	private String funcUri;
+	private String funcMethod;
 	private String name;
 	private String code;
 	private Integer sort;

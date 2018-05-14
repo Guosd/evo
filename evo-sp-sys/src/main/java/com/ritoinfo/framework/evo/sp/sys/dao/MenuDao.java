@@ -14,7 +14,13 @@ import java.util.Map;
  */
 @Mapper
 public interface MenuDao extends MyBatisDao<Menu, Long, MenuCondition> {
+	Map<String, Object> getWithParent(Long id);
+
 	List<Map<String, Object>> findByIds(Long... ids);
 
 	List<Map<String, Object>> findByUsername(String username);
+
+	int countWithParent(MenuCondition condition);
+
+	List<Map<String, Object>> findPageWithParent(MenuCondition condition);
 }

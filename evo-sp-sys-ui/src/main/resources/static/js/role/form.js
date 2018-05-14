@@ -124,6 +124,64 @@ $(function() {
 		queryFunc();
 	});
 
+	$('#microText').attr('readonly', 'readonly').click(function() {
+		$('#dialogMicro').dialog({
+			width: 850,
+			height: 510,
+			buttons: [{
+				text: "确定",
+				click: function() {
+					var ids = jqGridSelectIds('#grid-table-micro');
+					if (ids.length == 1) {
+						$('#microId').val(ids[0]);
+						$('#microText').val(jqGridSelectRowData(ids[0], '#grid-table-micro').name);
+					} else {
+						$('#microId').val('');
+						$('#microText').val('');
+					}
+
+					$(this).dialog('close');
+				}
+			}, {
+				text: "取消",
+				click: function() {
+					$(this).dialog('close');
+				}
+			}]
+		});
+
+		$('button#microQuery').unbind("click");
+		$('button#microReset').unbind("click");
+
+		$('button#microQuery').click(function() {
+			queryMicro();
+		});
+		$('button#microReset').click(function() {
+			resetMicro();
+		});
+
+		$('#grid-table-micro').jqGrid({
+			url: '/sys/micro/page',
+			datatype: 'local',
+			rowNum: 10,
+			pager: '#grid-pager-micro',
+			colModel: [{
+				label: '名称',
+				name: 'name'
+			}, {
+				label: '编码',
+				name: 'code'
+			}, {
+				label: '前缀',
+				name: 'prefix'
+			}],
+			sortname: 'id',
+			sortorder: 'asc'
+		});
+
+		queryMicro();
+	});
+
 	$('button#submit').click(function() {
 		$.ajax({
 			url: '/sys/role',
@@ -152,7 +210,7 @@ function setFuncIdAndText() {
 	var funcTexts = [];
 	for (var i = 0; i < tmpFuncRowDatas.length; i++) {
 		funcIds.push(tmpFuncRowDatas[i].id);
-		funcTexts.push(tmpFuncRowDatas[i].microId + ', ' + tmpFuncRowDatas[i].name + ', ' + tmpFuncRowDatas[i].code + ', ' + tmpFuncRowDatas[i].uri + ', ' + tmpFuncRowDatas[i].method);
+		funcTexts.push(tmpFuncRowDatas[i].microName + ', ' + (tmpFuncRowDatas[i].name || '') + ', ' + (tmpFuncRowDatas[i].code || '') + ', ' + tmpFuncRowDatas[i].uri + ', ' + tmpFuncRowDatas[i].method);
 	}
 	$('#funcIds').val(funcIds.join(','));
 	$('#funcTexts').val(funcTexts.join('\r\n'));
@@ -174,9 +232,25 @@ function queryFunc() {
 
 function resetFunc() {
 	$('#microId').val('');
+	$('#microText').val('');
 	$('#funcName').val('');
 	$('#funcCode').val('');
 	$('#funcUri').val('');
 	$('#funcMethod').val('');
 	queryFunc();
+}
+
+function queryMicro() {
+	jqGridQuery({
+		name: $('#microName').val(),
+		code: $('#microCode').val(),
+		prefix: $('#microPrefix').val()
+	}, '#grid-table-micro');
+}
+
+function resetMicro() {
+	$('#microName').val('');
+	$('#microCode').val('');
+	$('#microPrefix').val('');
+	queryMicro();
 }

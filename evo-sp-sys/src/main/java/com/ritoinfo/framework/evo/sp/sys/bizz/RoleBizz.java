@@ -31,7 +31,7 @@ public class RoleBizz extends BaseBizz<RoleDao, Role, Long, RoleCondition, RoleD
 
 	public RoleDto getWithFunc(Long id) {
 		RoleDto roleDto = super.get(id);
-		roleDto.setFuncDtoList(funcBizz.findByRole(id));
+		roleDto.setFuncDtoList(funcBizz.findByRoleWithMicro(id));
 		return roleDto;
 	}
 

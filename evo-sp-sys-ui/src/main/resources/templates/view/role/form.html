@@ -21,9 +21,9 @@
 <body>
 <div id="form">
 	<input type="hidden" id="id"/>
-	<div>名称:<input type="text" id="name"/></div><br/>
-	<div>编码:<input type="text" id="code"/></div><br/>
-	<div>功能:<textarea id="funcTexts" style="width: 500px; height: 200px;"></textarea><input type="hidden" id="funcIds"/></div><br/>
+	<div>名称:<input type="text" id="name"/><span style="color: #FF0000;">*</span></div><br/>
+	<div>编码:<input type="text" id="code"/><span style="color: #FF0000;">*</span></div><br/>
+	<div>功能:<textarea id="funcTexts" style="width: 500px; height: 200px;"></textarea><span style="color: #FF0000;">*</span><input type="hidden" id="funcIds"/></div><br/>
 	<div>
 		<button id="submit">提交</button>
 		<button id="back">返回</button>
@@ -42,6 +42,18 @@
 		<br/>
 		<table id="grid-table-func"></table>
 		<div id="grid-pager-func"></div>
+	</div>
+	<div id="dialogMicro" title="选择服务" style="display: none;">
+		<div id="microForm">
+			名称:<input type="text" id="microName"/>
+			编码:<input type="text" id="microCode"/>
+			前缀:<input type="text" id="microPrefix"/>
+			<button id="microQuery">查询</button>
+			<button id="microReset">重置</button>
+		</div>
+		<br/>
+		<table id="grid-table-micro"></table>
+		<div id="grid-pager-micro"></div>
 	</div>
 </div>
 </body>

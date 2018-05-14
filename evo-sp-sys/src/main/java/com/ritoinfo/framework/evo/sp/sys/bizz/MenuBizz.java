@@ -1,6 +1,7 @@
 package com.ritoinfo.framework.evo.sp.sys.bizz;
 
 import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
+import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
 import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseBizz;
 import com.ritoinfo.framework.evo.sp.base.starter.exception.UserContextNotExistException;
@@ -28,6 +29,10 @@ import java.util.Set;
 @Transactional(readOnly = true)
 @Service
 public class MenuBizz extends BaseBizz<MenuDao, Menu, Long, MenuCondition, MenuDto> {
+	public MenuDto getWithParent(Long id) {
+		return BaseHelper.mapToDto(dao.getWithParent(id), MenuDto.class);
+	}
+
 	public List<MyMenuDto> findByUsername() {
 		UserContext userContext = SessionHolder.getUserContext();
 		if (userContext == null) {
@@ -73,6 +78,19 @@ public class MenuBizz extends BaseBizz<MenuDao, Menu, Long, MenuCondition, MenuD
 		MenuCondition condition = new MenuCondition();
 		condition.setFuncId(funcId);
 		return BaseHelper.toDto(dao.find(condition));
+	}
+
+	public PageList<MenuDto> findPageWithParent(MenuCondition condition) {
+		PageList<MenuDto> pageList = new PageList<>();
+
+		int count = dao.countWithParent(condition.count());
+		BaseHelper.copyPage(pageList, count, condition);
+
+		if (count > 0) {
+			pageList.setDataList(BaseHelper.mapToDto(dao.findPageWithParent(condition.page()), MenuDto.class));
+		}
+
+		return pageList;
 	}
 
 	@Override

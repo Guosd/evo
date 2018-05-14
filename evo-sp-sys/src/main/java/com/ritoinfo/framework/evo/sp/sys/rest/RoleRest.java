@@ -31,17 +31,17 @@ import java.util.List;
 @RestController
 public class RoleRest extends BaseRest<RoleBizz, RoleDao, Role, Long, RoleCondition, RoleDto> {
 	@GetMapping("/id/{id}/func")
-	public ServiceResponse<RoleDto> withFunc(@PathVariable Long id) {
+	public ServiceResponse<RoleDto> getWithFunc(@PathVariable Long id) {
 		return ServiceResponse.ok(bizz.getWithFunc(id));
 	}
 
 	@GetMapping("/user/id/{userId}")
-	public ServiceResponse<List<RoleDto>> userId(@PathVariable Long userId) {
+	public ServiceResponse<List<RoleDto>> getByUserId(@PathVariable Long userId) {
 		return ServiceResponse.ok(bizz.findByUserId(userId));
 	}
 
 	@GetMapping("/user/username/{username}")
-	public ServiceResponse<List<RoleDto>> username(@PathVariable String username) {
+	public ServiceResponse<List<RoleDto>> getByUsername(@PathVariable String username) {
 		return ServiceResponse.ok(bizz.findByUsername(username));
 	}
 

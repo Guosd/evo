@@ -4,8 +4,10 @@ import com.ritoinfo.framework.evo.common.Const;
 import com.ritoinfo.framework.evo.common.uitl.StringUtil;
 import com.ritoinfo.framework.evo.sp.base.exception.BizzException;
 import com.ritoinfo.framework.evo.sp.base.exception.RestException;
+import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import com.ritoinfo.framework.evo.sp.base.starter.rest.BaseRest;
+import com.ritoinfo.framework.evo.sp.base.starter.validate.group.PageGroup;
 import com.ritoinfo.framework.evo.sp.sys.bizz.MenuBizz;
 import com.ritoinfo.framework.evo.sp.sys.condition.MenuCondition;
 import com.ritoinfo.framework.evo.sp.sys.dao.MenuDao;
@@ -13,7 +15,9 @@ import com.ritoinfo.framework.evo.sp.sys.dto.MenuDto;
 import com.ritoinfo.framework.evo.sp.sys.dto.MyMenuDto;
 import com.ritoinfo.framework.evo.sp.sys.entity.Menu;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +34,16 @@ import java.util.Map;
 @RequestMapping("/menu")
 @RestController
 public class MenuRest extends BaseRest<MenuBizz, MenuDao, Menu, Long, MenuCondition, MenuDto> {
+	@GetMapping("/id/{id}/parent")
+	public ServiceResponse<MenuDto> getWithParent(@PathVariable Long id) {
+		return ServiceResponse.ok(bizz.getWithParent(id));
+	}
+
+	@GetMapping("/page/parent")
+	public ServiceResponse<PageList<MenuDto>> findPageWithParent(@Validated(PageGroup.class) MenuCondition condition) {
+		return ServiceResponse.ok(bizz.findPageWithParent(condition));
+	}
+
 	@GetMapping("/my")
 	public ServiceResponse<List<MyMenuDto>> my() {
 		try {

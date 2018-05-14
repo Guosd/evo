@@ -106,6 +106,10 @@ public class BaseHelper {
 		return toAnyDto(map, clazz, null);
 	}
 
+	public static <T> T mapToDto(Map<String, Object> map, Class<T> clazz) {
+		return mapToDto(map, clazz, null);
+	}
+
 	public static <T> T mapToDto(Map<String, Object> map, Class<T> clazz, Converter<T, Map<String, Object>> converter) {
 		T target = BeanUtil.newInstance(clazz);
 

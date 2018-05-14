@@ -3,7 +3,7 @@ $(function() {
 
 	if (id) {
 		$.ajax({
-			url: '/sys/func/id/' + id,
+			url: '/sys/func/id/' + id + '/micro',
 			method: 'get',
 			success: function(result, textStatus, jqXHR) {
 				$('#id').val(result.data.id);

@@ -36,13 +36,19 @@ $(function() {
 		});
 
 		$('#grid-table-menu').jqGrid({
-			url: '/sys/menu/page',
+			url: '/sys/menu/page/parent',
 			datatype: 'local',
 			rowNum: 10,
 			pager: '#grid-pager-menu',
 			colModel: [{
+				name: 'parentId',
+				hidden: true
+			}, {
+				name: 'funcId',
+				hidden: true
+			}, {
 				label: '上级菜单',
-				name: 'parentId'
+				name: 'parentName'
 			}, {
 				label: '名称',
 				name: 'name'
@@ -51,7 +57,9 @@ $(function() {
 				name: 'code'
 			}, {
 				label: '功能',
-				name: 'funcId'
+				formatter: function(cellvalue, options, rowdata) {
+					return (rowdata.funcName || '') + ', ' + (rowdata.funcCode || '') + ', ' + rowdata.funcUri + ', ' + rowdata.funcMethod;
+				}
 			}],
 			sortname: 'id',
 			sortorder: 'asc',
@@ -144,6 +152,64 @@ $(function() {
 		queryFunc();
 	});
 
+	$('#microText').attr('readonly', 'readonly').click(function() {
+		$('#dialogMicro').dialog({
+			width: 850,
+			height: 510,
+			buttons: [{
+				text: "确定",
+				click: function() {
+					var ids = jqGridSelectIds('#grid-table-micro');
+					if (ids.length == 1) {
+						$('#microId').val(ids[0]);
+						$('#microText').val(jqGridSelectRowData(ids[0], '#grid-table-micro').name);
+					} else {
+						$('#microId').val('');
+						$('#microText').val('');
+					}
+
+					$(this).dialog('close');
+				}
+			}, {
+				text: "取消",
+				click: function() {
+					$(this).dialog('close');
+				}
+			}]
+		});
+
+		$('button#microQuery').unbind("click");
+		$('button#microReset').unbind("click");
+
+		$('button#microQuery').click(function() {
+			queryMicro();
+		});
+		$('button#microReset').click(function() {
+			resetMicro();
+		});
+
+		$('#grid-table-micro').jqGrid({
+			url: '/sys/micro/page',
+			datatype: 'local',
+			rowNum: 10,
+			pager: '#grid-pager-micro',
+			colModel: [{
+				label: '名称',
+				name: 'name'
+			}, {
+				label: '编码',
+				name: 'code'
+			}, {
+				label: '前缀',
+				name: 'prefix'
+			}],
+			sortname: 'id',
+			sortorder: 'asc'
+		});
+
+		queryMicro();
+	});
+
 	$('button#query').click(function() {
 		query();
 	});
@@ -180,11 +246,17 @@ $(function() {
 	});
 
 	$(gridSelector).jqGrid({
-		url: '/sys/menu/page',
+		url: '/sys/menu/page/parent',
 		datatype: 'local',
 		colModel: [{
+			name: 'parentId',
+			hidden: true
+		}, {
+			name: 'funcId',
+			hidden: true
+		}, {
 			label: '上级菜单',
-			name: 'parentId'
+			name: 'parentName'
 		}, {
 			label: '名称',
 			name: 'name'
@@ -193,7 +265,9 @@ $(function() {
 			name: 'code'
 		}, {
 			label: '功能',
-			name: 'funcId'
+			formatter: function(cellvalue, options, rowdata) {
+				return (rowdata.funcName || '') + ', ' + (rowdata.funcCode || '') + ', ' + rowdata.funcUri + ', ' + rowdata.funcMethod;
+			}
 		}],
 		sortname: 'sort',
 		sortorder: 'asc'
@@ -259,4 +333,19 @@ function resetFunc() {
 	$('#funcUri').val('');
 	$('#funcMethod').val('');
 	queryFunc();
+}
+
+function queryMicro() {
+	jqGridQuery({
+		name: $('#microName').val(),
+		code: $('#microCode').val(),
+		prefix: $('#microPrefix').val()
+	}, '#grid-table-micro');
+}
+
+function resetMicro() {
+	$('#microName').val('');
+	$('#microCode').val('');
+	$('#microPrefix').val('');
+	queryMicro();
 }

@@ -29,14 +29,18 @@ public class FuncBizz extends BaseBizz<FuncDao, Func, Long, FuncCondition, FuncD
 	@Autowired
 	private MenuBizz menuBizz;
 
+	public FuncDto getWithMicro(Long id) {
+		return BaseHelper.mapToDto(dao.getWithMicro(id), FuncDto.class);
+	}
+
 	public List<FuncDto> findByMicro(Long microId) {
 		FuncCondition condition = new FuncCondition();
 		condition.setMicroId(microId);
 		return BaseHelper.toDto(dao.find(condition));
 	}
 
-	public List<FuncDto> findByRole(Long roleId) {
-		return BaseHelper.toDto(dao.findByRole(roleId));
+	public List<FuncDto> findByRoleWithMicro(Long roleId) {
+		return BaseHelper.mapToDto(dao.findByRoleWithMicro(roleId), FuncDto.class);
 	}
 
 	public List<PermissionDto> findByUsername(String username) {
