@@ -15,8 +15,8 @@ import java.util.List;
 @FeignClient(value = "evo-sp-sys", path = "/role")
 public interface RoleApi {
 	@GetMapping("/user/id/{userId}")
-	ServiceResponse<List<RoleDto>> userId(@PathVariable("userId") Long userId);
+	ServiceResponse<List<RoleDto>> getByUserId(@PathVariable("userId") Long userId);
 
 	@GetMapping("/user/username/{username}")
-	ServiceResponse<List<RoleDto>> username(@PathVariable("username") String username);
+	ServiceResponse<List<RoleDto>> getByUsername(@PathVariable("username") String username);
 }

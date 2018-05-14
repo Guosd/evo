@@ -31,17 +31,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserRest extends BaseRest<UserBizz, UserDao, User, Long, UserCondition, UserDto> {
 	@GetMapping("/id/{id}/role")
-	public ServiceResponse<UserDto> withRole(@PathVariable Long id) {
+	public ServiceResponse<UserDto> getWithRole(@PathVariable Long id) {
 		return ServiceResponse.ok(bizz.getWithRole(id));
 	}
 
 	@GetMapping("/username/{username}")
-	public ServiceResponse<UserDto> username(@PathVariable String username) {
+	public ServiceResponse<UserDto> getByUsername(@PathVariable String username) {
 		return ServiceResponse.ok(bizz.getByUsername(username));
 	}
 
 	@GetMapping("/mobile-number/{mobileNumber}")
-	public ServiceResponse<UserDto> mobileNumber(@PathVariable String mobileNumber) {
+	public ServiceResponse<UserDto> getByMobileNumber(@PathVariable String mobileNumber) {
 		return ServiceResponse.ok(bizz.getByMobileNumber(mobileNumber));
 	}
 

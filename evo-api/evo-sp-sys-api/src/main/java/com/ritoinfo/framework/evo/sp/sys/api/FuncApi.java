@@ -15,5 +15,5 @@ import java.util.List;
 @FeignClient(value = "evo-sp-sys", path = "/func")
 public interface FuncApi {
 	@GetMapping("/user/username/{username}")
-	ServiceResponse<List<PermissionDto>> username(@PathVariable("username") String username);
+	ServiceResponse<List<PermissionDto>> getByUsername(@PathVariable("username") String username);
 }

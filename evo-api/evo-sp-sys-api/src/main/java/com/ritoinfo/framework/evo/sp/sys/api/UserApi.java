@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestHeader;
 @FeignClient(value = "evo-sp-sys", path = "/user")
 public interface UserApi {
 	@GetMapping("/username/{username}")
-	ServiceResponse<UserDto> username(@PathVariable("username") String username);
+	ServiceResponse<UserDto> getByUsername(@PathVariable("username") String username);
 
 	@GetMapping("/mobile-number/{mobileNumber}")
-	ServiceResponse<UserDto> mobileNumber(@PathVariable("mobileNumber") String mobileNumber);
+	ServiceResponse<UserDto> getByMobileNumber(@PathVariable("mobileNumber") String mobileNumber);
 
 	@PutMapping
 	ServiceResponse update(@RequestBody UserDto dto, @RequestHeader(Const.JWT_TOKEN_HEADER) String token);

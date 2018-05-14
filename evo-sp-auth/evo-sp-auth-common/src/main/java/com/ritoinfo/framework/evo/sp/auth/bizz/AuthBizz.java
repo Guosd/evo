@@ -60,7 +60,7 @@ public class AuthBizz {
 
 	public boolean verify(VerifyDto verifyDto) {
 		if (redisService.exist(RedisKeyAssist.generate("TOKEN", verifyDto.getToken()))) {
-			for (PermissionDto permissionDto : funcApi.username(jwtToken.parse(verifyDto.getToken()).getUsername()).getData()) {
+			for (PermissionDto permissionDto : funcApi.getByUsername(jwtToken.parse(verifyDto.getToken()).getUsername()).getData()) {
 				String uri = permissionDto.getUri();
 				uri = uri.contains("?") ? uri.substring(0, uri.indexOf('?')) : uri;
 

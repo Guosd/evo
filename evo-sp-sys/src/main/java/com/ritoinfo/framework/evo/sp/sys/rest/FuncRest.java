@@ -38,7 +38,7 @@ public class FuncRest extends BaseRest<FuncBizz, FuncDao, Func, Long, FuncCondit
 	}
 
 	@GetMapping("/user/username/{username}")
-	public ServiceResponse<List<PermissionDto>> username(@PathVariable String username) {
+	public ServiceResponse<List<PermissionDto>> findByUsername(@PathVariable String username) {
 		return ServiceResponse.ok(bizz.findByUsername(username));
 	}
 }

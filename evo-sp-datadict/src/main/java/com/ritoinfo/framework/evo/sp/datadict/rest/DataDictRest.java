@@ -23,12 +23,12 @@ import java.util.List;
 @RestController
 public class DataDictRest extends BaseRest<DataDictBizz, DataDictDao, DataDict, Long, DataDictCondition, DataDictDto> {
 	@GetMapping("/code/{code}")
-	public ServiceResponse<List<DataDictDto>> code(@PathVariable String code) {
+	public ServiceResponse<List<DataDictDto>> findByCode(@PathVariable String code) {
 		return ServiceResponse.ok(bizz.findByCode(code));
 	}
 
 	@GetMapping("/code/{code}/key/{key}")
-	public ServiceResponse<DataDictDto> codeAndKey(@PathVariable String code, @PathVariable String key) {
+	public ServiceResponse<DataDictDto> findByCodeAndKey(@PathVariable String code, @PathVariable String key) {
 		return ServiceResponse.ok(bizz.getByCodeAndKey(DataDictCondition.builder().code(code).key(key).build()));
 	}
 
