@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MenuCtrl {
 	@GetMapping("/list")
 	public String list() {
-		return "/view/menu/list";
+		return "view/menu/list";
 	}
 
 	@GetMapping("/form")
 	public String form() {
-		return "/view/menu/form";
+		return "view/menu/form";
 	}
 }

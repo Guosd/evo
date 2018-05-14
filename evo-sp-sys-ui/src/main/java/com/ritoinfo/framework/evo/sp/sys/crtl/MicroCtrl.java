@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MicroCtrl {
 	@GetMapping("/list")
 	public String list() {
-		return "/view/micro/list";
+		return "view/micro/list";
 	}
 
 	@GetMapping("/form")
 	public String form() {
-		return "/view/micro/form";
+		return "view/micro/form";
 	}
 }

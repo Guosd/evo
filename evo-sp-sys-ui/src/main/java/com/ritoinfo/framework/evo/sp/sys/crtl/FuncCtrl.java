@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class FuncCtrl {
 	@GetMapping("/list")
 	public String list() {
-		return "/view/func/list";
+		return "view/func/list";
 	}
 
 	@GetMapping("/form")
 	public String form() {
-		return "/view/func/form";
+		return "view/func/form";
 	}
 }

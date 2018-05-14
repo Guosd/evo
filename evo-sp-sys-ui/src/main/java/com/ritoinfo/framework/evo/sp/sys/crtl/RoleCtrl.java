@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RoleCtrl {
 	@GetMapping("/list")
 	public String list() {
-		return "/view/role/list";
+		return "view/role/list";
 	}
 
 	@GetMapping("/form")
 	public String form() {
-		return "/view/role/form";
+		return "view/role/form";
 	}
 }
