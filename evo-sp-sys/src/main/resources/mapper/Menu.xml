@@ -76,8 +76,8 @@
 			t1.name parent_name,
 			t2.name func_name, t2.code func_code, t2.uri func_uri, t2.method func_method
 		  FROM sys_menu t0
-		  JOIN sys_menu t1 ON t0.parent_id = t1.id
-		  JOIN sys_func t2 ON t0.func_id = t2.id
+		  LEFT JOIN sys_menu t1 ON t0.parent_id = t1.id
+		  LEFT JOIN sys_func t2 ON t0.func_id = t2.id
 		 WHERE t0.id = #{value}
 	</select>
 
@@ -104,8 +104,8 @@
 			t1.name parent_name,
 			t2.name func_name, t2.code func_code, t2.uri func_uri, t2.method func_method
 		  FROM sys_menu t0
-		  JOIN sys_menu t1 ON t0.parent_id = t1.id
-		  JOIN sys_func t2 ON t0.func_id = t2.id
+		  LEFT JOIN sys_menu t1 ON t0.parent_id = t1.id
+		  LEFT JOIN sys_func t2 ON t0.func_id = t2.id
 		<where>
 			<if test="parentId != null and parentId != ''">
 				AND t0.parent_id = #{parentId}
@@ -174,8 +174,8 @@
 		SELECT
 			count(1) count
 		FROM sys_menu t0
-		JOIN sys_menu t1 ON t0.parent_id = t1.id
-		JOIN sys_func t2 ON t0.func_id = t2.id
+		LEFT JOIN sys_menu t1 ON t0.parent_id = t1.id
+		LEFT JOIN sys_func t2 ON t0.func_id = t2.id
 		<where>
 			<if test="parentId != null and parentId != ''">
 				AND t0.parent_id = #{parentId}
