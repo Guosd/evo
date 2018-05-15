@@ -27,11 +27,29 @@ public class AuthRest {
 	private AuthBizz authBizz;
 
 	@PostMapping("code")
-	public ServiceResponse<String> code(@Validated @RequestBody MobileCodeDto mobileCodeDto) {
+	public ServiceResponse<String> getCode(@Validated @RequestBody MobileCodeDto mobileCodeDto) {
 		try {
-			return ServiceResponse.ok(authBizz.generateCode(mobileCodeDto));
+			return ServiceResponse.ok(authBizz.getCode(mobileCodeDto));
 		} catch (BizzException e) {
 			throw new RestException(Const.RC_AUTH_M_VERIFY_CODE, e);
+		}
+	}
+
+	@PostMapping("code/sign-in")
+	public ServiceResponse<String> getCodeForSignIn(@Validated @RequestBody MobileCodeDto mobileCodeDto) {
+		try {
+			return ServiceResponse.ok(authBizz.getCodeForSignIn(mobileCodeDto));
+		} catch (BizzException e) {
+			throw new RestException(Const.RC_AUTH_M_VERIFY_CODE_SIGN_IN, e);
+		}
+	}
+
+	@PostMapping("code/sign-up")
+	public ServiceResponse<String> getCodeForSignUp(@Validated @RequestBody MobileCodeDto mobileCodeDto) {
+		try {
+			return ServiceResponse.ok(authBizz.getCodeForSignUp(mobileCodeDto));
+		} catch (BizzException e) {
+			throw new RestException(Const.RC_AUTH_M_VERIFY_CODE_SIGN_UP, e);
 		}
 	}
 

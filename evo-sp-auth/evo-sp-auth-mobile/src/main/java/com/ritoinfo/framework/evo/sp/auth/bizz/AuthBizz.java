@@ -1,5 +1,6 @@
 package com.ritoinfo.framework.evo.sp.auth.bizz;
 
+import com.ritoinfo.framework.evo.common.Const;
 import com.ritoinfo.framework.evo.common.uitl.AlgorithmUtil;
 import com.ritoinfo.framework.evo.data.redis.service.RedisService;
 import com.ritoinfo.framework.evo.sms.api.SmsApi;
@@ -32,35 +33,69 @@ public class AuthBizz {
 	@Autowired
 	private AssistBizz assistBizz;
 
-	public String generateCode(MobileCodeDto mobileCodeDto) {
+	public String getCode(MobileCodeDto mobileCodeDto) {
+		String mobileNumber = mobileCodeDto.getMobileNumber();
+
+		String verifyCode = AlgorithmUtil.randomNumber(6);
+		//	smsApi.send() TODO
+		redisService.set(RedisKeyAssist.generate("VERIFY_CODE_" + Const.VERIFY_CODE_SIGN_IN, mobileNumber), verifyCode, 60 * 1000L);
+		redisService.set(RedisKeyAssist.generate("VERIFY_CODE_" + Const.VERIFY_CODE_SIGN_UP, mobileNumber), verifyCode, 60 * 1000L);
+
+		return verifyCode;// TODO 生产环境去掉返回值
+	}
+
+	public String getCodeForSignIn(MobileCodeDto mobileCodeDto) {
 		UserDto userDto = userApi.getByMobileNumber(mobileCodeDto.getMobileNumber()).getData();
 		if (userDto == null) {
 			throw new MobileNumberNotFoundException(mobileCodeDto.getMobileNumber());
 		}
 
-		String verifyCode = AlgorithmUtil.randomNumber(6);
-	//	smsApi.send() TODO
-		redisService.set(RedisKeyAssist.generate("YERIFY_CODE", userDto.getMobileNumber()), verifyCode, 60 * 1000L);
+		return generateCode(Const.VERIFY_CODE_SIGN_IN, userDto.getMobileNumber());
+	}
 
-		return verifyCode;
+	public String getCodeForSignUp(MobileCodeDto mobileCodeDto) {
+		return generateCode(Const.VERIFY_CODE_SIGN_UP, mobileCodeDto.getMobileNumber());
 	}
 
 	public String authorize(MobileLoginDto loginDto, HttpServletRequest request) {
 		String mobileNumber = loginDto.getMobileNumber();
 		String verifyCode = loginDto.getVerifyCode();
-		if (verifyCode.equals(redisService.getString(RedisKeyAssist.generate("YERIFY_CODE", mobileNumber)))) {
-			UserDto userDto = userApi.getByMobileNumber(mobileNumber).getData();
-			if (userDto == null) {
-				throw new MobileNumberNotFoundException(mobileNumber);
-			}
 
-			redisService.delete(RedisKeyAssist.generate("YERIFY_CODE", mobileNumber));
+		String verifyCodeSignIn = redisService.getString(RedisKeyAssist.generate("VERIFY_CODE_" + Const.VERIFY_CODE_SIGN_IN, mobileNumber));
+		if (verifyCode.equals(verifyCodeSignIn)) {
+			redisService.delete(RedisKeyAssist.generate("VERIFY_CODE_" + Const.VERIFY_CODE_SIGN_IN, mobileNumber));
+			redisService.delete(RedisKeyAssist.generate("VERIFY_CODE_" + Const.VERIFY_CODE_SIGN_UP, mobileNumber));
 
-			String token = assistBizz.createAndSaveToken(userDto);
-			assistBizz.updateLoginInfo(userDto, token, request);
-			return token;
+			return generateToken(mobileNumber, request);
 		} else {
-			throw new VerifyCodeInvalidException(verifyCode);
+			String verifyCodeSignUp = redisService.getString(RedisKeyAssist.generate("VERIFY_CODE_" + Const.VERIFY_CODE_SIGN_UP, mobileNumber));
+			if (verifyCode.equals(verifyCodeSignUp)) {
+				redisService.delete(RedisKeyAssist.generate("VERIFY_CODE_" + Const.VERIFY_CODE_SIGN_UP, mobileNumber));
+				redisService.delete(RedisKeyAssist.generate("VERIFY_CODE_" + Const.VERIFY_CODE_SIGN_IN, mobileNumber));
+
+				return generateToken(mobileNumber, request);
+			} else {
+				throw new VerifyCodeInvalidException(verifyCode);
+			}
 		}
+	}
+
+	private String generateCode(String type, String mobileNumber) {
+		String verifyCode = AlgorithmUtil.randomNumber(6);
+		//	smsApi.send() TODO
+		redisService.set(RedisKeyAssist.generate("VERIFY_CODE_" + type, mobileNumber), verifyCode, 60 * 1000L);
+
+		return verifyCode;// TODO 生产环境去掉返回值
+	}
+
+	private String generateToken(String mobileNumber, HttpServletRequest request) {
+		UserDto userDto = userApi.getByMobileNumber(mobileNumber).getData();
+		if (userDto == null) {
+			throw new MobileNumberNotFoundException(mobileNumber);
+		}
+
+		String token = assistBizz.createAndSaveToken(userDto);
+		assistBizz.updateLoginInfo(userDto, token, request);
+		return token;
 	}
 }

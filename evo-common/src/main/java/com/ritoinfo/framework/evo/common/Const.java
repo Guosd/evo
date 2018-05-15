@@ -12,6 +12,9 @@ public class Const {
 	public static final int HTTP_STATUS_BAD_REQUEST = 400;
 	public static final int HTTP_STATUS_INTERNAL_SERVER_ERROR = 500;
 
+	public static final String VERIFY_CODE_SIGN_IN = "SIGN_IN";
+	public static final String VERIFY_CODE_SIGN_UP = "SIGN_UP";
+
 	public static final String JWT_TOKEN_HEADER = "X-Authorization";
 
 	public static final String SPRING_APPLICATION_NAME_AUTH = "evo-sp-auth";
@@ -29,7 +32,9 @@ public class Const {
 	public static final String RC_AUTH_TRY_REFRESH = "AUTH-0004";
 	public static final String RC_AUTH_VERIFY = "AUTH-0005";
 	public static final String RC_AUTH_M_VERIFY_CODE = "AUTH-0006";
-	public static final String RC_AUTH_M_LOGIN = "AUTH-0007";
+	public static final String RC_AUTH_M_VERIFY_CODE_SIGN_IN = "AUTH-0007";
+	public static final String RC_AUTH_M_VERIFY_CODE_SIGN_UP = "AUTH-0008";
+	public static final String RC_AUTH_M_LOGIN = "AUTH-0009";
 	public static final String RC_SYS_MICRO = "SYS-0010";
 	public static final String RC_SYS_FUNC = "SYS-0020";
 	public static final String RC_SYS_ROLE_FUNC = "SYS-0030";
@@ -59,6 +64,8 @@ public class Const {
 		RCM_MAP.put(RC_AUTH_TRY_REFRESH, "尝试刷新令牌失败");
 		RCM_MAP.put(RC_AUTH_VERIFY, "校验令牌失败");
 		RCM_MAP.put(RC_AUTH_M_VERIFY_CODE, "获取验证码失败");
+		RCM_MAP.put(RC_AUTH_M_VERIFY_CODE_SIGN_IN, "获取登录验证码失败");
+		RCM_MAP.put(RC_AUTH_M_VERIFY_CODE_SIGN_UP, "获取注册验证码失败");
 		RCM_MAP.put(RC_AUTH_M_LOGIN, "登录失败");
 		RCM_MAP.put(RC_SYS_ROLE_FUNC, "功能数据无效");
 		RCM_MAP.put(RC_SYS_MENU_MY, "当前用户无效");
