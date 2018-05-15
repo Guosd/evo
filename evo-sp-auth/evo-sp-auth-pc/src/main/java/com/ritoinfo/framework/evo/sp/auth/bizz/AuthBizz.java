@@ -27,7 +27,7 @@ public class AuthBizz {
 	private AssistBizz assistBizz;
 
 	public String authorize(PcLoginDto loginDto, HttpServletRequest request) {
-		UserDto userDto = userApi.username(loginDto.getUsername()).getData();
+		UserDto userDto = userApi.getByUsername(loginDto.getUsername()).getData();
 		if (userDto == null) {
 			throw new UserNotFoundException(loginDto.getUsername());
 		}
