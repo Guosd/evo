@@ -42,7 +42,7 @@ public class RestExceptionHandlerAdvice {
 			RestException restException = (RestException) exception;
 
 			log.warn("REST 异常: " + restException.getCode() + " " + exception.getMessage() + " " + restException.getCause(), exception);
-			responseEntity = new ResponseEntity<>(ServiceResponse.of(restException.getCode(), restException.getData()), HttpStatus.valueOf(Const.HTTP_STATUS_INTERNAL_SERVER_ERROR));
+			responseEntity = new ResponseEntity<>(ServiceResponse.of(restException.getCode(), restException.getData()), HttpStatus.valueOf(Const.HTTP_STATUS_OK));
 		} else if (exception instanceof BizzException) {
 			BizzException bizzException = (BizzException) exception;
 
