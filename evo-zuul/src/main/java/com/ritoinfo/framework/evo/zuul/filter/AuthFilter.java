@@ -5,17 +5,20 @@ import com.netflix.zuul.context.RequestContext;
 import com.ritoinfo.framework.evo.common.Const;
 import com.ritoinfo.framework.evo.common.jwt.model.VerifyResult;
 import com.ritoinfo.framework.evo.common.jwt.token.JwtToken;
+import com.ritoinfo.framework.evo.common.uitl.NetUtil;
 import com.ritoinfo.framework.evo.common.uitl.StringUtil;
 import com.ritoinfo.framework.evo.sp.auth.api.AuthCommonApi;
 import com.ritoinfo.framework.evo.sp.auth.dto.VerifyDto;
 import com.ritoinfo.framework.evo.zuul.config.AuthConfig;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * User: Kyll
@@ -65,12 +68,12 @@ public class AuthFilter extends ZuulFilter {
 			log.info("忽略验证: " + uri);
 		} else {
 			String token = jwtToken.getToken(request);
+			boolean isBrowser = NetUtil.isRequestFromBrowser(request);
 
 			if (StringUtil.isBlank(token)) {
 				log.info("缺少授权: " + uri);
 
-				requestContext.setSendZuulResponse(false);
-				requestContext.setResponseStatusCode(401);
+				process401(requestContext, isBrowser);
 			} else {
 				VerifyResult verifyResult = jwtToken.verify(token);
 
@@ -84,8 +87,7 @@ public class AuthFilter extends ZuulFilter {
 						if (StringUtil.isBlank(newToken)) {
 							log.info("刷新失败: " + uri);
 
-							requestContext.setSendZuulResponse(false);
-							requestContext.setResponseStatusCode(401);
+							process401(requestContext, isBrowser);
 						} else {
 							requestContext.addZuulRequestHeader(Const.JWT_TOKEN_HEADER, newToken);
 
@@ -107,12 +109,29 @@ public class AuthFilter extends ZuulFilter {
 				} else {
 					log.info("令牌失效: " + uri);
 
-					requestContext.setSendZuulResponse(false);
-					requestContext.setResponseStatusCode(401);
+					process401(requestContext, isBrowser);
 				}
 			}
 		}
 
 		return null;
+	}
+
+	private void process401(RequestContext requestContext, boolean isBrowser) {
+		requestContext.setSendZuulResponse(false);
+
+		if (isBrowser) {
+			requestContext.setResponseStatusCode(HttpStatus.SC_TEMPORARY_REDIRECT);
+
+			requestContext.put(FilterConstants.FORWARD_TO_KEY, authConfig.getLoginPath());
+
+			try {
+				requestContext.getResponse().sendRedirect(authConfig.getLoginPath());
+			} catch (IOException e) {
+				log.error("重定向到登录页面失败", e);
+			}
+		} else {
+			requestContext.setResponseStatusCode(401);
+		}
 	}
 }

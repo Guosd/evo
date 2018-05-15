@@ -1,11 +1,14 @@
 package com.ritoinfo.framework.evo.common.uitl;
 
+import lombok.extern.slf4j.Slf4j;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * User: Kyll
  * Date: 2018-04-19 16:16
  */
+@Slf4j
 public class NetUtil {
 	public static String getRemoteAddr(HttpServletRequest request) {
 		String ip = request.getHeader("X-Forwarded-For");
@@ -24,5 +27,23 @@ public class NetUtil {
 		}
 
 		return request.getRemoteAddr();
+	}
+
+	public static boolean isRequestFromBrowser(HttpServletRequest request) {
+		String userAgent = request.getHeader("User-Agent");
+		log.info("Request User-Agent: " + userAgent);
+
+		if (StringUtil.isBlank(userAgent)) {
+			return false;
+		}
+
+		userAgent = userAgent.toLowerCase();
+		return (userAgent.contains("chrome") && userAgent.contains("safari"))
+				|| userAgent.contains("firefox")
+				|| (userAgent.contains("safari") && !userAgent.contains("chrome"))
+				|| userAgent.contains("edge")
+				|| (userAgent.contains("compatible") && userAgent.contains("msie"))
+				|| userAgent.contains("opera")
+				|| userAgent.contains("trident");
 	}
 }
