@@ -59,6 +59,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-common-password</artifactId>
+			<version>${evo-common-password.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
 			<artifactId>evo-sp-auth-common-model</artifactId>
 			<version>${evo-sp-auth-common-model.version}</version>
 		</dependency>
