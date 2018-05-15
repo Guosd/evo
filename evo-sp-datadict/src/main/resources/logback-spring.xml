@@ -22,7 +22,7 @@
 		</encoder>
 	</appender>
 
-	<logger name="io.lettuce.core" level="DEBUG" additivity="false">
+	<logger name="io.lettuce.core" level="INFO" additivity="false">
 		<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="ROLLINGFILE"/>
 	</logger>
