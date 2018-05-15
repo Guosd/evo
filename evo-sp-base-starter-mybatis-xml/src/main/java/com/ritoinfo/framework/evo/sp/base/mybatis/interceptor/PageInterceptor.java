@@ -63,10 +63,20 @@ public class PageInterceptor implements Interceptor {
 		String jdbcUrl = (String) BeanUtil.getFieldValue(dataSource, "jdbcUrl");
 
 		if (StringUtil.isBlank(jdbcUrl)) {
+			Connection connection = null;
 			try {
-				jdbcUrl = dataSource.getConnection().getMetaData().getURL();
+				connection = dataSource.getConnection();
+				jdbcUrl = connection.getMetaData().getURL();
 			} catch (SQLException e) {
 				log.error("分页查询失败，无法获取数据库连接", e);
+			} finally {
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						log.error("关闭数据库连接失败", e);
+					}
+				}
 			}
 		}
 
