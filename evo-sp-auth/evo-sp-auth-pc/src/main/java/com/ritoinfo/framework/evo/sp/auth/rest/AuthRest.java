@@ -25,7 +25,7 @@ public class AuthRest {
 	@Autowired
 	private AuthBizz authBizz;
 
-	@PostMapping("login")
+	@PostMapping("/login")
 	public ServiceResponse<String> login(@Validated @RequestBody PcLoginDto loginDto, HttpServletRequest request) {
 		try {
 			return ServiceResponse.ok(authBizz.authorize(loginDto, request));

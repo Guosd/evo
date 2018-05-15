@@ -46,12 +46,16 @@ public class AssistBizz {
 	}
 
 	public String createAndSaveToken(UserDto userDto) {
+		return createAndSaveToken(userDto, userDto.getMobileNumber());
+	}
+
+	public String createAndSaveToken(UserDto userDto, String mobileNumber) {
 		UserContext userContext = new UserContext();
 		userContext.setId(String.valueOf(userDto.getId()));
 		userContext.setUsername(userDto.getUsername());
 		userContext.setName(userDto.getName());
 		userContext.setCode(userDto.getCode());
-		userContext.setMobileNumber(userDto.getMobileNumber());
+		userContext.setMobileNumber(mobileNumber);
 		return createAndSaveToken(userContext);
 	}
 

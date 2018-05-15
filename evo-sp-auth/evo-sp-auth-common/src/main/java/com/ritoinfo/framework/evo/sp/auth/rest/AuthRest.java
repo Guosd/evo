@@ -2,6 +2,7 @@ package com.ritoinfo.framework.evo.sp.auth.rest;
 
 import com.ritoinfo.framework.evo.common.Const;
 import com.ritoinfo.framework.evo.sp.auth.bizz.AuthBizz;
+import com.ritoinfo.framework.evo.sp.auth.dto.DefaultUserDto;
 import com.ritoinfo.framework.evo.sp.auth.dto.VerifyDto;
 import com.ritoinfo.framework.evo.sp.base.exception.RestException;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * User: Kyll
  * Date: 2018-03-08 14:33
@@ -23,7 +26,16 @@ public class AuthRest {
 	@Autowired
 	private AuthBizz authBizz;
 
-	@PostMapping("logout")
+	@PostMapping("/token")
+	public ServiceResponse<String> getDefaultUserToken(@Validated @RequestBody DefaultUserDto defaultUserDto, HttpServletRequest request) {
+		try {
+			return ServiceResponse.ok(authBizz.getDefaultUserToken(defaultUserDto, request));
+		} catch (Exception e) {
+			throw new RestException(Const.RC_AUTH_DEFAULT_TOKEN, e);
+		}
+	}
+
+	@PostMapping("/logout")
 	public ServiceResponse<Boolean> logout(@RequestHeader(Const.JWT_TOKEN_HEADER) String token) {
 		try {
 			return ServiceResponse.ok(authBizz.clear(token));
@@ -32,7 +44,7 @@ public class AuthRest {
 		}
 	}
 
-	@PostMapping("try")
+	@PostMapping("/try")
 	public ServiceResponse<String> tryRefresh(@RequestBody String token) {
 		try {
 			return ServiceResponse.ok(authBizz.tryRefresh(token));
@@ -41,7 +53,7 @@ public class AuthRest {
 		}
 	}
 
-	@PostMapping("refresh")
+	@PostMapping("/refresh")
 	public ServiceResponse<String> refresh(@RequestBody String token) {
 		try {
 			return ServiceResponse.ok(authBizz.refresh(token));
@@ -50,7 +62,7 @@ public class AuthRest {
 		}
 	}
 
-	@PostMapping("verify")
+	@PostMapping("/verify")
 	public ServiceResponse<Boolean> verify(@Validated @RequestBody VerifyDto verifyDto) {
 		try {
 			return ServiceResponse.ok(authBizz.verify(verifyDto));

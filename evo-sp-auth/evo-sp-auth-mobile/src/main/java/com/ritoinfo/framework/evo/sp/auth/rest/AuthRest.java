@@ -26,7 +26,7 @@ public class AuthRest {
 	@Autowired
 	private AuthBizz authBizz;
 
-	@PostMapping("code")
+	@PostMapping("/code")
 	public ServiceResponse<String> getCode(@Validated @RequestBody MobileCodeDto mobileCodeDto) {
 		try {
 			return ServiceResponse.ok(authBizz.getCode(mobileCodeDto));
@@ -35,7 +35,7 @@ public class AuthRest {
 		}
 	}
 
-	@PostMapping("code/sign-in")
+	@PostMapping("/code/sign-in")
 	public ServiceResponse<String> getCodeForSignIn(@Validated @RequestBody MobileCodeDto mobileCodeDto) {
 		try {
 			return ServiceResponse.ok(authBizz.getCodeForSignIn(mobileCodeDto));
@@ -44,7 +44,7 @@ public class AuthRest {
 		}
 	}
 
-	@PostMapping("code/sign-up")
+	@PostMapping("/code/sign-up")
 	public ServiceResponse<String> getCodeForSignUp(@Validated @RequestBody MobileCodeDto mobileCodeDto) {
 		try {
 			return ServiceResponse.ok(authBizz.getCodeForSignUp(mobileCodeDto));
@@ -53,7 +53,7 @@ public class AuthRest {
 		}
 	}
 
-	@PostMapping("login")
+	@PostMapping("/login")
 	public ServiceResponse<String> login(@Validated @RequestBody MobileLoginDto loginDto, HttpServletRequest request) {
 		try {
 			return ServiceResponse.ok(authBizz.authorize(loginDto, request));

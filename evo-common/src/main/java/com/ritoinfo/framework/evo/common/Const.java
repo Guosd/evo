@@ -31,10 +31,11 @@ public class Const {
 	public static final String RC_AUTH_REFRESH = "AUTH-0003";
 	public static final String RC_AUTH_TRY_REFRESH = "AUTH-0004";
 	public static final String RC_AUTH_VERIFY = "AUTH-0005";
-	public static final String RC_AUTH_M_VERIFY_CODE = "AUTH-0006";
-	public static final String RC_AUTH_M_VERIFY_CODE_SIGN_IN = "AUTH-0007";
-	public static final String RC_AUTH_M_VERIFY_CODE_SIGN_UP = "AUTH-0008";
-	public static final String RC_AUTH_M_LOGIN = "AUTH-0009";
+	public static final String RC_AUTH_DEFAULT_TOKEN = "AUTH-0006";
+	public static final String RC_AUTH_M_VERIFY_CODE = "AUTH-0007";
+	public static final String RC_AUTH_M_VERIFY_CODE_SIGN_IN = "AUTH-0008";
+	public static final String RC_AUTH_M_VERIFY_CODE_SIGN_UP = "AUTH-0009";
+	public static final String RC_AUTH_M_LOGIN = "AUTH-0010";
 	public static final String RC_SYS_MICRO = "SYS-0010";
 	public static final String RC_SYS_FUNC = "SYS-0020";
 	public static final String RC_SYS_ROLE_FUNC = "SYS-0030";
@@ -63,6 +64,7 @@ public class Const {
 		RCM_MAP.put(RC_AUTH_REFRESH, "刷新令牌失败");
 		RCM_MAP.put(RC_AUTH_TRY_REFRESH, "尝试刷新令牌失败");
 		RCM_MAP.put(RC_AUTH_VERIFY, "校验令牌失败");
+		RCM_MAP.put(RC_AUTH_DEFAULT_TOKEN, "获取默认用户令牌失败");
 		RCM_MAP.put(RC_AUTH_M_VERIFY_CODE, "获取验证码失败");
 		RCM_MAP.put(RC_AUTH_M_VERIFY_CODE_SIGN_IN, "获取登录验证码失败");
 		RCM_MAP.put(RC_AUTH_M_VERIFY_CODE_SIGN_UP, "获取注册验证码失败");
