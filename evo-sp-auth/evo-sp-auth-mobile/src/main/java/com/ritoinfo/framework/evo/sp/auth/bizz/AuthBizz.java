@@ -33,7 +33,7 @@ public class AuthBizz {
 	private AssistBizz assistBizz;
 
 	public String generateCode(MobileCodeDto mobileCodeDto) {
-		UserDto userDto = userApi.mobileNumber(mobileCodeDto.getMobileNumber()).getData();
+		UserDto userDto = userApi.getByMobileNumber(mobileCodeDto.getMobileNumber()).getData();
 		if (userDto == null) {
 			throw new MobileNumberNotFoundException(mobileCodeDto.getMobileNumber());
 		}
@@ -49,7 +49,7 @@ public class AuthBizz {
 		String mobileNumber = loginDto.getMobileNumber();
 		String verifyCode = loginDto.getVerifyCode();
 		if (verifyCode.equals(redisService.getString(RedisKeyAssist.generate("YERIFY_CODE", mobileNumber)))) {
-			UserDto userDto = userApi.mobileNumber(mobileNumber).getData();
+			UserDto userDto = userApi.getByMobileNumber(mobileNumber).getData();
 			if (userDto == null) {
 				throw new MobileNumberNotFoundException(mobileNumber);
 			}
