@@ -17,6 +17,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 public class SwaggerConfig {
 	@Bean
 	public Docket api() {
-		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.any()).paths(PathSelectors.any()).build();
+		return new Docket(DocumentationType.SWAGGER_2).select()
+				.apis(RequestHandlerSelectors.any())
+				.paths(PathSelectors.regex("(?:(?!^/error|/actuator).)*")) // 排除 basic-error-controller, operation-handler, web-mvc-endpoint-handler-mapping
+				.build();
 	}
 }
