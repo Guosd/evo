@@ -5,6 +5,7 @@ import com.ritoinfo.framework.evo.common.uitl.AlgorithmUtil;
 import com.ritoinfo.framework.evo.data.redis.service.RedisService;
 import com.ritoinfo.framework.evo.sms.api.SmsApi;
 import com.ritoinfo.framework.evo.sp.auth.assist.RedisKeyAssist;
+import com.ritoinfo.framework.evo.sp.auth.dto.CodeDto;
 import com.ritoinfo.framework.evo.sp.auth.dto.MobileCodeDto;
 import com.ritoinfo.framework.evo.sp.auth.dto.MobileLoginDto;
 import com.ritoinfo.framework.evo.sp.auth.exception.MobileNumberNotFoundException;
@@ -33,15 +34,21 @@ public class AuthBizz {
 	@Autowired
 	private AssistBizz assistBizz;
 
-	public String getCode(MobileCodeDto mobileCodeDto) {
+	public CodeDto getCode(MobileCodeDto mobileCodeDto) {
 		String mobileNumber = mobileCodeDto.getMobileNumber();
 
 		String verifyCode = AlgorithmUtil.randomNumber(6);
-		//	smsApi.send() TODO
+
 		redisService.set(RedisKeyAssist.generate("VERIFY_CODE_" + Const.VERIFY_CODE_SIGN_IN, mobileNumber), verifyCode, 60 * 1000L);
 		redisService.set(RedisKeyAssist.generate("VERIFY_CODE_" + Const.VERIFY_CODE_SIGN_UP, mobileNumber), verifyCode, 60 * 1000L);
 
-		return verifyCode;// TODO 生产环境去掉返回值
+		CodeDto codeDto = new CodeDto();
+		codeDto.setVerifyCode(verifyCode);
+		codeDto.setExistUser(userApi.getByMobileNumber(mobileCodeDto.getMobileNumber()).getData() != null);
+
+		//	smsApi.send() TODO
+
+		return codeDto;// TODO 生产环境去掉返回值
 	}
 
 	public String getCodeForSignIn(MobileCodeDto mobileCodeDto) {

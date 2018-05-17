@@ -2,6 +2,7 @@ package com.ritoinfo.framework.evo.sp.auth.rest;
 
 import com.ritoinfo.framework.evo.common.Const;
 import com.ritoinfo.framework.evo.sp.auth.bizz.AuthBizz;
+import com.ritoinfo.framework.evo.sp.auth.dto.CodeDto;
 import com.ritoinfo.framework.evo.sp.auth.dto.MobileCodeDto;
 import com.ritoinfo.framework.evo.sp.auth.dto.MobileLoginDto;
 import com.ritoinfo.framework.evo.sp.base.exception.BizzException;
@@ -27,7 +28,7 @@ public class AuthRest {
 	private AuthBizz authBizz;
 
 	@PostMapping("/code")
-	public ServiceResponse<String> getCode(@Validated @RequestBody MobileCodeDto mobileCodeDto) {
+	public ServiceResponse<CodeDto> getCode(@Validated @RequestBody MobileCodeDto mobileCodeDto) {
 		try {
 			return ServiceResponse.ok(authBizz.getCode(mobileCodeDto));
 		} catch (BizzException e) {
