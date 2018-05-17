@@ -1,0 +1,12 @@
+server:
+  port: 20015
+  undertow:
+    buffer-size: 1024
+    direct-buffers: true
+    io-threads: 4
+    worker-threads: 30
+spring:
+  application:
+    name: evo-zipkin
+  jackson:
+    time-zone: GMT+8
