@@ -18,12 +18,6 @@ spring:
       read-only: false # 连接只读数据库时配置为true, 保证安全
   jackson:
     time-zone: GMT+8
-  zipkin:
-    base-url: http://10.20.133.30:20015
-#    discovery-client-enabled: true
-#    locator:
-#      discovery:
-#        enabled: true
   sleuth:
     sampler:
       probability: 1.0
@@ -39,3 +33,9 @@ spring:
     url: jdbc:mysql://10.20.133.43:8066/evo_sys?useUnicode=true&characterEncoding=UTF8
     username: evo_sys
     password: evo_sys
+  rabbitmq:
+    host: 10.20.133.43
+    port: 5672
+    virtual-host: vhost_eco
+    username: eco
+    password: eco
