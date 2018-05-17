@@ -12,6 +12,15 @@ spring:
     password: 123456
   jackson:
     time-zone: GMT+8
+  zipkin:
+    base-url: http://10.20.133.30:20015
+#    discovery-client-enabled: true
+#    locator:
+#      discovery:
+#        enabled: true
+  sleuth:
+    sampler:
+      probability: 1.0
 ---
 spring:
   profiles: sit

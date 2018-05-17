@@ -18,6 +18,15 @@ spring:
       read-only: false # 连接只读数据库时配置为true, 保证安全
   jackson:
     time-zone: GMT+8
+  zipkin:
+    base-url: http://10.20.133.30:20015
+#    discovery-client-enabled: true
+#    locator:
+#      discovery:
+#        enabled: true
+  sleuth:
+    sampler:
+      probability: 1.0
 mybatis:
   type-aliases-package: com.ritoinfo.framework.evo.sp.sys.entity
   mapper-locations: classpath:mapper/**/*.xml
