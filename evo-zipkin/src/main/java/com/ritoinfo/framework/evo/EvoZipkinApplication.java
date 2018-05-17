@@ -2,13 +2,12 @@ package com.ritoinfo.framework.evo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import zipkin.server.EnableZipkinServer;
 
 /**
  * User: Kyll
  * Date: 2018-02-26 20:53
  */
-@EnableZipkinServer
+/*@EnableZipkinServer*/
 @SpringBootApplication
 public class EvoZipkinApplication {
 	public static void main(String[] args) {
