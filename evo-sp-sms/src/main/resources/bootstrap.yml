@@ -1,0 +1,26 @@
+spring:
+  cloud:
+    config:
+      name: config
+      discovery:
+        enabled: true
+        service-id: evo-config
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+  client:
+    initial-instance-info-replication-interval-seconds: 5
+    registry-fetch-interval-seconds: 5
+    serviceUrl:
+      defaultZone: http://localhost:20000/eureka
+---
+spring:
+  profiles: sit
+eureka:
+  instance:
+    ip-address: 10.20.130.33
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://10.20.133.30:50101/eureka

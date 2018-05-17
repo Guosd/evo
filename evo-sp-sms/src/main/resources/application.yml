@@ -1,0 +1,19 @@
+server:
+  port: 20030
+spring:
+  application:
+    name: evo-sp-sms
+  jackson:
+    time-zone: GMT+8
+  sleuth:
+    sampler:
+      probability: 1.0
+---
+spring:
+  profiles: sit
+  rabbitmq:
+    host: 10.20.133.43
+    port: 5672
+    virtual-host: vhost_eco
+    username: eco
+    password: eco
