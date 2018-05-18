@@ -8,6 +8,14 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      connection-test-query: select 1
+      connection-timeout: 30000
+      idle-timeout: 600000
+      maximum-pool-size: 60
+      max-lifetime: 1800000
+      minimum-idle: 10
+      read-only: false
   jackson:
     time-zone: GMT+8
   activiti:

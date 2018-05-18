@@ -58,32 +58,6 @@
 			<groupId>com.ritoinfo.framework</groupId>
 			<artifactId>evo-sp-base-starter-mybatis-xml</artifactId>
 			<version>${evo-sp-base-starter-mybatis-xml.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.cloud</groupId>
-					<artifactId>spring-cloud-sleuth-zipkin-stream</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.springframework.cloud</groupId>
-					<artifactId>spring-cloud-sleuth-stream</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-sleuth-zipkin-stream</artifactId>
-			<version>${spring-cloud-sleuth-zipkin-stream.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.springframework.cloud</groupId>
-					<artifactId>spring-cloud-sleuth-stream</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-sleuth-stream</artifactId>
-			<version>${spring-cloud-sleuth-stream.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
