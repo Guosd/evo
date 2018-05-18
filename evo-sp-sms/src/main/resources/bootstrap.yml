@@ -19,7 +19,7 @@ spring:
   profiles: sit
 eureka:
   instance:
-    ip-address: 10.20.130.33
+    ip-address: 10.20.133.30
     prefer-ip-address: true
   client:
     serviceUrl:
