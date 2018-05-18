@@ -1,8 +1,6 @@
 server:
   port: 20100
 spring:
-  application:
-    name: evo-sp-sys
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/evo_sys?useUnicode=true&characterEncoding=UTF8
     username: root

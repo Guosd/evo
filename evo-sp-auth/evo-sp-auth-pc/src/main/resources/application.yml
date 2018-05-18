@@ -1,8 +1,6 @@
 server:
   port: 20110
 spring:
-  application:
-    name: evo-sp-auth-pc
   cache:
     redis:
       time-to-live: 3600s

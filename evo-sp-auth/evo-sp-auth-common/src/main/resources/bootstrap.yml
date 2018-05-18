@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: evo-sp-auth-common
   cloud:
     config:
       name: config
