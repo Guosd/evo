@@ -21,6 +21,9 @@ spring:
   sleuth:
     sampler:
       probability: 1.0
+    messaging:
+      rabbit:
+        enabled: true
 mybatis:
   type-aliases-package: com.ritoinfo.framework.evo.sp.sys.entity
   mapper-locations: classpath:mapper/**/*.xml
