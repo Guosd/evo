@@ -1,5 +1,5 @@
 server:
-  port: 20000
+  port: 50101
 spring:
   application:
     name: evo-eureka
@@ -18,8 +18,4 @@ eureka:
     fetch-registry: false
     service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
----
-spring:
-  profiles: sit
-server:
-  port: 50101
+
