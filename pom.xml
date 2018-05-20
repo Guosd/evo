@@ -11,6 +11,33 @@
 
 	<packaging>pom</packaging>
 
+	<profiles>
+		<profile>
+			<id>home</id>
+			<properties>
+				<dockerfile-profile>home</dockerfile-profile>
+			</properties>
+		</profile>
+		<profile>
+			<id>self</id>
+			<properties>
+				<dockerfile-profile>self</dockerfile-profile>
+			</properties>
+		</profile>
+		<profile>
+			<id>sit</id>
+			<properties>
+				<dockerfile-profile>sit</dockerfile-profile>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<dockerfile-profile>prod</dockerfile-profile>
+			</properties>
+		</profile>
+	</profiles>
+
 	<modules>
 		<module>evo-common</module>
 		<module>evo-common-jwt</module>
