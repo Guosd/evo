@@ -41,8 +41,10 @@
 						</goals>
 						<configuration>
 							<target name="run">
-								<echo message="copy ${basedir}/src/main/docker/Dockerfile"/>
-								<copy todir="${project.build.directory}/docker" file="${basedir}/src/main/docker/Dockerfile" overwrite="true"/>
+								<echo message="copy ${project.build.directory}/classes/Dockerfile"/>
+								<copy todir="${project.build.directory}/docker" file="${project.build.directory}/classes/Dockerfile" overwrite="true"/>
+								<echo message="delete ${project.build.directory}/classes/Dockerfile"/>
+								<delete file="${project.build.directory}/classes/Dockerfile"/>
 								<echo message="copy ${project.build.directory}/${project.build.finalName}.jar"/>
 								<copy todir="${project.build.directory}/docker" file="${project.build.directory}/${project.build.finalName}.jar" overwrite="true"/>
 							</target>
