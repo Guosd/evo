@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: evo-sp-sms
   cloud:
     config:
       name: config

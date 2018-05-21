@@ -1,13 +1,17 @@
 server:
   port: 20030
 spring:
-  application:
-    name: evo-sp-sms
   jackson:
     time-zone: GMT+8
   sleuth:
     sampler:
       probability: 1.0
+    web:
+      client:
+        enabled: true
+  zipkin:
+    base-url: http://none
+    enabled: true
 sms:
   address: http://10.21.111.71:9087/smserver/submitMessage
 ---
