@@ -2,9 +2,9 @@ server:
   port: 20100
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/evo_sys?useUnicode=true&characterEncoding=UTF8
-    username: root
-    password: 123456
+    url: ${evo.sp.sys.datasource.url}
+    username: ${evo.sp.sys.datasource.username}
+    password: ${evo.sp.sys.datasource.password}
     driver-class-name: com.mysql.jdbc.Driver
     hikari:
       connection-test-query: select 1
@@ -14,6 +14,12 @@ spring:
       max-lifetime: 1800000 # 连接的生命时长, 建议设置比数据库超时时长少30秒
       minimum-idle: 10
       read-only: false # 连接只读数据库时配置为true, 保证安全
+  rabbitmq:
+    host: ${evo.spring.rabbitmq.host}
+    port: ${evo.spring.rabbitmq.port}
+    virtual-host: ${evo.spring.rabbitmq.virtual-host}
+    username: ${evo.spring.rabbitmq.username}
+    password: ${evo.spring.rabbitmq.password}
   jackson:
     time-zone: GMT+8
   sleuth:
@@ -27,16 +33,3 @@ mybatis:
   mapper-locations: classpath:mapper/**/*.xml
   configuration:
     map-underscore-to-camel-case: true
----
-spring:
-  profiles: sit
-  datasource:
-    url: jdbc:mysql://10.20.133.43:8066/evo_sys?useUnicode=true&characterEncoding=UTF8
-    username: evo_sys
-    password: evo_sys
-  rabbitmq:
-    host: 10.20.133.43
-    port: 5672
-    virtual-host: vhost_eco
-    username: eco
-    password: eco
