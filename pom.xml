@@ -45,7 +45,6 @@
 		<module>evo-config</module>
 		<module>evo-eureka</module>
 		<module>evo-zuul</module>
-		<module>evo-zipkin</module>
 		<module>evo-admin</module>
 		<module>evo-activiti</module>
 		<module>evo-api</module>
