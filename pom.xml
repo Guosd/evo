@@ -13,15 +13,15 @@
 
 	<profiles>
 		<profile>
-			<id>home</id>
+			<id>prod</id>
 			<properties>
-				<dockerfile-profile>home</dockerfile-profile>
+				<dockerfile-profile>prod</dockerfile-profile>
 			</properties>
 		</profile>
 		<profile>
-			<id>self</id>
+			<id>uat</id>
 			<properties>
-				<dockerfile-profile>self</dockerfile-profile>
+				<dockerfile-profile>uat</dockerfile-profile>
 			</properties>
 		</profile>
 		<profile>
@@ -31,9 +31,15 @@
 			</properties>
 		</profile>
 		<profile>
-			<id>prod</id>
+			<id>dev</id>
 			<properties>
-				<dockerfile-profile>prod</dockerfile-profile>
+				<dockerfile-profile>dev</dockerfile-profile>
+			</properties>
+		</profile>
+		<profile>
+			<id>home</id>
+			<properties>
+				<dockerfile-profile>home</dockerfile-profile>
 			</properties>
 		</profile>
 	</profiles>
@@ -45,7 +51,6 @@
 		<module>evo-config</module>
 		<module>evo-eureka</module>
 		<module>evo-zuul</module>
-		<module>evo-zipkin</module>
 		<module>evo-admin</module>
 		<module>evo-activiti</module>
 		<module>evo-api</module>
