@@ -19,5 +19,7 @@ spring:
   jackson:
     time-zone: GMT+8
   sleuth:
+    http:
+      enabled: true
     sampler:
       probability: 1.0
