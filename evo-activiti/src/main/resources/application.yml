@@ -2,9 +2,9 @@ server:
   port: 20025
 spring:
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/evo_activiti?useUnicode=true&characterEncoding=UTF8
-    username: root
-    password: 123456
+    url: ${evo.sp.activiti.datasource.url}
+    username: ${evo.sp.activiti.datasource.username}
+    password: ${evo.sp.activiti.datasource.password}
     driver-class-name: com.mysql.jdbc.Driver
     hikari:
       connection-test-query: select 1
@@ -14,18 +14,20 @@ spring:
       max-lifetime: 1800000
       minimum-idle: 10
       read-only: false
+  rabbitmq:
+    host: ${evo.spring.rabbitmq.host}
+    port: ${evo.spring.rabbitmq.port}
+    virtual-host: ${evo.spring.rabbitmq.virtual-host}
+    username: ${evo.spring.rabbitmq.username}
+    password: ${evo.spring.rabbitmq.password}
   jackson:
     time-zone: GMT+8
+  sleuth:
+    sampler:
+      probability: 1.0
   activiti:
     database-schema: evo_activiti # 数据库名称
     database-schema-update: none # 如果设置为 true， 数据库中没有表时会新建
     check-process-definitions: false # 是否检测流程定义文件
     async-executor-activate: false
     async-executor-enabled: false
----
-spring:
-  profiles: sit
-  datasource:
-    url: jdbc:mysql://10.20.133.43:8066/evo_activiti?useUnicode=true&characterEncoding=UTF8
-    username: evo_activiti
-    password: evo_activiti

@@ -1,28 +1,23 @@
 server:
   port: 20105
 spring:
+  rabbitmq:
+    host: ${evo.spring.rabbitmq.host}
+    port: ${evo.spring.rabbitmq.port}
+    virtual-host: ${evo.spring.rabbitmq.virtual-host}
+    username: ${evo.spring.rabbitmq.username}
+    password: ${evo.spring.rabbitmq.password}
+  redis:
+    host: ${evo.spring.redis.host}
+    cluster:
+      nodes: ${evo.spring.redis.cluster.nodes}
+    password: ${evo.spring.redis.password}
   cache:
     redis:
       time-to-live: 3600s
       use-key-prefix: false
-  redis:
-    host: 127.0.0.1
-    password: 123456
   jackson:
     time-zone: GMT+8
   sleuth:
     sampler:
       probability: 1.0
----
-spring:
-  profiles: sit
-  redis:
-    cluster:
-      nodes: 10.20.133.85:7000, 10.20.133.85:7002, 10.20.133.85:7003, 10.20.133.85:7004, 10.20.133.85:7005
-    password:
-  rabbitmq:
-    host: 10.20.133.43
-    port: 5672
-    virtual-host: vhost_eco
-    username: eco
-    password: eco

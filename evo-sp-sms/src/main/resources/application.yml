@@ -1,19 +1,14 @@
 server:
   port: 20030
 spring:
+  rabbitmq:
+    host: ${evo.spring.rabbitmq.host}
+    port: ${evo.spring.rabbitmq.port}
+    virtual-host: ${evo.spring.rabbitmq.virtual-host}
+    username: ${evo.spring.rabbitmq.username}
+    password: ${evo.spring.rabbitmq.password}
   jackson:
     time-zone: GMT+8
   sleuth:
     sampler:
       probability: 1.0
-sms:
-  address: http://10.21.111.71:9087/smserver/submitMessage
----
-spring:
-  profiles: sit
-  rabbitmq:
-    host: 10.20.133.43
-    port: 5672
-    virtual-host: vhost_eco
-    username: eco
-    password: eco

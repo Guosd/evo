@@ -1,33 +1,41 @@
 server:
   port: 20120
 spring:
+  datasource:
+    url: ${evo.sp.datadict.datasource.url}
+    username: ${evo.sp.datadict.datasource.username}
+    password: ${evo.sp.datadict.datasource.password}
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      connection-test-query: select 1
+      connection-timeout: 30000
+      idle-timeout: 600000
+      maximum-pool-size: 60
+      max-lifetime: 1800000
+      minimum-idle: 10
+      read-only: false
+  rabbitmq:
+    host: ${evo.spring.rabbitmq.host}
+    port: ${evo.spring.rabbitmq.port}
+    virtual-host: ${evo.spring.rabbitmq.virtual-host}
+    username: ${evo.spring.rabbitmq.username}
+    password: ${evo.spring.rabbitmq.password}
+  redis:
+    host: ${evo.spring.redis.host}
+    cluster:
+      nodes: ${evo.spring.redis.cluster.nodes}
+    password: ${evo.spring.redis.password}
   cache:
     redis:
       time-to-live: 3600s
       use-key-prefix: false
-  redis:
-    host: 127.0.0.1
-    password: 123456
-  datasource:
-    url: jdbc:mysql://127.0.0.1:3306/evo_datadict?useUnicode=true&characterEncoding=UTF8
-    username: root
-    password: 123456
-    driver-class-name: com.mysql.jdbc.Driver
   jackson:
     time-zone: GMT+8
+  sleuth:
+    sampler:
+      probability: 1.0
 mybatis:
   type-aliases-package: com.ritoinfo.framework.evo.sp.datadict.entity
   mapper-locations: classpath:mapper/**/*.xml
   configuration:
     map-underscore-to-camel-case: true
----
-spring:
-  profiles: sit
-  redis:
-    cluster:
-      nodes: 10.20.133.85:7000, 10.20.133.85:7002, 10.20.133.85:7003, 10.20.133.85:7004, 10.20.133.85:7005
-    password:
-  datasource:
-    url: jdbc:mysql://10.20.133.43:8066/evo_datadict?useUnicode=true&characterEncoding=UTF8
-    username: evo_datadict
-    password: evo_datadict
