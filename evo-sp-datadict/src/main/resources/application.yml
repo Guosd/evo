@@ -1,8 +1,6 @@
 server:
   port: 20120
 spring:
-  application:
-    name: evo-sp-datadict
   cache:
     redis:
       time-to-live: 3600s

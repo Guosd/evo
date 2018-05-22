@@ -4,8 +4,6 @@ server:
     max-threads: 128
     min-spare-threads: 64
 spring:
-  application:
-    name: evo-zuul
   jackson:
     time-zone: GMT+8
 zuul:

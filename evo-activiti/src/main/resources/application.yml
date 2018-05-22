@@ -1,8 +1,6 @@
 server:
   port: 20025
 spring:
-  application:
-    name: evo-activiti
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/evo_activiti?useUnicode=true&characterEncoding=UTF8
     username: root

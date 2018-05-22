@@ -1,8 +1,6 @@
 server:
   port: 20500
 spring:
-  application:
-    name: evo-static-ui
   jackson:
     time-zone: GMT+8
   thymeleaf:
