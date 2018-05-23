@@ -35,6 +35,11 @@ public class RoleRest extends BaseRest<RoleBizz, RoleDao, Role, Long, RoleCondit
 		return ServiceResponse.ok(bizz.getWithFunc(id));
 	}
 
+	@GetMapping("/code/{code}")
+	public ServiceResponse<RoleDto> getByCode(@PathVariable String code) {
+		return ServiceResponse.ok(bizz.getByCode(code));
+	}
+
 	@GetMapping("/user/id/{userId}")
 	public ServiceResponse<List<RoleDto>> findByUserId(@PathVariable Long userId) {
 		return ServiceResponse.ok(bizz.findByUserId(userId));

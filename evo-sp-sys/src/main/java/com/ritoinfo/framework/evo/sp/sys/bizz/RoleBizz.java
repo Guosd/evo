@@ -35,6 +35,14 @@ public class RoleBizz extends BaseBizz<RoleDao, Role, Long, RoleCondition, RoleD
 		return roleDto;
 	}
 
+	public RoleDto getByCode(String code) {
+		RoleCondition condition = new RoleCondition();
+		condition.setCode(code);
+
+		List<Role> roleList =  dao.find(condition);
+		return roleList.isEmpty() ? null : BaseHelper.toDto(roleList.get(0));
+	}
+
 	public List<RoleDto> findByUserId(Long userId) {
 		return BaseHelper.toDto(dao.findByUserId(userId));
 	}
