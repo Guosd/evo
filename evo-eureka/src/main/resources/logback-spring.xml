@@ -27,51 +27,9 @@
 		</encoder>
 	</appender>
 
-	<appender name="LOGSTASH" class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<File>${log_file}.log.json</File>
-		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-			<FileNamePattern>${log_file}.%d{yyyy-MM-dd}.%i.log.json</FileNamePattern>
-			<maxFileSize>500MB</maxFileSize>
-			<maxHistory>30</maxHistory>
-			<totalSizeCap>5GB</totalSizeCap>
-		</rollingPolicy>
-		<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
-			<providers>
-				<timestamp>
-					<timeZone>GMT+8</timeZone>
-				</timestamp>
-				<pattern>
-					<pattern>
-						{
-						"severity": "%level",
-						"service": "${springAppName:-}",
-						"trace": "%X{X-B3-TraceId:-}",
-						"span": "%X{X-B3-SpanId:-}",
-						"parent": "%X{X-B3-ParentSpanId:-}",
-						"exportable": "%X{X-Span-Export:-}",
-						"pid": "${PID:-}",
-						"thread": "%thread",
-						"class": "%logger",
-						"method": "%M",
-						"linenumber": "%L",
-						"rest": "%message"
-						}
-					</pattern>
-				</pattern>
-			</providers>
-		</encoder>
-	</appender>
-
-	<logger name="com.ritoinfo.framework.evo" level="DEBUG" additivity="false">
-		<appender-ref ref="CONSOLE"/>
-		<appender-ref ref="ROLLINGFILE"/>
-		<appender-ref ref="LOGSTASH"/>
-	</logger>
-
 	<root level="INFO">
 		<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="ROLLINGFILE"/>
-		<appender-ref ref="LOGSTASH"/>
 	</root>
 
 </configuration>
