@@ -1,7 +1,18 @@
 server:
   port: 20500
 spring:
+  rabbitmq:
+    host: ${evo.spring.rabbitmq.host}
+    port: ${evo.spring.rabbitmq.port}
+    virtual-host: ${evo.spring.rabbitmq.virtual-host}
+    username: ${evo.spring.rabbitmq.username}
+    password: ${evo.spring.rabbitmq.password}
   jackson:
     time-zone: GMT+8
+  sleuth:
+    http:
+      enabled: true
+    sampler:
+      probability: 1.0
   thymeleaf:
     cache: false
