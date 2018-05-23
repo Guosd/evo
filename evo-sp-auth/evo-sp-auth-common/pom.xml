@@ -10,7 +10,6 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>evo-sp-auth-common</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 
 	<build>
 		<plugins>
