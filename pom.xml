@@ -91,6 +91,7 @@
 		<jjwt.version>0.9.0</jjwt.version>
 		<validation-api.version>2.0.1.Final</validation-api.version>
 
+		<logstash-logback-encoder.version>5.1</logstash-logback-encoder.version>
 		<swagger2.version>2.8.0</swagger2.version>
 		<swagger-ui.version>2.8.0</swagger-ui.version>
 		<activiti-spring-boot-starter-basic.version>5.22.0</activiti-spring-boot-starter-basic.version>
