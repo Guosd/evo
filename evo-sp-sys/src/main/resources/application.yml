@@ -1,5 +1,13 @@
 server:
   port: 20100
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
 spring:
   datasource:
     url: ${evo.sp.sys.datasource.url}
