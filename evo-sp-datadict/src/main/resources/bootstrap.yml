@@ -66,4 +66,5 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://192.168.1.24:50101/eureka
-
+logstash:
+  destination: 192.168.1.28:9600
