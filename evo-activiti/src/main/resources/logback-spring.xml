@@ -3,7 +3,7 @@
 	<include resource="org/springframework/boot/logging/logback/base.xml"/>
 
 	<springProperty scope="context" name="springAppName" source="spring.application.name"/>
-	<springProperty scope="context" name="logstashDestination" source="evo.logstash.destination"/>
+	<springProperty scope="context" name="logstashDestination" source="logstash.destination"/>
 
 	<property name="log_file" value="logs/${springAppName}"/>
 	<!--<property name="log_pattern" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(-&#45;&#45;){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>-->
