@@ -21,10 +21,8 @@ spring:
     username: ${evo.spring.rabbitmq.username}
     password: ${evo.spring.rabbitmq.password}
   redis:
-    host: ${evo.spring.redis.host}
     cluster:
       nodes: ${evo.spring.redis.cluster.nodes}
-    password: ${evo.spring.redis.password}
   cache:
     redis:
       time-to-live: 3600s
