@@ -33,5 +33,3 @@ spring:
     check-process-definitions: false # 是否检测流程定义文件
     async-executor-activate: false
     async-executor-enabled: false
-logstash:
-  destination: ${evo.logstash.destination}
