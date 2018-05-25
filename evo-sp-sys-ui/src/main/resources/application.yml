@@ -1,5 +1,6 @@
 server:
   port: 20505
+  address: ${evo.server.address}
 spring:
   rabbitmq:
     host: ${evo.spring.rabbitmq.host}
@@ -18,5 +19,7 @@ spring:
     admin:
       client:
         url: ${evo.spring.boot.admin.client.url}
+        instance:
+          prefer-ip: true
   thymeleaf:
     cache: false

@@ -1,5 +1,6 @@
 server:
   port: 20025
+  address: ${evo.server.address}
 spring:
   datasource:
     url: ${evo.sp.activiti.datasource.url}
@@ -31,6 +32,8 @@ spring:
     admin:
       client:
         url: ${evo.spring.boot.admin.client.url}
+        instance:
+          prefer-ip: true
   activiti:
     database-schema: evo_activiti # 数据库名称
     database-schema-update: none # 如果设置为 true， 数据库中没有表时会新建

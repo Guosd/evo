@@ -1,5 +1,6 @@
 server:
   port: 20120
+  address: ${evo.server.address}
 spring:
   datasource:
     url: ${evo.sp.datadict.datasource.url}
@@ -38,6 +39,8 @@ spring:
     admin:
       client:
         url: ${evo.spring.boot.admin.client.url}
+        instance:
+          prefer-ip: true
 mybatis:
   type-aliases-package: com.ritoinfo.framework.evo.sp.datadict.entity
   mapper-locations: classpath:mapper/**/*.xml
