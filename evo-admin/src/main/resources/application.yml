@@ -1,0 +1,28 @@
+server:
+  port: 20020
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+spring:
+  application:
+    name: evo-admin
+---
+spring:
+  profiles: prod
+---
+spring:
+  profiles: uat
+---
+spring:
+  profiles: sit
+---
+spring:
+  profiles: dev
+---
+spring:
+  profiles: home

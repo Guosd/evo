@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+	<property name="springAppName" value="evo_admin"/>
+	<property name="log_file" value="logs/${springAppName}"/>
+	<!--<property name="log_pattern" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(-&#45;&#45;){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>-->
+	<property name="log_pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID} --- [%t] %logger.%M %L : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+	<contextName>${springAppName}</contextName>
+
+	<appender name="ROLLINGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>${log_file}.log</File>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<FileNamePattern>${log_file}.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+			<!-- 单个日志文件最多500MB, 30天的日志周期，最大不能超过5GB -->
+			<maxFileSize>500MB</maxFileSize>
+			<maxHistory>30</maxHistory>
+			<totalSizeCap>5GB</totalSizeCap>
+		</rollingPolicy>
+
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>${log_pattern}</pattern>
+		</encoder>
+	</appender>
+
+	<root level="INFO">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="ROLLINGFILE"/>
+	</root>
+
+</configuration>
