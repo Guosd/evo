@@ -1,6 +1,6 @@
 server:
   port: 20110
-  address: ${evo.server.address}
+  address: 10.20.133.30
 spring:
   rabbitmq:
     host: ${evo.spring.rabbitmq.host}
