@@ -11,18 +11,3 @@ management:
 spring:
   application:
     name: evo-admin
----
-spring:
-  profiles: prod
----
-spring:
-  profiles: uat
----
-spring:
-  profiles: sit
----
-spring:
-  profiles: dev
----
-spring:
-  profiles: home
