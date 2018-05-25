@@ -13,6 +13,10 @@ spring:
       probability: 1.0
     zuul:
       enabled: true
+  boot:
+    admin:
+      client:
+        url: ${evo.spring.boot.admin.client.url}
 zuul:
   retryable: true
   sensitiveHeaders:

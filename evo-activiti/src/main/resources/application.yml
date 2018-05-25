@@ -27,6 +27,10 @@ spring:
       enabled: true
     sampler:
       probability: 1.0
+  boot:
+    admin:
+      client:
+        url: ${evo.spring.boot.admin.client.url}
   activiti:
     database-schema: evo_activiti # 数据库名称
     database-schema-update: none # 如果设置为 true， 数据库中没有表时会新建

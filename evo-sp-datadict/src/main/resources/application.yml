@@ -34,6 +34,10 @@ spring:
       enabled: true
     sampler:
       probability: 1.0
+  boot:
+    admin:
+      client:
+        url: ${evo.spring.boot.admin.client.url}
 mybatis:
   type-aliases-package: com.ritoinfo.framework.evo.sp.datadict.entity
   mapper-locations: classpath:mapper/**/*.xml
