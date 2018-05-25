@@ -1,6 +1,6 @@
 server:
   port: 20120
-  address: 10.20.133.30
+# address: 10.20.133.30
 spring:
   datasource:
     url: ${evo.sp.datadict.datasource.url}
