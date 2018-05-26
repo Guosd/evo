@@ -1,6 +1,6 @@
 server:
   port: 20125
- address: 192.168.1.24
+  address: 192.168.1.24
 spring:
   datasource:
     url: ${evo.sp.activiti.datasource.url}
