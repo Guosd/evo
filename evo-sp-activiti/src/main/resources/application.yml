@@ -8,7 +8,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: [actuator, auditevents, autoconfig, health, info, trace]
       base-path: /
 #  server:
 #    address: 192.168.1.24
