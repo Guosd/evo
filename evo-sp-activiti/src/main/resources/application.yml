@@ -1,9 +1,17 @@
 server:
   port: 20125
-  address: 192.168.1.24
+#  address: 192.168.1.24
 management:
-  server:
-    address: 192.168.1.24
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: *
+      base-path: /
+#  server:
+#    address: 192.168.1.24
 spring:
   datasource:
     url: ${evo.sp.activiti.datasource.url}
