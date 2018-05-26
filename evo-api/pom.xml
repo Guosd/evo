@@ -15,11 +15,11 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>evo-activiti-api</module>
-		<module>evo-sp-sms-api</module>
+		<module>evo-sp-activiti-api</module>
 		<module>evo-sp-auth-common-api</module>
-		<module>evo-sp-sys-api</module>
 		<module>evo-sp-datadict-api</module>
+		<module>evo-sp-sms-api</module>
+		<module>evo-sp-sys-api</module>
 	</modules>
 
 	<dependencies>

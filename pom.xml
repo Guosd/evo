@@ -53,11 +53,10 @@
 		<module>evo-common</module>
 		<module>evo-common-jwt</module>
 		<module>evo-common-password</module>
+		<module>evo-admin</module>
 		<module>evo-config</module>
 		<module>evo-eureka</module>
 		<module>evo-zuul</module>
-		<module>evo-admin</module>
-		<module>evo-activiti</module>
 		<module>evo-api</module>
 		<module>evo-model</module>
 		<module>evo-data-redis</module>
@@ -66,10 +65,11 @@
 		<module>evo-sp-base-starter-validate</module>
 		<module>evo-sp-base-starter-model</module>
 		<module>evo-sp-base-starter-mybatis-xml</module>
+		<module>evo-sp-activiti</module>
 		<module>evo-sp-auth</module>
-		<module>evo-sp-sys</module>
 		<module>evo-sp-datadict</module>
 		<module>evo-sp-sms</module>
+		<module>evo-sp-sys</module>
 		<module>evo-sp-sys-ui</module>
 		<module>evo-static-ui</module>
 	</modules>
@@ -120,19 +120,19 @@
 		<evo-sp-base-starter-model.version>1.0.0-SNAPSHOT</evo-sp-base-starter-model.version>
 		<evo-sp-base-starter-mybatis-xml.version>1.0.0-SNAPSHOT</evo-sp-base-starter-mybatis-xml.version>
 
-		<evo-activiti-model.version>1.0.0-SNAPSHOT</evo-activiti-model.version>
-		<evo-sp-sms-model.version>1.0.0-SNAPSHOT</evo-sp-sms-model.version>
+		<evo-sp-activiti-model.version>1.0.0-SNAPSHOT</evo-sp-activiti-model.version>
 		<evo-sp-auth-common-model.version>1.0.0-SNAPSHOT</evo-sp-auth-common-model.version>
 		<evo-sp-auth-pc-model.version>1.0.0-SNAPSHOT</evo-sp-auth-pc-model.version>
 		<evo-sp-auth-mobile-model.version>1.0.0-SNAPSHOT</evo-sp-auth-mobile-model.version>
-		<evo-sp-sys-model.version>1.0.0-SNAPSHOT</evo-sp-sys-model.version>
 		<evo-sp-datadict-model.version>1.0.0-SNAPSHOT</evo-sp-datadict-model.version>
+		<evo-sp-sms-model.version>1.0.0-SNAPSHOT</evo-sp-sms-model.version>
+		<evo-sp-sys-model.version>1.0.0-SNAPSHOT</evo-sp-sys-model.version>
 
 		<evo-activiti-api.version>1.0.0-SNAPSHOT</evo-activiti-api.version>
-		<evo-sp-sms-api.version>1.0.0-SNAPSHOT</evo-sp-sms-api.version>
-		<evo-sp-auth-common-api.version>1.0.0-SNAPSHOT</evo-sp-auth-common-api.version>
-		<evo-sp-sys-api.version>1.0.0-SNAPSHOT</evo-sp-sys-api.version>
 		<evo-sp-datadict-api.version>1.0.0-SNAPSHOT</evo-sp-datadict-api.version>
+		<evo-sp-auth-common-api.version>1.0.0-SNAPSHOT</evo-sp-auth-common-api.version>
+		<evo-sp-sms-api.version>1.0.0-SNAPSHOT</evo-sp-sms-api.version>
+		<evo-sp-sys-api.version>1.0.0-SNAPSHOT</evo-sp-sys-api.version>
 	</properties>
 
 	<dependencyManagement>
