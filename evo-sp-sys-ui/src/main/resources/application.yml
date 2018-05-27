@@ -1,6 +1,13 @@
 server:
   port: 20505
-# address: 10.20.133.30
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include: [actuator, auditevents, autoconfig, beans, conditions, configprops, flyway, heapdump, health, httptrace, info, jolokia, liquibase, logfile, loggers, mappings, metrics, prometheus, scheduledtasks, sessions, shutdown, threaddump, trace]
 spring:
   rabbitmq:
     host: ${evo.spring.rabbitmq.host}
