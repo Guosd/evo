@@ -4,12 +4,13 @@ server:
 management:
   endpoint:
     health:
-      show-details: always
+      show-details: ALWAYS
   endpoints:
     web:
       exposure:
-        include: [actuator, auditevents, autoconfig, beans, conditions, configprops, env, flyway, health, httptrace, info, liquibase, loggers, mappings, metrics, scheduledtasks, sessions, shutdown, threaddump, trace]
-      base-path: /
+        #include: [actuator, auditevents, autoconfig, beans, conditions, configprops, env, flyway, health, httptrace, info, liquibase, loggers, mappings, metrics, scheduledtasks, sessions, shutdown, threaddump, trace]
+        include: "*"
+      #base-path: /
 #  server:
 #    address: 192.168.1.24
 spring:
