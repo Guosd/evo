@@ -3,4 +3,4 @@ VOLUME ["/tmp", "/logs"]
 ADD evo-sp-activiti-1.0.0-SNAPSHOT.jar app.jar
 RUN bash -c 'touch /app.jar'
 EXPOSE 20125
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=${dockerfile-profile}","-Devo-appname=evo-sp-activiti","-jar","/app.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=${dockerfile-profile}","-Devo-appname=evo-sp-activiti","-Xms512m","-Xmx512m","-jar","/app.jar"]
