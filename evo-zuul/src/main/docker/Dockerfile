@@ -3,4 +3,4 @@ VOLUME ["/tmp", "/logs"]
 ADD evo-zuul-1.0.0-SNAPSHOT.jar app.jar
 RUN bash -c 'touch /app.jar'
 EXPOSE 50001
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=${dockerfile-profile}","-Devo-appname=evo-zuul","-jar","/app.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=${dockerfile-profile}","-Devo-appname=evo-zuul","-Xms512m","-Xmx512m","-jar","/app.jar"]
