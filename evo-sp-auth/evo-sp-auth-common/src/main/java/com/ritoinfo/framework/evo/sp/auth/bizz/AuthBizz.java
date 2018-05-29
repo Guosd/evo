@@ -77,7 +77,7 @@ public class AuthBizz {
 		VerifyResult verifyResult = jwtToken.verify(refreshToken);
 		if (VerifyResult.SUCCESS == verifyResult) {
 			String newToken = assistBizz.createAndSaveToken(jwtToken.parse(refreshToken));
-			redisService.set(RedisKeyAssist.generate("OLD_TOKEN", token), newToken, 30000L);
+			redisService.set(RedisKeyAssist.generate("OLD_TOKEN", token), newToken, 30 * 1000L);
 			redisService.delete(RedisKeyAssist.generate("REFRESH_TOKEN", token));
 			return newToken;
 		} else {
