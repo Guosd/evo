@@ -71,6 +71,8 @@ spring:
     admin:
       client:
         url: http://10.20.133.30:20020
+        instance:
+          prefer-ip: true
 eureka:
   instance:
     ip-address: 10.20.133.30
@@ -95,6 +97,8 @@ spring:
     admin:
       client:
         url: http://192.168.1.24:20020
+        instance:
+          prefer-ip: true
 eureka:
   instance:
     ip-address: 192.168.1.24
