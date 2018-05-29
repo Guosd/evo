@@ -62,7 +62,7 @@ public class AssistBizz {
 
 	public String createAndSaveToken(UserContext userContext) {
 		// 相同用户登录，删除前次登录token
-		String onlineKey= RedisKeyAssist.generate("ONLINE", userContext.getId());
+		String onlineKey= RedisKeyAssist.generate("ONLINE", userContext.getMobileNumber());
 		String onlineToken = redisService.getString(onlineKey);
 		if (StringUtil.isNotBlank(onlineToken)) {
 			redisService.delete(RedisKeyAssist.generate("TOKEN", onlineToken));
