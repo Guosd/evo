@@ -8,6 +8,8 @@ import com.netflix.zuul.context.RequestContext;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -46,7 +48,27 @@ public class BackToSelfRule extends AbstractLoadBalancerRule {
 			return null;
 		}
 
+		List<String> hostList = new ArrayList<>();
 		for (Server server : serverList) {
+			hostList.add(
+					server.getHost() + ", " +
+					server.getHostPort() + ", " +
+					server.getId() + ", " +
+					server.getMetaInfo().getAppName() + ", " +
+					server.getMetaInfo().getInstanceId() + ", " +
+					server.getMetaInfo().getServerGroup() + ", " +
+					server.getMetaInfo().getServiceIdForDiscovery() + ", " +
+					server.getPort() + ", " +
+					server.getScheme() + ", " +
+					server.getZone() + ", " +
+					server.isAlive() + ", " +
+					server.isReadyToServe() + "\r\n"
+			);
+		}
+		log.info("Server list is: " + Arrays.toString(hostList.toArray()));
+
+		for (Server server : serverList) {
+
 			if (server.getHost().equals(remoteHost)) {
 				finalServer = server;
 				break;
