@@ -81,8 +81,11 @@ public class AuthFilter extends ZuulFilter {
 				if (VerifyResult.SUCCESS == verifyResult || VerifyResult.EXPIRED == verifyResult) {
 					if (VerifyResult.EXPIRED == verifyResult) {
 						String newToken = authCommonApi.tryRefresh(token).getData();
+						log.info("获取临时令牌: " + newToken);
+
 						if (StringUtil.isBlank(newToken)) {
 							newToken = authCommonApi.refresh(token).getData();
+							log.info("获取刷新令牌: " + newToken);
 						}
 
 						if (StringUtil.isBlank(newToken)) {
