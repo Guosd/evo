@@ -135,6 +135,9 @@ public class AuthFilter extends ZuulFilter {
 				log.error("重定向到登录页面失败", e);
 			}
 		} else {
+			HttpServletRequest request = requestContext.getRequest();
+			String uri = request.getRequestURI();
+			log.info("401: " + uri);
 			requestContext.setResponseStatusCode(401);
 		}
 	}
