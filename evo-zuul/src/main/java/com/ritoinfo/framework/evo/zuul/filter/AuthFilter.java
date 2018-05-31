@@ -76,6 +76,7 @@ public class AuthFilter extends ZuulFilter {
 				process401(requestContext, isBrowser);
 			} else {
 				VerifyResult verifyResult = jwtToken.verify(token);
+				log.info("验证结果: " + verifyResult + ", " + token);
 
 				if (VerifyResult.SUCCESS == verifyResult || VerifyResult.EXPIRED == verifyResult) {
 					if (VerifyResult.EXPIRED == verifyResult) {

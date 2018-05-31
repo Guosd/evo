@@ -65,6 +65,8 @@ public class AssistBizz {
 		String onlineKey= RedisKeyAssist.generate("ONLINE", userContext.getMobileNumber());
 		String onlineToken = redisService.getString(onlineKey);
 		if (StringUtil.isNotBlank(onlineToken)) {
+			log.info("用户[" + userContext.getMobileNumber() + "]的令牌[" + onlineToken + "]被重置");
+
 			redisService.delete(RedisKeyAssist.generate("TOKEN", onlineToken));
 			redisService.delete(RedisKeyAssist.generate("REFRESH_TOKEN", onlineToken));
 			redisService.delete(RedisKeyAssist.generate("OLD_TOKEN", onlineToken));

@@ -38,12 +38,16 @@ public class NetUtil {
 		}
 
 		userAgent = userAgent.toLowerCase();
-		return (userAgent.contains("chrome") && userAgent.contains("safari"))
+		boolean result = (userAgent.contains("chrome") && userAgent.contains("safari"))
 				|| userAgent.contains("firefox")
 				|| (userAgent.contains("safari") && !userAgent.contains("chrome"))
 				|| userAgent.contains("edge")
 				|| (userAgent.contains("compatible") && userAgent.contains("msie"))
 				|| userAgent.contains("opera")
 				|| userAgent.contains("trident");
+		
+		log.info("Request From Browser: " + result);
+
+		return result;
 	}
 }
