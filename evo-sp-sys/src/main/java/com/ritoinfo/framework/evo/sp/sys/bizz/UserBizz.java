@@ -11,6 +11,7 @@ import com.ritoinfo.framework.evo.sp.sys.condition.UserCondition;
 import com.ritoinfo.framework.evo.sp.sys.dao.UserDao;
 import com.ritoinfo.framework.evo.sp.sys.dto.UserDto;
 import com.ritoinfo.framework.evo.sp.sys.entity.User;
+import com.ritoinfo.framework.evo.sp.sys.exception.UserExistedException;
 import com.ritoinfo.framework.evo.sp.sys.exception.UserRoleInvalidException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,6 +74,11 @@ public class UserBizz extends BaseBizz<UserDao, User, Long, UserCondition, UserD
 
 	@Transactional
 	public Long createAll(UserDto dto) {
+		UserDto existUserDto = getByMobileNumber(dto.getMobileNumber());
+		if (existUserDto != null) {
+			throw new UserExistedException(dto.getMobileNumber());
+		}
+
 		dto.setPassword(passwordEncoder.encode(dto.getPassword()));
 		Long id = this.create(dto);
 		dto.setId(id);

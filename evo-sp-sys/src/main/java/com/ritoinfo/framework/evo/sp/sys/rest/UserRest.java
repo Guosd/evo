@@ -12,6 +12,8 @@ import com.ritoinfo.framework.evo.sp.sys.condition.UserCondition;
 import com.ritoinfo.framework.evo.sp.sys.dao.UserDao;
 import com.ritoinfo.framework.evo.sp.sys.dto.UserDto;
 import com.ritoinfo.framework.evo.sp.sys.entity.User;
+import com.ritoinfo.framework.evo.sp.sys.exception.UserExistedException;
+import com.ritoinfo.framework.evo.sp.sys.exception.UserRoleInvalidException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,8 +57,12 @@ public class UserRest extends BaseRest<UserBizz, UserDao, User, Long, UserCondit
 	public ServiceResponse<Long> createAll(@Validated(CreateGroup.class) @RequestBody UserDto dto) {
 		try {
 			return ServiceResponse.ok(bizz.createAll(dto));
-		} catch (BizzException e) {
+		} catch (UserExistedException e) {
+			throw new RestException(Const.RC_SYS_USER_EXIST);
+		} catch (UserRoleInvalidException e) {
 			throw new RestException(Const.RC_SYS_USER_ROLE);
+		} catch (BizzException e) {
+			throw new RestException(Const.RC_SYS_USER);
 		}
 	}
 
