@@ -61,8 +61,8 @@ public class AssistBizz {
 	}
 
 	public String createAndSaveToken(UserContext userContext) {
-		/*// 相同用户登录，删除前次登录token
-		String onlineKey= RedisKeyAssist.generate("ONLINE", userContext.getMobileNumber());
+		/* TODO 相同用户登录，删除前次登录token
+		String onlineKey = RedisKeyAssist.generate("ONLINE", userContext.getMobileNumber());
 		String onlineToken = redisService.getString(onlineKey);
 		if (StringUtil.isNotBlank(onlineToken)) {
 			log.info("用户[" + userContext.getMobileNumber() + "]的令牌[" + onlineToken + "]被重置");
@@ -84,7 +84,8 @@ public class AssistBizz {
 		// 设置缓存
 		redisService.set(RedisKeyAssist.generate("TOKEN", token), userContext, tokenExpiration);
 		redisService.set(RedisKeyAssist.generate("REFRESH_TOKEN", token), refreshToken, jwtToken.parse(refreshToken).getJwtExpiration());
-		redisService.set(onlineKey, token, tokenExpiration);
+		// TODO 相同用户登录，删除前次登录token
+		// redisService.set(onlineKey, token, tokenExpiration);
 
 		return token;
 	}
