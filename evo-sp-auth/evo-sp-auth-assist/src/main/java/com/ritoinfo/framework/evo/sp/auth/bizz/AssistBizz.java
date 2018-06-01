@@ -61,7 +61,7 @@ public class AssistBizz {
 	}
 
 	public String createAndSaveToken(UserContext userContext) {
-		// 相同用户登录，删除前次登录token
+		/*// 相同用户登录，删除前次登录token
 		String onlineKey= RedisKeyAssist.generate("ONLINE", userContext.getMobileNumber());
 		String onlineToken = redisService.getString(onlineKey);
 		if (StringUtil.isNotBlank(onlineToken)) {
@@ -70,7 +70,7 @@ public class AssistBizz {
 			redisService.delete(RedisKeyAssist.generate("TOKEN", onlineToken));
 			redisService.delete(RedisKeyAssist.generate("REFRESH_TOKEN", onlineToken));
 			redisService.delete(RedisKeyAssist.generate("OLD_TOKEN", onlineToken));
-		}
+		}*/
 
 		// 清空 token 过期时间，因为从 Claims 中获取 Date 类型的数据，结果是 LONG 类型， 会引起 bean 赋值错误
 		userContext.setJwtExpiration(null);
