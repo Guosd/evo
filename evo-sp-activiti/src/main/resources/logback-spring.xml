@@ -2,6 +2,8 @@
 <configuration>
 	<include resource="org/springframework/boot/logging/logback/base.xml"/>
 
+	<jmxConfigurator/>
+
 	<springProperty scope="context" name="springAppName" source="spring.application.name"/>
 	<springProperty scope="context" name="logstashDestination" source="logstash.destination"/>
 
