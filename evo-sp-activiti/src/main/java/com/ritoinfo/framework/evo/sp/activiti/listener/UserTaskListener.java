@@ -93,7 +93,7 @@ public class UserTaskListener implements TaskListener {
 				String code = serviceResponse.getCode();
 				log.info("任务监听器获取回调URL结果: " + JsonUtil.objectToJson(serviceResponse));
 
-				if (!"SU00".equals(code)) {
+				if (!"SUCC-0000".equals(code)) {
 					throw new TaskListenerCallbackResultException("任务监听器获取回调URL结果非法: " + code);
 				}
 			} catch (Exception e) {
