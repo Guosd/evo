@@ -26,7 +26,7 @@ public class EvoActivitiApplication {
 		SpringApplication.run(EvoActivitiApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	public CommandLineRunner init(final RepositoryService repositoryService,
 	                              final RuntimeService runtimeService,
 	                              final TaskService taskService) {
@@ -46,6 +46,6 @@ public class EvoActivitiApplication {
 			}
 		};
 
-	}
+	}*/
 
 }
