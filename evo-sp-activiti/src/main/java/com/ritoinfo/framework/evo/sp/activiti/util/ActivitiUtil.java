@@ -1,12 +1,16 @@
 package com.ritoinfo.framework.evo.sp.activiti.util;
 
+import com.ritoinfo.framework.evo.common.uitl.BeanUtil;
+import com.ritoinfo.framework.evo.common.uitl.StringUtil;
 import com.ritoinfo.framework.evo.sp.activiti.condition.ActivitiPageCondition;
 import com.ritoinfo.framework.evo.sp.activiti.dto.VariableDto;
 import com.ritoinfo.framework.evo.sp.activiti.proxy.entity.TaskProxy;
 import com.ritoinfo.framework.evo.sp.activiti.proxy.entity.VariableProxy;
 import com.ritoinfo.framework.evo.sp.activiti.proxy.model.ActivitiPage;
-import com.ritoinfo.framework.evo.common.uitl.BeanUtil;
-import com.ritoinfo.framework.evo.common.uitl.StringUtil;
+import lombok.extern.slf4j.Slf4j;
+import org.activiti.engine.ActivitiException;
+import org.activiti.engine.delegate.VariableScope;
+import org.activiti.engine.impl.el.Expression;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +21,7 @@ import java.util.Map;
  * User: Kyll
  * Date: 2018-04-02 09:47
  */
+@Slf4j
 public class ActivitiUtil {
 	public static Map<String, Object> listToMap(List<VariableProxy> variableList) {
 		Map<String, Object> map = new HashMap<>();
@@ -78,5 +83,21 @@ public class ActivitiUtil {
 
 	public static boolean isWithdraw(String taskId, String defpvWithdrawMark) {
 		return StringUtil.isNotBlank(defpvWithdrawMark) && ("," + defpvWithdrawMark + ",").contains("," + taskId + ",");
+	}
+
+	public static String getExpressionText(Expression expression) {
+		return expression == null ? null : expression.getExpressionText();
+	}
+
+	public static Object getExpressionValue(Expression expression, VariableScope variableScope) {
+		Object value = null;
+		if (expression != null) {
+			try {
+				value = expression.getValue(variableScope);
+			} catch (ActivitiException e) {
+				log.warn("流程变量不存在: " + e.getMessage());
+			}
+		}
+		return value;
 	}
 }
