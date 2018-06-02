@@ -105,7 +105,7 @@ public class AuthBizz {
 		String token = assistBizz.createAndSaveToken(userDto);
 		assistBizz.updateLoginInfo(userDto, token, request);
 
-		log.info("生成token: " + mobileNumber + ", " + token);
+		log.info("生成令牌: " + mobileNumber + ", " + token);
 		return token;
 	}
 }

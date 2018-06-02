@@ -95,19 +95,14 @@ public class AuthFilter extends ZuulFilter {
 						} else {
 							requestContext.addZuulRequestHeader(Const.JWT_TOKEN_HEADER, newToken);
 
-							/*HttpServletResponse response = requestContext.getResponse();
+							HttpServletResponse response = requestContext.getResponse();
 							response.setHeader("Cache-Control", "no-store");
 							response.setHeader("Access-Control-Expose-Headers", Const.JWT_TOKEN_HEADER);
-							response.setHeader(Const.JWT_TOKEN_HEADER, newToken);*/
+							response.setHeader(Const.JWT_TOKEN_HEADER, newToken);
 						}
 
 						token = newToken;
 					}
-
-					HttpServletResponse response = requestContext.getResponse();
-					response.setHeader("Cache-Control", "no-store");
-					response.setHeader("Access-Control-Expose-Headers", Const.JWT_TOKEN_HEADER);
-					response.setHeader(Const.JWT_TOKEN_HEADER, token);
 
 					if (StringUtil.isNotBlank(token) && !authCommonApi.verify(VerifyDto.builder().uri(uri).method(request.getMethod()).token(token).build()).getData()) {
 						log.info("缺少权限: " + uri);
