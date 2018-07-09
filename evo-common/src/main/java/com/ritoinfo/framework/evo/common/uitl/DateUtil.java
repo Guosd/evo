@@ -61,7 +61,7 @@ public class DateUtil {
 	}
 
 	public static String format(Date date, String pattern) {
-		return new SimpleDateFormat(pattern).format(date);
+		return date == null ? null : new SimpleDateFormat(pattern).format(date);
 	}
 
 	public static Date removeHMS(Date date) {

@@ -1,9 +1,32 @@
 server:
   port: 20500
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include: [actuator, auditevents, autoconfig, beans, conditions, configprops, flyway, heapdump, health, httptrace, info, jolokia, liquibase, logfile, loggers, mappings, metrics, prometheus, scheduledtasks, sessions, shutdown, threaddump, trace]
 spring:
-  application:
-    name: evo-static-ui
+  rabbitmq:
+    host: ${evo.spring.rabbitmq.host}
+    port: ${evo.spring.rabbitmq.port}
+    virtual-host: ${evo.spring.rabbitmq.virtual-host}
+    username: ${evo.spring.rabbitmq.username}
+    password: ${evo.spring.rabbitmq.password}
   jackson:
     time-zone: GMT+8
+  sleuth:
+    http:
+      enabled: true
+    sampler:
+      probability: 1.0
+  boot:
+    admin:
+      client:
+        url: ${evo.spring.boot.admin.client.url}
+        instance:
+          prefer-ip: true
   thymeleaf:
     cache: false

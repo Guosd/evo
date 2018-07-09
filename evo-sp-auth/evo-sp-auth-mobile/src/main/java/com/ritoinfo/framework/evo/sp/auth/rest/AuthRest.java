@@ -5,6 +5,7 @@ import com.ritoinfo.framework.evo.sp.auth.bizz.AuthBizz;
 import com.ritoinfo.framework.evo.sp.auth.dto.CodeDto;
 import com.ritoinfo.framework.evo.sp.auth.dto.MobileCodeDto;
 import com.ritoinfo.framework.evo.sp.auth.dto.MobileLoginDto;
+import com.ritoinfo.framework.evo.sp.auth.exception.VerifyCodeInvalidException;
 import com.ritoinfo.framework.evo.sp.base.exception.BizzException;
 import com.ritoinfo.framework.evo.sp.base.exception.RestException;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
@@ -58,6 +59,8 @@ public class AuthRest {
 	public ServiceResponse<String> login(@Validated @RequestBody MobileLoginDto loginDto, HttpServletRequest request) {
 		try {
 			return ServiceResponse.ok(authBizz.authorize(loginDto, request));
+		} catch (VerifyCodeInvalidException e) {
+			throw new RestException(Const.RC_AUTH_M_LOGIN_VERIFY_CODE, e);
 		} catch (BizzException e) {
 			throw new RestException(Const.RC_AUTH_M_LOGIN, e);
 		}

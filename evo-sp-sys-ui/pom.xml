@@ -10,7 +10,6 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>evo-sp-sys-ui</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 
 	<build>
 		<plugins>
@@ -21,6 +20,7 @@
 				<executions>
 					<execution>
 						<goals>
+							<goal>build-info</goal>
 							<goal>repackage</goal>
 						</goals>
 					</execution>

@@ -10,18 +10,17 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>evo-model</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>evo-activiti-model</module>
-		<module>evo-sp-sms-model</module>
+		<module>evo-sp-activiti-model</module>
 		<module>evo-sp-auth-pc-model</module>
 		<module>evo-sp-auth-common-model</module>
 		<module>evo-sp-auth-mobile-model</module>
-		<module>evo-sp-sys-model</module>
 		<module>evo-sp-datadict-model</module>
+		<module>evo-sp-sms-model</module>
+		<module>evo-sp-sys-model</module>
 	</modules>
 
 	<dependencies>

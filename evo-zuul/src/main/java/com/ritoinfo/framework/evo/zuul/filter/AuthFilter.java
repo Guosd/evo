@@ -76,12 +76,16 @@ public class AuthFilter extends ZuulFilter {
 				process401(requestContext, isBrowser);
 			} else {
 				VerifyResult verifyResult = jwtToken.verify(token);
+				log.info("验证结果: " + verifyResult + ", " + token);
 
 				if (VerifyResult.SUCCESS == verifyResult || VerifyResult.EXPIRED == verifyResult) {
 					if (VerifyResult.EXPIRED == verifyResult) {
 						String newToken = authCommonApi.tryRefresh(token).getData();
+						log.info("获取临时令牌: " + uri + "\r\n新令牌: " + newToken + "\r\n旧令牌: " + token);
+
 						if (StringUtil.isBlank(newToken)) {
 							newToken = authCommonApi.refresh(token).getData();
+							log.info("获取刷新令牌: " + uri + "\r\n新令牌: " + newToken + "\r\n旧令牌: " + token);
 						}
 
 						if (StringUtil.isBlank(newToken)) {
@@ -131,6 +135,9 @@ public class AuthFilter extends ZuulFilter {
 				log.error("重定向到登录页面失败", e);
 			}
 		} else {
+			HttpServletRequest request = requestContext.getRequest();
+			String uri = request.getRequestURI();
+			log.info("401: " + uri);
 			requestContext.setResponseStatusCode(401);
 		}
 	}

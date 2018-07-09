@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: evo-static-ui
   cloud:
     config:
       name: config
@@ -9,11 +11,32 @@ eureka:
   instance:
     lease-expiration-duration-in-seconds: 15
     lease-renewal-interval-in-seconds: 5
+    health-check-url-path: /actuator/health
   client:
     initial-instance-info-replication-interval-seconds: 5
     registry-fetch-interval-seconds: 5
     serviceUrl:
-      defaultZone: http://localhost:20000/eureka
+      defaultZone: http://localhost:50101/eureka
+---
+spring:
+  profiles: prod
+eureka:
+  instance:
+    ip-address: 10.20.133.30
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://10.20.133.30:50101/eureka
+---
+spring:
+  profiles: uat
+eureka:
+  instance:
+    ip-address: 10.20.133.30
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://10.20.133.30:50101/eureka
 ---
 spring:
   profiles: sit
@@ -24,3 +47,27 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://10.20.133.30:50101/eureka
+logstash:
+  destination: 10.21.111.42:9600
+---
+spring:
+  profiles: dev
+eureka:
+  instance:
+    ip-address: 192.168.11.102
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.11.102:50101/eureka
+---
+spring:
+  profiles: home
+eureka:
+  instance:
+    ip-address: 192.168.1.24
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.1.24:50101/eureka
+logstash:
+  destination: 192.168.1.28:9600
