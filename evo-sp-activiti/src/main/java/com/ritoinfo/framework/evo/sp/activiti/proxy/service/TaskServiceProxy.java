@@ -1,5 +1,11 @@
 package com.ritoinfo.framework.evo.sp.activiti.proxy.service;
 
+import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
+import com.ritoinfo.framework.evo.common.uitl.BeanUtil;
+import com.ritoinfo.framework.evo.common.uitl.DateUtil;
+import com.ritoinfo.framework.evo.common.uitl.JsonUtil;
+import com.ritoinfo.framework.evo.common.uitl.SqlUtil;
+import com.ritoinfo.framework.evo.common.uitl.StringUtil;
 import com.ritoinfo.framework.evo.sp.activiti.condition.TaskCondition;
 import com.ritoinfo.framework.evo.sp.activiti.dto.VariableDto;
 import com.ritoinfo.framework.evo.sp.activiti.proxy.entity.CommentProxy;
@@ -7,13 +13,11 @@ import com.ritoinfo.framework.evo.sp.activiti.proxy.entity.TaskProxy;
 import com.ritoinfo.framework.evo.sp.activiti.proxy.entity.VariableProxy;
 import com.ritoinfo.framework.evo.sp.activiti.proxy.model.ActivitiPage;
 import com.ritoinfo.framework.evo.sp.activiti.util.ActivitiUtil;
-import com.ritoinfo.framework.evo.common.uitl.BeanUtil;
-import com.ritoinfo.framework.evo.common.uitl.DateUtil;
-import com.ritoinfo.framework.evo.common.uitl.JsonUtil;
-import com.ritoinfo.framework.evo.common.uitl.SqlUtil;
-import com.ritoinfo.framework.evo.common.uitl.StringUtil;
+import com.ritoinfo.framework.evo.sp.base.starter.exception.UserContextNotExistException;
+import com.ritoinfo.framework.evo.sp.base.starter.session.SessionHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.impl.identity.Authentication;
 import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.task.TaskQuery;
@@ -100,6 +104,14 @@ public class TaskServiceProxy {
 
 	public CommentProxy saveComment(String processInstanceId, String taskId, String message) {
 		log.info("增加审批意见: " + processInstanceId + ", " + taskId + ", " + message);
+
+		UserContext userContext = SessionHolder.getUserContext();
+		if (userContext == null) {
+			throw new UserContextNotExistException("无法获取UserContext");
+		}
+
+		log.info("当前审批用户: " + userContext.getUsername());
+		Authentication.setAuthenticatedUserId(userContext.getUsername());
 
 		Comment comment = taskService.addComment(taskId, processInstanceId, message);
 

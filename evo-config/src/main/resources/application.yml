@@ -24,6 +24,10 @@ eureka:
 ---
 spring:
   profiles:
+    active: native
+---
+spring:
+  profiles:
     active: subversion
   cloud:
     config:
@@ -35,25 +39,18 @@ spring:
           default-label: /src/evo-config-file
 ---
 spring:
-  profiles:
-    active: git
-  cloud:
-    config:
-      server:
-        git:
-          uri: https://github.com/kyllyang/evo-config-file
-          username: kyllyang
-          password: ky40010628ll
----
-spring:
   profiles: prod
+  boot:
+    admin:
+      client:
+        url: http://10.20.168.48:20020, http://10.20.168.49:20020
 eureka:
   instance:
-    ip-address: 10.20.133.30
+    ip-address: ${parasitifer-ip}
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://10.20.133.30:50101/eureka
+      defaultZone: http://10.20.168.46:50101/eureka, http://10.20.168.47:50101/eureka
 ---
 spring:
   profiles: uat
@@ -106,5 +103,3 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://192.168.1.24:50101/eureka
-logstash:
-  destination: 192.168.1.28:9600

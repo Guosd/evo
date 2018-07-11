@@ -99,8 +99,4 @@ public class BackToSelfRule extends AbstractLoadBalancerRule {
 
 		return finalServer;
 	}
-
-	public static void main(String[] args) {
-		System.out.println(new Random().nextInt(0));
-	}
 }

@@ -18,4 +18,15 @@ eureka:
     fetch-registry: false
     service-url:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka
-
+---
+spring:
+  profiles: prod
+eureka:
+  instance:
+    ip-address: ${parasitifer-ip}
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://${eureka-ip}:50101/eureka

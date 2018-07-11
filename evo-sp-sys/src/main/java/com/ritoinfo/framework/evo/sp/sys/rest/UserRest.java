@@ -53,6 +53,12 @@ public class UserRest extends BaseRest<UserBizz, UserDao, User, Long, UserCondit
 		return ServiceResponse.ok(bizz.getUserContext());
 	}
 
+	// TODO 兼容 SCFW
+	@GetMapping("/checkOldPassword")
+	public String checkOldPassword(UserDto dto) {
+		return String.valueOf(bizz.checkOldPassword(dto));
+	}
+
 	@PostMapping("/all")
 	public ServiceResponse<Long> createAll(@Validated(CreateGroup.class) @RequestBody UserDto dto) {
 		try {

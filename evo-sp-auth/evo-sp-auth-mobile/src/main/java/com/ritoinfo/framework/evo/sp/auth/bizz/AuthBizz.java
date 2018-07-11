@@ -4,11 +4,13 @@ import com.ritoinfo.framework.evo.common.Const;
 import com.ritoinfo.framework.evo.common.uitl.AlgorithmUtil;
 import com.ritoinfo.framework.evo.data.redis.service.RedisService;
 import com.ritoinfo.framework.evo.sp.auth.assist.RedisKeyAssist;
+import com.ritoinfo.framework.evo.sp.auth.config.AuthConfig;
 import com.ritoinfo.framework.evo.sp.auth.dto.CodeDto;
 import com.ritoinfo.framework.evo.sp.auth.dto.MobileCodeDto;
 import com.ritoinfo.framework.evo.sp.auth.dto.MobileLoginDto;
 import com.ritoinfo.framework.evo.sp.auth.exception.MobileNumberNotFoundException;
 import com.ritoinfo.framework.evo.sp.auth.exception.VerifyCodeInvalidException;
+import com.ritoinfo.framework.evo.sp.auth.exception.VerifyCodeSendException;
 import com.ritoinfo.framework.evo.sp.sms.api.SmsApi;
 import com.ritoinfo.framework.evo.sp.sms.dto.SmsDto;
 import com.ritoinfo.framework.evo.sp.sys.api.UserApi;
@@ -34,20 +36,28 @@ public class AuthBizz {
 	private RedisService redisService;
 	@Autowired
 	private AssistBizz assistBizz;
+	@Autowired
+	private AuthConfig authConfig;
 
 	public CodeDto getCode(MobileCodeDto mobileCodeDto) {
 		String mobileNumber = mobileCodeDto.getMobileNumber();
+		String verifyCode = AlgorithmUtil.randomNumber(authConfig.getLength());
+		int expirationTime = authConfig.getExpirationTime();
 
-		String verifyCode = AlgorithmUtil.randomNumber(6);
+		log.info("生成验证码: " + mobileNumber + ", " + verifyCode + ", " + expirationTime);
 
-		redisService.set(RedisKeyAssist.generate("VERIFY_CODE_" + Const.VERIFY_CODE_SIGN_IN, mobileNumber), verifyCode, 60 * 1000L);
-		redisService.set(RedisKeyAssist.generate("VERIFY_CODE_" + Const.VERIFY_CODE_SIGN_UP, mobileNumber), verifyCode, 60 * 1000L);
+		redisService.set(RedisKeyAssist.generate("VERIFY_CODE_" + Const.VERIFY_CODE_SIGN_IN, mobileNumber), verifyCode, 1000L * 60 * expirationTime);
+		redisService.set(RedisKeyAssist.generate("VERIFY_CODE_" + Const.VERIFY_CODE_SIGN_UP, mobileNumber), verifyCode, 1000L * 60 * expirationTime);
 
 		CodeDto codeDto = new CodeDto();
 		codeDto.setVerifyCode(verifyCode);// TODO 生产环境去掉返回值
 		codeDto.setExistUser(userApi.getByMobileNumber(mobileCodeDto.getMobileNumber()).getData() != null);
 
-		smsApi.send(new SmsDto());// TODO 后续完善
+		try {
+			smsApi.send(SmsDto.builder().phoneNo(mobileNumber).content(verifyCode).build());
+		} catch (Exception e) {
+			throw new VerifyCodeSendException("验证码发送失败", e);
+		}
 
 		return codeDto;
 	}

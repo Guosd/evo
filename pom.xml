@@ -15,8 +15,10 @@
 		<profile>
 			<id>prod</id>
 			<properties>
-				<config-type>subversion</config-type>
+				<config-type>native</config-type>
 				<dockerfile-profile>prod</dockerfile-profile>
+				<eureka-ip>${eureka-ip}</eureka-ip>
+				<parasitifer-ip>${parasitifer-ip}</parasitifer-ip>
 			</properties>
 		</profile>
 		<profile>
@@ -29,7 +31,7 @@
 		<profile>
 			<id>sit</id>
 			<properties>
-				<config-type>subversion</config-type>
+				<config-type>native</config-type>
 				<dockerfile-profile>sit</dockerfile-profile>
 			</properties>
 		</profile>
@@ -175,7 +177,7 @@
 			</resource>
 			<resource>
 				<directory>src/main/resources</directory>
-				<filtering>false</filtering>
+				<filtering>true</filtering>
 			</resource>
 		</resources>
 		<plugins>

@@ -11,5 +11,7 @@
 20120 ~ 20124 sp-datadict # 数据字典
 20125 ~ 20129 sp-activiti # 工作流
 20130 ~ 20134 sp-sms # 短信服务
+20135 ~ 20139 sp-storage # 文件服务
 20500 ~ 20504 static-ui # 静态资源
 20505 ~ 20509 sp-sys-ui # sp-sys模块的UI
+30000 # 示例服务

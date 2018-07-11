@@ -89,7 +89,7 @@ function jqGridQuery(postData, customGridSelector) {
 		datatype: 'json',
 		pageNo: 1,
 		postData: postData
-	}).trigger('reloadGrid');
+	}).trigger('reloadGrid', [{page: 1}]);
 }
 
 function jqGridSelectIds(customGridSelector) {

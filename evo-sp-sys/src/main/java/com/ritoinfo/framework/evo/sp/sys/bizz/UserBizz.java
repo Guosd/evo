@@ -133,4 +133,9 @@ public class UserBizz extends BaseBizz<UserDao, User, Long, UserCondition, UserD
 	public void deleteByRole(Long roleId) {
 		dao.deleteByRole(roleId);
 	}
+
+	public boolean checkOldPassword(UserDto dto) {
+		UserDto oldUserDto = this.getByUsername(dto.getUsername());
+		return oldUserDto != null && passwordEncoder.matches(dto.getPassword(), oldUserDto.getPassword());
+	}
 }

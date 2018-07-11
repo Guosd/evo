@@ -82,7 +82,7 @@ public class AuthFilter extends ZuulFilter {
 					if (VerifyResult.EXPIRED == verifyResult) {
 						String newToken = authCommonApi.tryRefresh(token).getData();
 						log.info("获取临时令牌: " + uri + "\r\n新令牌: " + newToken + "\r\n旧令牌: " + token);
-
+						
 						if (StringUtil.isBlank(newToken)) {
 							newToken = authCommonApi.refresh(token).getData();
 							log.info("获取刷新令牌: " + uri + "\r\n新令牌: " + newToken + "\r\n旧令牌: " + token);
@@ -104,12 +104,12 @@ public class AuthFilter extends ZuulFilter {
 						token = newToken;
 					}
 
-					if (StringUtil.isNotBlank(token) && !authCommonApi.verify(VerifyDto.builder().uri(uri).method(request.getMethod()).token(token).build()).getData()) {
+					/*if (StringUtil.isNotBlank(token) && !authCommonApi.verify(VerifyDto.builder().uri(uri).method(request.getMethod()).token(token).build()).getData()) {
 						log.info("缺少权限: " + uri);
 
 						requestContext.setSendZuulResponse(false);
 						requestContext.setResponseStatusCode(403);
-					}
+					}*/
 				} else {
 					log.info("令牌失效: " + uri);
 

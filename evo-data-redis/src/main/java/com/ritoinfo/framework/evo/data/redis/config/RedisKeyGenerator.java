@@ -9,7 +9,13 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class RedisKeyGenerator {
+	private static String redisCompanyPrefix;
 	private static String springApplicationName;
+
+	@Value("${redis.companyPrefix}")
+	public void setRedisCompanyPrefix(String redisCompanyPrefix) {
+		RedisKeyGenerator.redisCompanyPrefix = redisCompanyPrefix;
+	}
 
 	@Value("${spring.application.name}")
 	public void setSpringApplicationName(String springApplicationName) {
@@ -29,6 +35,6 @@ public class RedisKeyGenerator {
 	}
 
 	public static String generate(String springApplicationName, String clazzName, String bizzFlag, String key) {
-		return springApplicationName + ":" + clazzName + ":" + bizzFlag + ":" + key;
+		return redisCompanyPrefix + ":" + springApplicationName + ":" + clazzName + ":" + bizzFlag + ":" + key;
 	}
 }
