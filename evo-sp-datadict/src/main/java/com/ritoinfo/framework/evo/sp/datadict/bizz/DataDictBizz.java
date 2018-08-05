@@ -1,7 +1,7 @@
 package com.ritoinfo.framework.evo.sp.datadict.bizz;
 
 import com.ritoinfo.framework.evo.data.redis.annotation.RedisKey;
-import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseBizz;
+import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseXmlBizz;
 import com.ritoinfo.framework.evo.sp.datadict.condition.DataDictCondition;
 import com.ritoinfo.framework.evo.sp.datadict.dao.DataDictDao;
 import com.ritoinfo.framework.evo.sp.datadict.dto.DataDictDto;
@@ -23,7 +23,7 @@ import java.util.List;
 @Slf4j
 @Transactional(readOnly = true)
 @Service
-public class DataDictBizz extends BaseBizz<DataDictDao, DataDict, Long, DataDictCondition, DataDictDto> {
+public class DataDictBizz extends BaseXmlBizz<DataDictDao, DataDict, Long, DataDictDto> {
 	@Cacheable
 	public List<DataDictDto> findByCode(String code) {
 		return super.find(DataDictCondition.builder().code(code).build());

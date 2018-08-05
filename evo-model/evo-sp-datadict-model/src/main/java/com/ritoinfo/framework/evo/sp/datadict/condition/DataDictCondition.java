@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.datadict.condition;
 
-import com.ritoinfo.framework.evo.sp.base.starter.condition.BaseCondition;
+import com.ritoinfo.framework.evo.sp.base.starter.dto.PageDto;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,7 +12,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Builder
 @Data
-public class DataDictCondition extends BaseCondition<Long> {
+public class DataDictCondition extends PageDto {
+	private Long id;
 	private String name;
 	private String code;
 	private String key;

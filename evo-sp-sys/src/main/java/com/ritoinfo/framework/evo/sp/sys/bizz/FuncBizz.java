@@ -2,7 +2,7 @@ package com.ritoinfo.framework.evo.sp.sys.bizz;
 
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
-import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseBizz;
+import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseXmlBizz;
 import com.ritoinfo.framework.evo.sp.sys.condition.FuncCondition;
 import com.ritoinfo.framework.evo.sp.sys.dao.FuncDao;
 import com.ritoinfo.framework.evo.sp.sys.dto.FuncDto;
@@ -23,28 +23,28 @@ import java.util.List;
 @Slf4j
 @Transactional(readOnly = true)
 @Service
-public class FuncBizz extends BaseBizz<FuncDao, Func, Long, FuncCondition, FuncDto> {
+public class FuncBizz extends BaseXmlBizz<FuncDao, Func, Long, FuncDto> {
 	@Autowired
 	private RoleBizz roleBizz;
 	@Autowired
 	private MenuBizz menuBizz;
 
 	public FuncDto getWithMicro(Long id) {
-		return BaseHelper.mapToDto(dao.getWithMicro(id), FuncDto.class);
+		return BaseHelper.toObject(dao.getWithMicro(id), FuncDto.class);
 	}
 
 	public List<FuncDto> findByMicro(Long microId) {
 		FuncCondition condition = new FuncCondition();
 		condition.setMicroId(microId);
-		return BaseHelper.toDto(dao.find(condition));
+		return toDto(dao.find(condition));
 	}
 
 	public List<FuncDto> findByRoleWithMicro(Long roleId) {
-		return BaseHelper.mapToDto(dao.findByRoleWithMicro(roleId), FuncDto.class);
+		return BaseHelper.toObject(dao.findByRoleWithMicro(roleId), FuncDto.class);
 	}
 
 	public List<PermissionDto> findByUsername(String username) {
-		return BaseHelper.mapToDto(dao.findByUsername(username), PermissionDto.class);
+		return BaseHelper.toObject(dao.findByUsername(username), PermissionDto.class);
 	}
 
 	public PageList<FuncDto> findPageWithMicro(FuncCondition condition) {
@@ -54,7 +54,7 @@ public class FuncBizz extends BaseBizz<FuncDao, Func, Long, FuncCondition, FuncD
 		BaseHelper.copyPage(pageList, count, condition);
 
 		if (count > 0) {
-			pageList.setDataList(BaseHelper.mapToDto(dao.findPageWithMicro(condition.page()), FuncDto.class));
+			pageList.setDataList(BaseHelper.toObject(dao.findPageWithMicro(condition.page()), FuncDto.class));
 		}
 
 		return pageList;

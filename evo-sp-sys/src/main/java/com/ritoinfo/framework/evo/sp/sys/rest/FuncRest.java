@@ -6,10 +6,8 @@ import com.ritoinfo.framework.evo.sp.base.starter.rest.BaseRest;
 import com.ritoinfo.framework.evo.sp.base.starter.validate.group.PageGroup;
 import com.ritoinfo.framework.evo.sp.sys.bizz.FuncBizz;
 import com.ritoinfo.framework.evo.sp.sys.condition.FuncCondition;
-import com.ritoinfo.framework.evo.sp.sys.dao.FuncDao;
 import com.ritoinfo.framework.evo.sp.sys.dto.FuncDto;
 import com.ritoinfo.framework.evo.sp.sys.dto.PermissionDto;
-import com.ritoinfo.framework.evo.sp.sys.entity.Func;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +24,7 @@ import java.util.List;
 @Slf4j
 @RequestMapping("func")
 @RestController
-public class FuncRest extends BaseRest<FuncBizz, FuncDao, Func, Long, FuncCondition, FuncDto> {
+public class FuncRest extends BaseRest<FuncBizz, Long, FuncDto> {
 	@GetMapping("/id/{id}/micro")
 	public ServiceResponse<FuncDto> getWithMicro(@PathVariable Long id) {
 		return ServiceResponse.ok(bizz.getWithMicro(id));

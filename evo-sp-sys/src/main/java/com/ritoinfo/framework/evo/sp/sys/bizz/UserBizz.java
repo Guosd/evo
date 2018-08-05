@@ -4,7 +4,7 @@ import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
 import com.ritoinfo.framework.evo.common.password.crypto.PasswordEncoder;
 import com.ritoinfo.framework.evo.common.uitl.ArrayUtil;
 import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
-import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseBizz;
+import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseXmlBizz;
 import com.ritoinfo.framework.evo.sp.base.starter.exception.UserContextNotExistException;
 import com.ritoinfo.framework.evo.sp.base.starter.session.SessionHolder;
 import com.ritoinfo.framework.evo.sp.sys.condition.UserCondition;
@@ -28,7 +28,7 @@ import java.util.List;
 @Slf4j
 @Transactional(readOnly = true)
 @Service
-public class UserBizz extends BaseBizz<UserDao, User, Long, UserCondition, UserDto> {
+public class UserBizz extends BaseXmlBizz<UserDao, User, Long, UserDto> {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	@Autowired
@@ -45,7 +45,7 @@ public class UserBizz extends BaseBizz<UserDao, User, Long, UserCondition, UserD
 		condition.setUsername(username);
 
 		List<User> list = dao.find(condition);
-		return list.isEmpty() ? null : BaseHelper.toDto(list.get(0));
+		return list.isEmpty() ? null : toDto(list.get(0));
 	}
 
 	public UserDto getByMobileNumber(String mobileNumber) {
@@ -53,7 +53,7 @@ public class UserBizz extends BaseBizz<UserDao, User, Long, UserCondition, UserD
 		condition.setMobileNumber(mobileNumber);
 
 		List<User> list = dao.find(condition);
-		return list.isEmpty() ? null : BaseHelper.toDto(list.get(0));
+		return list.isEmpty() ? null : toDto(list.get(0));
 	}
 
 	// TODO 兼容 SCFW
@@ -86,7 +86,7 @@ public class UserBizz extends BaseBizz<UserDao, User, Long, UserCondition, UserD
 		Long[] roleIds = dto.getRoleIds();
 		if (ArrayUtil.isNotEmpty(roleIds)) {
 			if (ArrayUtil.isValid(roleIds)) {
-				dao.insertWithRole(BaseHelper.dtoToMap(dto));
+				dao.insertWithRole(BaseHelper.toMap(dto));
 			} else {
 				throw new UserRoleInvalidException(Arrays.toString(roleIds));
 			}
@@ -107,7 +107,7 @@ public class UserBizz extends BaseBizz<UserDao, User, Long, UserCondition, UserD
 		} else {
 			if (ArrayUtil.isValid(roleIds)) {
 				dao.deleteWithRole(dto.getId());
-				dao.insertWithRole(BaseHelper.dtoToMap(dto));
+				dao.insertWithRole(BaseHelper.toMap(dto));
 			} else {
 				throw new UserRoleInvalidException(Arrays.toString(roleIds));
 			}

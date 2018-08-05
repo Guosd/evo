@@ -10,10 +10,8 @@ import com.ritoinfo.framework.evo.sp.base.starter.rest.BaseRest;
 import com.ritoinfo.framework.evo.sp.base.starter.validate.group.PageGroup;
 import com.ritoinfo.framework.evo.sp.sys.bizz.MenuBizz;
 import com.ritoinfo.framework.evo.sp.sys.condition.MenuCondition;
-import com.ritoinfo.framework.evo.sp.sys.dao.MenuDao;
 import com.ritoinfo.framework.evo.sp.sys.dto.MenuDto;
 import com.ritoinfo.framework.evo.sp.sys.dto.MyMenuDto;
-import com.ritoinfo.framework.evo.sp.sys.entity.Menu;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +31,7 @@ import java.util.Map;
 @Slf4j
 @RequestMapping("/menu")
 @RestController
-public class MenuRest extends BaseRest<MenuBizz, MenuDao, Menu, Long, MenuCondition, MenuDto> {
+public class MenuRest extends BaseRest<MenuBizz, Long, MenuDto> {
 	@GetMapping("/id/{id}/parent")
 	public ServiceResponse<MenuDto> getWithParent(@PathVariable Long id) {
 		return ServiceResponse.ok(bizz.getWithParent(id));

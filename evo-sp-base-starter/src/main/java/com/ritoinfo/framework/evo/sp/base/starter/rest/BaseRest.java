@@ -3,12 +3,8 @@ package com.ritoinfo.framework.evo.sp.base.starter.rest;
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseBizz;
-import com.ritoinfo.framework.evo.sp.base.starter.condition.BaseCondition;
-import com.ritoinfo.framework.evo.sp.base.starter.dao.BaseDao;
-import com.ritoinfo.framework.evo.sp.base.starter.dto.BaseDto;
-import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseEntity;
+import com.ritoinfo.framework.evo.sp.base.starter.dto.PageDto;
 import com.ritoinfo.framework.evo.sp.base.starter.validate.group.CreateGroup;
-import com.ritoinfo.framework.evo.sp.base.starter.validate.group.ListGroup;
 import com.ritoinfo.framework.evo.sp.base.starter.validate.group.PageGroup;
 import com.ritoinfo.framework.evo.sp.base.starter.validate.group.UpdateGroup;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,48 +17,42 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * User: Kyll
  * Date: 2018-02-09 15:58
  */
-public abstract class BaseRest<B extends BaseBizz<D, E, PK, C, T>, D extends BaseDao<E, PK, C>, E extends BaseEntity<PK>, PK extends Serializable, C extends BaseCondition<PK>, T extends BaseDto<PK>> {
+public abstract class BaseRest<B extends BaseBizz, PK extends Serializable, D> {
 	@Autowired
 	protected B bizz;
 
 	@GetMapping("/id/{id}")
-	public ServiceResponse<T> get(@PathVariable PK id) {
-		return ServiceResponse.ok(bizz.get(id));
+	@SuppressWarnings("unchecked")
+	public ServiceResponse<D> get(@PathVariable PK id) {
+		return ServiceResponse.ok((D) bizz.get(id));
 	}
 
-	@GetMapping("/all")
-	public ServiceResponse<List<T>> find() {
-		return ServiceResponse.ok(bizz.find());
-	}
-
-	@GetMapping
-	public ServiceResponse<List<T>> find(@Validated(ListGroup.class) C condition) {
-		return ServiceResponse.ok(bizz.find(condition));
-	}
-
-	@GetMapping("/page")
-	public ServiceResponse<PageList<T>> findPage(@Validated(PageGroup.class) C condition) {
-		return ServiceResponse.ok(bizz.findPage(condition));
+	@PostMapping("/page")
+	@SuppressWarnings("unchecked")
+	public <PD extends PageDto> ServiceResponse<PageList<D>> findPage(@Validated(PageGroup.class) @RequestBody PD pageDto) {
+		return ServiceResponse.ok(bizz.findPage(pageDto));
 	}
 
 	@PostMapping
-	public ServiceResponse<PK> create(@Validated(CreateGroup.class) @RequestBody T dto) {
-		return ServiceResponse.ok(bizz.create(dto));
+	@SuppressWarnings("unchecked")
+	public ServiceResponse<PK> create(@Validated(CreateGroup.class) @RequestBody D dto) {
+		return ServiceResponse.ok((PK) bizz.create(dto));
 	}
 
 	@PutMapping
-	public ServiceResponse update(@Validated(UpdateGroup.class) @RequestBody T dto) {
+	@SuppressWarnings("unchecked")
+	public ServiceResponse update(@Validated(UpdateGroup.class) @RequestBody D dto) {
 		bizz.update(dto);
 		return ServiceResponse.ok();
 	}
 
 	@DeleteMapping("/{id}")
+	@SuppressWarnings("unchecked")
 	public ServiceResponse delete(@PathVariable PK id) {
 		bizz.delete(id);
 		return ServiceResponse.ok();

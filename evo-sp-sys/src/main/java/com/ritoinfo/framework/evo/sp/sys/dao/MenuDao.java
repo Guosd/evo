@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.sys.dao;
 
-import com.ritoinfo.framework.evo.sp.base.dao.MyBatisDao;
+import com.ritoinfo.framework.evo.sp.base.starter.dao.BaseXmlDao;
 import com.ritoinfo.framework.evo.sp.sys.condition.MenuCondition;
 import com.ritoinfo.framework.evo.sp.sys.entity.Menu;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,7 +13,7 @@ import java.util.Map;
  * Date: 2018-04-23 21:12
  */
 @Mapper
-public interface MenuDao extends MyBatisDao<Menu, Long, MenuCondition> {
+public interface MenuDao extends BaseXmlDao<Menu, Long, MenuCondition> {
 	Map<String, Object> getWithParent(Long id);
 
 	List<Map<String, Object>> findByIds(Long... ids);

@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.sys.entity;
 
-import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseEntity;
+import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseXmlEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class Func extends BaseEntity<Long> {
+public class Func extends BaseXmlEntity<Long> {
 	private Long microId;// 微服务ID
 	private String name;// 功能名称
 	private String code;// 功能编码

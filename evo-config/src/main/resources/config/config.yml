@@ -52,9 +52,16 @@ evo:
       admin:
         client:
           url: http://10.20.133.30:20020
+          instance:
+            prefer-ip: true
   ribbon:
     NFLoadBalancerRuleClassName: com.ritoinfo.framework.evo.zuul.loadbalancer.BackToSelfRule
   sp:
+    demo:
+      datasource:
+        url: jdbc:mysql://10.20.133.43:8066/evo_demo?useUnicode=true&characterEncoding=UTF8
+        username: evo_demo
+        password: evo_demo
     sys:
       datasource:
         url: jdbc:mysql://10.20.133.43:8066/evo_sys?useUnicode=true&characterEncoding=UTF8

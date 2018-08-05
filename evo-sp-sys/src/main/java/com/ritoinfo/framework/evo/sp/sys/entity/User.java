@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.sys.entity;
 
-import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseEntity;
+import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseXmlEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class User extends BaseEntity<Long> {
+public class User extends BaseXmlEntity<Long> {
 	private String username;// 用户名称
 	private String password;// 密码
 	private String name;// 姓名

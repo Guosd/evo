@@ -1,9 +1,8 @@
 package com.ritoinfo.framework.evo.sp.sys.dto;
 
-import com.ritoinfo.framework.evo.sp.base.starter.dto.BaseDto;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -11,9 +10,9 @@ import java.util.List;
  * User: Kyll
  * Date: 2018-03-05 23:06
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class UserDto extends BaseDto<Long> {
+public class UserDto implements Serializable {
+	private Long id;
 	private String username;
 	private String password;
 	private String name;

@@ -1,16 +1,14 @@
 package com.ritoinfo.framework.evo.sp.base.starter.bizz;
 
+import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
 import com.ritoinfo.framework.evo.common.uitl.BeanUtil;
-import com.ritoinfo.framework.evo.common.uitl.DateUtil;
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
-import com.ritoinfo.framework.evo.sp.base.starter.condition.BaseCondition;
-import com.ritoinfo.framework.evo.sp.base.starter.dao.BaseDao;
-import com.ritoinfo.framework.evo.sp.base.starter.dto.BaseDto;
+import com.ritoinfo.framework.evo.sp.base.starter.assist.Converter;
+import com.ritoinfo.framework.evo.sp.base.starter.dto.PageDto;
 import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseEntity;
 import com.ritoinfo.framework.evo.sp.base.starter.session.SessionHolder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,69 +17,76 @@ import java.util.List;
  * User: Kyll
  * Date: 2018-02-09 16:52
  */
-public abstract class BaseBizz<D extends BaseDao<E, PK, C>, E extends BaseEntity<PK>, PK extends Serializable, C extends BaseCondition<PK>, T extends BaseDto<PK>> {
+public abstract class BaseBizz<Dao, E extends BaseEntity, PK extends Serializable, Dto> {
 	@Autowired
-	protected D dao;
+	protected Dao dao;
 
-	public T get(PK id) {
-		return BaseHelper.toDto(dao.get(id));
+	private static Class entityClass;
+	private static Class dtoClass;
+
+	public abstract Dto get(PK id);
+
+	public abstract Dto getOne(Object condition);
+
+	public abstract List<Dto> find();
+
+	public abstract List<Dto> find(Object condition);
+
+	public abstract <C extends PageDto> PageList<Dto> findPage(C condition);
+
+	public abstract int count();
+
+	public abstract int count(Object condition);
+
+	public abstract PK create(Dto dto);
+
+	public abstract void update(Dto dto);
+
+	public abstract void delete(PK id);
+
+	@SuppressWarnings("unchecked")
+	protected Dto toDto(E entity, Converter<Dto, E> converter) {
+		return (Dto) BaseHelper.convertObject(entity, getDtoClass(), converter);
 	}
 
-	public List<T> find() {
-		return BaseHelper.toDto(dao.find(null));
+	protected Dto toDto(E entity) {
+		return toDto(entity, null);
 	}
 
-	public List<T> find(C condition) {
-		return BaseHelper.toDto(dao.find(condition));
+	@SuppressWarnings("unchecked")
+	protected List<Dto> toDto(List<E> entityList, Converter<Dto, E> converter) {
+		return BaseHelper.convertObject(entityList, getDtoClass(), converter);
 	}
 
-	public PageList<T> findPage(C condition) {
-		PageList<T> pageList = new PageList<>();
+	protected List<Dto> toDto(List<E> entityList) {
+		return toDto(entityList, null);
+	}
 
-		int count = dao.countLike(condition.count());
-		BaseHelper.copyPage(pageList, count, condition);
+	@SuppressWarnings("unchecked")
+	protected E toEntity(Dto dto, Converter<E, Dto> converter) {
+		return (E) BaseHelper.convertObject(dto, getEntityClass(), converter);
+	}
 
-		if (count > 0) {
-			pageList.setDataList(BaseHelper.toDto(dao.findLike(condition.page())));
+	protected E toEntity(Dto dto) {
+		return toEntity(dto, null);
+	}
+
+	protected Class getEntityClass() {
+		if (entityClass == null) {
+			entityClass = (Class) BeanUtil.getGenericTypes(this)[1];
 		}
-
-		return pageList;
+		return entityClass;
 	}
 
-	public int count() {
-		return dao.count(null);
+	protected Class getDtoClass() {
+		if (dtoClass == null) {
+			dtoClass = (Class) BeanUtil.getGenericTypes(this)[3];
+		}
+		return dtoClass;
 	}
 
-	public int count(C condition) {
-		return dao.count(condition);
-	}
-
-	@Transactional
-	public PK create(T dto) {
-		E entity = BaseHelper.toEntity(dto);
-
-		entity.setCreateBy(SessionHolder.getUserContext().getId(BeanUtil.getGenericClass(entity)));
-		entity.setUpdateBy(entity.getCreateBy());
-		entity.setCreateTime(DateUtil.now());
-		entity.setUpdateTime(entity.getCreateTime());
-
-		dao.insert(entity);
-
-		return entity.getId();
-	}
-
-	@Transactional
-	public void update(T dto) {
-		E entity = BaseHelper.toEntity(dto);
-
-		entity.setUpdateBy(SessionHolder.getUserContext().getId(BeanUtil.getGenericClass(entity)));
-		entity.setUpdateTime(DateUtil.now());
-
-		dao.update(entity);
-	}
-
-	@Transactional
-	public void delete(PK id) {
-		dao.delete(id);
+	protected PK getUserContextId() {
+		UserContext userContext = SessionHolder.getUserContext();
+		return userContext == null ? null : userContext.getId(getEntityClass());
 	}
 }

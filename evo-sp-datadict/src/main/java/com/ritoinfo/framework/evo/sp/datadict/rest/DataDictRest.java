@@ -4,9 +4,7 @@ import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import com.ritoinfo.framework.evo.sp.base.starter.rest.BaseRest;
 import com.ritoinfo.framework.evo.sp.datadict.bizz.DataDictBizz;
 import com.ritoinfo.framework.evo.sp.datadict.condition.DataDictCondition;
-import com.ritoinfo.framework.evo.sp.datadict.dao.DataDictDao;
 import com.ritoinfo.framework.evo.sp.datadict.dto.DataDictDto;
-import com.ritoinfo.framework.evo.sp.datadict.entity.DataDict;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +19,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-public class DataDictRest extends BaseRest<DataDictBizz, DataDictDao, DataDict, Long, DataDictCondition, DataDictDto> {
+public class DataDictRest extends BaseRest<DataDictBizz, Long, DataDictDto> {
 	@GetMapping("/code/{code}")
 	public ServiceResponse<List<DataDictDto>> findByCode(@PathVariable String code) {
 		return ServiceResponse.ok(bizz.findByCode(code));

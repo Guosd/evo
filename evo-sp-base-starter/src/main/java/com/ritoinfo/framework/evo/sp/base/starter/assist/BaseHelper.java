@@ -3,9 +3,7 @@ package com.ritoinfo.framework.evo.sp.base.starter.assist;
 import com.ritoinfo.framework.evo.common.uitl.BeanUtil;
 import com.ritoinfo.framework.evo.common.uitl.StringUtil;
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
-import com.ritoinfo.framework.evo.sp.base.starter.condition.BaseCondition;
-import com.ritoinfo.framework.evo.sp.base.starter.dto.BaseDto;
-import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseEntity;
+import com.ritoinfo.framework.evo.sp.base.starter.dto.PageDto;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -15,102 +13,112 @@ import java.util.Map;
 
 /**
  * User: Kyll
- * Date: 2018-03-08 13:07
+ * Date: 2018-07-15 15:43
  */
 public class BaseHelper {
-	public static <T extends BaseDto, E extends BaseEntity> T toDto(E entity) {
-		return toDto(entity, null);
+	public static <T> void copyPage(PageList<T> pageList, int total, PageDto condition) {
+		pageList.setTotalRecord(total);
+		pageList.setPageNo(condition.getPageNo());
+		pageList.setPageSize(condition.getPageSize());
+		pageList.setPageSort(condition.getPageSort());
+		pageList.setPageOrder(condition.getPageOrder());
 	}
 
-	public static <T extends BaseDto, E extends BaseEntity> T toDto(E entity, Converter<T, E> converter) {
-		T dto = toEmptyDto(entity);
-		BeanUtil.copy(dto, entity);
+	public static <T> void copyPage(PageList<T> pageList, int total, PageDto condition, List<T> dataList) {
+		copyPage(pageList, total, condition);
+		pageList.setDataList(dataList);
+	}
+
+	public static <T> void copyPage(PageList<T> pageList, long total, PageDto condition, List<T> dataList) {
+		copyPage(pageList, new Long(total).intValue(), condition, dataList);
+	}
+
+	public static <T, E> T convertObject(E orig, Class<T> clazz, Converter<T, E> converter) {
+		T dest = BeanUtil.newInstance(clazz);
+		BeanUtil.copy(dest, orig);
 
 		if (converter != null) {
-			converter.convert(dto, entity);
+			converter.convert(dest, orig);
 		}
 
-		return dto;
+		return dest;
 	}
 
-	public static <T extends BaseDto, E extends BaseEntity> List<T> toDto(List<E> entityList) {
-		return toDto(entityList, null);
+	public static <T, E> T convertObject(E orig, Class<T> clazz) {
+		return convertObject(orig, clazz, null);
 	}
 
-	public static <T extends BaseDto, E extends BaseEntity> List<T> toDto(List<E> entityList, Converter<T, E> converter) {
-		List<T> dtoList = new ArrayList<>();
-		for (E entity : entityList) {
-			dtoList.add(toDto(entity, converter));
+	public static <T, E> List<T> convertObject(List<E> origList, Class<T> clazz, Converter<T, E> converter) {
+		if (origList == null) {
+			return null;
 		}
-		return dtoList;
+
+		List<T> destList = new ArrayList<>();
+		for (E orig : origList) {
+			destList.add(convertObject(orig, clazz, converter));
+		}
+		return destList;
 	}
 
-	public static <T extends BaseDto, E extends BaseEntity> PageList<T> toDto(PageList<E> entityPageList) {
-		return toDto(entityPageList, null);
+	public static <T, E> List<T> convertObject(List<E> origList, Class<T> clazz) {
+		return convertObject(origList, clazz, (Converter<T, E>) (t, e) -> {});
 	}
 
-	public static <T extends BaseDto, E extends BaseEntity> PageList<T> toDto(PageList<E> entityPageList, Converter<T, E> converter) {
-		PageList<T> dtoPageList = new PageList<>();
-		dtoPageList.setPageNo(entityPageList.getPageNo());
-		dtoPageList.setPageSize(entityPageList.getPageSize());
-		dtoPageList.setTotalRecord(entityPageList.getTotalRecord());
-		dtoPageList.setDataList(toDto(entityPageList.getDataList(), converter));
-		return dtoPageList;
+	public static Map<String, Object> toMap(Object object) {
+		Map<String, Object> map = null;
+		if (object != null) {
+			map = new HashMap<>();
+
+			for (Field field : BeanUtil.getFields(object)) {
+				map.put(field.getName(), BeanUtil.getFieldValue(object, field));
+			}
+		}
+		return map;
 	}
 
-	public static <T extends BaseDto, E extends BaseEntity> T toEmptyDto(E entity) {
-		String className = BeanUtil.getClassName(entity);
-		return BeanUtil.newInstance(className.replace(".entity.", ".dto.") + "Dto");
+	public static Map<String, Object> toSqlMap(Object object) {
+		Map<String, Object> map = null;
+		if (object != null) {
+			map = new HashMap<>();
+
+			for (Field field : BeanUtil.getFields(object)) {
+				map.put(StringUtil.camelStringInsertUnderline(field.getName()).toLowerCase(), BeanUtil.getFieldValue(object, field));
+			}
+		}
+		return map;
 	}
 
-	public static <E extends BaseEntity, T extends BaseDto> E toEntity(T dto) {
-		E entity = toEmptyEntity(dto);
-		BeanUtil.copy(entity, dto);
-		return entity;
-	}
-
-	public static <E extends BaseEntity, T extends BaseDto> E toEmptyEntity(T dto) {
-		String className = BeanUtil.getClassName(dto);
-		className = className.replace(".dto.", ".entity.");
-		return BeanUtil.newInstance(className.substring(0, className.length() - 3));
-	}
-
-	public static <T, E> T toAnyDto(E entity, Class<T> clazz) {
-		return toAnyDto(entity, clazz, null);
-	}
-
-	public static <T, E> T toAnyDto(E entity, Class<T> clazz, Converter<T, E> converter) {
+	public static <T> T toObject(Map<String, Object> map, Class<T> clazz, Converter<T, Map<String, Object>> converter) {
 		T target = BeanUtil.newInstance(clazz);
-		BeanUtil.copy(target, entity);
+
+		for (Field field : BeanUtil.getFields(target)) {
+			BeanUtil.setFieldValue(target, field, map.get(field.getName()));
+		}
 
 		if (converter != null) {
-			converter.convert(target, entity);
+			converter.convert(target, map);
 		}
 
 		return target;
 	}
 
-	public static <T, E> List<T> toAnyDto(List<E> entityList, Class<T> clazz) {
-		return toAnyDto(entityList, clazz, (Converter<T, E>) (t, e) -> {});
+	public static <T> T toObject(Map<String, Object> map, Class<T> clazz) {
+		return toObject(map, clazz, null);
 	}
 
-	public static <T, E> List<T> toAnyDto(List<E> entityList, Class<T> clazz, Converter<T, E> converter) {
+	public static <T> List<T> toObject(List<Map<String, Object>> list, Class<T> clazz, Converter<T, Map<String, Object>> converter) {
 		List<T> targetList = new ArrayList<>();
-		for (E entity : entityList) {
-			targetList.add(toAnyDto(entity, clazz, converter));
+		for (Map<String, Object> map : list) {
+			targetList.add(toObject(map, clazz, converter));
 		}
 		return targetList;
 	}
 
-	public static <T> T toAnyDto(Map<String, Object> map, Class<T> clazz) {
-		return toAnyDto(map, clazz, null);
+	public static <T> List<T> toObject(List<Map<String, Object>> list, Class<T> clazz) {
+		return toObject(list, clazz, null);
 	}
 
-	public static <T> T mapToDto(Map<String, Object> map, Class<T> clazz) {
-		return mapToDto(map, clazz, null);
-	}
-
-	public static <T> T mapToDto(Map<String, Object> map, Class<T> clazz, Converter<T, Map<String, Object>> converter) {
+	public static <T> T sqlMapToObject(Map<String, Object> map, Class<T> clazz, Converter<T, Map<String, Object>> converter) {
 		T target = BeanUtil.newInstance(clazz);
 
 		for (Field field : BeanUtil.getFields(target)) {
@@ -124,35 +132,19 @@ public class BaseHelper {
 		return target;
 	}
 
-	public static <T> List<T> mapToDto(List<Map<String, Object>> list, Class<T> clazz) {
-		return mapToDto(list, clazz, null);
+	public static <T> T sqlMapToObject(Map<String, Object> map, Class<T> clazz) {
+		return sqlMapToObject(map, clazz, null);
 	}
 
-	public static <T> List<T> mapToDto(List<Map<String, Object>> list, Class<T> clazz, Converter<T, Map<String, Object>> converter) {
+	public static <T> List<T> sqlMapToObject(List<Map<String, Object>> mapList, Class<T> clazz, Converter<T, Map<String, Object>> converter) {
 		List<T> targetList = new ArrayList<>();
-		for (Map<String, Object> map : list) {
-			targetList.add(mapToDto(map, clazz, converter));
+		for (Map<String, Object> map : mapList) {
+			targetList.add(sqlMapToObject(map, clazz, converter));
 		}
 		return targetList;
 	}
 
-	public static <T extends BaseDto> Map<String, Object> dtoToMap(T dto) {
-		Map<String, Object> map = null;
-		if (dto != null) {
-			map = new HashMap<>();
-
-			for (Field field : BeanUtil.getFields(dto)) {
-				map.put(field.getName(), BeanUtil.getFieldValue(dto, field));
-			}
-		}
-		return map;
-	}
-
-	public static void copyPage(PageList pageList, int count, BaseCondition condition) {
-		pageList.setTotalRecord(count);
-		pageList.setPageNo(condition.getPageNo());
-		pageList.setPageSize(condition.getPageSize());
-		pageList.setPageSort(condition.getPageSort());
-		pageList.setPageOrder(condition.getPageOrder());
+	public static <T> List<T> sqlMapToObject(List<Map<String, Object>> mapList, Class<T> clazz) {
+		return sqlMapToObject(mapList, clazz, null);
 	}
 }

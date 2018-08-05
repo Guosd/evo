@@ -1,54 +1,47 @@
-package com.ritoinfo.framework.evo.sp.base.starter.condition;
+package com.ritoinfo.framework.evo.sp.base.starter.dto;
 
 import com.ritoinfo.framework.evo.sp.base.model.Page;
-import com.ritoinfo.framework.evo.sp.base.starter.validate.group.ListGroup;
 import com.ritoinfo.framework.evo.sp.base.starter.validate.group.PageGroup;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
+import java.io.Serializable;
 
 /**
  * User: Kyll
- * Date: 2018-02-12 14:07
+ * Date: 2018-07-15 12:58
  */
-public abstract class BaseCondition<PK> {
+public class PageDto implements Serializable {
 	@Getter @Setter
-	protected PK id;
-	@Getter @Setter
-	@Null(groups = ListGroup.class)
 	@NotNull(groups = PageGroup.class)
 	protected Integer pageNo;
 	@Getter @Setter
-	@Null(groups = ListGroup.class)
 	@NotNull(groups = PageGroup.class)
 	protected Integer pageSize;
 	@Getter @Setter
-	@Null(groups = ListGroup.class)
 	@NotBlank(groups = PageGroup.class)
 	protected String pageSort;
 	@Getter @Setter
-	@Null(groups = ListGroup.class)
 	@NotBlank(groups = PageGroup.class)
 	protected String pageOrder;
 
 	private Page page;
 
 	@SuppressWarnings("unchecked")
-	public <C extends BaseCondition> C count() {
+	public <D extends PageDto> D count() {
 		page = null;
-		return (C) this;
+		return (D) this;
 	}
 
 	@SuppressWarnings("unchecked")
-	public <C extends BaseCondition> C page() {
+	public <D extends PageDto> D page() {
 		page = new Page();
 		page.setPageNo(pageNo);
 		page.setPageSize(pageSize);
 		page.setPageSort(pageSort);
 		page.setPageOrder(pageOrder);
-		return (C) this;
+		return (D) this;
 	}
 }
