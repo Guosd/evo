@@ -30,7 +30,7 @@ public class FuncBizz extends BaseXmlBizz<FuncDao, Func, Long, FuncDto> {
 	private MenuBizz menuBizz;
 
 	public FuncDto getWithMicro(Long id) {
-		return BaseHelper.toObject(dao.getWithMicro(id), FuncDto.class);
+		return BaseHelper.sqlMapToObject(dao.getWithMicro(id), FuncDto.class);
 	}
 
 	public List<FuncDto> findByMicro(Long microId) {
@@ -40,11 +40,11 @@ public class FuncBizz extends BaseXmlBizz<FuncDao, Func, Long, FuncDto> {
 	}
 
 	public List<FuncDto> findByRoleWithMicro(Long roleId) {
-		return BaseHelper.toObject(dao.findByRoleWithMicro(roleId), FuncDto.class);
+		return BaseHelper.sqlMapToObject(dao.findByRoleWithMicro(roleId), FuncDto.class);
 	}
 
 	public List<PermissionDto> findByUsername(String username) {
-		return BaseHelper.toObject(dao.findByUsername(username), PermissionDto.class);
+		return BaseHelper.sqlMapToObject(dao.findByUsername(username), PermissionDto.class);
 	}
 
 	public PageList<FuncDto> findPageWithMicro(FuncCondition condition) {
@@ -54,7 +54,7 @@ public class FuncBizz extends BaseXmlBizz<FuncDao, Func, Long, FuncDto> {
 		BaseHelper.copyPage(pageList, count, condition);
 
 		if (count > 0) {
-			pageList.setDataList(BaseHelper.toObject(dao.findPageWithMicro(condition.page()), FuncDto.class));
+			pageList.setDataList(BaseHelper.sqlMapToObject(dao.findPageWithMicro(condition.page()), FuncDto.class));
 		}
 
 		return pageList;

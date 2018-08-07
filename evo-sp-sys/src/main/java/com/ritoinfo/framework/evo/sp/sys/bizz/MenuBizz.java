@@ -30,7 +30,7 @@ import java.util.Set;
 @Service
 public class MenuBizz extends BaseXmlBizz<MenuDao, Menu, Long, MenuDto> {
 	public MenuDto getWithParent(Long id) {
-		return BaseHelper.toObject(dao.getWithParent(id), MenuDto.class);
+		return BaseHelper.sqlMapToObject(dao.getWithParent(id), MenuDto.class);
 	}
 
 	public List<MyMenuDto> findByUsername() {
@@ -42,7 +42,7 @@ public class MenuBizz extends BaseXmlBizz<MenuDao, Menu, Long, MenuDto> {
 	}
 
 	public List<MyMenuDto> findByUsername(String username) {
-		return BaseHelper.toObject(recurParentMenu(dao.findByUsername(username)), MyMenuDto.class);
+		return BaseHelper.sqlMapToObject(recurParentMenu(dao.findByUsername(username)), MyMenuDto.class);
 	}
 
 	private List<Map<String, Object>> recurParentMenu(List<Map<String, Object>> mapList) {
@@ -87,7 +87,7 @@ public class MenuBizz extends BaseXmlBizz<MenuDao, Menu, Long, MenuDto> {
 		BaseHelper.copyPage(pageList, count, condition);
 
 		if (count > 0) {
-			pageList.setDataList(BaseHelper.toObject(dao.findPageWithParent(condition.page()), MenuDto.class));
+			pageList.setDataList(BaseHelper.sqlMapToObject(dao.findPageWithParent(condition.page()), MenuDto.class));
 		}
 
 		return pageList;
