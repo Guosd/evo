@@ -36,6 +36,8 @@ public class RedisService {
 	}
 
 	public boolean set(String key, Serializable value, Long expire) {
+		log.info("设置redis缓存: " + key + ", " + value + ", " + expire);
+
 		Boolean result;
 		try {
 			redisTemplate.opsForValue().set(key, value);
@@ -47,6 +49,8 @@ public class RedisService {
 	}
 
 	public Serializable get(String key) {
+		log.info("获取redis缓存: " + key);
+
 		Serializable value;
 		try {
 			value = redisTemplate.opsForValue().get(key);
@@ -92,6 +96,8 @@ public class RedisService {
 	}
 
 	public boolean delete(String key) {
+		log.info("删除redis缓存: " + key);
+
 		Boolean result;
 		try {
 			result = redisTemplate.delete(key);

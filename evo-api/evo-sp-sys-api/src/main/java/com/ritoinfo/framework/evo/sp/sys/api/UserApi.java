@@ -24,4 +24,7 @@ public interface UserApi {
 
 	@PutMapping
 	ServiceResponse update(@RequestBody UserDto dto, @RequestHeader(Const.JWT_TOKEN_HEADER) String token);
+
+	@GetMapping("/empty")
+	ServiceResponse empty();
 }

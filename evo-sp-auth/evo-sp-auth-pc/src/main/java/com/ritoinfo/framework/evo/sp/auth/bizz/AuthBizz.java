@@ -27,14 +27,26 @@ public class AuthBizz {
 	private AssistBizz assistBizz;
 
 	public String authorize(PcLoginDto loginDto, HttpServletRequest request) {
+		log.debug("查询用户S: " + loginDto.getUsername());
 		UserDto userDto = userApi.getByUsername(loginDto.getUsername()).getData();
 		if (userDto == null) {
 			throw new UserNotFoundException(loginDto.getUsername());
 		}
+		log.debug("查询用户E: " + loginDto.getUsername());
 
 		if (passwordEncoder.matches(loginDto.getPassword(), userDto.getPassword())) {
+			log.debug("生成令牌S: " + loginDto.getUsername());
 			String token = assistBizz.createAndSaveToken(userDto);
+			log.debug("生成令牌E: " + loginDto.getUsername());
+
+			log.debug("更新用户S: " + loginDto.getUsername());
 			assistBizz.updateLoginInfo(userDto, token, request);
+			log.debug("更新用户E: " + loginDto.getUsername());
+
+			log.debug("空调用S");
+			userApi.empty();
+			log.debug("空调用E");
+
 			return token;
 		} else {
 			throw new PasswordInvalidException(loginDto.getUsername());

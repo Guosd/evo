@@ -1,19 +1,19 @@
 package com.ritoinfo.framework.evo.sp.sms.dto;
 
+import lombok.Builder;
 import lombok.Data;
+
+import javax.validation.constraints.NotBlank;
 
 /**
  * User: Kyll
  * Date: 2018-04-20 16:20
  */
+@Builder
 @Data
 public class SmsDto {
-	private String comCode;
-	private String businessType;
-	private String operatorCode;
-	private String bizUser;
-	private String bizNo;
-	private String spNumber;
+	@NotBlank
 	private String phoneNo;
+	@NotBlank
 	private String content;
 }

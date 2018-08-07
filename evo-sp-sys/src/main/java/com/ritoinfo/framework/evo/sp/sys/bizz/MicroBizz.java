@@ -1,7 +1,6 @@
 package com.ritoinfo.framework.evo.sp.sys.bizz;
 
-import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseBizz;
-import com.ritoinfo.framework.evo.sp.sys.condition.MicroCondition;
+import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseXmlBizz;
 import com.ritoinfo.framework.evo.sp.sys.dao.MicroDao;
 import com.ritoinfo.framework.evo.sp.sys.dto.FuncDto;
 import com.ritoinfo.framework.evo.sp.sys.dto.MicroDto;
@@ -18,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @Transactional(readOnly = true)
 @Service
-public class MicroBizz extends BaseBizz<MicroDao, Micro, Long, MicroCondition, MicroDto> {
+public class MicroBizz extends BaseXmlBizz<MicroDao, Micro, Long, MicroDto> {
 	@Autowired
 	private FuncBizz funcBizz;
 

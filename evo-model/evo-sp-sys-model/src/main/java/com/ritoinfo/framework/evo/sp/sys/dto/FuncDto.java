@@ -1,16 +1,16 @@
 package com.ritoinfo.framework.evo.sp.sys.dto;
 
-import com.ritoinfo.framework.evo.sp.base.starter.dto.BaseDto;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 
 /**
  * User: Kyll
  * Date: 2018-03-08 11:43
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
-public class FuncDto extends BaseDto<Long> {
+public class FuncDto implements Serializable {
+	private Long id;
 	private Long microId;
 	private String microName;
 	private String name;

@@ -2,7 +2,7 @@ package com.ritoinfo.framework.evo.sp.sys.bizz;
 
 import com.ritoinfo.framework.evo.common.uitl.ArrayUtil;
 import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
-import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseBizz;
+import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseXmlBizz;
 import com.ritoinfo.framework.evo.sp.sys.condition.RoleCondition;
 import com.ritoinfo.framework.evo.sp.sys.dao.RoleDao;
 import com.ritoinfo.framework.evo.sp.sys.dto.RoleDto;
@@ -23,7 +23,7 @@ import java.util.List;
 @Slf4j
 @Transactional(readOnly = true)
 @Service
-public class RoleBizz extends BaseBizz<RoleDao, Role, Long, RoleCondition, RoleDto> {
+public class RoleBizz extends BaseXmlBizz<RoleDao, Role, Long, RoleDto> {
 	@Autowired
 	private FuncBizz funcBizz;
 	@Autowired
@@ -40,15 +40,15 @@ public class RoleBizz extends BaseBizz<RoleDao, Role, Long, RoleCondition, RoleD
 		condition.setCode(code);
 
 		List<Role> roleList =  dao.find(condition);
-		return roleList.isEmpty() ? null : BaseHelper.toDto(roleList.get(0));
+		return roleList.isEmpty() ? null : toDto(roleList.get(0));
 	}
 
 	public List<RoleDto> findByUserId(Long userId) {
-		return BaseHelper.toDto(dao.findByUserId(userId));
+		return toDto(dao.findByUserId(userId));
 	}
 
 	public List<RoleDto> findByUsername(String username) {
-		return BaseHelper.toDto(dao.findByUsername(username));
+		return toDto(dao.findByUsername(username));
 	}
 
 	@Transactional
@@ -60,7 +60,7 @@ public class RoleBizz extends BaseBizz<RoleDao, Role, Long, RoleCondition, RoleD
 		Long[] funcIds = dto.getFuncIds();
 		if (ArrayUtil.isNotEmpty(funcIds)) {
 			if (ArrayUtil.isValid(funcIds)) {
-				dao.insertWithFunc(BaseHelper.dtoToMap(dto));
+				dao.insertWithFunc(BaseHelper.toMap(dto));
 			} else {
 				throw new RoleFuncInvalidException(Arrays.toString(funcIds));
 			}
@@ -80,7 +80,7 @@ public class RoleBizz extends BaseBizz<RoleDao, Role, Long, RoleCondition, RoleD
 		} else {
 			if (ArrayUtil.isValid(funcIds)) {
 				dao.deleteWithFunc(dto.getId());
-				dao.insertWithFunc(BaseHelper.dtoToMap(dto));
+				dao.insertWithFunc(BaseHelper.toMap(dto));
 			} else {
 				throw new RoleFuncInvalidException(Arrays.toString(funcIds));
 			}

@@ -17,11 +17,11 @@ spring:
   profiles: prod
 eureka:
   instance:
-    ip-address: 10.20.133.30
+    ip-address: ${parasitifer-ip}
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://10.20.133.30:50101/eureka
+      defaultZone: http://10.20.168.46:50101/eureka, http://10.20.168.47:50101/eureka
 ---
 spring:
   profiles: uat

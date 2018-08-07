@@ -24,7 +24,7 @@ public class ProcessDefinitionBizz {
 	private RepositoryServiceProxy repositoryServiceProxy;
 
 	public List<ProcessDefinitionDto> getProcessDefinitionList(ProcessDefinitionCondition processDefinitionCondition) {
-		return BaseHelper.toAnyDto(repositoryServiceProxy.getProcessDefinitionList(processDefinitionCondition), ProcessDefinitionDto.class);
+		return BaseHelper.convertObject(repositoryServiceProxy.getProcessDefinitionList(processDefinitionCondition), ProcessDefinitionDto.class);
 	}
 
 	public PageList<ProcessDefinitionDto> getProcessDefinitionPage(ProcessDefinitionCondition condition) {
@@ -38,13 +38,13 @@ public class ProcessDefinitionBizz {
 		pageList.setPageOrder(condition.getPageOrder());
 
 		if (count > 0) {
-			pageList.setDataList(BaseHelper.toAnyDto(repositoryServiceProxy.getProcessDefinitionList(condition, ActivitiUtil.toActivitiPage(condition)), ProcessDefinitionDto.class));
+			pageList.setDataList(BaseHelper.convertObject(repositoryServiceProxy.getProcessDefinitionList(condition, ActivitiUtil.toActivitiPage(condition)), ProcessDefinitionDto.class));
 		}
 
 		return pageList;
 	}
 
 	public List<TaskDto> getTaskList(String processDefinitionId) {
-		return BaseHelper.toAnyDto(repositoryServiceProxy.getTaskList(processDefinitionId), TaskDto.class);
+		return BaseHelper.convertObject(repositoryServiceProxy.getTaskList(processDefinitionId), TaskDto.class);
 	}
 }

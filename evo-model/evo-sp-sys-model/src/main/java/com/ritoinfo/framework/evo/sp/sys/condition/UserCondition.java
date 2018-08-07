@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.sys.condition;
 
-import com.ritoinfo.framework.evo.sp.base.starter.condition.BaseCondition;
+import com.ritoinfo.framework.evo.sp.base.starter.dto.PageDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -10,7 +10,8 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class UserCondition extends BaseCondition<Long> {
+public class UserCondition extends PageDto {
+	private Long id;
 	private String username;
 	private String password;
 	private String name;

@@ -1,0 +1,84 @@
+jwt:
+  algorithm: HS512
+  issuer: http://ritoinfo.com
+  signingKey: 1580fcb1746e468095b1bc24b6fb94b8
+  expirationTime: 4320 # 分钟 60 * 24 * 3
+  refreshExpirationTime: 5760 # 分钟 60 * 24 * 4
+  header: X-Authorization # TODO 升级后删掉
+password:
+  salt: 8
+auth:
+  loginPath: /ui/comm/login
+  excludePaths: [
+    /auth/common/logout, /auth/pc/login, /auth/mobile/code, /auth/common/token, /auth/mobile/login, /static/**/*, /ui/comm/login,
+    /error,
+    /eco/mobilecar/api/main/version, /eco/mobilecar/api/buycar/detail, /eco/mobilecar/api/product/wash,
+    /eco/mobilecar/api/product/tyre, /eco/mobilecar/api/product/maintain,
+    /eco/mobilecar/index.html**/*,
+    /eco/mobilecar/detailBuyCar.html, /eco/mobilecar/detailMaintain.html, /eco/mobilecar/detail.html, /eco/mobilecar/detailTyre.html,
+    /eco/mobilecar/detailWash.html, /eco/mobilecar/interface.html, /eco/mobilecar/userAgreement.html, /eco/mobilecar/userHelp.html,
+    /eco/mobilecar/api/gasstation/getorcbyimg, /eco/mobilecar/api/gasstation/orc,
+    /eco/mobilecar/api/product/tyreshare, /eco/mobilecar/api/product/maintainshare,
+    /eco/mobilecar/image/**/*, /eco/mobilecar/js/**/*, /eco/mobilecar/css/**/*, /eco/mobilecar/static/**/*,
+    /ui/static/**/*, /ui/common/**/*, /ui/css/**/*, /ui/fonts/**/*, /ui/images/**/*, /ui/img/**/*, /ui/js/**/*,
+    /eco/ui/static/**/*, /eco/ui/common/**/*, /eco/ui/css/**/*, /eco/ui/fonts/**/*, /eco/ui/images/**/*, /eco/ui/img/**/*, /eco/ui/js/**/*
+    ] # TODO 升级后删掉 /ui/comm/login 后的所有地址
+  verifyCode:
+    length: 6
+    expirationTime: 2 # 分钟
+sms:
+  address: http://10.21.111.71:9087/smserver/submitMessage
+  comCode: ZBKG
+  orgCode: "00000000"
+  businessNo: ZBKG00000000DJCFAPP001
+  businessTypeCode: "04"
+  channel: "0"
+  ip: 10.20.133.30
+redis:
+  companyPrefix: ZBKG
+evo:
+  spring:
+    redis:
+      cluster:
+        nodes: 10.20.133.85:7000, 10.20.133.85:7002, 10.20.133.85:7003, 10.20.133.85:7004, 10.20.133.85:7005
+    rabbitmq:
+      addresses: 10.20.133.43:5672
+      host: 10.20.133.43
+      port: 5672
+      virtual-host: vhost_eco
+      username: eco
+      password: eco
+    boot:
+      admin:
+        client:
+          url: http://10.20.133.30:20020
+          instance:
+            prefer-ip: true
+  ribbon:
+    NFLoadBalancerRuleClassName: com.ritoinfo.framework.evo.zuul.loadbalancer.BackToSelfRule
+  sp:
+    demo:
+      datasource:
+        url: jdbc:mysql://10.20.133.43:8066/evo_demo?useUnicode=true&characterEncoding=UTF8
+        username: evo_demo
+        password: evo_demo
+    sys:
+      datasource:
+        url: jdbc:mysql://10.20.133.43:8066/evo_sys?useUnicode=true&characterEncoding=UTF8
+        username: evo_sys
+        password: evo_sys
+    datadict:
+      datasource:
+        url: jdbc:mysql://10.20.133.43:8066/evo_datadict?useUnicode=true&characterEncoding=UTF8
+        username: evo_datadict
+        password: evo_datadict
+    activiti:
+      datasource:
+        url: jdbc:mysql://10.20.133.43:8066/evo_activiti?useUnicode=true&characterEncoding=UTF8
+        username: evo_activiti
+        password: evo_activiti
+    eco-mobile-car:
+      datasource:
+        url: jdbc:mysql://10.20.133.43:8066/eco_mobile?useUnicode=true&characterEncoding=utf8&useSSL=false
+        username: eco_mobile
+        password: eco_mobile

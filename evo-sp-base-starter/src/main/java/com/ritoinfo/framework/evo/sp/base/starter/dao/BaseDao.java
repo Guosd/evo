@@ -1,6 +1,5 @@
 package com.ritoinfo.framework.evo.sp.base.starter.dao;
 
-import com.ritoinfo.framework.evo.sp.base.starter.condition.BaseCondition;
 import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseEntity;
 
 import java.io.Serializable;
@@ -10,16 +9,18 @@ import java.util.List;
  * User: Kyll
  * Date: 2018-02-26 16:13
  */
-public interface BaseDao<E extends BaseEntity<PK>, PK extends Serializable, C extends BaseCondition<PK>> {
+public interface BaseDao<E extends BaseEntity, PK extends Serializable, D> {
 	E get(PK id);
 
-	List<E> find(C condition);
+	E getOne(Object condition);
 
-	List<E> findLike(C condition);
+	List<E> find(Object condition);
 
-	int count(C condition);
+	List<E> findLike(Object condition);
 
-	int countLike(C condition);
+	int count(Object condition);
+
+	int countLike(Object condition);
 
 	int insert(E entity);
 

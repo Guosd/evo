@@ -21,6 +21,7 @@
 		<module>evo-sp-datadict-model</module>
 		<module>evo-sp-sms-model</module>
 		<module>evo-sp-sys-model</module>
+		<module>evo-sp-demo-model</module>
 	</modules>
 
 	<dependencies>

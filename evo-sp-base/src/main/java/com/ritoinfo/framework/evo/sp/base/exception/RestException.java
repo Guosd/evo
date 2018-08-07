@@ -28,4 +28,14 @@ public class RestException extends BaseException {
 
 		this.code = code;
 	}
+
+	public RestException(String code, String message, Throwable e) {
+		this(code, message, null, e);
+	}
+
+	public RestException(String code, String message, Object data, Throwable e) {
+		super(message, data, e);
+
+		this.code = code;
+	}
 }

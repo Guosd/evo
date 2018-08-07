@@ -23,7 +23,7 @@ public class CommentBizz {
 	private HistoryServiceProxy historyServiceProxy;
 
 	public List<CommentDto> getList(String processInstanceId) {
-		List<CommentDto> commentDtoList = BaseHelper.toAnyDto(taskServiceProxy.getProcessInstanceCommentList(processInstanceId), CommentDto.class);
+		List<CommentDto> commentDtoList = BaseHelper.convertObject(taskServiceProxy.getProcessInstanceCommentList(processInstanceId), CommentDto.class);
 		for (CommentDto commentDto : commentDtoList) {
 			// TODO author
 			commentDto.setTaskName(historyServiceProxy.getById(commentDto.getTaskId()).getName());

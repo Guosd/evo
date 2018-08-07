@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.sys.dao;
 
-import com.ritoinfo.framework.evo.sp.base.dao.MyBatisDao;
+import com.ritoinfo.framework.evo.sp.base.starter.dao.BaseXmlDao;
 import com.ritoinfo.framework.evo.sp.sys.condition.RoleCondition;
 import com.ritoinfo.framework.evo.sp.sys.entity.Role;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,7 +13,7 @@ import java.util.Map;
  * Date: 2018-03-04 18:02
  */
 @Mapper
-public interface RoleDao extends MyBatisDao<Role, Long, RoleCondition> {
+public interface RoleDao extends BaseXmlDao<Role, Long, RoleCondition> {
 	List<Role> findByUserId(Long userId);
 
 	List<Role> findByUsername(String username);

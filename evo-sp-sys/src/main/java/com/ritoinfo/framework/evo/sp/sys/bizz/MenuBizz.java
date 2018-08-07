@@ -3,7 +3,7 @@ package com.ritoinfo.framework.evo.sp.sys.bizz;
 import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
-import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseBizz;
+import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseXmlBizz;
 import com.ritoinfo.framework.evo.sp.base.starter.exception.UserContextNotExistException;
 import com.ritoinfo.framework.evo.sp.base.starter.session.SessionHolder;
 import com.ritoinfo.framework.evo.sp.sys.condition.MenuCondition;
@@ -28,9 +28,9 @@ import java.util.Set;
 @Slf4j
 @Transactional(readOnly = true)
 @Service
-public class MenuBizz extends BaseBizz<MenuDao, Menu, Long, MenuCondition, MenuDto> {
+public class MenuBizz extends BaseXmlBizz<MenuDao, Menu, Long, MenuDto> {
 	public MenuDto getWithParent(Long id) {
-		return BaseHelper.mapToDto(dao.getWithParent(id), MenuDto.class);
+		return BaseHelper.toObject(dao.getWithParent(id), MenuDto.class);
 	}
 
 	public List<MyMenuDto> findByUsername() {
@@ -42,7 +42,7 @@ public class MenuBizz extends BaseBizz<MenuDao, Menu, Long, MenuCondition, MenuD
 	}
 
 	public List<MyMenuDto> findByUsername(String username) {
-		return BaseHelper.mapToDto(recurParentMenu(dao.findByUsername(username)), MyMenuDto.class);
+		return BaseHelper.toObject(recurParentMenu(dao.findByUsername(username)), MyMenuDto.class);
 	}
 
 	private List<Map<String, Object>> recurParentMenu(List<Map<String, Object>> mapList) {
@@ -77,7 +77,7 @@ public class MenuBizz extends BaseBizz<MenuDao, Menu, Long, MenuCondition, MenuD
 	public List<MenuDto> findByFunc(Long funcId) {
 		MenuCondition condition = new MenuCondition();
 		condition.setFuncId(funcId);
-		return BaseHelper.toDto(dao.find(condition));
+		return toDto(dao.find(condition));
 	}
 
 	public PageList<MenuDto> findPageWithParent(MenuCondition condition) {
@@ -87,12 +87,13 @@ public class MenuBizz extends BaseBizz<MenuDao, Menu, Long, MenuCondition, MenuD
 		BaseHelper.copyPage(pageList, count, condition);
 
 		if (count > 0) {
-			pageList.setDataList(BaseHelper.mapToDto(dao.findPageWithParent(condition.page()), MenuDto.class));
+			pageList.setDataList(BaseHelper.toObject(dao.findPageWithParent(condition.page()), MenuDto.class));
 		}
 
 		return pageList;
 	}
 
+	@Transactional
 	@Override
 	public void delete(Long id) {
 		MenuCondition condition = new MenuCondition();

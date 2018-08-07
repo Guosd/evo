@@ -23,6 +23,7 @@ spring:
       minimum-idle: 10
       read-only: false # 连接只读数据库时配置为true, 保证安全
   rabbitmq:
+    addresses: ${evo.spring.rabbitmq.addresses}
     host: ${evo.spring.rabbitmq.host}
     port: ${evo.spring.rabbitmq.port}
     virtual-host: ${evo.spring.rabbitmq.virtual-host}
@@ -40,7 +41,7 @@ spring:
       client:
         url: ${evo.spring.boot.admin.client.url}
         instance:
-          prefer-ip: true
+          prefer-ip: ${evo.spring.boot.admin.client.instance.prefer-ip}
 mybatis:
   type-aliases-package: com.ritoinfo.framework.evo.sp.sys.entity
   mapper-locations: classpath:mapper/**/*.xml

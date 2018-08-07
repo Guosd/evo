@@ -1,0 +1,47 @@
+server:
+  port: 30002
+management:
+  endpoint:
+    health:
+      show-details: ALWAYS
+  endpoints:
+    web:
+      exposure:
+        include: [actuator, auditevents, autoconfig, beans, conditions, configprops, flyway, heapdump, health, httptrace, info, jolokia, liquibase, logfile, loggers, mappings, metrics, prometheus, scheduledtasks, sessions, shutdown, threaddump, trace]
+spring:
+  jpa:
+    show-sql: true
+    open-in-view: true
+  datasource:
+    url: ${evo.sp.demo.datasource.url}
+    username: ${evo.sp.demo.datasource.username}
+    password: ${evo.sp.demo.datasource.password}
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      connection-test-query: select 1
+      connection-timeout: 30000 # 等待连接池分配连接的最大时长
+      idle-timeout: 600000 # 连接闲置状态的最大时长
+      maximum-pool-size: 60 # 连接池中允许的最大连接数, 推荐的公式：((core_count * 2) + effective_spindle_count)
+      max-lifetime: 1800000 # 连接的生命时长, 建议设置比数据库超时时长少30秒
+      minimum-idle: 10
+      read-only: false # 连接只读数据库时配置为true, 保证安全
+  rabbitmq:
+    addresses: ${evo.spring.rabbitmq.addresses}
+    host: ${evo.spring.rabbitmq.host}
+    port: ${evo.spring.rabbitmq.port}
+    virtual-host: ${evo.spring.rabbitmq.virtual-host}
+    username: ${evo.spring.rabbitmq.username}
+    password: ${evo.spring.rabbitmq.password}
+  jackson:
+    time-zone: GMT+8
+  sleuth:
+    http:
+      enabled: true
+    sampler:
+      probability: 1.0
+  boot:
+    admin:
+      client:
+        url: ${evo.spring.boot.admin.client.url}
+        instance:
+          prefer-ip: ${evo.spring.boot.admin.client.instance.prefer-ip}

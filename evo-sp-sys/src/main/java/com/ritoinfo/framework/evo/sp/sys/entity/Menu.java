@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.sys.entity;
 
-import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseEntity;
+import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseXmlEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class Menu extends BaseEntity<Long> {
+public class Menu extends BaseXmlEntity<Long> {
 	private Long parentId;// 上级菜单ID
 	private Long funcId;// 功能ID
 	private String name;// 菜单名称

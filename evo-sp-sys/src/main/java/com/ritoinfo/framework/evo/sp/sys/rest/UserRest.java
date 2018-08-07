@@ -8,10 +8,7 @@ import com.ritoinfo.framework.evo.sp.base.starter.rest.BaseRest;
 import com.ritoinfo.framework.evo.sp.base.starter.validate.group.CreateGroup;
 import com.ritoinfo.framework.evo.sp.base.starter.validate.group.UpdateGroup;
 import com.ritoinfo.framework.evo.sp.sys.bizz.UserBizz;
-import com.ritoinfo.framework.evo.sp.sys.condition.UserCondition;
-import com.ritoinfo.framework.evo.sp.sys.dao.UserDao;
 import com.ritoinfo.framework.evo.sp.sys.dto.UserDto;
-import com.ritoinfo.framework.evo.sp.sys.entity.User;
 import com.ritoinfo.framework.evo.sp.sys.exception.UserExistedException;
 import com.ritoinfo.framework.evo.sp.sys.exception.UserRoleInvalidException;
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("user")
 @RestController
-public class UserRest extends BaseRest<UserBizz, UserDao, User, Long, UserCondition, UserDto> {
+public class UserRest extends BaseRest<UserBizz, Long, UserDto> {
 	@GetMapping("/id/{id}/role")
 	public ServiceResponse<UserDto> getWithRole(@PathVariable Long id) {
 		return ServiceResponse.ok(bizz.getWithRole(id));
@@ -51,6 +48,12 @@ public class UserRest extends BaseRest<UserBizz, UserDao, User, Long, UserCondit
 	@GetMapping("/user-context")
 	public ServiceResponse<UserDto> userContext() {
 		return ServiceResponse.ok(bizz.getUserContext());
+	}
+
+	// TODO 兼容 SCFW
+	@GetMapping("/checkOldPassword")
+	public String checkOldPassword(UserDto dto) {
+		return String.valueOf(bizz.checkOldPassword(dto));
 	}
 
 	@PostMapping("/all")
@@ -75,6 +78,11 @@ public class UserRest extends BaseRest<UserBizz, UserDao, User, Long, UserCondit
 	@PutMapping("/password")
 	public ServiceResponse updatePassword(@Validated(UpdateGroup.class) @RequestBody UserDto dto) {
 		bizz.updatePassowrd(dto);
+		return ServiceResponse.ok();
+	}
+
+	@GetMapping("/empty")
+	public ServiceResponse empty() {
 		return ServiceResponse.ok();
 	}
 }

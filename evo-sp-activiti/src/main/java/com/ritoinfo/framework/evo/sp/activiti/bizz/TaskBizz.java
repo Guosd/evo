@@ -273,6 +273,8 @@ public class TaskBizz {
 
 		if (count > 0) {
 			pageList.setDataList(taskServiceProxy.getList(condition, ActivitiUtil.toActivitiPage(condition)));
+		} else {
+			pageList.setDataList(new ArrayList<>());
 		}
 
 		return pageList;
