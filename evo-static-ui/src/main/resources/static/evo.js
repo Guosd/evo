@@ -44,7 +44,10 @@ $.ajaxSetup({
 });
 
 $.extend($.jgrid.defaults, {
-	mtype: 'GET',
+	mtype: 'POST',
+	ajaxGridOptions: {
+		contentType: 'application/json'
+	},
 	datatype: "json",
 	rowNum: 20,
 	rowList: [10, 20, 30, 50, 100, 500],
@@ -88,7 +91,7 @@ function jqGridQuery(postData, customGridSelector) {
 	$(customGridSelector || gridSelector).setGridParam({
 		datatype: 'json',
 		pageNo: 1,
-		postData: postData
+		postData: JSON.stringify($.extend($(customGridSelector || gridSelector).getGridParam('postData'), postData))
 	}).trigger('reloadGrid', [{page: 1}]);
 }
 

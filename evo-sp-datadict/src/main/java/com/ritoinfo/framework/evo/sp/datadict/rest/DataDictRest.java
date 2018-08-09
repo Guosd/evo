@@ -19,7 +19,7 @@ import java.util.List;
  */
 @Slf4j
 @RestController
-public class DataDictRest extends BaseRest<DataDictBizz, Long, DataDictDto> {
+public class DataDictRest extends BaseRest<DataDictBizz, Long, DataDictDto, DataDictCondition> {
 	@GetMapping("/code/{code}")
 	public ServiceResponse<List<DataDictDto>> findByCode(@PathVariable String code) {
 		return ServiceResponse.ok(bizz.findByCode(code));

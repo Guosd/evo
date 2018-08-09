@@ -7,6 +7,7 @@ import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import com.ritoinfo.framework.evo.sp.base.starter.rest.BaseRest;
 import com.ritoinfo.framework.evo.sp.base.starter.validate.group.CreateGroup;
 import com.ritoinfo.framework.evo.sp.sys.bizz.RoleBizz;
+import com.ritoinfo.framework.evo.sp.sys.condition.RoleCondition;
 import com.ritoinfo.framework.evo.sp.sys.dto.RoleDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
@@ -26,7 +27,7 @@ import java.util.List;
 @Slf4j
 @RequestMapping("role")
 @RestController
-public class RoleRest extends BaseRest<RoleBizz, Long, RoleDto> {
+public class RoleRest extends BaseRest<RoleBizz, Long, RoleDto, RoleCondition> {
 	@GetMapping("/id/{id}/func")
 	public ServiceResponse<RoleDto> getWithFunc(@PathVariable Long id) {
 		return ServiceResponse.ok(bizz.getWithFunc(id));

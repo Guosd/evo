@@ -82,3 +82,13 @@ evo:
         url: jdbc:mysql://10.20.133.43:8066/eco_mobile?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: eco_mobile
         password: eco_mobile
+    eco-material:
+      datasource:
+        url: jdbc:mysql://10.20.133.43:8066/eco_material?useUnicode=true&characterEncoding=utf8&useSSL=false
+        username: eco_material
+        password: eco_material
+    eco-product:
+      datasource:
+        url: jdbc:mysql://10.20.133.43:8066/eco_product?useUnicode=true&characterEncoding=utf8&useSSL=false
+        username: eco_product
+        password: eco_product

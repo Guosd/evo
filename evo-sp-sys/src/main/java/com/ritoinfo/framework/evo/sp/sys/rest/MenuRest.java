@@ -31,7 +31,7 @@ import java.util.Map;
 @Slf4j
 @RequestMapping("/menu")
 @RestController
-public class MenuRest extends BaseRest<MenuBizz, Long, MenuDto> {
+public class MenuRest extends BaseRest<MenuBizz, Long, MenuDto, MenuCondition> {
 	@GetMapping("/id/{id}/parent")
 	public ServiceResponse<MenuDto> getWithParent(@PathVariable Long id) {
 		return ServiceResponse.ok(bizz.getWithParent(id));

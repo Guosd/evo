@@ -8,6 +8,7 @@ import com.ritoinfo.framework.evo.sp.base.starter.rest.BaseRest;
 import com.ritoinfo.framework.evo.sp.base.starter.validate.group.CreateGroup;
 import com.ritoinfo.framework.evo.sp.base.starter.validate.group.UpdateGroup;
 import com.ritoinfo.framework.evo.sp.sys.bizz.UserBizz;
+import com.ritoinfo.framework.evo.sp.sys.condition.UserCondition;
 import com.ritoinfo.framework.evo.sp.sys.dto.UserDto;
 import com.ritoinfo.framework.evo.sp.sys.exception.UserExistedException;
 import com.ritoinfo.framework.evo.sp.sys.exception.UserRoleInvalidException;
@@ -28,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("user")
 @RestController
-public class UserRest extends BaseRest<UserBizz, Long, UserDto> {
+public class UserRest extends BaseRest<UserBizz, Long, UserDto, UserCondition> {
 	@GetMapping("/id/{id}/role")
 	public ServiceResponse<UserDto> getWithRole(@PathVariable Long id) {
 		return ServiceResponse.ok(bizz.getWithRole(id));

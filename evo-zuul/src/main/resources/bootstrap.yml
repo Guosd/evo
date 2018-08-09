@@ -17,6 +17,8 @@ eureka:
     registry-fetch-interval-seconds: 5
     serviceUrl:
       defaultZone: http://localhost:50101/eureka
+logstash:
+  destination: 10.21.111.42:9600
 ---
 spring:
   profiles: prod

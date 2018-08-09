@@ -22,6 +22,7 @@ public abstract class BaseBizz<Dao, E extends BaseEntity, PK extends Serializabl
 	protected Dao dao;
 
 	private static Class entityClass;
+	private static Class pkClass;
 	private static Class dtoClass;
 
 	public abstract Dto get(PK id);
@@ -78,6 +79,13 @@ public abstract class BaseBizz<Dao, E extends BaseEntity, PK extends Serializabl
 		return entityClass;
 	}
 
+	protected Class getPKClass() {
+		if (pkClass == null) {
+			pkClass = (Class) BeanUtil.getGenericTypes(this)[2];
+		}
+		return pkClass;
+	}
+
 	protected Class getDtoClass() {
 		if (dtoClass == null) {
 			dtoClass = (Class) BeanUtil.getGenericTypes(this)[3];
@@ -87,6 +95,6 @@ public abstract class BaseBizz<Dao, E extends BaseEntity, PK extends Serializabl
 
 	protected PK getUserContextId() {
 		UserContext userContext = SessionHolder.getUserContext();
-		return userContext == null ? null : userContext.getId(getEntityClass());
+		return userContext == null ? null : userContext.getId(getPKClass());
 	}
 }

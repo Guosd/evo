@@ -24,7 +24,7 @@ import java.util.List;
 @Slf4j
 @RequestMapping("func")
 @RestController
-public class FuncRest extends BaseRest<FuncBizz, Long, FuncDto> {
+public class FuncRest extends BaseRest<FuncBizz, Long, FuncDto, FuncCondition> {
 	@GetMapping("/id/{id}/micro")
 	public ServiceResponse<FuncDto> getWithMicro(@PathVariable Long id) {
 		return ServiceResponse.ok(bizz.getWithMicro(id));

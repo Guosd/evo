@@ -3,6 +3,7 @@ package com.ritoinfo.framework.evo.sp.demo.rest;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import com.ritoinfo.framework.evo.sp.base.starter.rest.BaseRest;
 import com.ritoinfo.framework.evo.sp.demo.bizz.CountryBizz;
+import com.ritoinfo.framework.evo.sp.demo.condition.CountryCondition;
 import com.ritoinfo.framework.evo.sp.demo.dto.CountryDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ import java.util.Map;
 @Slf4j
 @RequestMapping("/country")
 @RestController
-public class CountryRest extends BaseRest<CountryBizz, Long, CountryDto> {
+public class CountryRest extends BaseRest<CountryBizz, Long, CountryDto, CountryCondition> {
 	@GetMapping("/countryCode/{countryCode}")
 	public ServiceResponse<List<Map<String, Object>>> get(@PathVariable String countryCode) {
 		return ServiceResponse.ok(bizz.findByCountryCode(countryCode));

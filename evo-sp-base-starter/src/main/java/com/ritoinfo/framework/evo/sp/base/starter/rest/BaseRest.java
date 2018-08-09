@@ -22,7 +22,7 @@ import java.io.Serializable;
  * User: Kyll
  * Date: 2018-02-09 15:58
  */
-public abstract class BaseRest<B extends BaseBizz, PK extends Serializable, D> {
+public abstract class BaseRest<B extends BaseBizz, PK extends Serializable, D, PD extends PageDto> {
 	@Autowired
 	protected B bizz;
 
@@ -34,7 +34,7 @@ public abstract class BaseRest<B extends BaseBizz, PK extends Serializable, D> {
 
 	@PostMapping("/page")
 	@SuppressWarnings("unchecked")
-	public <PD extends PageDto> ServiceResponse<PageList<D>> findPage(@Validated(PageGroup.class) @RequestBody PD pageDto) {
+	public ServiceResponse<PageList<D>> findPage(@Validated(PageGroup.class) @RequestBody PD pageDto) {
 		return ServiceResponse.ok(bizz.findPage(pageDto));
 	}
 
