@@ -50,63 +50,7 @@ spring:
           default-label: /src/evo-config-file
 ---
 spring:
-  profiles: prod
-  boot:
-    admin:
-      client:
-        url: http://10.20.168.48:20020, http://10.20.168.49:20020
-eureka:
-  instance:
-    ip-address: ${parasitifer-ip}
-    prefer-ip-address: true
-  client:
-    serviceUrl:
-      defaultZone: http://10.20.168.46:50101/eureka, http://10.20.168.47:50101/eureka
----
-spring:
-  profiles: uat
-eureka:
-  instance:
-    ip-address: 10.20.133.30
-    prefer-ip-address: true
-  client:
-    serviceUrl:
-      defaultZone: http://10.20.133.30:50101/eureka
----
-spring:
-  profiles: sit
-  boot:
-    admin:
-      client:
-        url: http://10.20.133.30:20020
-        instance:
-          prefer-ip: true
-eureka:
-  instance:
-    ip-address: 10.20.133.30
-    prefer-ip-address: true
-  client:
-    serviceUrl:
-      defaultZone: http://10.20.133.30:50101/eureka
----
-spring:
-  profiles: dev
-eureka:
-  instance:
-    ip-address: 10.20.133.30
-    prefer-ip-address: true
-  client:
-    serviceUrl:
-      defaultZone: http://10.20.133.30:50101/eureka
----
-spring:
-  profiles: home
-  boot:
-    admin:
-      client:
-        url: http://192.168.1.24:20020
-        instance:
-          prefer-ip: true
+  profiles: vm
 eureka:
   instance:
     ip-address: 192.168.1.24
