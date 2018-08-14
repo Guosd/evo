@@ -119,7 +119,7 @@
 		<mybatis-spring-boot-starter.version>1.3.2</mybatis-spring-boot-starter.version>
 		<mapper-spring-boot-starter.version>2.0.3</mapper-spring-boot-starter.version>
 		<druid.version>1.1.6</druid.version>
-		<mysql-connector-java.version>5.1.24</mysql-connector-java.version>
+		<mysql-connector-java.version>8.0.12</mysql-connector-java.version>
 
 		<evo-data-redis.version>1.0.0-SNAPSHOT</evo-data-redis.version>
 

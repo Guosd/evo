@@ -7,17 +7,21 @@ management:
   endpoints:
     web:
       exposure:
-        include: [actuator, auditevents, autoconfig, beans, conditions, configprops, flyway, heapdump, health, httptrace, info, jolokia, liquibase, logfile, loggers, mappings, metrics, prometheus, scheduledtasks, sessions, shutdown, threaddump, trace]
+        include: [actuator, auditevents, autoconfig, beans, conditions, configprops, flyway, heapdump, health, httptrace, info, jolokia, liquibase, logfile, loggers, mappings, metrics, prometheus, scheduledtasks, sessions, shutdown, threaddump, trace, bus-refresh]
 spring:
   application:
     name: evo-config
   rabbitmq:
-    addresses: 10.20.133.43:5672
-    host: 10.20.133.43
+    addresses: 127.0.0.1:5672
+    host: 127.0.0.1
     port: 5672
-    virtual-host: vhost_eco
-    username: eco
-    password: eco
+    virtual-host: evo_config_vhost
+    username: evo_config
+    password: evo_config
+  cloud:
+    bus:
+      trace:
+        enabled: true # 消息总线跟踪开关
 eureka:
   instance:
     lease-expiration-duration-in-seconds: 15
@@ -77,16 +81,6 @@ spring:
         url: http://10.20.133.30:20020
         instance:
           prefer-ip: true
-eureka:
-  instance:
-    ip-address: 10.20.133.30
-    prefer-ip-address: true
-  client:
-    serviceUrl:
-      defaultZone: http://10.20.133.30:50101/eureka
----
-spring:
-  profiles: dev
 eureka:
   instance:
     ip-address: 10.20.133.30
