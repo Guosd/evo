@@ -28,7 +28,7 @@ public class SmsRest {
 			smsBizz.send(smsDto);
 			return ServiceResponse.ok();
 		} catch (BizzException e) {
-			throw new RestException(Const.RC_SMS);
+			throw new RestException(Const.RC_SMS, e);
 		}
 	}
 }

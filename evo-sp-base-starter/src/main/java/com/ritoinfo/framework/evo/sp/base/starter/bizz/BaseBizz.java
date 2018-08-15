@@ -21,9 +21,9 @@ public abstract class BaseBizz<Dao, E extends BaseEntity, PK extends Serializabl
 	@Autowired
 	protected Dao dao;
 
-	private static Class entityClass;
-	private static Class pkClass;
-	private static Class dtoClass;
+	private Class entityClass;
+	private Class pkClass;
+	private Class dtoClass;
 
 	public abstract Dto get(PK id);
 

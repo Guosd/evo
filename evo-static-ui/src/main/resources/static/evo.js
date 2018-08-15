@@ -61,6 +61,9 @@ $.extend($.jgrid.defaults, {
 	shrinkToFit: false,
 	autoScroll: false,
 	pager: pagerSelector,
+	serializeGridData: function(postData) {
+		return JSON.stringify(postData);
+	},
 	jsonReader: {
 		root: 'data.dataList',
 		page: 'data.pageNo',
@@ -88,10 +91,10 @@ function resetHeight() {
 }
 
 function jqGridQuery(postData, customGridSelector) {
+	$.extend($(customGridSelector || gridSelector).getGridParam('postData'), postData);
+
 	$(customGridSelector || gridSelector).setGridParam({
-		datatype: 'json',
-		pageNo: 1,
-		postData: JSON.stringify($.extend($(customGridSelector || gridSelector).getGridParam('postData'), postData))
+		datatype: 'json'
 	}).trigger('reloadGrid', [{page: 1}]);
 }
 
@@ -114,10 +117,10 @@ function jqGridSelectRowDatas(customGridSelector) {
 	return rowDatas;
 }
 
-function getAllPropertyNames(obj) {
-	var props = [];
-	do {
-		props = props.concat(Object.getOwnPropertyNames(obj));
-	} while (obj = Object.getPrototypeOf(obj));
-	return props.join('\r\n');
+function getAllProperties(obj) {
+	var str = '';
+	for (var p in obj) {
+		str += p + '=' + obj[p] + '\r\n';
+	}
+	return str;
 }
