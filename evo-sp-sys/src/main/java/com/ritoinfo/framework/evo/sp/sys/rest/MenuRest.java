@@ -7,7 +7,7 @@ import com.ritoinfo.framework.evo.sp.base.exception.RestException;
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import com.ritoinfo.framework.evo.sp.base.starter.rest.BaseRest;
-import com.ritoinfo.framework.evo.sp.base.starter.validate.group.PageGroup;
+import com.ritoinfo.framework.evo.sp.base.validate.group.PageGroup;
 import com.ritoinfo.framework.evo.sp.sys.bizz.MenuBizz;
 import com.ritoinfo.framework.evo.sp.sys.condition.MenuCondition;
 import com.ritoinfo.framework.evo.sp.sys.dto.MenuDto;

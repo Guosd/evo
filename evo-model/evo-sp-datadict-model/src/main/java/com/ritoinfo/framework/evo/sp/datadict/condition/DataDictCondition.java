@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.datadict.condition;
 
-import com.ritoinfo.framework.evo.sp.base.starter.dto.PageDto;
+import com.ritoinfo.framework.evo.sp.base.dto.PageDto;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

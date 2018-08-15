@@ -5,7 +5,7 @@ import com.ritoinfo.framework.evo.sp.base.exception.BizzException;
 import com.ritoinfo.framework.evo.sp.base.exception.RestException;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import com.ritoinfo.framework.evo.sp.base.starter.rest.BaseRest;
-import com.ritoinfo.framework.evo.sp.base.starter.validate.group.CreateGroup;
+import com.ritoinfo.framework.evo.sp.base.validate.group.CreateGroup;
 import com.ritoinfo.framework.evo.sp.sys.bizz.RoleBizz;
 import com.ritoinfo.framework.evo.sp.sys.condition.RoleCondition;
 import com.ritoinfo.framework.evo.sp.sys.dto.RoleDto;

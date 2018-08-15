@@ -69,12 +69,6 @@
 		<module>evo-model</module>
 		<module>evo-data-redis</module>
 		<module>evo-sp-base</module>
-		<module>evo-sp-base-starter</module>
-		<module>evo-sp-base-starter-validate</module>
-		<module>evo-sp-base-starter-model</module>
-		<module>evo-sp-base-starter-jpa</module>
-		<module>evo-sp-base-starter-mybatis-mapper</module>
-		<module>evo-sp-base-starter-mybatis-xml</module>
 		<module>evo-sp-activiti</module>
 		<module>evo-sp-auth</module>
 		<module>evo-sp-datadict</module>
@@ -127,9 +121,9 @@
 		<evo-common-jwt.version>1.0.0-SNAPSHOT</evo-common-jwt.version>
 		<evo-sp-auth-assist.version>1.0.0-SNAPSHOT</evo-sp-auth-assist.version>
 		<evo-sp-base.version>1.0.0-SNAPSHOT</evo-sp-base.version>
+		<evo-sp-base-validate.version>1.0.0-SNAPSHOT</evo-sp-base-validate.version>
+		<evo-sp-base-model.version>1.0.0-SNAPSHOT</evo-sp-base-model.version>
 		<evo-sp-base-starter.version>1.0.0-SNAPSHOT</evo-sp-base-starter.version>
-		<evo-sp-base-starter-validate.version>1.0.0-SNAPSHOT</evo-sp-base-starter-validate.version>
-		<evo-sp-base-starter-model.version>1.0.0-SNAPSHOT</evo-sp-base-starter-model.version>
 		<evo-sp-base-starter-mybatis-xml.version>1.0.0-SNAPSHOT</evo-sp-base-starter-mybatis-xml.version>
 		<evo-sp-base-starter-mybatis-mapper.version>1.0.0-SNAPSHOT</evo-sp-base-starter-mybatis-mapper.version>
 		<evo-sp-base-starter-jpa.version>1.0.0-SNAPSHOT</evo-sp-base-starter-jpa.version>

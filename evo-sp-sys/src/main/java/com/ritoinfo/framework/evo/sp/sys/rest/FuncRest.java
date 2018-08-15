@@ -3,7 +3,7 @@ package com.ritoinfo.framework.evo.sp.sys.rest;
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
 import com.ritoinfo.framework.evo.sp.base.starter.rest.BaseRest;
-import com.ritoinfo.framework.evo.sp.base.starter.validate.group.PageGroup;
+import com.ritoinfo.framework.evo.sp.base.validate.group.PageGroup;
 import com.ritoinfo.framework.evo.sp.sys.bizz.FuncBizz;
 import com.ritoinfo.framework.evo.sp.sys.condition.FuncCondition;
 import com.ritoinfo.framework.evo.sp.sys.dto.FuncDto;
