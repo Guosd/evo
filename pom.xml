@@ -72,8 +72,7 @@
 		<module>evo-sp-activiti</module>
 		<module>evo-sp-auth</module>
 		<module>evo-sp-datadict</module>
-		<module>evo-sp-demo-jpa</module>
-		<module>evo-sp-demo-mybatis-mapper</module>
+		<module>evo-sp-demo</module>
 		<module>evo-sp-sms</module>
 		<module>evo-sp-sys</module>
 		<module>evo-sp-sys-ui</module>
