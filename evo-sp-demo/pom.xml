@@ -12,7 +12,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>evo-sp-demo</artifactId>
+
 	<packaging>pom</packaging>
+
 	<modules>
 		<module>evo-sp-demo-jpa</module>
 		<module>evo-sp-demo-mybatis-mapper</module>

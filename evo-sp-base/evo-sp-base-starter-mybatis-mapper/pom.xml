@@ -27,7 +27,7 @@
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper-spring-boot-starter</artifactId>
-			<version>1.2.5</version>
+			<version>${pagehelper-spring-boot-starter.version}</version>
 		</dependency>
 	</dependencies>
 
