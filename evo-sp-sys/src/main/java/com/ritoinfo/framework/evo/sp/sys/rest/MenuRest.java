@@ -16,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -37,8 +39,8 @@ public class MenuRest extends BaseRest<MenuBizz, Long, MenuDto, MenuCondition> {
 		return ServiceResponse.ok(bizz.getWithParent(id));
 	}
 
-	@GetMapping("/page/parent")
-	public ServiceResponse<PageList<MenuDto>> findPageWithParent(@Validated(PageGroup.class) MenuCondition condition) {
+	@PostMapping("/page/parent")
+	public ServiceResponse<PageList<MenuDto>> findPageWithParent(@Validated(PageGroup.class) @RequestBody MenuCondition condition) {
 		return ServiceResponse.ok(bizz.findPageWithParent(condition));
 	}
 
