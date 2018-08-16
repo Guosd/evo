@@ -18,8 +18,8 @@ import javax.persistence.Table;
 @Table(name = "country", catalog = "evo_demo")
 public class Country extends BaseJpaEntity<Long> {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Getter @Setter private Long id;
-	@Getter @Setter private String countryCode;
-	@Getter @Setter private String countryName;
+	@Getter @Setter private String code;
+	@Getter @Setter private String name;
 }

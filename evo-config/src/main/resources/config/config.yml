@@ -45,9 +45,9 @@ evo:
       addresses: 127.0.0.1:5672
       host: 127.0.0.1
       port: 5672
-      virtual-host: evo_config_vhost
-      username: evo_config
-      password: evo_config
+      virtual-host: evo_vhost
+      username: evo
+      password: evo
     boot:
       admin:
         client:

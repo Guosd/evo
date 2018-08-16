@@ -10,6 +10,6 @@ import java.util.List;
  * Date: 2018-07-12 13:12
  */
 public interface CountryDao extends JpaRepository<Country, Long> {
-	List<Country> findByCountryCode(String countryCode);
-	Country getByCountryCode(String countryCode);
+	List<Country> findByCode(String code);
+	Country getByCode(String code);
 }

@@ -89,7 +89,8 @@ public abstract class BaseMapperBizz<Dao extends Mapper, E extends BaseMapperEnt
 	@Transactional
 	@SuppressWarnings("unchecked")
 	public void update(Dto dto) {
-		E entity = toEntity(dto);
+		E entity = (E) dao.selectByPrimaryKey(getPKValue(dto));
+		BeanUtil.copy(entity, dto);
 
 		entity.setUpdateBy(getUserContextId());
 		entity.setUpdateTime(DateUtil.now());

@@ -11,6 +11,6 @@ import java.io.Serializable;
 @Data
 public class CountryDto implements Serializable {
 	private Long id;
-	private String countryCode;
-	private String countryName;
+	private String code;
+	private String name;
 }

@@ -14,11 +14,11 @@ import java.util.Date;
 public abstract class BaseMapperEntity<PK> extends BaseEntity {
 	@ColumnType(jdbcType = JdbcType.VARCHAR)
 	@Getter @Setter protected PK createBy;
-	@ColumnType(jdbcType = JdbcType.DATE)
+	@ColumnType(jdbcType = JdbcType.TIMESTAMP)
 	@Getter @Setter protected Date createTime;
 	@ColumnType(jdbcType = JdbcType.VARCHAR)
 	@Getter @Setter protected PK updateBy;
-	@ColumnType(jdbcType = JdbcType.DATE)
+	@ColumnType(jdbcType = JdbcType.TIMESTAMP)
 	@Getter @Setter protected Date updateTime;
 
 	public abstract PK getId();

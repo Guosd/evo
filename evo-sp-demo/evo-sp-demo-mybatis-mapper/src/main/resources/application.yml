@@ -1,13 +1,13 @@
 server:
   port: 30001
 management:
-  endpoint:
-    health:
-      show-details: ALWAYS
   endpoints:
     web:
       exposure:
         include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
 spring:
   datasource:
     url: ${evo.sp.demo.datasource.url}

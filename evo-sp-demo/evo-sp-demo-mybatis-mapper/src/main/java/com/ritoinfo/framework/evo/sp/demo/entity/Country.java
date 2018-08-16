@@ -3,6 +3,7 @@ package com.ritoinfo.framework.evo.sp.demo.entity;
 import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseMapperEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -16,8 +17,9 @@ import javax.persistence.Table;
 @Table(name = "country", catalog = "evo_demo")
 public class Country extends BaseMapperEntity<Long> {
 	@Id
-	/*@KeySql(sql = "select SEQ_COUNTRY.nextval from dual", order = ORDER.BEFORE)*/
+	@KeySql(useGeneratedKeys = true) // MySql
+	/*@KeySql(sql = "select SEQ_COUNTRY.nextval from dual", order = ORDER.BEFORE) // Oracle */
 	private Long id;
-	private String countryCode;
-	private String countryName;
+	private String code;
+	private String name;
 }

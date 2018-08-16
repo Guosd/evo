@@ -12,6 +12,6 @@ import lombok.EqualsAndHashCode;
 @Data
 public class CountryCondition extends PageDto {
 	private Long id;
-	private String countryCode;
-	private String countryName;
+	private String code;
+	private String name;
 }

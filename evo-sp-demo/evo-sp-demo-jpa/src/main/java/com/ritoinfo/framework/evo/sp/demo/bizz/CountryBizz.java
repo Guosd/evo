@@ -19,8 +19,8 @@ import java.util.Map;
 @Transactional(readOnly = true)
 @Service
 public class CountryBizz extends BaseJpaBizz<CountryDao, Country, Long, CountryDto> {
-	public List<Map<String, Object>> findByCountryCode(String countryCode) {
-		dao.findByCountryCode(countryCode);
+	public List<Map<String, Object>> findByCode(String code) {
+		dao.findByCode(code);
 		return null;
 	}
 }

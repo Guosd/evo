@@ -82,7 +82,8 @@ public abstract class BaseJpaBizz<Dao extends JpaRepository, E extends BaseJpaEn
 	@Transactional
 	@SuppressWarnings("unchecked")
 	public void update(Dto dto) {
-		E entity = toEntity(dto);
+		E entity = (E) dao.getOne(getPKValue(dto));
+		BeanUtil.copy(entity, dto);
 
 		entity.setUpdateBy(getUserContextId());
 		entity.setUpdateTime(DateUtil.now());
@@ -96,6 +97,7 @@ public abstract class BaseJpaBizz<Dao extends JpaRepository, E extends BaseJpaEn
 		dao.deleteById(id);
 	}
 
+	@SuppressWarnings("unchecked")
 	protected Example toExample(Object condition) {
 		return toExample(getEntityClass(), condition);
 	}

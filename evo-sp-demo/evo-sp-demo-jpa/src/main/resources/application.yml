@@ -1,13 +1,13 @@
 server:
   port: 30002
 management:
-  endpoint:
-    health:
-      show-details: ALWAYS
   endpoints:
     web:
       exposure:
-        include: [actuator, auditevents, autoconfig, beans, conditions, configprops, flyway, heapdump, health, httptrace, info, jolokia, liquibase, logfile, loggers, mappings, metrics, prometheus, scheduledtasks, sessions, shutdown, threaddump, trace]
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
 spring:
   jpa:
     show-sql: true
@@ -16,7 +16,7 @@ spring:
     url: ${evo.sp.demo.datasource.url}
     username: ${evo.sp.demo.datasource.username}
     password: ${evo.sp.demo.datasource.password}
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-test-query: select 1
       connection-timeout: 30000 # 等待连接池分配连接的最大时长
@@ -39,9 +39,3 @@ spring:
       enabled: true
     sampler:
       probability: 1.0
-  boot:
-    admin:
-      client:
-        url: ${evo.spring.boot.admin.client.url}
-        instance:
-          prefer-ip: ${evo.spring.boot.admin.client.instance.prefer-ip}

@@ -4,13 +4,13 @@ server:
     max-threads: 128
     min-spare-threads: 64
 management:
-  endpoint:
-    health:
-      show-details: ALWAYS
   endpoints:
     web:
       exposure:
-        include: [actuator, auditevents, autoconfig, beans, conditions, configprops, flyway, heapdump, health, httptrace, info, jolokia, liquibase, logfile, loggers, mappings, metrics, prometheus, scheduledtasks, sessions, shutdown, threaddump, trace]
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
 spring:
   rabbitmq:
     addresses: ${evo.spring.rabbitmq.addresses}
@@ -28,12 +28,6 @@ spring:
       probability: 1.0
     zuul:
       enabled: true
-  boot:
-    admin:
-      client:
-        url: ${evo.spring.boot.admin.client.url}
-        instance:
-          prefer-ip: ${evo.spring.boot.admin.client.instance.prefer-ip}
 zuul:
   retryable: true
   sensitiveHeaders:

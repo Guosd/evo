@@ -93,6 +93,11 @@ public abstract class BaseBizz<Dao, E extends BaseEntity, PK extends Serializabl
 		return dtoClass;
 	}
 
+	@SuppressWarnings("unchecked")
+	protected PK getPKValue(Object object) {
+		return (PK) BeanUtil.getFieldValue(object, "id");
+	}
+
 	protected PK getUserContextId() {
 		UserContext userContext = SessionHolder.getUserContext();
 		return userContext == null ? null : userContext.getId(getPKClass());

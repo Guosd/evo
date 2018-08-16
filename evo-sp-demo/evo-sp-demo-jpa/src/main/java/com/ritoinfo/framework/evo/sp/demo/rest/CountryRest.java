@@ -22,8 +22,8 @@ import java.util.Map;
 @RequestMapping("/country")
 @RestController
 public class CountryRest extends BaseRest<CountryBizz, Long, CountryDto, CountryCondition> {
-	@GetMapping("/countryCode/{countryCode}")
-	public ServiceResponse<List<Map<String, Object>>> get(@PathVariable String countryCode) {
-		return ServiceResponse.ok(bizz.findByCountryCode(countryCode));
+	@GetMapping("/code/{code}")
+	public ServiceResponse<List<Map<String, Object>>> get(@PathVariable String code) {
+		return ServiceResponse.ok(bizz.findByCode(code));
 	}
 }
