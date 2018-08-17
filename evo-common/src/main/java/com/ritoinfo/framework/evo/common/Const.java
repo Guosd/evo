@@ -14,6 +14,8 @@ public class Const {
 
 	public static final String VERIFY_CODE_SIGN_IN = "SIGN_IN";
 	public static final String VERIFY_CODE_SIGN_UP = "SIGN_UP";
+	public static final String VERIFY_CODE_TYPE_RANDOM = "random";
+	public static final String VERIFY_CODE_TYPE_FIX = "fix";
 
 	public static final String JWT_TOKEN_HEADER = "X-Authorization";
 

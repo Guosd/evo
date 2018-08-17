@@ -11,8 +11,12 @@ import org.springframework.context.annotation.Configuration;
 @Data
 @Configuration
 public class AuthConfig {
+	@Value("${auth.verifyCode.type}")
+	private String type;
 	@Value("${auth.verifyCode.length}")
 	private Integer length;
+	@Value("${auth.verifyCode.value}")
+	private String value;
 	@Value("${auth.verifyCode.expirationTime}")
 	private Integer expirationTime;
 }

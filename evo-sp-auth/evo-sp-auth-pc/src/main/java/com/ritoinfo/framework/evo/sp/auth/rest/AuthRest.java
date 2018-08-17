@@ -30,7 +30,7 @@ public class AuthRest {
 		try {
 			return ServiceResponse.ok(authBizz.authorize(loginDto, request));
 		} catch (BizzException e) {
-			throw new RestException(Const.RC_AUTH_LOGIN);
+			throw new RestException(Const.RC_AUTH_LOGIN, e);
 		}
 	}
 }

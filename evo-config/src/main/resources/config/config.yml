@@ -24,7 +24,9 @@ auth:
     /eco/ui/static/**/*, /eco/ui/common/**/*, /eco/ui/css/**/*, /eco/ui/fonts/**/*, /eco/ui/images/**/*, /eco/ui/img/**/*, /eco/ui/js/**/*
     ] # TODO 升级后删掉 /ui/comm/login 后的所有地址
   verifyCode:
-    length: 6
+    type: fix # random 随机; fix 固定
+    length: 6 # 当 type = random 时，验证码位数
+    value: 123456 # 当 type= fix 时， 验证码值
     expirationTime: 2 # 分钟
 sms:
   address: http://10.21.111.71:9087/smserver/submitMessage

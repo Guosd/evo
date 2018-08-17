@@ -41,7 +41,7 @@ public class AuthBizz {
 
 	public CodeDto getCode(MobileCodeDto mobileCodeDto) {
 		String mobileNumber = mobileCodeDto.getMobileNumber();
-		String verifyCode = AlgorithmUtil.randomNumber(authConfig.getLength());
+		String verifyCode = getVerifyCode();
 		int expirationTime = authConfig.getExpirationTime();
 
 		log.info("生成验证码: " + mobileNumber + ", " + verifyCode + ", " + expirationTime);
@@ -96,6 +96,10 @@ public class AuthBizz {
 				throw new VerifyCodeInvalidException(verifyCode);
 			}
 		}
+	}
+
+	private String getVerifyCode() {
+		return Const.VERIFY_CODE_TYPE_RANDOM.equals(authConfig.getType()) ? AlgorithmUtil.randomNumber(authConfig.getLength()) : authConfig.getValue();
 	}
 
 	private String generateCode(String type, String mobileNumber) {
