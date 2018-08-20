@@ -32,12 +32,12 @@ public class IdentityRest {
 			identityBizz.create(identityDto);
 			return ServiceResponse.ok();
 		} catch (BizzException e) {
-			throw new RestException(Const.RC_ACTIVITI_ID_CREATE);
+			throw new RestException(Const.RC_ACTIVITI_ID_CREATE, e);
 		}
 	}
-	
+
 	@PostMapping("/createNew")
-	public ServiceResponse createNew(String username,String code) {
+	public ServiceResponse createNew(String username, String code) {
 		try {
 			IdentityDto dto = new IdentityDto();
 			dto.setUsername(username);
@@ -45,7 +45,7 @@ public class IdentityRest {
 			identityBizz.create(dto);
 			return ServiceResponse.ok();
 		} catch (BizzException e) {
-			throw new RestException(Const.RC_ACTIVITI_ID_CREATE);
+			throw new RestException(Const.RC_ACTIVITI_ID_CREATE, e);
 		}
 	}
 
@@ -55,7 +55,7 @@ public class IdentityRest {
 			identityBizz.deleteByUser(username);
 			return ServiceResponse.ok();
 		} catch (BizzException e) {
-			throw new RestException(Const.RC_ACTIVITI_ID_USER_DELETE);
+			throw new RestException(Const.RC_ACTIVITI_ID_USER_DELETE, e);
 		}
 	}
 
@@ -65,7 +65,7 @@ public class IdentityRest {
 			identityBizz.deleteByGroup(groupCode);
 			return ServiceResponse.ok();
 		} catch (BizzException e) {
-			throw new RestException(Const.RC_ACTIVITI_ID_GROUP_DELETE);
+			throw new RestException(Const.RC_ACTIVITI_ID_GROUP_DELETE, e);
 		}
 	}
 }

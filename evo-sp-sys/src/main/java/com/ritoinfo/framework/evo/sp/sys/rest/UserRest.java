@@ -62,11 +62,11 @@ public class UserRest extends BaseRest<UserBizz, Long, UserDto, UserCondition> {
 		try {
 			return ServiceResponse.ok(bizz.createAll(dto));
 		} catch (UserExistedException e) {
-			throw new RestException(Const.RC_SYS_USER_EXIST);
+			throw new RestException(Const.RC_SYS_USER_EXIST, e);
 		} catch (UserRoleInvalidException e) {
-			throw new RestException(Const.RC_SYS_USER_ROLE);
+			throw new RestException(Const.RC_SYS_USER_ROLE, e);
 		} catch (BizzException e) {
-			throw new RestException(Const.RC_SYS_USER);
+			throw new RestException(Const.RC_SYS_USER, e);
 		}
 	}
 

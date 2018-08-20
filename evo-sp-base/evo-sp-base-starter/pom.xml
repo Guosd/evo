@@ -16,8 +16,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-sp-base</artifactId>
-			<version>${evo-sp-base.version}</version>
+			<artifactId>evo-sp-base-exception</artifactId>
+			<version>${evo-sp-base-exception.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>

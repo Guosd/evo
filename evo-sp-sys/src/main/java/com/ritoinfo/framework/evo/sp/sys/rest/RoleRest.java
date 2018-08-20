@@ -53,7 +53,7 @@ public class RoleRest extends BaseRest<RoleBizz, Long, RoleDto, RoleCondition> {
 		try {
 			return ServiceResponse.ok(bizz.create(roleDto));
 		} catch (BizzException e) {
-			throw new RestException(Const.RC_SYS_ROLE_FUNC);
+			throw new RestException(Const.RC_SYS_ROLE_FUNC, e);
 		}
 	}
 }

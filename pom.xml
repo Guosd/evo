@@ -90,24 +90,25 @@
 		<evo-common-jwt.version>1.0.0-SNAPSHOT</evo-common-jwt.version>
 		<evo-sp-auth-assist.version>1.0.0-SNAPSHOT</evo-sp-auth-assist.version>
 		<evo-sp-base.version>1.0.0-SNAPSHOT</evo-sp-base.version>
-		<evo-sp-base-validate.version>1.0.0-SNAPSHOT</evo-sp-base-validate.version>
+		<evo-sp-base-exception.version>1.0.0-SNAPSHOT</evo-sp-base-exception.version>
 		<evo-sp-base-model.version>1.0.0-SNAPSHOT</evo-sp-base-model.version>
+		<evo-sp-base-validate.version>1.0.0-SNAPSHOT</evo-sp-base-validate.version>
 		<evo-sp-base-starter.version>1.0.0-SNAPSHOT</evo-sp-base-starter.version>
-		<evo-sp-base-starter-mybatis-xml.version>1.0.0-SNAPSHOT</evo-sp-base-starter-mybatis-xml.version>
-		<evo-sp-base-starter-mybatis-mapper.version>1.0.0-SNAPSHOT</evo-sp-base-starter-mybatis-mapper.version>
 		<evo-sp-base-starter-jpa.version>1.0.0-SNAPSHOT</evo-sp-base-starter-jpa.version>
+		<evo-sp-base-starter-mybatis-mapper.version>1.0.0-SNAPSHOT</evo-sp-base-starter-mybatis-mapper.version>
+		<evo-sp-base-starter-mybatis-xml.version>1.0.0-SNAPSHOT</evo-sp-base-starter-mybatis-xml.version>
 
 		<evo-sp-activiti-model.version>1.0.0-SNAPSHOT</evo-sp-activiti-model.version>
 		<evo-sp-auth-common-model.version>1.0.0-SNAPSHOT</evo-sp-auth-common-model.version>
-		<evo-sp-auth-pc-model.version>1.0.0-SNAPSHOT</evo-sp-auth-pc-model.version>
 		<evo-sp-auth-mobile-model.version>1.0.0-SNAPSHOT</evo-sp-auth-mobile-model.version>
+		<evo-sp-auth-pc-model.version>1.0.0-SNAPSHOT</evo-sp-auth-pc-model.version>
 		<evo-sp-datadict-model.version>1.0.0-SNAPSHOT</evo-sp-datadict-model.version>
 		<evo-sp-sms-model.version>1.0.0-SNAPSHOT</evo-sp-sms-model.version>
 		<evo-sp-sys-model.version>1.0.0-SNAPSHOT</evo-sp-sys-model.version>
 		<evo-sp-demo-model.version>1.0.0-SNAPSHOT</evo-sp-demo-model.version>
 
-		<evo-sp-datadict-api.version>1.0.0-SNAPSHOT</evo-sp-datadict-api.version>
 		<evo-sp-auth-common-api.version>1.0.0-SNAPSHOT</evo-sp-auth-common-api.version>
+		<evo-sp-datadict-api.version>1.0.0-SNAPSHOT</evo-sp-datadict-api.version>
 		<evo-sp-sms-api.version>1.0.0-SNAPSHOT</evo-sp-sms-api.version>
 		<evo-sp-sys-api.version>1.0.0-SNAPSHOT</evo-sp-sys-api.version>
 	</properties>

@@ -16,11 +16,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-sp-base</artifactId>
-			<version>${evo-sp-base.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
 			<artifactId>evo-sp-base-validate</artifactId>
 			<version>${evo-sp-base-validate.version}</version>
 		</dependency>

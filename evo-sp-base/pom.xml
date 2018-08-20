@@ -16,12 +16,13 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>evo-sp-base-starter</module>
-		<module>evo-sp-base-validate</module>
+		<module>evo-sp-base-exception</module>
 		<module>evo-sp-base-model</module>
+		<module>evo-sp-base-starter</module>
 		<module>evo-sp-base-starter-jpa</module>
 		<module>evo-sp-base-starter-mybatis-mapper</module>
 		<module>evo-sp-base-starter-mybatis-xml</module>
+		<module>evo-sp-base-validate</module>
 	</modules>
 
 	<dependencies>

@@ -45,8 +45,3 @@ evo:
         url: jdbc:mysql://192.168.1.29:3306/evo_activiti?useUnicode=true&characterEncoding=UTF8
         username: evo_activiti
         password: evo_activiti
-    eco-mobile-car:
-      datasource:
-        url: jdbc:mysql://10.20.133.43:8066/eco_mobile?useUnicode=true&characterEncoding=utf8&useSSL=false
-        username: eco_mobile
-        password: eco_mobile

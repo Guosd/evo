@@ -18,6 +18,8 @@
 	<modules>
 		<module>evo-sp-demo-jpa</module>
 		<module>evo-sp-demo-mybatis-mapper</module>
+		<module>evo-sp-demo-mybatis-xml</module>
 	</modules>
+
 
 </project>
