@@ -53,6 +53,7 @@ public abstract class BaseMapperBizz<Dao extends Mapper, E extends BaseMapperEnt
 		return findPage(condition, null);
 	}
 
+	@SuppressWarnings("unchecked")
 	public PageList<Dto> findPage(PageDto condition, ExampleCreater exampleCreater) {
 		Page<Object> result = PageHelper.startPage(condition.getPageNo(), condition.getPageSize());
 		List<E> list = dao.selectByExample(toExample(condition, exampleCreater));

@@ -22,7 +22,7 @@ auth:
     /eco/mobilecar/image/**/*, /eco/mobilecar/js/**/*, /eco/mobilecar/css/**/*, /eco/mobilecar/static/**/*,
     /ui/static/**/*, /ui/common/**/*, /ui/css/**/*, /ui/fonts/**/*, /ui/images/**/*, /ui/img/**/*, /ui/js/**/*,
     /eco/ui/static/**/*, /eco/ui/common/**/*, /eco/ui/css/**/*, /eco/ui/fonts/**/*, /eco/ui/images/**/*, /eco/ui/img/**/*, /eco/ui/js/**/*
-    ] # TODO 升级后删掉 /ui/comm/login 后的所有地址
+  ] # TODO 升级后删掉 /ui/comm/login 后的所有地址
   verifyCode:
     type: fix # random 随机; fix 固定
     length: 6 # 当 type = random 时，验证码位数
@@ -44,23 +44,32 @@ evo:
       cluster:
         nodes: 10.20.133.85:7000, 10.20.133.85:7002, 10.20.133.85:7003, 10.20.133.85:7004, 10.20.133.85:7005
     rabbitmq:
-      addresses: 127.0.0.1:5672
-      host: 127.0.0.1
+      addresses: 10.20.133.43:5672
+      host: 10.20.133.43
       port: 5672
-      virtual-host: evo_vhost
-      username: evo
-      password: evo
-    boot:
-      admin:
-        client:
-          url: http://127.0.0.1:20020
-          instance:
-            prefer-ip: true
+      virtual-host: vhost_eco
+      username: eco
+      password: eco
   ribbon:
-    NFLoadBalancerRuleClassName: com.ritoinfo.framework.evo.zuul.loadbalancer.BackToSelfRule
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
   sp:
     demo:
       datasource:
-        url: jdbc:mysql://127.0.0.1:3306/evo_demo?useUnicode=true&characterEncoding=UTF8&useSSL=false # MySQL 8+ 增加 useSSL 参数
+        url: jdbc:mysql://10.20.133.43:8066/evo_demo?useUnicode=true&characterEncoding=UTF8
         username: evo_demo
         password: evo_demo
+    sys:
+      datasource:
+        url: jdbc:mysql://10.20.133.43:8066/evo_sys?useUnicode=true&characterEncoding=UTF8&useSSL=false
+        username: evo_sys
+        password: evo_sys
+    datadict:
+      datasource:
+        url: jdbc:mysql://10.20.133.43:8066/evo_datadict?useUnicode=true&characterEncoding=UTF8&useSSL=false
+        username: evo_datadict
+        password: evo_datadict
+    activiti:
+      datasource:
+        url: jdbc:mysql://10.20.133.43:8066/evo_activiti?useUnicode=true&characterEncoding=UTF8&useSSL=false
+        username: evo_activiti
+        password: evo_activiti
