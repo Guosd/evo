@@ -65,6 +65,18 @@
 		<appender-ref ref="LOGSTASH"/>
 	</logger>
 
+	<logger name="org.springframework.cloud.netflix.ribbon" level="DEBUG" additivity="false">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="ROLLINGFILE"/>
+		<appender-ref ref="LOGSTASH"/>
+	</logger>
+
+	<logger name="org.springframework.retry" level="DEBUG" additivity="false">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="ROLLINGFILE"/>
+		<appender-ref ref="LOGSTASH"/>
+	</logger>
+
 	<root level="INFO">
 		<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="ROLLINGFILE"/>

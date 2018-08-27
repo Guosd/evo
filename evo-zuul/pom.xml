@@ -62,8 +62,8 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-sp-base-starter</artifactId>
-			<version>${evo-sp-base-starter.version}</version>
+			<artifactId>evo-sp-base-starter-mybatis-mapper</artifactId>
+			<version>${evo-sp-base-starter-mybatis-mapper.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
@@ -74,6 +74,11 @@
 			<groupId>com.ritoinfo.framework</groupId>
 			<artifactId>evo-sp-auth-common-api</artifactId>
 			<version>${evo-sp-auth-common-api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-connector-java.version}</version>
 		</dependency>
 	</dependencies>
 

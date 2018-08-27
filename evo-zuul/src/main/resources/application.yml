@@ -12,6 +12,19 @@ management:
     health:
       show-details: ALWAYS
 spring:
+  datasource:
+    url: ${evo.sp.demo.datasource.url}
+    username: ${evo.sp.demo.datasource.username}
+    password: ${evo.sp.demo.datasource.password}
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      connection-test-query: select 1
+      connection-timeout: 30000 # 等待连接池分配连接的最大时长
+      idle-timeout: 600000 # 连接闲置状态的最大时长
+      maximum-pool-size: 60 # 连接池中允许的最大连接数, 推荐的公式：((core_count * 2) + effective_spindle_count)
+      max-lifetime: 1800000 # 连接的生命时长, 建议设置比数据库超时时长少30秒
+      minimum-idle: 10
+      read-only: false # 连接只读数据库时配置为true, 保证安全
   rabbitmq:
     addresses: ${evo.spring.rabbitmq.addresses}
     host: ${evo.spring.rabbitmq.host}
@@ -28,376 +41,27 @@ spring:
       probability: 1.0
     zuul:
       enabled: true
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
 zuul:
   retryable: true
   sensitiveHeaders:
   ignoredServices: '*'
-  routes:
-    evo-activiti:
-      path: /activiti/**
-    evo-sp-auth-common:
-      path: /auth/common/**
-    evo-sp-auth-pc:
-      path: /auth/pc/**
-    evo-sp-auth-mobile:
-      path: /auth/mobile/**
-    evo-sp-sys:
-      path: /sys/**
-    evo-sp-datadict:
-      path: /datadict/**
-    evo-static-ui:
-      path: /static-ui/**
-    evo-sp-sys-ui:
-      path: /sys-ui/**
-    sp-ui: # TODO 兼容 SCFW
-      path: /ui/**
-    sp-base:
-      path: /base/**
-    sp-storage:
-      path: /storage/**
-      serviceId: sp-storage
-    sp-eco-base:
-      path: /eco/base/**
-      serviceId: sp-eco-base
-    sp-eco-product:
-      path: /eco/prod/**
-      serviceId: sp-eco-product
-    sp-eco-store:
-      path: /eco/store/**
-      serviceId: sp-eco-store
-    sp-eco-ui:
-      path: /eco/ui/**
-      serviceId: sp-eco-ui
-    sp-eco-ware:
-      path: /eco/ware/**
-      serviceId: sp-eco-ware
-    sp-eco-dict:
-      path: /eco/dict/**
-      serviceId: sp-eco-dict
-    sp-eco-material:
-      path: /eco/material/**
-      serviceId: sp-eco-material
-    sp-eco-member:
-      path: /eco/member/**
-      serviceId: sp-eco-member
-    sp-eco-supplier:
-      path: /eco/supplier/**
-      serviceId: sp-eco-supplier
-    sp-eco-warehouse:
-      path: /eco/warehouse/**
-      serviceId: sp-eco-warehouse
-    sp-eco-sto:
-      path: /eco/sto/**
-      serviceId: sp-eco-sto
-    sp-eco-order:
-      path: /eco/order/**
-      serviceId: sp-eco-order
-    sp-eco-order-new:
-      path: /eco/order-new/**
-      serviceId: sp-eco-order-new
-    sp-eco-alloc:
-      path: /eco/alloc/**
-      serviceId: sp-eco-alloc
-    sp-eco-purch:
-      path: /eco/purch/**
-      serviceId: sp-eco-purch
-    sp-eco-purchtemp:
-      path: /eco/purchtemp/**
-      serviceId: sp-eco-purchtemp
-    sp-eco-finance:
-      path: /eco/finance/**
-      serviceId: sp-eco-finance
-    sp-eco-sc:
-      path: /eco/sc/**
-      serviceId: sc-sp-datasc
-    sp-eco-epim:
-      path: /eco/epim/**
-      serviceId: epim-sp-dataepim
-    sp-eco-vehicle:
-      path: /eco/vehicle/**
-      serviceId: vehicle-sp-datavehicle
-    sp-eco-mobile-car:
-      path: /eco/mobilecar/**
-      serviceId: sp-eco-mobile-car
-    sp-eco-schedule:
-      path: /eco/schedule/**
-      serviceId: sp-eco-schedule
 hystrix:
   command:
     default:
       execution:
         isolation:
+          strategy: THREAD
           thread:
             timeoutInMilliseconds: 300000
-    evo-activiti:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    evo-sp-auth-common:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    evo-sp-auth-pc:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    evo-sp-auth-mobile:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    evo-sp-sys:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    evo-sp-datadict:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    evo-static-ui:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    evo-sp-sys-ui:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-ui:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-base:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-storage:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-base:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-product:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-store:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-ui:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-ware:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-sc:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-dict:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-material:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-member:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-supplier:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-warehouse:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-sto:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-order:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-order-new:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-alloc:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-purch:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-purchtemp:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-finance:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-epim:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-vehicle:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-mobile-car:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-    sp-eco-schedule:
-      execution:
-        isolation:
-          thread:
-            timeoutInMilliseconds: 300000
-evo-activiti:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-evo-sp-auth-common:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-evo-sp-auth-pc:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-evo-sp-auth-mobile:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-evo-sp-sys:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-evo-sp-datadict:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-evo-static-ui:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-evo-sp-sys-ui:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-ui:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-base:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-storage:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-base:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-product:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-store:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-ui:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-ware:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-dict:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-material:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-member:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-supplier:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-warehouse:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-sto:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-order:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-order-new:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-alloc:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-purch:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-purchtemp:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-finance:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-sc:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-epim:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-sp-eco-vehicle:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
+ribbon:
+  NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
+  ConnectTimeout: 10000
+  ReadTimeout: 30000
+  OkToRetryOnAllOperations: false # 重试策略，因为涉及到服务调用幂等性，所以暂时关闭此三个属性
+  MaxAutoRetriesNextServer: 0 # 在其他服务器的重试次数
+  MaxAutoRetries: 0 # 在相同服务器正常请求之外的重试次数
 sp-eco-mobile-car:
   ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-    ReadTimeout: 30000
-    ConnectTimeout: 30000
-sp-eco-schedule:
-  ribbon:
-    NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-ribbon:
-  ReadTimeout: 30000
-  ConnectTimeout: 30000
-feign:
-  httpclient:
-    connection-timeout: 30000
+    ReadTimeout: 60000

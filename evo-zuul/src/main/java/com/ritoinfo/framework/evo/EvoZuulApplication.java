@@ -12,11 +12,13 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import tk.mybatis.spring.annotation.MapperScan;
 
 /**
  * User: Kyll
  * Date: 2018-02-26 20:53
  */
+@MapperScan(basePackages = "com.ritoinfo.framework.evo.zuul.routelocator.dao")
 @EnableFeignClients
 @EnableCircuitBreaker
 @EnableZuulProxy

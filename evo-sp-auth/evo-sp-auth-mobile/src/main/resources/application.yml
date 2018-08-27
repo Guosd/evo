@@ -30,3 +30,20 @@ spring:
       enabled: true
     sampler:
       probability: 1.0
+ribbon:
+  ConnectTimeout: 10000
+  ReadTimeout: 20000
+  OkToRetryOnAllOperations: false
+  MaxAutoRetriesNextServer: 0
+  MaxAutoRetries: 0
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: THREAD
+          thread:
+            timeoutInMilliseconds: 35000
