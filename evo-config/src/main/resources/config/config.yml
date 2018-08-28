@@ -55,7 +55,7 @@ evo:
   sp:
     framework:
       datasource:
-        url: jdbc:mysql://127.0.0.1:3306/evo_framework?useUnicode=true&characterEncoding=UTF8
+        url: jdbc:mysql://127.0.0.1:3306/evo_framework?useUnicode=true&characterEncoding=UTF8&useSSL=false
         username: evo_framework
         password: evo_framework
     sys:
