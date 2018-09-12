@@ -44,32 +44,37 @@ evo:
       cluster:
         nodes: 10.20.133.85:7000, 10.20.133.85:7002, 10.20.133.85:7003, 10.20.133.85:7004, 10.20.133.85:7005
     rabbitmq:
-      addresses: 10.20.133.43:5672
-      host: 10.20.133.43
+      addresses: 127.0.0.1:5672
+      host: 127.0.0.1
       port: 5672
-      virtual-host: vhost_eco
-      username: eco
-      password: eco
+      virtual-host: evo_vhost
+      username: evo
+      password: evo
   ribbon:
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule
   sp:
-    demo:
+    framework:
       datasource:
-        url: jdbc:mysql://10.20.133.43:8066/evo_demo?useUnicode=true&characterEncoding=UTF8
-        username: evo_demo
-        password: evo_demo
+        url: jdbc:mysql://127.0.0.1:3306/evo_framework?useUnicode=true&characterEncoding=UTF8
+        username: evo_framework
+        password: evo_framework
     sys:
       datasource:
-        url: jdbc:mysql://10.20.133.43:8066/evo_sys?useUnicode=true&characterEncoding=UTF8&useSSL=false
+        url: jdbc:mysql://127.0.0.1:3306/evo_sys?useUnicode=true&characterEncoding=UTF8&useSSL=false
         username: evo_sys
         password: evo_sys
     datadict:
       datasource:
-        url: jdbc:mysql://10.20.133.43:8066/evo_datadict?useUnicode=true&characterEncoding=UTF8&useSSL=false
+        url: jdbc:mysql://127.0.0.1:3306/evo_datadict?useUnicode=true&characterEncoding=UTF8&useSSL=false
         username: evo_datadict
         password: evo_datadict
     activiti:
       datasource:
-        url: jdbc:mysql://10.20.133.43:8066/evo_activiti?useUnicode=true&characterEncoding=UTF8&useSSL=false
+        url: jdbc:mysql://127.0.0.1:3306/evo_activiti?useUnicode=true&characterEncoding=UTF8&useSSL=false
         username: evo_activiti
         password: evo_activiti
+    demo:
+      datasource:
+        url: jdbc:mysql://127.0.0.1:3306/evo_demo?useUnicode=true&characterEncoding=UTF8&useSSL=false # MySQL 8+ 增加 useSSL 参数
+        username: evo_demo
+        password: evo_demo
