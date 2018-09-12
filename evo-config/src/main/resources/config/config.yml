@@ -55,7 +55,7 @@ evo:
   sp:
     framework:
       datasource:
-        url: jdbc:mysql://127.0.0.1:3306/evo_framework?useUnicode=true&characterEncoding=UTF8
+        url: jdbc:mysql://127.0.0.1:3306/evo_framework?useUnicode=true&characterEncoding=UTF8&useSSL=false # MySQL 8+ 增加 useSSL 参数
         username: evo_framework
         password: evo_framework
     sys:
@@ -75,6 +75,6 @@ evo:
         password: evo_activiti
     demo:
       datasource:
-        url: jdbc:mysql://127.0.0.1:3306/evo_demo?useUnicode=true&characterEncoding=UTF8&useSSL=false # MySQL 8+ 增加 useSSL 参数
+        url: jdbc:mysql://127.0.0.1:3306/evo_demo?useUnicode=true&characterEncoding=UTF8&useSSL=false
         username: evo_demo
         password: evo_demo
