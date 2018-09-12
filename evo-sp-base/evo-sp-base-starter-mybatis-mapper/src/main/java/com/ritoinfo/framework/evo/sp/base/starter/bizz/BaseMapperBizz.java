@@ -5,9 +5,9 @@ import com.github.pagehelper.PageHelper;
 import com.ritoinfo.framework.evo.common.uitl.BeanUtil;
 import com.ritoinfo.framework.evo.common.uitl.DateUtil;
 import com.ritoinfo.framework.evo.common.uitl.StringUtil;
+import com.ritoinfo.framework.evo.sp.base.dto.PageDto;
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
-import com.ritoinfo.framework.evo.sp.base.dto.PageDto;
 import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseMapperEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,7 +45,12 @@ public abstract class BaseMapperBizz<Dao extends Mapper, E extends BaseMapperEnt
 
 	@SuppressWarnings("unchecked")
 	public List<Dto> find(Object condition) {
-		return toDto(dao.selectByExample(condition));
+		return find(condition, null);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Dto> find(Object condition, ExampleCreater exampleCreater) {
+		return toDto(dao.selectByExample(toExample(condition, exampleCreater)));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -69,7 +74,11 @@ public abstract class BaseMapperBizz<Dao extends Mapper, E extends BaseMapperEnt
 	}
 
 	public int count(Object condition) {
-		return dao.selectCountByExample(condition);
+		return count(condition, null);
+	}
+
+	public int count(Object condition, ExampleCreater exampleCreater) {
+		return dao.selectCountByExample(toExample(condition, exampleCreater));
 	}
 
 	@Transactional
@@ -105,20 +114,20 @@ public abstract class BaseMapperBizz<Dao extends Mapper, E extends BaseMapperEnt
 		dao.deleteByPrimaryKey(id);
 	}
 
-	protected Example toExample(PageDto condition, ExampleCreater exampleCreater) {
+	protected Example toExample(Object condition, ExampleCreater exampleCreater) {
 		return toExample(getEntityClass(), condition, exampleCreater);
 	}
 
-	protected Example toExample(PageDto condition) {
+	protected Example toExample(Object condition) {
 		return toExample(getEntityClass(), condition, null);
 	}
 
-	protected Example toExample(Class clazz, PageDto condition) {
+	protected Example toExample(Class clazz, Object condition) {
 		return toExample(clazz, condition, null);
 	}
 
-	protected Example toExample(Class clazz, PageDto condition, ExampleCreater exampleCreater) {
-		Example example = new Example(clazz);
+	protected Example toExample(Class clazz, Object condition, ExampleCreater exampleCreater) {
+		Example example = new Example(clazz, false);
 
 		if (exampleCreater == null) {
 			Example.Criteria criteria = example.createCriteria();
@@ -136,11 +145,14 @@ public abstract class BaseMapperBizz<Dao extends Mapper, E extends BaseMapperEnt
 				}
 			}
 
-			Example.OrderBy orderBy = example.orderBy(condition.getPageSort());
-			if ("asc".equals(condition.getPageOrder())) {
-				orderBy.asc();
-			} else {
-				orderBy.desc();
+			if (condition instanceof PageDto) {
+				PageDto pageDto = (PageDto) condition;
+				Example.OrderBy orderBy = example.orderBy(pageDto.getPageSort());
+				if ("asc".equals(pageDto.getPageOrder())) {
+					orderBy.asc();
+				} else {
+					orderBy.desc();
+				}
 			}
 		} else {
 			exampleCreater.create(example, condition);
@@ -150,6 +162,6 @@ public abstract class BaseMapperBizz<Dao extends Mapper, E extends BaseMapperEnt
 	}
 
 	public static interface ExampleCreater {
-		void create(Example example, PageDto condition);
+		void create(Example example, Object condition);
 	}
 }
