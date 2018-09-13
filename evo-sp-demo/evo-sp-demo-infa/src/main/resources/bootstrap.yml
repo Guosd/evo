@@ -16,7 +16,7 @@ eureka:
     initial-instance-info-replication-interval-seconds: 5
     registry-fetch-interval-seconds: 5
     serviceUrl:
-      defaultZone: http://localhost:50101/eureka
+      defaultZone: http://localhost:20000/eureka
 logstash:
   destination: 10.21.111.42:9600
 ---
