@@ -1,6 +1,7 @@
 package com.ritoinfo.framework.evo.sp.base.starter.advice;
 
 import com.ritoinfo.framework.evo.common.Const;
+import com.ritoinfo.framework.evo.common.uitl.StringUtil;
 import com.ritoinfo.framework.evo.sp.base.exception.BizzException;
 import com.ritoinfo.framework.evo.sp.base.exception.RestException;
 import com.ritoinfo.framework.evo.sp.base.model.ServiceResponse;
@@ -32,25 +33,29 @@ public class RestExceptionHandlerAdvice {
 			BindException bindException = (BindException) exception;
 
 			log.warn("参数绑定无效", exception);
-			responseEntity = new ResponseEntity<>(ServiceResponse.of(Const.RC_FAIL_REQUEST_PARAM, toMessageList(bindException.getAllErrors())), HttpStatus.valueOf(Const.HTTP_STATUS_BAD_REQUEST));
+			responseEntity = new ResponseEntity<>(ServiceResponse.of(Const.RC_FAIL_REQUEST_PARAM, Const.getRcm(Const.RC_FAIL_REQUEST_PARAM), toMessageList(bindException.getAllErrors())), HttpStatus.valueOf(Const.HTTP_STATUS_BAD_REQUEST));
 		} else if (exception instanceof MethodArgumentNotValidException) {
 			MethodArgumentNotValidException methodArgumentNotValidException = (MethodArgumentNotValidException) exception;
 
 			log.warn("方法参数无效", exception);
-			responseEntity = new ResponseEntity<>(ServiceResponse.of(Const.RC_FAIL_REQUEST_PARAM, toMessageList(methodArgumentNotValidException.getBindingResult().getAllErrors())), HttpStatus.valueOf(Const.HTTP_STATUS_BAD_REQUEST));
+			responseEntity = new ResponseEntity<>(ServiceResponse.of(Const.RC_FAIL_REQUEST_PARAM, Const.getRcm(Const.RC_FAIL_REQUEST_PARAM), toMessageList(methodArgumentNotValidException.getBindingResult().getAllErrors())), HttpStatus.valueOf(Const.HTTP_STATUS_BAD_REQUEST));
 		} else if (exception instanceof RestException) {
 			RestException restException = (RestException) exception;
 
-			log.warn("REST 异常: " + restException.getCode() + " " + exception.getMessage() + " " + restException.getCause(), exception);
-			responseEntity = new ResponseEntity<>(ServiceResponse.of(restException.getCode(), restException.getData()), HttpStatus.valueOf(Const.HTTP_STATUS_OK));
+			String code = restException.getCode();
+			String message = exception.getMessage();
+			message = StringUtil.isBlank(message) ? Const.getRcm(code) : message;// TODO 国际化替换Const
+
+			log.warn("REST 异常: " + code + " " + message + " " + restException.getCause(), exception);
+			responseEntity = new ResponseEntity<>(ServiceResponse.of(code, message, restException.getData()), HttpStatus.valueOf(Const.HTTP_STATUS_OK));
 		} else if (exception instanceof BizzException) {
 			BizzException bizzException = (BizzException) exception;
 
 			log.error("未按要求转换业务异常", exception);
-			responseEntity = new ResponseEntity<>(ServiceResponse.of(Const.RC_BASE_EXCEPTION, bizzException.getData()), HttpStatus.valueOf(Const.HTTP_STATUS_INTERNAL_SERVER_ERROR));
+			responseEntity = new ResponseEntity<>(ServiceResponse.of(Const.RC_BASE_EXCEPTION, Const.getRcm(Const.RC_BASE_EXCEPTION), bizzException.getData()), HttpStatus.valueOf(Const.HTTP_STATUS_INTERNAL_SERVER_ERROR));
 		} else {
 			log.error("不期望的内部服务异常", exception);
-			responseEntity = new ResponseEntity<>(ServiceResponse.of(Const.RC_FAIL_UNEXPECT), HttpStatus.valueOf(Const.HTTP_STATUS_INTERNAL_SERVER_ERROR));
+			responseEntity = new ResponseEntity<>(ServiceResponse.of(Const.RC_FAIL_UNEXPECT, Const.getRcm(Const.RC_FAIL_UNEXPECT)), HttpStatus.valueOf(Const.HTTP_STATUS_INTERNAL_SERVER_ERROR));
 		}
 		return responseEntity;
 	}

@@ -23,6 +23,15 @@ public class StringUtil {
 	}
 
 	/**
+	 * 首字母大写，其余字符不变
+	 * @param str 输入字符串
+	 * @return 首字母大写的字符串
+	 */
+	public static String toCapture(String str) {
+		return Character.toUpperCase(str.charAt(0)) + str.substring(1);
+	}
+
+	/**
 	 * 将驼峰字符串中大写字母、数字前插入下划线
 	 * @param camel 驼峰形式字符串
 	 * @return 带有下划线的字符串

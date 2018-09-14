@@ -21,3 +21,6 @@
 30001 sp-demo-jpa # 示例服务
 30002 sp-demo-mybatis-mapper # 示例服务
 30003 sp-demo-mybatis-xml # 示例服务
+30004 sp-demo-infa # 示例服务 接口代码生成
+30005 sp-demo-rocketmq # 示例服务 RocketMQ
+
