@@ -23,6 +23,7 @@
 		<module>evo-sp-demo-rocketmq</module>
 		<module>evo-sp-demo-rocketmq</module>
 		<module>evo-sp-demo-transaction-jdbc</module>
+		<module>evo-sp-demo-transaction-jta-atomikos</module>
 	</modules>
 
 

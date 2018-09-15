@@ -1,5 +1,6 @@
 package com.ritoinfo.framework.evo.bizz;
 
+import com.ritoinfo.framework.evo.common.Config;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendCallback;
@@ -20,8 +21,7 @@ public class AsynchronouslyProducerMessageBizz {
 	public void send() {
 		DefaultMQProducer producer = new DefaultMQProducer("test_async_group");
 		producer.setInstanceName("AsyncProducer");
-	//	producer.setNamesrvAddr("192.168.1.141:9876");
-		producer.setNamesrvAddr("192.168.1.141:9876");
+		producer.setNamesrvAddr(Config.NAMESRV_ADDR);
 		producer.setSendMsgTimeout(10000);
 		producer.setVipChannelEnabled(false);
 		producer.setClientIP("192.168.1.14");

@@ -1,5 +1,6 @@
 package com.ritoinfo.framework.evo.bizz;
 
+import com.ritoinfo.framework.evo.common.Config;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
@@ -12,9 +13,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ConsumeMessageBizz {
-	public void send() {
+	public void receive() {
 		DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("test_consume_group");
-		consumer.setNamesrvAddr("192.168.1.141:9876");
+		consumer.setNamesrvAddr(Config.NAMESRV_ADDR);
 
 		try {
 			consumer.subscribe("TopicTest", "*");

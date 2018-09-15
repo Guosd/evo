@@ -3,6 +3,7 @@ package com.ritoinfo.framework.evo;
 import com.ritoinfo.framework.evo.bizz.AsynchronouslyProducerMessageBizz;
 import com.ritoinfo.framework.evo.bizz.ConsumeMessageBizz;
 import com.ritoinfo.framework.evo.bizz.OnewayProducerMessageBizz;
+import com.ritoinfo.framework.evo.bizz.OrderProducerMessageBizz;
 import com.ritoinfo.framework.evo.bizz.SynchronouslyProducerMessageBizz;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -29,15 +30,17 @@ public class EvoSpDemoRocketMQApplication {
 	public CommandLineRunner init(final SynchronouslyProducerMessageBizz synchronouslyProducerMessageBizz,
 	                              final AsynchronouslyProducerMessageBizz asynchronouslyProducerMessageBizz,
 	                              final OnewayProducerMessageBizz onewayProducerMessageBizz,
-	                              final ConsumeMessageBizz consumeMessageBizz) {
+	                              final ConsumeMessageBizz consumeMessageBizz,
+	                              final OrderProducerMessageBizz orderProducerMessageBizz) {
 		return strings -> {
-			synchronouslyProducerMessageBizz.send();
-			asynchronouslyProducerMessageBizz.send();
-			onewayProducerMessageBizz.send();
+		//	synchronouslyProducerMessageBizz.send();
+		//	asynchronouslyProducerMessageBizz.send();
+		//	onewayProducerMessageBizz.send();
+			orderProducerMessageBizz.send();
 
-			Thread.sleep(1000 * 10);
+		//	Thread.sleep(1000 * 10);
 
-			consumeMessageBizz.send();
+		//	consumeMessageBizz.receive();
 		};
 
 	}

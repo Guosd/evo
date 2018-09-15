@@ -1,5 +1,6 @@
 package com.ritoinfo.framework.evo.bizz;
 
+import com.ritoinfo.framework.evo.common.Config;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.common.message.Message;
@@ -17,7 +18,7 @@ import java.io.UnsupportedEncodingException;
 public class OnewayProducerMessageBizz {
 	public void send() {
 		DefaultMQProducer producer = new DefaultMQProducer("test_oneway_group");
-		producer.setNamesrvAddr("192.168.1.141:9876");
+		producer.setNamesrvAddr(Config.NAMESRV_ADDR);
 
 		try {
 			producer.start();

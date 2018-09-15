@@ -1,7 +1,5 @@
 server:
   port: 30005
-  tomcat:
-    max
 management:
   endpoints:
     web:
@@ -11,11 +9,16 @@ management:
     health:
       show-details: ALWAYS
 spring:
+  jpa:
+    show-sql: true
+    open-in-view: true
   datasource:
     url: ${evo.sp.demo.datasource.url}
     username: ${evo.sp.demo.datasource.username}
     password: ${evo.sp.demo.datasource.password}
     driver-class-name: com.mysql.cj.jdbc.Driver
+    xa:
+      data-source-class-name: com.mysql.cj.jdbc.MysqlXADataSource
     hikari:
       connection-test-query: select 1
       connection-timeout: 30000 # 等待连接池分配连接的最大时长
@@ -38,5 +41,3 @@ spring:
       enabled: true
     sampler:
       probability: 1.0
-mybatis:
-  mapper-locations: classpath:mapper/*.xml
