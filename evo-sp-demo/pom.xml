@@ -21,10 +21,11 @@
 		<module>evo-sp-demo-mybatis-xml</module>
 		<module>evo-sp-demo-infa</module>
 		<module>evo-sp-demo-rocketmq</module>
-		<module>evo-sp-demo-rocketmq</module>
 		<module>evo-sp-demo-transaction-jdbc</module>
 		<module>evo-sp-demo-transaction-jta-atomikos</module>
 		<module>evo-sp-demo-rabbitmq</module>
+		<module>evo-sp-demo-rocketmq-producer</module>
+		<module>evo-sp-demo-rocketmq-consumer</module>
 	</modules>
 
 

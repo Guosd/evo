@@ -5,13 +5,13 @@
 
 	<parent>
 		<groupId>com.ritoinfo.framework</groupId>
-		<artifactId>evo</artifactId>
+		<artifactId>evo-sp-demo</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>evo-zuul</artifactId>
+	<artifactId>evo-sp-demo-rocketmq-producer</artifactId>
 
 	<build>
 		<plugins>
@@ -57,28 +57,24 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
 			<artifactId>evo-sp-base-starter-mybatis-mapper</artifactId>
 			<version>${evo-sp-base-starter-mybatis-mapper.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-common-jwt</artifactId>
-			<version>${evo-common-jwt.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-sp-auth-common-api</artifactId>
-			<version>${evo-sp-auth-common-api.version}</version>
+			<artifactId>evo-sp-demo-model</artifactId>
+			<version>${evo-sp-demo-model.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql-connector-java.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.rocketmq</groupId>
+			<artifactId>rocketmq-client</artifactId>
+			<version>4.3.1</version>
 		</dependency>
 	</dependencies>
 
