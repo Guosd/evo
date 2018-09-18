@@ -59,6 +59,7 @@
 		<lombok.version>1.18.2</lombok.version>
 		<commons-lang3.version>3.7</commons-lang3.version>
 		<commons-pool2.version>2.5.0</commons-pool2.version>
+		<cglib.version>3.2.8</cglib.version>
 		<joda-time.version>2.9.9</joda-time.version>
 		<jackson-databind.version>2.9.5</jackson-databind.version>
 		<h2.version>1.4.196</h2.version>

@@ -21,6 +21,8 @@ public class AsynchronouslyProducerMessageBizz {
 	public void send() {
 		DefaultMQProducer producer = new DefaultMQProducer("test_async_group");
 		producer.setNamesrvAddr(Config.NAMESRV_ADDR);
+		producer.setRetryTimesWhenSendAsyncFailed(0);
+		producer.setClientIP("192.168.204.1");
 
 		try {
 			producer.start();
@@ -37,8 +39,6 @@ public class AsynchronouslyProducerMessageBizz {
 		}
 
 		producer.setCreateTopicKey("TopicTest");*/
-
-		producer.setRetryTimesWhenSendAsyncFailed(0);
 
 		for (int i = 0; i < 1; i++) {
 			Message msg = null;

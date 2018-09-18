@@ -2,7 +2,7 @@ package com.ritoinfo.framework.evo.common.uitl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
-import org.springframework.cglib.beans.BeanCopier;
+import net.sf.cglib.beans.BeanCopier;
 import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 import java.lang.annotation.Annotation;

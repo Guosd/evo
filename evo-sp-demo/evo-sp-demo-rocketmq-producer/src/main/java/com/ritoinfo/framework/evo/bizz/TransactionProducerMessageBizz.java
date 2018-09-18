@@ -69,6 +69,7 @@ public class TransactionProducerMessageBizz {
 		producer.setNamesrvAddr(Config.NAMESRV_ADDR);
 		producer.setExecutorService(executorService);
 		producer.setTransactionListener(transactionListener);
+
 		try {
 			producer.start();
 		} catch (MQClientException e) {

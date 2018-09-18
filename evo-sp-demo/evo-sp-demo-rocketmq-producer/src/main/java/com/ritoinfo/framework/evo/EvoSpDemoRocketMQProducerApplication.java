@@ -42,11 +42,11 @@ public class EvoSpDemoRocketMQProducerApplication {
 	                              final TransactionProducerMessageBizz transactionProducerMessageBizz) {
 		return strings -> {
 		//	synchronouslyProducerMessageBizz.send();
-		//	asynchronouslyProducerMessageBizz.send();
+			asynchronouslyProducerMessageBizz.send();
 		//	onewayProducerMessageBizz.send();
 		//	orderProducerMessageBizz.send();
 		//	broadcastProducerMessageBizz.send();
-			scheduleProducerMessageBizz.send();
+		//	scheduleProducerMessageBizz.send();
 		//	transactionProducerMessageBizz.send();
 		};
 
