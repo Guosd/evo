@@ -31,7 +31,7 @@ spring:
     password: ${evo.spring.rabbitmq.password}
   rocketmq:
     name-server-address: 192.168.204.129:9876
-    producer-group: test_transaction_group
+    producer-group: test_producer_group
     send-msg-timeout: 5000
     trace-enabled: true # 追溯消息具体消费情况的开关，默认打开
     vip-channel-enabled: true # 是否启用VIP通道，默认打开

@@ -1,4 +1,4 @@
-package com.ritoinfo.framework.evo.bizz;
+package com.ritoinfo.framework.evo.producer;
 
 import com.maihaoche.starter.mq.annotation.MQProducer;
 import com.maihaoche.starter.mq.base.AbstractMQProducer;
@@ -8,5 +8,5 @@ import com.maihaoche.starter.mq.base.AbstractMQProducer;
  * Date: 2018-09-19 13:55
  */
 @MQProducer
-public class AsynchronouslyProducer extends AbstractMQProducer {
+public class CommonMQProducer extends AbstractMQProducer {
 }

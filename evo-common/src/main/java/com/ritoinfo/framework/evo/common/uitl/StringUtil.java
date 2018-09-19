@@ -31,6 +31,14 @@ public class StringUtil {
 		return Character.toUpperCase(str.charAt(0)) + str.substring(1);
 	}
 
+	public static String leftPad(String str, int size, char padChar) {
+		return StringUtils.leftPad(str, size, padChar);
+	}
+
+	public static String leftPad(String str, int size, String padStr) {
+		return StringUtils.leftPad(str, size, padStr);
+	}
+
 	/**
 	 * 将驼峰字符串中大写字母、数字前插入下划线
 	 * @param camel 驼峰形式字符串

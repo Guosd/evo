@@ -1,4 +1,4 @@
-package com.ritoinfo.framework.evo.bizz;
+package com.ritoinfo.framework.evo.producer;
 
 import com.maihaoche.starter.mq.annotation.MQTransactionProducer;
 import com.maihaoche.starter.mq.base.AbstractMQTransactionProducer;
@@ -10,7 +10,7 @@ import org.apache.rocketmq.common.message.MessageExt;
  * User: Kyll
  * Date: 2018-09-19 14:55
  */
-@MQTransactionProducer(producerGroup = "test_async")
+@MQTransactionProducer(producerGroup = "test_transaction_group")
 public class TransactionProducer extends AbstractMQTransactionProducer {
 	@Override
 	public LocalTransactionState executeLocalTransaction(Message message, Object o) {
