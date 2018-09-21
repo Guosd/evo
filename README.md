@@ -24,4 +24,7 @@
 30004 sp-demo-infa # 示例服务 接口代码生成
 30005 sp-demo-rocketmq-producer # 示例服务 RocketMQ Producer
 30006 sp-demo-rocketmq-consumer # 示例服务 RocketMQ Consumer
-30007 sp-demo-rabbitmq-producer-starter # 示例服务 RabbitMQ Producer Starter
+30007 sp-demo-rocketmq-producer-starter # 示例服务 RocketMQ Producer Starter
+30008 sp-demo-rocketmq-consumer-starter # 示例服务 RocketMQ Consumer Starter
+30009 sp-demo-rabbitmq-producer # 示例服务 RabbitMQ Producer
+30010 sp-demo-rabbitmq-consumer # 示例服务 RabbitMQ Consumer

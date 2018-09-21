@@ -1,6 +1,6 @@
 spring:
   application:
-    name: evo-sp-demo-rocketmq-consumer-starter
+    name: evo-sp-demo-rabbitmq-producer
   cloud:
     config:
       name: config

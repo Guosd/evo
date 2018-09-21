@@ -26,4 +26,5 @@ public class UserDto implements Serializable {
 	private String lastLoginIp;
 	private Long[] roleIds;
 	private List<RoleDto> roleDtoList;
+
 }
