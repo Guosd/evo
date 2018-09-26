@@ -1,10 +1,6 @@
 package com.ritoinfo.framework.evo;
 
-import com.ritoinfo.framework.evo.bizz.RecvMessageBizz;
-import com.ritoinfo.framework.evo.bizz.Work01MessageBizz;
-import com.ritoinfo.framework.evo.bizz.Work02MessageBizz;
-import com.ritoinfo.framework.evo.bizz.Work03MessageBizz;
-import com.ritoinfo.framework.evo.bizz.Work04MessageBizz;
+import com.ritoinfo.framework.evo.bizz.RpcServerMessageBizz;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,17 +23,9 @@ public class EvoSpDemoRabbitMQConsumerApplication {
 	}
 
 	@Bean
-	public CommandLineRunner init(final RecvMessageBizz recvMessageBizz,
-	                              final Work01MessageBizz work01MessageBizz,
-	                              final Work02MessageBizz work02MessageBizz,
-	                              final Work03MessageBizz work03MessageBizz,
-	                              final Work04MessageBizz work04MessageBizz) {
+	public CommandLineRunner init(final RpcServerMessageBizz rpcServerMessageBizz) {
 		return strings -> {
-		//	recvMessageBizz.process();
-			work01MessageBizz.process();
-			work02MessageBizz.process();
-		//	work03MessageBizz.process();
-		//	work04MessageBizz.process();
+			rpcServerMessageBizz.process();
 		};
 	}
 }

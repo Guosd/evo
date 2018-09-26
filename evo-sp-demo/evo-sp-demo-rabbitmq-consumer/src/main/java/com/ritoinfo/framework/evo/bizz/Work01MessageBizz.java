@@ -1,12 +1,10 @@
 package com.ritoinfo.framework.evo.bizz;
 
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Consumer;
+import com.ritoinfo.framework.evo.bizz.consumer.WorkDefaultConsumer;
 import com.ritoinfo.framework.evo.common.CommonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 
 /**
  * User: Kyll
@@ -22,19 +20,6 @@ public class Work01MessageBizz {
 		CommonUtil.createQueue(channel, QUEUE_NAME, true);
 
 		log.info("等待接收消息");
-		Consumer consumer = new WorkDefaultConsumer(channel);
-
-		boolean autoAck = true; // acknowledgment is covered below
-		try {
-			channel.basicConsume(QUEUE_NAME, autoAck, consumer);
-		} catch (IOException e) {
-			log.error("接收消息失败", e);
-		}
-	}
-
-	private static void doWork(String task) throws InterruptedException {
-		for (char ch: task.toCharArray()) {
-			if (ch == '.') Thread.sleep(1000);
-		}
+		CommonUtil.basicConsume(channel, QUEUE_NAME, true, new WorkDefaultConsumer(channel));
 	}
 }

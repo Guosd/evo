@@ -8,20 +8,21 @@ import org.springframework.stereotype.Service;
 
 /**
  * User: Kyll
- * Date: 2018-09-20 11:55
+ * Date: 2018-09-25 09:06
  */
 @Slf4j
 @Service
-public class Work02MessageBizz {
-	private final static String QUEUE_NAME = "hello_durable";
+public class Receive02MessageBizz {
+	private final static String EXCHANGE_NAME = "logs";
 
 	public void process() {
 		Channel channel = CommonUtil.createChannel();
-		CommonUtil.createQueue(channel, QUEUE_NAME, true);
+		CommonUtil.createExchange(channel, EXCHANGE_NAME, "fanout");
 
-		CommonUtil.basicQos(channel, 1);// 一个处理一个消息
+		String queueName = CommonUtil.getQueue(channel);
+		CommonUtil.queueBind(channel, queueName, EXCHANGE_NAME, "");
 
 		log.info("等待接收消息");
-		CommonUtil.basicConsume(channel, QUEUE_NAME, true, new WorkDefaultConsumer(channel));
+		CommonUtil.basicConsume(channel, queueName, true, new WorkDefaultConsumer(channel));
 	}
 }

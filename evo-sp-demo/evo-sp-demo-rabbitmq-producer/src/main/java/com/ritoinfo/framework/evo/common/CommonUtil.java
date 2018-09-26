@@ -4,6 +4,7 @@ import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.Consumer;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -61,8 +62,6 @@ public class CommonUtil {
 	}
 
 	public static void createQueue(Channel channel, String queueName, boolean durable) {
-		assert channel != null;
-
 		try {
 			AMQP.Queue.DeclareOk declareOk = channel.queueDeclare(queueName, durable, false, false, null);
 			log.info(declareOk.toString());
@@ -71,9 +70,57 @@ public class CommonUtil {
 		}
 	}
 
-	public static void basicPublish(Channel channel, String exchange, String queueName, AMQP.BasicProperties basicProperties, String message) {
+	public static String getQueue(Channel channel) {
+		String queueName = null;
 		try {
-			channel.basicPublish(exchange, queueName, basicProperties, message.getBytes());
+			queueName = channel.queueDeclare().getQueue();
+			log.info("建立默认队列 " + queueName);
+		} catch (IOException e) {
+			log.error("建立默认队列失败", e);
+		}
+		return queueName;
+	}
+
+	public static void queuePurge(Channel channel, String queueName) {
+		try {
+			AMQP.Queue.PurgeOk purgeOk = channel.queuePurge(queueName);
+			log.info(purgeOk.toString());
+		} catch (IOException e) {
+			log.error("清除队列失败", e);
+		}
+	}
+
+	public static void queueBind(Channel channel, String queueName, String exchange, String routeKey) {
+		try {
+			AMQP.Queue.BindOk bindOk = channel.queueBind(queueName, exchange, routeKey);
+			log.info(bindOk.toString());
+		} catch (IOException e) {
+			log.error("绑定队列失败", e);
+		}
+	}
+
+	public static void basicQos(Channel channel, int prefetchCount) {
+		try {
+			channel.basicQos(prefetchCount);
+		} catch (IOException e) {
+			log.error("设置服务质量失败", e);
+			return;
+		}
+	}
+
+	public static String basicConsume(Channel channel, String queueName, boolean autoAck, Consumer callback) {
+		String result = null;
+		try {
+			result = channel.basicConsume(queueName, autoAck, callback);
+		} catch (IOException e) {
+			log.error("接收消息失败", e);
+		}
+		return result;
+	}
+
+	public static void basicPublish(Channel channel, String exchange, String routingKey, AMQP.BasicProperties basicProperties, String message) {
+		try {
+			channel.basicPublish(exchange, routingKey, basicProperties, message.getBytes());
 		} catch (IOException e) {
 			log.error("发送消息失败", e);
 		}
@@ -102,10 +149,26 @@ public class CommonUtil {
 	}
 
 	public static String createMessage() {
-		StringBuilder message = new StringBuilder("Hello World " + count++);
+		return createMessage("");
+	}
+
+	public static String createMessage(String content) {
+		StringBuilder message = new StringBuilder("Hello World " + content + " " + count++);
 		for (int i = 0, size = new Random().nextInt(10); i < size; i++) {
 			message.append(".");
 		}
 		return message.toString();
+	}
+
+	public static void doWork(String message) {
+		for (char ch: message.toCharArray()) {
+			if (ch == '.') {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					log.error("消息处理失败", e);
+				}
+			}
+		}
 	}
 }
