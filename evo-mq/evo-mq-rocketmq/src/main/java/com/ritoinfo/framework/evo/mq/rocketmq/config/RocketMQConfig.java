@@ -1,9 +1,14 @@
 package com.ritoinfo.framework.evo.mq.rocketmq.config;
 
 import com.ritoinfo.framework.evo.common.uitl.ConcurrentUtil;
+import com.ritoinfo.framework.evo.mq.rocketmq.annotation.RocketMQConsumer;
 import com.ritoinfo.framework.evo.mq.rocketmq.annotation.RocketMQTransactionProducer;
+import com.ritoinfo.framework.evo.mq.rocketmq.exception.RocketMQOperateException;
 import com.ritoinfo.framework.evo.mq.rocketmq.listener.AbstractRocketMQTransactionProcesser;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
+import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
+import org.apache.rocketmq.client.consumer.listener.MessageListenerOrderly;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.TransactionMQProducer;
@@ -50,7 +55,7 @@ public class RocketMQConfig {
 		try {
 			producer.start();
 		} catch (MQClientException e) {
-			log.error("启动 DefaultMQProducer 失败", e);
+			throw new RocketMQOperateException("启动 DefaultMQProducer 失败", e);
 		}
 
 		return producer;
@@ -74,7 +79,38 @@ public class RocketMQConfig {
 			try {
 				producer.start();
 			} catch (MQClientException e) {
-				log.error("启动 TransactionMQProducer 失败", e);
+				throw new RocketMQOperateException("启动 TransactionMQProducer 失败", e);
+			}
+		});
+	}
+
+	@PostConstruct
+	public void defaultMQPushConsumer() {
+		Map<String, Object> beanMap = applicationContext.getBeansWithAnnotation(RocketMQConsumer.class);
+		beanMap.values().forEach(o -> {
+			RocketMQConsumer rocketMQConsumer = o.getClass().getAnnotation(RocketMQConsumer.class);
+			DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(rocketMQConsumer.consumerGroup());
+			consumer.setNamesrvAddr(namesrvAddr);
+			consumer.setMessageModel(rocketMQConsumer.messageModel());
+
+			try {
+				consumer.subscribe(rocketMQConsumer.topic(), rocketMQConsumer.tags());
+			} catch (MQClientException e) {
+				throw new RocketMQOperateException("订阅消息失败", e);
+			}
+
+			if (o instanceof MessageListenerConcurrently) {
+				consumer.registerMessageListener((MessageListenerConcurrently) o);
+			} else if (o instanceof MessageListenerOrderly) {
+				consumer.registerMessageListener((MessageListenerOrderly) o);
+			} else {
+				throw new RocketMQOperateException("不支持的 MessageListener " + o);
+			}
+
+			try {
+				consumer.start();
+			} catch (MQClientException e) {
+				throw new RocketMQOperateException("启动 DefaultMQPushConsumer 失败 " + o.getClass(), e);
 			}
 		});
 	}

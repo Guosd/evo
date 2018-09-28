@@ -72,9 +72,9 @@
 			<version>${mysql-connector-java.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.apache.rocketmq</groupId>
-			<artifactId>rocketmq-client</artifactId>
-			<version>4.3.1</version>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-mq-rocketmq</artifactId>
+			<version>${evo-mq-rocketmq.version}</version>
 		</dependency>
 	</dependencies>
 

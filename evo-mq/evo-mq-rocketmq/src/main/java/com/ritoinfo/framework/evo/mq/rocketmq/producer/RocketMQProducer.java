@@ -29,7 +29,7 @@ public class RocketMQProducer {
 		try {
 			return defaultMQProducer.send(message);
 		} catch (MQClientException | RemotingException | MQBrokerException | InterruptedException e) {
-			throw new RocketMQOperateException("发送 sync 消息失败", e);
+			throw new RocketMQOperateException("发送 Sync 消息失败", e);
 		}
 	}
 
@@ -37,7 +37,7 @@ public class RocketMQProducer {
 		try {
 			defaultMQProducer.send(message, sendCallback);
 		} catch (MQClientException | RemotingException | InterruptedException e) {
-			throw new RocketMQOperateException("发送 async 消息失败", e);
+			throw new RocketMQOperateException("发送 Async 消息失败", e);
 		}
 	}
 
@@ -45,7 +45,7 @@ public class RocketMQProducer {
 		try {
 			defaultMQProducer.sendOneway(message);
 		} catch (MQClientException | RemotingException | InterruptedException e) {
-			throw new RocketMQOperateException("发送 oneway 消息失败", e);
+			throw new RocketMQOperateException("发送 Oneway 消息失败", e);
 		}
 	}
 
@@ -53,7 +53,7 @@ public class RocketMQProducer {
 		try {
 			return defaultMQProducer.send(message);
 		} catch (MQClientException | RemotingException | MQBrokerException | InterruptedException e) {
-			throw new RocketMQOperateException("发送 broadcast 消息失败", e);
+			throw new RocketMQOperateException("发送 Broadcast 消息失败", e);
 		}
 	}
 
@@ -61,7 +61,7 @@ public class RocketMQProducer {
 		try {
 			return defaultMQProducer.send(message, messageQueueSelector, arg);
 		} catch (MQClientException | RemotingException | MQBrokerException | InterruptedException e) {
-			throw new RocketMQOperateException("发送 order 消息失败", e);
+			throw new RocketMQOperateException("发送 Order 消息失败", e);
 		}
 	}
 
@@ -69,7 +69,7 @@ public class RocketMQProducer {
 		try {
 			return defaultMQProducer.send(message);
 		} catch (MQClientException | RemotingException | MQBrokerException | InterruptedException e) {
-			throw new RocketMQOperateException("发送 schedule 消息失败", e);
+			throw new RocketMQOperateException("发送 Schedule 消息失败", e);
 		}
 	}
 }
