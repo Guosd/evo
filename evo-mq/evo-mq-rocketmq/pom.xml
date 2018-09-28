@@ -5,23 +5,19 @@
 
 	<parent>
 		<groupId>com.ritoinfo.framework</groupId>
-		<artifactId>evo</artifactId>
+		<artifactId>evo-mq</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>evo-data-redis</artifactId>
+	<artifactId>evo-mq-rocketmq</artifactId>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-common</artifactId>
-			<version>${evo-common.version}</version>
+			<groupId>org.apache.rocketmq</groupId>
+			<artifactId>rocketmq-client</artifactId>
+			<version>${rocketmq-client.version}</version>
 		</dependency>
 	</dependencies>
 

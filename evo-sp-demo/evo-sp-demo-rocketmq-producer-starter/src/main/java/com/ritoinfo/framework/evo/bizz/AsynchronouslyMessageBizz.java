@@ -36,7 +36,7 @@ public class AsynchronouslyMessageBizz {
 		producer.asyncSend(message, new SendCallback() {
 			@Override
 			public void onSuccess(SendResult sendResult) {
-				sendResult = sendResult;
+				log.info(sendResult.toString());
 			}
 
 			@Override

@@ -41,6 +41,7 @@
 		<module>evo-sp-sys</module>
 		<module>evo-sp-sys-ui</module>
 		<module>evo-static-ui</module>
+		<module>evo-mq</module>
 	</modules>
 
 	<properties>
@@ -77,8 +78,10 @@
 		<mapper-spring-boot-starter.version>2.0.3</mapper-spring-boot-starter.version>
 		<pagehelper-spring-boot-starter.version>1.2.5</pagehelper-spring-boot-starter.version>
 		<mysql-connector-java.version>8.0.12</mysql-connector-java.version>
+		<rocketmq-client.version>4.3.1</rocketmq-client.version>
 
 		<evo-data-redis.version>1.0.0-SNAPSHOT</evo-data-redis.version>
+		<evo-mq-rocketmq.version>1.0.0-SNAPSHOT</evo-mq-rocketmq.version>
 
 		<evo-common.version>1.0.0-SNAPSHOT</evo-common.version>
 		<evo-common-password.version>1.0.0-SNAPSHOT</evo-common-password.version>

@@ -11,13 +11,15 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>evo-data-redis</artifactId>
+	<artifactId>evo-mq</artifactId>
+
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>evo-mq-rocketmq</module>
+	</modules>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
 			<artifactId>evo-common</artifactId>
