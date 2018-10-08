@@ -79,6 +79,7 @@
 		<pagehelper-spring-boot-starter.version>1.2.5</pagehelper-spring-boot-starter.version>
 		<mysql-connector-java.version>8.0.12</mysql-connector-java.version>
 		<rocketmq-client.version>4.3.1</rocketmq-client.version>
+		<rocketmq-logappender.version>4.3.1</rocketmq-logappender.version>
 
 		<evo-data-redis.version>1.0.0-SNAPSHOT</evo-data-redis.version>
 		<evo-mq-rocketmq.version>1.0.0-SNAPSHOT</evo-mq-rocketmq.version>
@@ -110,7 +111,6 @@
 		<evo-sp-sms-api.version>1.0.0-SNAPSHOT</evo-sp-sms-api.version>
 		<evo-sp-sys-api.version>1.0.0-SNAPSHOT</evo-sp-sys-api.version>
 	</properties>
-
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

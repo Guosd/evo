@@ -3,6 +3,7 @@ package com.ritoinfo.framework.evo.mq.rocketmq.config;
 import com.ritoinfo.framework.evo.common.uitl.ConcurrentUtil;
 import com.ritoinfo.framework.evo.mq.rocketmq.annotation.RocketMQConsumer;
 import com.ritoinfo.framework.evo.mq.rocketmq.annotation.RocketMQTransactionProducer;
+import com.ritoinfo.framework.evo.mq.rocketmq.assist.MessageHelper;
 import com.ritoinfo.framework.evo.mq.rocketmq.exception.RocketMQOperateException;
 import com.ritoinfo.framework.evo.mq.rocketmq.listener.AbstractRocketMQTransactionProcesser;
 import lombok.extern.slf4j.Slf4j;
@@ -73,6 +74,7 @@ public class RocketMQConfig {
 			producer.setNamesrvAddr(namesrvAddr);
 			producer.setExecutorService(executorService);
 			producer.setTransactionListener(transactionListener);
+			producer.setInstanceName(MessageHelper.createInstanceName());
 
 			transactionListener.setTransactionMQProducer(producer);
 

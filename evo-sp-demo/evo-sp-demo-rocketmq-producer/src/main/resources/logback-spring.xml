@@ -6,6 +6,7 @@
 
 	<springProperty scope="context" name="springAppName" source="spring.application.name"/>
 	<springProperty scope="context" name="logstashDestination" source="logstash.destination"/>
+	<springProperty scope="context" name="rockemqNameServerAddress" source="rocketmq.namesrv-addr"/>
 
 	<property name="log_file" value="logs/${springAppName}"/>
 	<!--<property name="log_pattern" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(-&#45;&#45;){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>-->
@@ -59,22 +60,47 @@
 		</encoder>
 	</appender>
 
+	<appender name="ROCKETMQ" class="org.apache.rocketmq.logappender.logback.RocketmqLogbackAppender">
+		<tag>*</tag>
+		<topic>TopicTest</topic>
+		<producerGroup>test_transaction_group_1</producerGroup>
+		<!--
+			<nameServerAddress>${rockemqNameServerAddress}</nameServerAddress>
+			The producer group[xxxx] has been created before, specify another name please.
+		-->
+		<nameServerAddress>192.168.204.129:9876</nameServerAddress>
+		<layout>
+			<pattern>%date %p %t - %m%n</pattern>
+		</layout>
+	</appender>
+
+	<appender name="ROCKETMQ_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+		<queueSize>1024</queueSize>
+		<discardingThreshold>80</discardingThreshold>
+		<maxFlushTime>2000</maxFlushTime>
+		<neverBlock>true</neverBlock>
+		<appender-ref ref="ROCKETMQ"/>
+	</appender>
+
 	<logger name="com.ritoinfo.framework.evo" level="DEBUG" additivity="false">
 		<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="ROLLINGFILE"/>
 		<appender-ref ref="LOGSTASH"/>
+		<appender-ref ref="ROCKETMQ_ASYNC"/>
 	</logger>
 
 	<logger name="org.apache.rocketmq" level="DEBUG" additivity="false">
 		<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="ROLLINGFILE"/>
 		<appender-ref ref="LOGSTASH"/>
+		<appender-ref ref="ROCKETMQ_ASYNC"/>
 	</logger>
 
 	<root level="INFO">
 		<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="ROLLINGFILE"/>
 		<appender-ref ref="LOGSTASH"/>
+		<appender-ref ref="ROCKETMQ_ASYNC"/>
 	</root>
 
 </configuration>

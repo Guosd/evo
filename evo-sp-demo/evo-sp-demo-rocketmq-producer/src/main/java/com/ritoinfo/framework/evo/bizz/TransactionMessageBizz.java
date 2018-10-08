@@ -43,7 +43,7 @@ public class TransactionMessageBizz extends AbstractRocketMQTransactionProcesser
 		log.info("checkLocalTransaction " + messageExt);
 
 
-		return LocalTransactionState.UNKNOW;
+		return LocalTransactionState.COMMIT_MESSAGE;
 	}
 
 	public String send() {

@@ -20,6 +20,10 @@ public class MessageHelper {
 		return DateUtil.formatDatetimeCompact(DateUtil.now()) + "_" + AlgorithmUtil.randomNumber(8) + "_" + StringUtil.leftPad(String.valueOf(message_count++), 8, '0');
 	}
 
+	public static String createInstanceName() {
+		return DateUtil.formatDatetimeCompact(DateUtil.now()) + "_" + AlgorithmUtil.randomNumber(8) + "_" + AlgorithmUtil.random();
+	}
+
 	public static Message createMessage(String topic, String tags, String keys, String content) {
 		try {
 			return new Message(topic, tags, keys, content.getBytes(RemotingHelper.DEFAULT_CHARSET));

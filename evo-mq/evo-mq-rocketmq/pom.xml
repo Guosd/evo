@@ -19,6 +19,11 @@
 			<artifactId>rocketmq-client</artifactId>
 			<version>${rocketmq-client.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.rocketmq</groupId>
+			<artifactId>rocketmq-logappender</artifactId>
+			<version>${rocketmq-logappender.version}</version>
+		</dependency>
 	</dependencies>
 
 </project>
