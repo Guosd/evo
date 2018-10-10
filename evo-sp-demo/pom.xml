@@ -28,6 +28,7 @@
 		<module>evo-sp-demo-rocketmq-consumer-starter</module>
 		<module>evo-sp-demo-rabbitmq-producer</module>
 		<module>evo-sp-demo-rabbitmq-consumer</module>
+		<module>evo-sp-demo-dt-rocketmq-server1</module>
 	</modules>
 
 
