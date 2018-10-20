@@ -31,7 +31,7 @@ public class NetUtil {
 
 	public static boolean isRequestFromBrowser(HttpServletRequest request) {
 		String userAgent = request.getHeader("User-Agent");
-		log.info("Request User-Agent: " + userAgent);
+		log.debug("Request User-Agent: {}", userAgent);
 
 		if (StringUtil.isBlank(userAgent)) {
 			return false;
@@ -45,8 +45,8 @@ public class NetUtil {
 				|| (userAgent.contains("compatible") && userAgent.contains("msie"))
 				|| userAgent.contains("opera")
 				|| userAgent.contains("trident");
-		
-		log.info("Request From Browser: " + result);
+
+		log.debug("Request From Browser: {}", result);
 
 		return result;
 	}

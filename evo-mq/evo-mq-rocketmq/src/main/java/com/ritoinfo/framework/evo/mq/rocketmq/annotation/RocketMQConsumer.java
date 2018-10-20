@@ -5,6 +5,7 @@ import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
@@ -15,11 +16,13 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
+@Inherited
 @Documented
 public @interface RocketMQConsumer {
-	String consumerGroup();
-	String topic();
-	String tags();
-	ConsumeFromWhere consumeFromWhere() default ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET;
+	String namesrvAddr() default "";
+	String group() default "";
+	String topic() default "";
+	String tags() default "";
+	ConsumeFromWhere consumeFromWhere() default ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET;
 	MessageModel messageModel() default MessageModel.CLUSTERING;
 }

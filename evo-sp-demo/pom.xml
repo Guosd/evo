@@ -22,15 +22,13 @@
 		<module>evo-sp-demo-infa</module>
 		<module>evo-sp-demo-transaction-jdbc</module>
 		<module>evo-sp-demo-transaction-jta-atomikos</module>
-		<module>evo-sp-demo-rocketmq-producer</module>
-		<module>evo-sp-demo-rocketmq-consumer</module>
 		<module>evo-sp-demo-rocketmq-producer-starter</module>
 		<module>evo-sp-demo-rocketmq-consumer-starter</module>
 		<module>evo-sp-demo-rabbitmq-producer</module>
 		<module>evo-sp-demo-rabbitmq-consumer</module>
-		<module>evo-sp-demo-dt-rocketmq-server1</module>
 		<module>evo-sp-demo-dt-rocketmq-account</module>
+		<module>evo-sp-demo-dt-rocketmq-order</module>
+		<module>evo-sp-demo-dt-rocketmq-storage</module>
 	</modules>
-
 
 </project>

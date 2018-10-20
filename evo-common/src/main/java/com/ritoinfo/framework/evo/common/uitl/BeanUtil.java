@@ -1,12 +1,16 @@
 package com.ritoinfo.framework.evo.common.uitl;
 
+import com.ritoinfo.framework.evo.common.exception.BeanOperateException;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
 import net.sf.cglib.beans.BeanCopier;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
 import sun.reflect.generics.reflectiveObjects.ParameterizedTypeImpl;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -75,13 +79,11 @@ public class BeanUtil {
 	}
 
 	public static Class getClass(String className) {
-		Class clazz = null;
 		try {
-			clazz = Class.forName(className);
+			return Class.forName(className);
 		} catch (ClassNotFoundException e) {
-			log.error("加载Class失败", e);
+			throw new BeanOperateException("加载 Class 失败", e);
 		}
-		return clazz;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -99,13 +101,11 @@ public class BeanUtil {
 	}
 
 	public static <T> T newInstance(Class<T> clazz) {
-		T t = null;
 		try {
-			t = clazz.newInstance();
+			return clazz.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
-			log.error("实例化对象失败", e);
+			throw new BeanOperateException("实例化对象失败", e);
 		}
-		return t;
 	}
 
 	public static List<Field> getFields(Object object) {
@@ -153,7 +153,7 @@ public class BeanUtil {
 			try {
 				value = field.get(object);
 			} catch (IllegalAccessException e) {
-				log.error("获取对象中的属性值失败", e);
+				throw new BeanOperateException("获取对象中的属性值失败", e);
 			}
 		}
 
@@ -171,8 +171,25 @@ public class BeanUtil {
 			try {
 				field.set(object, fieldValue);
 			} catch (IllegalAccessException e) {
-				log.error("设置对象中的属性值失败", e);
+				throw new BeanOperateException("设置对象中的属性值失败", e);
 			}
+		}
+	}
+
+	public static Method getMethod(Object object, String methodName) {
+		for (Method method : object.getClass().getMethods()) {
+			if (methodName.equals(method.getName())) {
+				return method;
+			}
+		}
+		return null;
+	}
+
+	public static Method getMethod(Object object, String methodName, Class<?>... parameterTypes) {
+		try {
+			return object.getClass().getMethod(methodName, parameterTypes);
+		} catch (NoSuchMethodException e) {
+			throw new BeanOperateException("获取方法失败", e);
 		}
 	}
 
@@ -189,9 +206,23 @@ public class BeanUtil {
 				}
 			}
 		} catch (Exception e) {
-			log.error("获取注解失败", e);
+			throw new BeanOperateException("获取注解失败", e);
 		}
 
 		return result;
+	}
+
+	public static <T extends Annotation> T getAnnotation(ProceedingJoinPoint proceedingJoinPoint, Class<T> clazz) {
+		MethodSignature methodSignature = (MethodSignature) proceedingJoinPoint.getSignature();
+		Method method = methodSignature.getMethod();
+		return method.getAnnotation(clazz);
+	}
+
+	public static Object invoke(Object object, Method method, Object... args) {
+		try {
+			return method.invoke(object, args);
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			throw new BeanOperateException("调用方法失败", e);
+		}
 	}
 }

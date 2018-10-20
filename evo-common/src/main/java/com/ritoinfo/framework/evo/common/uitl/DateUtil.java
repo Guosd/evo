@@ -1,5 +1,6 @@
 package com.ritoinfo.framework.evo.common.uitl;
 
+import com.ritoinfo.framework.evo.common.exception.DateOperateException;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 
@@ -35,13 +36,11 @@ public class DateUtil {
 	}
 
 	public static Date parse(String str, String pattern) {
-		Date date = null;
 		try {
-			date = new SimpleDateFormat(pattern).parse(str);
+			return new SimpleDateFormat(pattern).parse(str);
 		} catch (ParseException e) {
-			log.error("日期解析失败", e);
+			throw new DateOperateException("日期解析失败", e);
 		}
-		return date;
 	}
 
 	public static String formatDate(Date date) {

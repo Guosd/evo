@@ -1,27 +1,23 @@
 package com.ritoinfo.framework.evo.mq.rocketmq.config;
 
-import com.ritoinfo.framework.evo.common.uitl.ConcurrentUtil;
+import com.ritoinfo.framework.evo.common.config.properties.ApplicationProperties;
 import com.ritoinfo.framework.evo.mq.rocketmq.annotation.RocketMQConsumer;
-import com.ritoinfo.framework.evo.mq.rocketmq.annotation.RocketMQTransactionProducer;
-import com.ritoinfo.framework.evo.mq.rocketmq.assist.MessageHelper;
+import com.ritoinfo.framework.evo.mq.rocketmq.assist.RocketMQHelper;
+import com.ritoinfo.framework.evo.mq.rocketmq.config.properties.RocketMQProperties;
 import com.ritoinfo.framework.evo.mq.rocketmq.exception.RocketMQOperateException;
-import com.ritoinfo.framework.evo.mq.rocketmq.listener.AbstractRocketMQTransactionProcesser;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerOrderly;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
-import org.apache.rocketmq.client.producer.TransactionMQProducer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
 
 /**
  * User: Kyll
@@ -30,28 +26,18 @@ import java.util.concurrent.ExecutorService;
 @Slf4j
 @Configuration
 public class RocketMQConfig {
-	@Value("${rocketmq.producer-group}")
-	private String producerGroup;
-	@Value("${rocketmq.namesrv-addr}")
-	private String namesrvAddr;
-	@Value("${rocketmq.transaction.executor-service.core-pool-size:2}")
-	private Integer corePoolSize;
-	@Value("${rocketmq.transaction.executor-service.maximum-pool-size:5}")
-	private Integer maximumPoolSize;
-	@Value("${rocketmq.transaction.executor-service.keep-alive-time:100}")
-	private Long keepAliveTime;
-	@Value("${rocketmq.transaction.executor-service.capacity:200}")
-	private Integer capacity;
-	@Value("${rocketmq.transaction.executor-service.thread-name:client-transaction-msg-check-thread}")
-	private String threadName;
-
 	@Autowired
 	private ApplicationContext applicationContext;
+	@Autowired
+	private ApplicationProperties applicationProperties;
+	@Autowired
+	private RocketMQProperties rocketMQProperties;
 
 	@Bean("defaultMQProducer")
 	public DefaultMQProducer defaultMQProducer() {
-		DefaultMQProducer producer = new DefaultMQProducer(producerGroup);
-		producer.setNamesrvAddr(namesrvAddr);
+		DefaultMQProducer producer = new DefaultMQProducer(RocketMQHelper.getProducerGroup(rocketMQProperties));
+		producer.setNamesrvAddr(RocketMQHelper.getProducerNamesrvAddr(rocketMQProperties));
+		producer.setInstanceName(RocketMQHelper.createInstanceName(applicationProperties.getApplicationName()));
 
 		try {
 			producer.start();
@@ -63,40 +49,17 @@ public class RocketMQConfig {
 	}
 
 	@PostConstruct
-	public void transactionMQProducer() {
-		ExecutorService executorService = ConcurrentUtil.createExecutorService(corePoolSize, maximumPoolSize, keepAliveTime, capacity, threadName);
-
-		Map<String, Object> beanMap = applicationContext.getBeansWithAnnotation(RocketMQTransactionProducer.class);
-		beanMap.values().forEach(o -> {
-			AbstractRocketMQTransactionProcesser transactionListener = (AbstractRocketMQTransactionProcesser) o;
-
-			TransactionMQProducer producer = new TransactionMQProducer(o.getClass().getAnnotation(RocketMQTransactionProducer.class).producerGroup());
-			producer.setNamesrvAddr(namesrvAddr);
-			producer.setExecutorService(executorService);
-			producer.setTransactionListener(transactionListener);
-			producer.setInstanceName(MessageHelper.createInstanceName());
-
-			transactionListener.setTransactionMQProducer(producer);
-
-			try {
-				producer.start();
-			} catch (MQClientException e) {
-				throw new RocketMQOperateException("启动 TransactionMQProducer 失败", e);
-			}
-		});
-	}
-
-	@PostConstruct
 	public void defaultMQPushConsumer() {
 		Map<String, Object> beanMap = applicationContext.getBeansWithAnnotation(RocketMQConsumer.class);
 		beanMap.values().forEach(o -> {
 			RocketMQConsumer rocketMQConsumer = o.getClass().getAnnotation(RocketMQConsumer.class);
-			DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(rocketMQConsumer.consumerGroup());
-			consumer.setNamesrvAddr(namesrvAddr);
+			DefaultMQPushConsumer consumer = new DefaultMQPushConsumer(RocketMQHelper.getConsumerGroup(rocketMQProperties, rocketMQConsumer));
+			consumer.setNamesrvAddr(RocketMQHelper.getConsumerNamesrvAddr(rocketMQProperties, rocketMQConsumer));
+			consumer.setConsumeFromWhere(rocketMQConsumer.consumeFromWhere());
 			consumer.setMessageModel(rocketMQConsumer.messageModel());
 
 			try {
-				consumer.subscribe(rocketMQConsumer.topic(), rocketMQConsumer.tags());
+				consumer.subscribe(RocketMQHelper.getConsumerTopic(rocketMQProperties, rocketMQConsumer), RocketMQHelper.getConsumerTags(rocketMQProperties, rocketMQConsumer));
 			} catch (MQClientException e) {
 				throw new RocketMQOperateException("订阅消息失败", e);
 			}

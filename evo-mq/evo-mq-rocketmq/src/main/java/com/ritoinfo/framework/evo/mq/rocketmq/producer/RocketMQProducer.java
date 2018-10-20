@@ -12,14 +12,14 @@ import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.exception.RemotingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 /**
  * User: Kyll
  * Date: 2018-09-28 16:15
  */
 @Slf4j
-@Service
+@Component
 public class RocketMQProducer {
 	@Qualifier("defaultMQProducer")
 	@Autowired

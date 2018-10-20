@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ritoinfo.framework.evo.common.exception.JsonOperateException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -44,9 +45,8 @@ public class JsonUtil {
 		try {
 			return mapper.readTree(json);
 		} catch (IOException e) {
-			log.error("读取 JSON 失败", e);
+			throw new JsonOperateException("读取 JSON 失败", e);
 		}
-		return null;
 	}
 
 	/**
@@ -58,9 +58,8 @@ public class JsonUtil {
 		try {
 			return mapper.readTree(inputStream);
 		} catch (IOException e) {
-			log.error("读取 JSON 失败", e);
+			throw new JsonOperateException("读取 JSON 失败", e);
 		}
-		return null;
 	}
 
 	/**
@@ -71,25 +70,11 @@ public class JsonUtil {
 	 * @return 特定类型对象
 	 */
 	public static <T> T jsonToObject(String json, Class<T> clazz) {
-		T t = null;
 		try {
-			t = mapper.readValue(json, clazz);
+			return mapper.readValue(json, clazz);
 		} catch (IOException e) {
-			log.error("JSON 转换对象失败", e);
+			throw new JsonOperateException("JSON 转换对象失败", e);
 		}
-		return t;
-	}
-
-	/**
-	 * JSON 字符串转换为特定类型对象
-	 * @param json JSON 字符串
-	 * @param clazz 对象类
-	 * @param <T> 对象类型
-	 * @return 特定类型对象
-	 * @throws IOException JSON 转换对象失败失败时抛出
-	 */
-	public static <T> T jsonToObjectWithException(String json, Class<T> clazz) throws IOException {
-		return mapper.readValue(json, clazz);
 	}
 
 	/**
@@ -100,13 +85,11 @@ public class JsonUtil {
 	 * @return 特定类型对象
 	 */
 	public static <T> T jsonToObject(InputStream inputStream, Class<T> clazz) {
-		T t = null;
 		try {
-			t = mapper.readValue(inputStream, clazz);
+			return mapper.readValue(inputStream, clazz);
 		} catch (IOException e) {
-			log.error("JSON 转换对象失败", e);
+			throw new JsonOperateException("JSON 转换对象失败", e);
 		}
-		return t;
 	}
 
 	/**
@@ -122,9 +105,8 @@ public class JsonUtil {
 		try {
 			return mapper.readValue(json, getCollectionType(collectionClass, elementClass));
 		} catch (IOException e) {
-			log.error("JSON 转换对象失败", e);
+			throw new JsonOperateException("JSON 转换集合失败", e);
 		}
-		return null;
 	}
 
 	/**
@@ -140,9 +122,8 @@ public class JsonUtil {
 		try {
 			return mapper.readValue(inputStream, getCollectionType(collectionClass, elementClass));
 		} catch (IOException e) {
-			log.error("JSON 转换对象失败", e);
+			throw new JsonOperateException("JSON 转换集合失败", e);
 		}
-		return null;
 	}
 
 	/**
@@ -154,18 +135,7 @@ public class JsonUtil {
 		try {
 			return mapper.writeValueAsString(object);
 		} catch (JsonProcessingException e) {
-			log.error("对象转换 JSON 失败", e);
+			throw new JsonOperateException("对象转换 JSON 失败", e);
 		}
-		return null;
-	}
-
-	/**
-	 * 对象转换为字符串
-	 * @param object 输入对象
-	 * @return String JSON 字符串
-	 * @throws JsonProcessingException 对象转换 JSON 失败时抛出
-	 */
-	public static String objectToJsonWithException(Object object) throws JsonProcessingException {
-		return mapper.writeValueAsString(object);
 	}
 }

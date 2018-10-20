@@ -37,6 +37,7 @@
 		<module>evo-sp-auth</module>
 		<module>evo-sp-datadict</module>
 		<module>evo-sp-demo</module>
+		<module>evo-sp-dts</module>
 		<module>evo-sp-sms</module>
 		<module>evo-sp-sys</module>
 		<module>evo-sp-sys-ui</module>
@@ -87,6 +88,7 @@
 		<evo-common.version>1.0.0-SNAPSHOT</evo-common.version>
 		<evo-common-password.version>1.0.0-SNAPSHOT</evo-common-password.version>
 		<evo-common-jwt.version>1.0.0-SNAPSHOT</evo-common-jwt.version>
+		<evo-sp-dts-common.version>1.0.0-SNAPSHOT</evo-sp-dts-common.version>
 		<evo-sp-auth-assist.version>1.0.0-SNAPSHOT</evo-sp-auth-assist.version>
 		<evo-sp-base.version>1.0.0-SNAPSHOT</evo-sp-base.version>
 		<evo-sp-base-exception.version>1.0.0-SNAPSHOT</evo-sp-base-exception.version>
@@ -102,6 +104,7 @@
 		<evo-sp-auth-mobile-model.version>1.0.0-SNAPSHOT</evo-sp-auth-mobile-model.version>
 		<evo-sp-auth-pc-model.version>1.0.0-SNAPSHOT</evo-sp-auth-pc-model.version>
 		<evo-sp-datadict-model.version>1.0.0-SNAPSHOT</evo-sp-datadict-model.version>
+		<evo-sp-dts-model.version>1.0.0-SNAPSHOT</evo-sp-dts-model.version>
 		<evo-sp-sms-model.version>1.0.0-SNAPSHOT</evo-sp-sms-model.version>
 		<evo-sp-sys-model.version>1.0.0-SNAPSHOT</evo-sp-sys-model.version>
 		<evo-sp-demo-model.version>1.0.0-SNAPSHOT</evo-sp-demo-model.version>

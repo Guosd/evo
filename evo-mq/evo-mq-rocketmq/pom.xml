@@ -24,6 +24,11 @@
 			<artifactId>rocketmq-logappender</artifactId>
 			<version>${rocketmq-logappender.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-sp-dts-model</artifactId>
+			<version>${evo-sp-dts-model.version}</version>
+		</dependency>
 	</dependencies>
 
 </project>

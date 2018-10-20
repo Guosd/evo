@@ -78,3 +78,19 @@ evo:
         url: jdbc:mysql://127.0.0.1:3306/evo_demo?useUnicode=true&characterEncoding=UTF8&useSSL=false
         username: evo_demo
         password: evo_demo
+      dt:
+        order:
+          datasource:
+            url: jdbc:mysql://127.0.0.1:3306/evo_demo_dt_order?useUnicode=true&characterEncoding=UTF8&useSSL=false
+            username: evo_demo_dt_order
+            password: evo_demo_dt_order
+        account:
+          datasource:
+            url: jdbc:mysql://127.0.0.1:3306/evo_demo_dt_account?useUnicode=true&characterEncoding=UTF8&useSSL=false
+            username: evo_demo_dt_account
+            password: evo_demo_dt_account
+        storage:
+          datasource:
+            url: jdbc:mysql://127.0.0.1:3306/evo_demo_dt_storage?useUnicode=true&characterEncoding=UTF8&useSSL=false
+            username: evo_demo_dt_storage
+            password: evo_demo_dt_storage
