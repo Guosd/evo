@@ -8,17 +8,17 @@ evo:
   # eureka 无法在 bootstrap.yml 中配置
   eureka:
     instance:
-      ip-address: 192.168.1.24
+      ip-address: 192.168.204.134
     client:
       serviceUrl:
-        defaultZone: http://192.168.1.24:50101/eureka
+        defaultZone: http://192.168.204.134:20000/eureka
   spring:
     redis:
       cluster:
         nodes: 192.168.1.26:7001, 192.168.1.26:7002, 192.168.1.26:7003, 192.168.1.26:7004, 192.168.1.26:7005, 192.168.1.26:7006
     rabbitmq:
-      addresses: 192.168.1.27:5672
-      host: 192.168.1.27
+      addresses: 192.168.204.134:5672
+      host: 192.168.204.134
       port: 5672
       virtual-host: vhost_eco
       username: eco
@@ -30,18 +30,23 @@ evo:
   ribbon:
     NFLoadBalancerRuleClassName: com.ritoinfo.framework.evo.zuul.loadbalancer.BackToSelfRule
   sp:
+    demo:
+      datasource:
+        url: jdbc:mysql://192.168.204.1:3306/evo_demo?useUnicode=true&characterEncoding=UTF8
+        username: evo_demo
+        password: evo_demo
     sys:
       datasource:
-        url: jdbc:mysql://192.168.1.29:3306/evo_sys?useUnicode=true&characterEncoding=UTF8
+        url: jdbc:mysql://192.168.204.1:3306/evo_sys?useUnicode=true&characterEncoding=UTF8
         username: evo_sys
         password: evo_sys
     datadict:
       datasource:
-        url: jdbc:mysql://192.168.1.29:3306/evo_datadict?useUnicode=true&characterEncoding=UTF8
+        url: jdbc:mysql://192.168.204.1:3306/evo_datadict?useUnicode=true&characterEncoding=UTF8
         username: evo_datadict
         password: evo_datadict
     activiti:
       datasource:
-        url: jdbc:mysql://192.168.1.29:3306/evo_activiti?useUnicode=true&characterEncoding=UTF8
+        url: jdbc:mysql://192.168.204.1:3306/evo_activiti?useUnicode=true&characterEncoding=UTF8
         username: evo_activiti
         password: evo_activiti

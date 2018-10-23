@@ -53,8 +53,8 @@ spring:
   profiles: vm
 eureka:
   instance:
-    ip-address: 192.168.1.24
+    ip-address: 192.168.204.134
     prefer-ip-address: true
   client:
     serviceUrl:
-      defaultZone: http://192.168.1.24:50101/eureka
+      defaultZone: http://192.168.204.134:50101/eureka
