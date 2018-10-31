@@ -14,16 +14,12 @@ import javax.persistence.Table;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "dts_log", catalog = "evo_framework")
-public class DtsLog extends BaseMapperEntity<Long> {
+@Table(name = "dts_record", catalog = "evo_framework")
+public class DtsRecord extends BaseMapperEntity<Long> {
 	@Id
 	@KeySql(useGeneratedKeys = true)
 	private Long id;
-	private String messageKey;// 消息Key
 	private String businessKey;// 业务Key(事务Key)
-	private String source;// 事务生产者
-	private String target;// 事务消费者
-	private String arg;// 业务参数 JSON
-	private String sourceStatus;// SS00 服务生产者处理中， SS01 服务生产者已完成
-	private String targetStatus;// ST00 服务消费者处理中， ST01 服务消费者已完成
+	private String producerStep;// ST00 事务处理中， ST01 事务已完成
+	private String consumerStep;// ST00 事务处理中， ST01 事务已完成
 }

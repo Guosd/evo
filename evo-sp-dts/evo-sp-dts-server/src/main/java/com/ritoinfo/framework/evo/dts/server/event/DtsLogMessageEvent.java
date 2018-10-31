@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.dts.server.event;
 
-import com.ritoinfo.framework.evo.dts.common.model.DtsLogMessage;
+import com.ritoinfo.framework.evo.dts.common.model.DtsLogMessageDto;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
@@ -10,10 +10,10 @@ import org.springframework.context.ApplicationEvent;
  */
 public class DtsLogMessageEvent extends ApplicationEvent {
 	@Getter
-	private DtsLogMessage dtsLogMessage;
+	private DtsLogMessageDto dtsLogMessageDto;
 
-	public DtsLogMessageEvent(Object source, DtsLogMessage dtsLogMessage) {
+	public DtsLogMessageEvent(Object source, DtsLogMessageDto dtsLogMessageDto) {
 		super(source);
-		this.dtsLogMessage = dtsLogMessage;
+		this.dtsLogMessageDto = dtsLogMessageDto;
 	}
 }

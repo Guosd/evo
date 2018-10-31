@@ -40,10 +40,7 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
 rocketmq:
   namesrv-addr: 192.168.204.129:9876
-  group: evo_dts_group
-  topic: evo_dts_topic
   producer:
+    group: evo_order_producer_group
+    topic: evo_order_topic
     tags: order_create_tag
-  dts:
-    log:
-      tags: dts_log_tag

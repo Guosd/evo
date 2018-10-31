@@ -1,7 +1,7 @@
 package com.ritoinfo.framework.evo.sp.demo.bizz;
 
 import com.ritoinfo.framework.evo.dts.common.annotation.RocketMQTransactionConsumer;
-import com.ritoinfo.framework.evo.dts.common.model.DtsMessage;
+import com.ritoinfo.framework.evo.dts.common.model.DtsBizzMessageDto;
 import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseMapperBizz;
 import com.ritoinfo.framework.evo.sp.demo.dao.AccountDao;
 import com.ritoinfo.framework.evo.sp.demo.dto.AccountDto;
@@ -30,11 +30,11 @@ public class AccountBizz extends BaseMapperBizz<AccountDao, Account, Long, Accou
 	 * consumeConcurrentlyContext 消费者并行上下文
 	 *
 	 * DtsMessage dtsMessage 从 MessageExt 转换而成的事务消息，此对象中包含事务信息
-	 * @param dtsMessage
+	 * @param dtsBizzMessageDto
 	 * @return
 	 */
 	@RocketMQTransactionConsumer(messageListenerClass = MessageListenerConcurrently.class)
-	public ConsumeConcurrentlyStatus consumeMessage(DtsMessage dtsMessage) {
+	public ConsumeConcurrentlyStatus consumeMessage(DtsBizzMessageDto dtsBizzMessageDto) {
 		this.saveLoacl();
 
 		return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;

@@ -49,12 +49,12 @@ public class RocketMQProperties {
 	@Value("${rocketmq.consumer.tags:}")
 	private String consumerTags;
 
-	@Value("${rocketmq.dts.log.namesrv-addr:}")
-	private String logNamesrvAddr;
-	@Value("${rocketmq.dts.log.group:evo_dts_group}")
-	private String logGroup;
-	@Value("${rocketmq.dts.log.topic:evo_dts_topic}")
-	private String logTopic;
-	@Value("${rocketmq.dts.log.tags:dts_log_tag}")
-	private String logTags;
+	@Value("${rocketmq.dts.log.producer.namesrv-addr:}")
+	private String logProducerNamesrvAddr;
+	@Value("${rocketmq.dts.log.producer.group:evo_dts_log_producer_group}")
+	private String logProducerGroup;
+	@Value("${rocketmq.dts.log.producer.topic:evo_dts_log_topic}")
+	private String logProducerTopic;
+	@Value("${rocketmq.dts.log.producer.tags:dts_log_tag}")
+	private String logProducerTags;
 }

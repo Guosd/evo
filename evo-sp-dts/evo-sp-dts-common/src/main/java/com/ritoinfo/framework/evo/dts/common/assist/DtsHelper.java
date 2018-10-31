@@ -5,8 +5,8 @@ import com.ritoinfo.framework.evo.common.uitl.JsonUtil;
 import com.ritoinfo.framework.evo.common.uitl.StringUtil;
 import com.ritoinfo.framework.evo.dts.common.annotation.RocketMQTransactionConsumer;
 import com.ritoinfo.framework.evo.dts.common.annotation.RocketMQTransactionProducer;
-import com.ritoinfo.framework.evo.dts.common.model.DtsLogMessage;
-import com.ritoinfo.framework.evo.dts.common.model.DtsMessage;
+import com.ritoinfo.framework.evo.dts.common.model.DtsLogMessageDto;
+import com.ritoinfo.framework.evo.dts.common.model.DtsBizzMessageDto;
 import com.ritoinfo.framework.evo.mq.rocketmq.assist.RocketMQHelper;
 import com.ritoinfo.framework.evo.mq.rocketmq.config.properties.RocketMQProperties;
 import com.ritoinfo.framework.evo.mq.rocketmq.exception.RocketMQOperateException;
@@ -63,54 +63,55 @@ public class DtsHelper {
 		return StringUtil.isBlank(value) ? RocketMQHelper.getConsumerTags(rocketMQProperties) : value;
 	}
 
-	public static String getLogNamesrvAddr(RocketMQProperties rocketMQProperties) {
-		String value = rocketMQProperties.getLogNamesrvAddr();
+	public static String getLogProducerNamesrvAddr(RocketMQProperties rocketMQProperties) {
+		String value = rocketMQProperties.getLogProducerNamesrvAddr();
 		return StringUtil.isBlank(value) ? rocketMQProperties.getNamesrvAddr() : value;
 	}
 
-	public static String getLogGroup(RocketMQProperties rocketMQProperties) {
-		String value = rocketMQProperties.getLogGroup();
+	public static String getLogProducerGroup(RocketMQProperties rocketMQProperties) {
+		String value = rocketMQProperties.getLogProducerGroup();
 		return StringUtil.isBlank(value) ? rocketMQProperties.getGroup() : value;
 	}
 
-	public static String getLogTopic(RocketMQProperties rocketMQProperties) {
-		String value = rocketMQProperties.getLogTopic();
+	public static String getLogProducerTopic(RocketMQProperties rocketMQProperties) {
+		String value = rocketMQProperties.getLogProducerTopic();
 		return StringUtil.isBlank(value) ? rocketMQProperties.getTopic() : value;
 	}
 
-	public static String getLogTags(RocketMQProperties rocketMQProperties) {
-		String value = rocketMQProperties.getLogTags();
+	public static String getLogProducerTags(RocketMQProperties rocketMQProperties) {
+		String value = rocketMQProperties.getLogProducerTags();
 		return StringUtil.isBlank(value) ? rocketMQProperties.getTags() : value;
 	}
 
-	public static Message createDtsMessage(RocketMQProperties rocketMQProperties, RocketMQTransactionProducer producer, DtsMessage dtsMessage) {
-		return RocketMQHelper.createMessage(getProducerTopic(rocketMQProperties, producer), getProducerTags(rocketMQProperties, producer), dtsMessage.getMessageKey(), dtsMessage);
+	public static Message createDtsMessage(RocketMQProperties rocketMQProperties, RocketMQTransactionProducer producer, DtsBizzMessageDto dtsBizzMessageDto) {
+		return RocketMQHelper.createMessage(getProducerTopic(rocketMQProperties, producer), getProducerTags(rocketMQProperties, producer), dtsBizzMessageDto.getMessageKey(), dtsBizzMessageDto);
 	}
 
-	public static Message createDtsLogMessage(RocketMQProperties rocketMQProperties, String keys, DtsMessage dtsMessage, String role, String step) {
-		DtsLogMessage dtsLogMessage = new DtsLogMessage();
-		BeanUtil.copy(dtsLogMessage, dtsMessage);
+	public static Message createDtsLogMessage(RocketMQProperties rocketMQProperties, String keys, DtsBizzMessageDto dtsBizzMessageDto, String role, String step) {
+		DtsLogMessageDto dtsLogMessageDto = new DtsLogMessageDto();
+		BeanUtil.copy(dtsLogMessageDto, dtsBizzMessageDto);
 
-		dtsLogMessage.setRole(role);
-		dtsLogMessage.setStep(step);
+		dtsLogMessageDto.setLogMessageKey("log_" + keys);
+		dtsLogMessageDto.setRole(role);
+		dtsLogMessageDto.setStep(step);
 
-		return RocketMQHelper.createMessage(getLogTopic(rocketMQProperties), getLogTags(rocketMQProperties), "log_" + keys, dtsLogMessage);
+		return RocketMQHelper.createMessage(getLogProducerTopic(rocketMQProperties), getLogProducerTags(rocketMQProperties), dtsLogMessageDto.getLogMessageKey(), dtsLogMessageDto);
 	}
 
-	public static List<DtsMessage> parseDtsMessage(List<MessageExt> messageExtList) {
-		return parse(messageExtList, DtsMessage.class);
+	public static List<DtsBizzMessageDto> parseDtsMessage(List<MessageExt> messageExtList) {
+		return parse(messageExtList, DtsBizzMessageDto.class);
 	}
 
-	public static List<DtsLogMessage> parseDtsLogMessage(List<MessageExt> messageExtList) {
-		return parse(messageExtList, DtsLogMessage.class);
+	public static List<DtsLogMessageDto> parseDtsLogMessage(List<MessageExt> messageExtList) {
+		return parse(messageExtList, DtsLogMessageDto.class);
 	}
 
-	public static DtsMessage parseDtsMessage(MessageExt messageExt) {
-		return parse(messageExt, DtsMessage.class);
+	public static DtsBizzMessageDto parseDtsMessage(MessageExt messageExt) {
+		return parse(messageExt, DtsBizzMessageDto.class);
 	}
 
-	public static DtsLogMessage parseDtsLogMessage(MessageExt messageExt) {
-		return parse(messageExt, DtsLogMessage.class);
+	public static DtsLogMessageDto parseDtsLogMessage(MessageExt messageExt) {
+		return parse(messageExt, DtsLogMessageDto.class);
 	}
 
 	public static <T> List<T> parse(List<MessageExt> messageExtList, Class<T> clazz) {

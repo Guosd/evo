@@ -8,11 +8,11 @@ import com.ritoinfo.framework.evo.common.uitl.JsonUtil;
 import com.ritoinfo.framework.evo.dts.common.DtsTransaction;
 import com.ritoinfo.framework.evo.dts.common.annotation.RocketMQTransactionProducer;
 import com.ritoinfo.framework.evo.dts.common.assist.DtsHelper;
-import com.ritoinfo.framework.evo.dts.common.model.DtsMessage;
+import com.ritoinfo.framework.evo.dts.common.model.DtsBizzMessageDto;
+import com.ritoinfo.framework.evo.dts.common.producer.LogRocketMQProducer;
 import com.ritoinfo.framework.evo.mq.rocketmq.assist.RocketMQHelper;
 import com.ritoinfo.framework.evo.mq.rocketmq.config.properties.RocketMQProperties;
 import com.ritoinfo.framework.evo.mq.rocketmq.exception.RocketMQOperateException;
-import com.ritoinfo.framework.evo.mq.rocketmq.producer.RocketMQProducer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.LocalTransactionState;
@@ -41,13 +41,14 @@ import java.util.Map;
 @Component
 public class RocketMQTransactionProducerAspect {
 	private static final Map<String, TransactionMQProducer> TRANSACTION_MQ_PRODUCER_MAP = new HashMap<>();
+	private static final Map<String, DtsBizzMessageDto> DTS_BIZZ_MESSAGE_MAP = new HashMap<>();
 
 	@Autowired
 	private ApplicationProperties applicationProperties;
 	@Autowired
 	private RocketMQProperties rocketMQProperties;
 	@Autowired
-	private RocketMQProducer rocketMQProducer;
+	private LogRocketMQProducer logRocketMQProducer;
 
 	@Pointcut("@annotation(com.ritoinfo.framework.evo.dts.common.annotation.RocketMQTransactionProducer)")
 	public void rocketMQTransactionProducerPointcut() {
@@ -57,6 +58,16 @@ public class RocketMQTransactionProducerAspect {
 	public Object rocketMQTransactionProducerAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		RocketMQTransactionProducer rocketMQTransactionProducer = BeanUtil.getAnnotation(proceedingJoinPoint, RocketMQTransactionProducer.class);
 		String namesrvAddr = DtsHelper.getProducerNamesrvAddr(rocketMQProperties, rocketMQTransactionProducer);
+
+		// 构造事务消息
+		DtsBizzMessageDto dtsBizzMessageDto = new DtsBizzMessageDto();
+		dtsBizzMessageDto.setMessageKey(RocketMQHelper.generateMessageKey(applicationProperties.getApplicationName()));
+		dtsBizzMessageDto.setBusinessKey(getBusinessKey(proceedingJoinPoint.getTarget(), rocketMQProperties, rocketMQTransactionProducer));
+		dtsBizzMessageDto.setProducer(applicationProperties.getApplicationName());
+		dtsBizzMessageDto.setConsumer(rocketMQTransactionProducer.target());
+		Object arg = getArg(proceedingJoinPoint.getTarget(), rocketMQProperties, rocketMQTransactionProducer);
+		dtsBizzMessageDto.setContent(arg == null ? null : JsonUtil.objectToJson(arg));
+		DTS_BIZZ_MESSAGE_MAP.put(dtsBizzMessageDto.getMessageKey(), dtsBizzMessageDto);
 
 		TransactionMQProducer transactionMQProducer = TRANSACTION_MQ_PRODUCER_MAP.get(namesrvAddr);// 一个 mqnamesrv 一个 producer
 		if (transactionMQProducer == null) {
@@ -76,12 +87,16 @@ public class RocketMQTransactionProducerAspect {
 						log.error("本地 transaction 执行失败", throwable);
 						localTransactionState = LocalTransactionState.ROLLBACK_MESSAGE;
 					}
+
+					if (LocalTransactionState.COMMIT_MESSAGE == localTransactionState) {
+						log.info("发送 transaction log 已完成消息成功 {}", logRocketMQProducer.send(DtsHelper.createDtsLogMessage(rocketMQProperties, RocketMQHelper.generateMessageKey(applicationProperties.getApplicationName()), DTS_BIZZ_MESSAGE_MAP.remove(message.getKeys()), Const.DTS_ROLE_PRODUCER, Const.DTS_STEP_FINISHED)));
+					}
 					return localTransactionState;
 				}
 
 				@Override
 				public LocalTransactionState checkLocalTransaction(MessageExt messageExt) {
-					log.info("本地 transaction 检查开始 messageExt = {}", messageExt);
+					log.info("本地 transaction 检查开始 {}", messageExt);
 					LocalTransactionState localTransactionState = ((DtsTransaction) proceedingJoinPoint.getTarget()).checkLocal(messageExt);
 					log.info("本地 transaction 检查结果 {}", localTransactionState);
 					return localTransactionState;
@@ -97,29 +112,14 @@ public class RocketMQTransactionProducerAspect {
 			TRANSACTION_MQ_PRODUCER_MAP.put(namesrvAddr, transactionMQProducer);
 		}
 
-		DtsMessage dtsMessage = new DtsMessage();
-		dtsMessage.setMessageKey(RocketMQHelper.generateMessageKey(applicationProperties.getApplicationName()));
-		dtsMessage.setBusinessKey(getBusinessKey(proceedingJoinPoint.getTarget(), rocketMQProperties, rocketMQTransactionProducer));
-		dtsMessage.setSource(applicationProperties.getApplicationName());
-		dtsMessage.setTarget(rocketMQTransactionProducer.target());
-
-		Object arg = getArg(proceedingJoinPoint.getTarget(), rocketMQProperties, rocketMQTransactionProducer);
-		if (arg != null) {
-			dtsMessage.setArg(JsonUtil.objectToJson(arg));
-		}
-
-		rocketMQProducer.send(DtsHelper.createDtsLogMessage(rocketMQProperties, RocketMQHelper.generateMessageKey(applicationProperties.getApplicationName()), dtsMessage, Const.DTS_ROLE_PRODUCER, Const.DTS_STEP_PROCESS));
+		log.info("发送 transaction log 处理中消息成功 {}", logRocketMQProducer.send(DtsHelper.createDtsLogMessage(rocketMQProperties, RocketMQHelper.generateMessageKey(applicationProperties.getApplicationName()), dtsBizzMessageDto, Const.DTS_ROLE_PRODUCER, Const.DTS_STEP_PROCESS)));
 
 		TransactionSendResult transactionSendResult;
 		try {
-			transactionSendResult = transactionMQProducer.sendMessageInTransaction(DtsHelper.createDtsMessage(rocketMQProperties, rocketMQTransactionProducer, dtsMessage), arg);
-			log.info("发送 transaction 消息成功 {}", transactionSendResult);
+			transactionSendResult = transactionMQProducer.sendMessageInTransaction(DtsHelper.createDtsMessage(rocketMQProperties, rocketMQTransactionProducer, dtsBizzMessageDto), arg);
+			log.info("发送 transaction 消息成功 {}, {}", transactionSendResult, transactionSendResult.getLocalTransactionState());
 		} catch (MQClientException e) {
 			throw new RocketMQOperateException("发送 transaction 消息失败", e);
-		}
-
-		if (LocalTransactionState.COMMIT_MESSAGE == transactionSendResult.getLocalTransactionState()) {
-			rocketMQProducer.send(DtsHelper.createDtsLogMessage(rocketMQProperties, RocketMQHelper.generateMessageKey(applicationProperties.getApplicationName()), dtsMessage, Const.DTS_ROLE_PRODUCER, Const.DTS_STEP_FINISHED));
 		}
 
 		return null;

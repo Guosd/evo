@@ -18,7 +18,7 @@ import java.io.UnsupportedEncodingException;
  */
 public class RocketMQHelper {
 	public static String generateMessageKey(String applicationName) {
-		return applicationName + "_" + DateUtil.formatDatetimeCompact(DateUtil.now()) + "_" + AlgorithmUtil.randomNumber(8) + "_" + AlgorithmUtil.uuid();
+		return applicationName + "_" + DateUtil.formatDatetimeCompact(DateUtil.now()) + "_" + AlgorithmUtil.uuid();
 	}
 
 	public static String createInstanceName(String applicationName) {

@@ -1,7 +1,7 @@
 package com.ritoinfo.framework.evo.dts.server.consumer;
 
 import com.ritoinfo.framework.evo.dts.common.assist.DtsHelper;
-import com.ritoinfo.framework.evo.dts.common.model.DtsLogMessage;
+import com.ritoinfo.framework.evo.dts.common.model.DtsLogMessageDto;
 import com.ritoinfo.framework.evo.dts.server.event.DtsLogMessageEvent;
 import com.ritoinfo.framework.evo.mq.rocketmq.annotation.RocketMQConsumer;
 import lombok.extern.slf4j.Slf4j;
@@ -30,8 +30,8 @@ public class DtsLogMessageConsumer implements MessageListenerConcurrently {
 	public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
 		log.info("接收消息 List<MessageExt> = {}，ConsumeConcurrentlyContext = {}", list, consumeConcurrentlyContext);
 
-		for (DtsLogMessage dtsLogMessage : DtsHelper.parse(list, DtsLogMessage.class)) {
-			applicationContext.publishEvent(new DtsLogMessageEvent(this, dtsLogMessage));
+		for (DtsLogMessageDto dtsLogMessageDto : DtsHelper.parse(list, DtsLogMessageDto.class)) {
+			applicationContext.publishEvent(new DtsLogMessageEvent(this, dtsLogMessageDto));
 		}
 
 		return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;

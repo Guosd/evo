@@ -21,8 +21,8 @@ public class Const {
 
 	public static final String DTS_ROLE_PRODUCER = "RE00";
 	public static final String DTS_ROLE_CONSUMER = "RE01";
-	public static final String DTS_STEP_PROCESS = "SS00";
-	public static final String DTS_STEP_FINISHED = "SS01";
+	public static final String DTS_STEP_PROCESS = "ST00";
+	public static final String DTS_STEP_FINISHED = "ST01";
 
 	public static final String SPRING_APPLICATION_NAME_AUTH = "evo-sp-auth";
 
