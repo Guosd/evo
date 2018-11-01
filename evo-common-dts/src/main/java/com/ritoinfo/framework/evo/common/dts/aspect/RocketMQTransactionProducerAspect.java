@@ -50,7 +50,7 @@ public class RocketMQTransactionProducerAspect {
 	@Autowired
 	private LogRocketMQProducer logRocketMQProducer;
 
-	@Pointcut("@annotation(com.ritoinfo.framework.evo.dts.common.annotation.RocketMQTransactionProducer)")
+	@Pointcut("@annotation(com.ritoinfo.framework.evo.common.dts.annotation.RocketMQTransactionProducer)")
 	public void rocketMQTransactionProducerPointcut() {
 	}
 

@@ -37,7 +37,7 @@ public class RocketMQTransactionConsumerAspect {
 	@Autowired
 	private RocketMQProducer rocketMQProducer;
 
-	@Pointcut("@annotation(com.ritoinfo.framework.evo.dts.common.annotation.RocketMQTransactionConsumer)")
+	@Pointcut("@annotation(com.ritoinfo.framework.evo.common.dts.annotation.RocketMQTransactionConsumer)")
 	public void rocketMQTransactionConsumerPointcut() {
 	}
 
