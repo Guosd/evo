@@ -1,11 +1,11 @@
 package com.ritoinfo.framework.evo.sp.demo.bizz;
 
-import com.ritoinfo.framework.evo.dts.common.annotation.RocketMQTransactionConsumer;
-import com.ritoinfo.framework.evo.dts.common.model.DtsBizzMessageDto;
+import com.ritoinfo.framework.evo.common.dts.annotation.RocketMQTransactionConsumer;
 import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseMapperBizz;
 import com.ritoinfo.framework.evo.sp.demo.dao.AccountDao;
 import com.ritoinfo.framework.evo.sp.demo.dto.AccountDto;
 import com.ritoinfo.framework.evo.sp.demo.entity.Account;
+import com.ritoinfo.framework.evo.sp.dts.dto.DtsBizzMessageDto;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;

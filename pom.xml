@@ -43,6 +43,8 @@
 		<module>evo-sp-sys-ui</module>
 		<module>evo-static-ui</module>
 		<module>evo-mq</module>
+		<module>evo-common-dts</module>
+		<module>evo-sp-dts-ui</module>
 	</modules>
 
 	<properties>
@@ -88,7 +90,7 @@
 		<evo-common.version>1.0.0-SNAPSHOT</evo-common.version>
 		<evo-common-password.version>1.0.0-SNAPSHOT</evo-common-password.version>
 		<evo-common-jwt.version>1.0.0-SNAPSHOT</evo-common-jwt.version>
-		<evo-sp-dts-common.version>1.0.0-SNAPSHOT</evo-sp-dts-common.version>
+		<evo-common-dts.version>1.0.0-SNAPSHOT</evo-common-dts.version>
 		<evo-sp-auth-assist.version>1.0.0-SNAPSHOT</evo-sp-auth-assist.version>
 		<evo-sp-base.version>1.0.0-SNAPSHOT</evo-sp-base.version>
 		<evo-sp-base-exception.version>1.0.0-SNAPSHOT</evo-sp-base-exception.version>

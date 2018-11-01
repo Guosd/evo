@@ -1,18 +1,17 @@
-package com.ritoinfo.framework.evo.sp.demo.consumer;
+package com.ritoinfo.framework.evo.sp.dts.consumer;
 
 import com.ritoinfo.framework.evo.common.dts.assist.DtsHelper;
-import com.ritoinfo.framework.evo.common.dts.exception.DtsException;
+import com.ritoinfo.framework.evo.sp.dts.event.DtsLogMessageEvent;
 import com.ritoinfo.framework.evo.mq.rocketmq.annotation.RocketMQConsumer;
-import com.ritoinfo.framework.evo.sp.demo.bizz.AccountBizz;
-import com.ritoinfo.framework.evo.sp.dts.dto.DtsBizzMessageDto;
+import com.ritoinfo.framework.evo.sp.dts.dto.DtsLogMessageDto;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,20 +22,18 @@ import java.util.List;
 @RocketMQConsumer
 @Slf4j
 @Component
-public class DtsMessageConsumer implements MessageListenerConcurrently {
+public class DtsLogMessageConsumer implements MessageListenerConcurrently {
 	@Autowired
-	private AccountBizz accountBizz;
+	private ApplicationContext applicationContext;
 
-	@Transactional
 	@Override
 	public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
 		log.info("接收消息 List<MessageExt> = {}，ConsumeConcurrentlyContext = {}", list, consumeConcurrentlyContext);
 
-		List<DtsBizzMessageDto> dtsBizzMessageDtoList = DtsHelper.parseDtsMessage(list);
-		if (dtsBizzMessageDtoList.size() > 1) {
-			throw new DtsException("不支持批量获取消息");
+		for (DtsLogMessageDto dtsLogMessageDto : DtsHelper.parse(list, DtsLogMessageDto.class)) {
+			applicationContext.publishEvent(new DtsLogMessageEvent(this, dtsLogMessageDto));
 		}
 
-		return accountBizz.consumeMessage(dtsBizzMessageDtoList.get(0));
+		return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
 	}
 }

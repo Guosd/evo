@@ -13,12 +13,64 @@
 
 	<artifactId>evo-sp-dts</artifactId>
 
-	<packaging>pom</packaging>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${spring-boot-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>build-info</goal>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>${maven-antrun-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>package</id>
+						<phase>package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target name="run">
+								<echo message="copy ${project.build.directory}/classes/Dockerfile"/>
+								<copy todir="${project.build.directory}/docker" file="${project.build.directory}/classes/Dockerfile" overwrite="true"/>
+								<echo message="delete ${project.build.directory}/classes/Dockerfile"/>
+								<delete file="${project.build.directory}/classes/Dockerfile"/>
+								<echo message="copy ${project.build.directory}/${project.build.finalName}.jar"/>
+								<copy todir="${project.build.directory}/docker" file="${project.build.directory}/${project.build.finalName}.jar" overwrite="true"/>
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
-	<modules>
-		<module>evo-sp-dts-server</module>
-		<module>evo-sp-dts-common</module>
-		<module>evo-sp-dts-model</module>
-	</modules>
+	<dependencies>
+		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-sp-base-starter-mybatis-mapper</artifactId>
+			<version>${evo-sp-base-starter-mybatis-mapper.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql-connector-java.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-common-dts</artifactId>
+			<version>${evo-common-dts.version}</version>
+		</dependency>
+	</dependencies>
 
 </project>

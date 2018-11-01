@@ -31,8 +31,8 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-sp-dts-common</artifactId>
-			<version>${evo-sp-dts-common.version}</version>
+			<artifactId>evo-common-dts</artifactId>
+			<version>${evo-common-dts.version}</version>
 		</dependency>
 	</dependencies>
 

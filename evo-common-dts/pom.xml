@@ -11,27 +11,13 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>evo-model</artifactId>
-
-	<packaging>pom</packaging>
-
-	<modules>
-		<module>evo-sp-activiti-model</module>
-		<module>evo-sp-auth-pc-model</module>
-		<module>evo-sp-auth-common-model</module>
-		<module>evo-sp-auth-mobile-model</module>
-		<module>evo-sp-datadict-model</module>
-		<module>evo-sp-sms-model</module>
-		<module>evo-sp-sys-model</module>
-		<module>evo-sp-demo-model</module>
-		<module>evo-sp-dts-model</module>
-	</modules>
+	<artifactId>evo-common-dts</artifactId>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-sp-base-model</artifactId>
-			<version>${evo-sp-base-model.version}</version>
+			<artifactId>evo-mq-rocketmq</artifactId>
+			<version>${evo-mq-rocketmq.version}</version>
 		</dependency>
 	</dependencies>
 

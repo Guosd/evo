@@ -16,7 +16,8 @@
 20135 ~ 20139 sp-storage # 文件服务
 20500 ~ 20504 static-ui # 静态资源
 20505 ~ 20509 sp-sys-ui # sp-sys模块的UI
-20510 ~ 20514 sp-datadict-ui # sp-datadict-ui模块的UI
+20510 ~ 20514 sp-datadict-ui # sp-datadict模块的UI
+20515 ~ 20519 evo-sp-dts-server-ui # sp-dts-server模块的UI
 # demo
 30001 sp-demo-jpa # 示例服务
 30002 sp-demo-mybatis-mapper # 示例服务
