@@ -34,6 +34,7 @@ public class DynamicRouteLocator extends DiscoveryClientRouteLocator {
 		this.evoZuulRouteDao = evoZuulRouteDao;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected LinkedHashMap<String, ZuulProperties.ZuulRoute> locateRoutes() {
 		LinkedHashMap<String, ZuulProperties.ZuulRoute> routesMap = new LinkedHashMap();
