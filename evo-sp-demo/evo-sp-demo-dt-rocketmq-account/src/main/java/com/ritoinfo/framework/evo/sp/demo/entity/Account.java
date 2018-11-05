@@ -15,7 +15,7 @@ import java.math.BigDecimal;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "account", catalog = "evo_demo_dt_account")
+@Table(name = "demo_account", catalog = "evo_demo_account")
 public class Account extends BaseMapperEntity<Long> {
 	@Id
 	@KeySql(useGeneratedKeys = true)

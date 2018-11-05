@@ -14,7 +14,7 @@ import javax.persistence.Table;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Table(name = "storage", catalog = "evo_demo_dt_storage")
+@Table(name = "demo_storage", catalog = "evo_demo_storage")
 public class Storage extends BaseMapperEntity<Long> {
 	@Id
 	@KeySql(useGeneratedKeys = true)

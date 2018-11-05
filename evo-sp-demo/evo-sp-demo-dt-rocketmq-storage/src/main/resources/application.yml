@@ -10,9 +10,9 @@ management:
       show-details: ALWAYS
 spring:
   datasource:
-    url: ${evo.sp.demo.dt.storage.datasource.url}
-    username: ${evo.sp.demo.dt.storage.datasource.username}
-    password: ${evo.sp.demo.dt.storage.datasource.password}
+    url: ${evo.sp.demo.storage.datasource.url}
+    username: ${evo.sp.demo.storage.datasource.username}
+    password: ${evo.sp.demo.storage.datasource.password}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-test-query: select 1

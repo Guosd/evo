@@ -10,9 +10,9 @@ management:
       show-details: ALWAYS
 spring:
   datasource:
-    url: ${evo.sp.demo.dt.order.datasource.url}
-    username: ${evo.sp.demo.dt.order.datasource.username}
-    password: ${evo.sp.demo.dt.order.datasource.password}
+    url: ${evo.sp.demo.order.datasource.url}
+    username: ${evo.sp.demo.order.datasource.username}
+    password: ${evo.sp.demo.order.datasource.password}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-test-query: select 1
@@ -39,7 +39,7 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 rocketmq:
-  namesrv-addr: 192.168.204.129:9876
+  namesrv-addr: 192.168.1.141:9876
   producer:
     group: evo_order_producer_group
     topic: evo_order_topic

@@ -42,7 +42,7 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 rocketmq:
-  namesrv-addr: 192.168.204.129:9876
+  namesrv-addr: 192.168.1.141:9876
   producer:
     group: evo_dts_rollback_producer_group
     topic: evo_dts_rollback_topic
