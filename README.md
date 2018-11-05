@@ -1,3 +1,5 @@
+# 域名
+name.kyll.evo
 # evo
 20000 ~ 20004 Eureak # 服务注册/发现
 20005 ~ 20009 Config # 配置中心
