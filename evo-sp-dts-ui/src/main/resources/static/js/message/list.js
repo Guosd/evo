@@ -22,7 +22,7 @@ $(function() {
 		url: '/dts/message/page',
 		datatype: 'local',
 		colModel: [{
-			label: '事务日志消息key',
+			label: '日志消息key',
 			name: 'logMessageKey'
 		}, {
 			label: '事务消息key',
@@ -31,13 +31,16 @@ $(function() {
 			label: '事务主键',
 			name: 'businessKey'
 		}, {
-			label: '事务消息内容',
+			label: '事务内容',
 			name: 'content'
 		}, {
 			label: '事务生产者',
 			name: 'producer'
 		}, {
-			label: '事务日志来源',
+			label: '事务消费者',
+			name: 'consumer'
+		}, {
+			label: '日志消息来源',
 			name: 'role'
 		}, {
 			label: '事务阶段',

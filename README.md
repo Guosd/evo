@@ -19,7 +19,7 @@ name.kyll.evo
 20500 ~ 20504 static-ui # 静态资源<br/>
 20505 ~ 20509 sp-sys-ui # sp-sys模块的UI<br/>
 20510 ~ 20514 sp-datadict-ui # sp-datadict模块的UI<br/>
-20515 ~ 20519 evo-sp-dts-server-ui # sp-dts-server模块的UI<br/>
+20515 ~ 20519 sp-dts-ui # sp-dts-ui模块的UI<br/>
 # demo
 30001 sp-demo-jpa # 示例服务<br/>
 30002 sp-demo-mybatis-mapper # 示例服务<br/>

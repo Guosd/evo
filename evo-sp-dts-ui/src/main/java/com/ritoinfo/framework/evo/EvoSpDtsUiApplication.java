@@ -12,8 +12,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 @EnableCircuitBreaker
 @SpringBootApplication
-public class EvoSpDtsServerUiApplication {
+public class EvoSpDtsUiApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(EvoSpDtsServerUiApplication.class, args);
+		SpringApplication.run(EvoSpDtsUiApplication.class, args);
 	}
 }

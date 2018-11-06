@@ -20,14 +20,14 @@
 </head>
 <body>
 	<div id="form">
-		<input type="hidden" id="recordId"/>
-		事务日志消息key:<input type="text" id="logMessageKey"/>
+		日志消息key:<input type="text" id="logMessageKey"/>
 		事务消息key:<input type="text" id="messageKey"/>
 		事务主键:<input type="text" id="businessKey"/>
-		事务消息内容:<input type="text" id="content"/>
+		事务内容:<input type="text" id="content"/>
+		<br/>
 		事务生产者:<input type="text" id="producer"/>
 		事务消费者:<input type="text" id="consumer"/>
-		事务日志来源:<select id="role"><option value="">请选择</option></select>
+		日志消息来源:<select id="role"><option value="">请选择</option></select>
 		事务阶段:<select id="step"><option value="">请选择</option></select>
 		<button id="query">查询</button>
 		<button id="reset">重置</button>
