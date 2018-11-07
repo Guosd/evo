@@ -4,7 +4,7 @@
 
 	<jmxConfigurator/>
 
-	<property name="springAppName" value="evo_admin"/>
+	<property name="springAppName" value="evo-admin"/>
 	<property name="log_file" value="logs/${springAppName}"/>
 	<!--<property name="log_pattern" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(-&#45;&#45;){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>-->
 	<property name="log_pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID} --- [%t] %logger.%M %L : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
