@@ -1,0 +1,21 @@
+@startuml
+Trunk -> Trunk: 项目启动 v1.0.0
+Trunk -> Tag: 项目完成 创建标签 v1.0.0
+Tag -> Test: 测试 v1.0.0
+Test -> Deploy: 部署 v1.0.0
+
+Trunk -> Trunk: 项目继续 v1.0.1
+Trunk -> Tag: 项目完成 创建标签 v1.0.1
+Tag -> Test: 测试 v1.0.1
+
+Trunk -> Trunk: 项目继续 v1.0.2
+Test -> Test: 发现BUG v1.0.1
+
+Tag -> Branch: 创建BUG修复分支 v1.0.1
+Branch -> Branch: 修复BUG v1.0.1
+
+Branch -> Test: 测试 v1.0.1
+Test -> Deploy: 部署 v1.0.1
+Branch -> Trunk: 修复BUG后，合并回主干
+
+@enduml
