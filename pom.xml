@@ -150,10 +150,19 @@
 			<resource>
 				<directory>src/main/docker</directory>
 				<filtering>true</filtering>
+				<targetPath>${project.build.directory}</targetPath>
 			</resource>
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
+				<excludes>
+					<exclude>mapper/*.xml</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>src/main/resources/mapper</directory>
+				<filtering>false</filtering>
+				<targetPath>mapper</targetPath>
 			</resource>
 		</resources>
 		<plugins>
