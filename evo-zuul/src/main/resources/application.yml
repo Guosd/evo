@@ -13,9 +13,9 @@ management:
       show-details: ALWAYS
 spring:
   datasource:
-    url: ${evo.sp.demo.datasource.url}
-    username: ${evo.sp.demo.datasource.username}
-    password: ${evo.sp.demo.datasource.password}
+    url: ${evo.sp.framework.datasource.url}
+    username: ${evo.sp.framework.datasource.username}
+    password: ${evo.sp.framework.datasource.password}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-test-query: select 1

@@ -11,6 +11,21 @@ management:
 spring:
   application:
     name: evo-config
+  profiles:
+    active: jdbc
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/evo_framework?useUnicode=true&characterEncoding=UTF8&useSSL=false
+    username: evo_framework
+    password: evo_framework
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-test-query: select 1
+      connection-timeout: 30000
+      idle-timeout: 600000
+      maximum-pool-size: 60
+      max-lifetime: 1800000
+      minimum-idle: 10
+      read-only: false
   rabbitmq:
     addresses: 127.0.0.1:5672
     host: 127.0.0.1
@@ -19,6 +34,11 @@ spring:
     username: evo
     password: evo
   cloud:
+    config:
+      server:
+        default-label: master
+        jdbc:
+          sql: select t.key_, t.value from config_properties t where t.application = ? and t.profile = ? and t.label = ?
     bus:
       trace:
         enabled: true # 消息总线跟踪开关
@@ -32,22 +52,6 @@ eureka:
     registry-fetch-interval-seconds: 5
     serviceUrl:
       defaultZone: http://localhost:20000/eureka
----
-spring:
-  profiles:
-    active: native
----
-spring:
-  profiles:
-    active: subversion
-  cloud:
-    config:
-      server:
-        svn:
-          uri: https://apptestaf.faf.com.cn/svn/SVN_faf/SVN_faf_scfw
-          username: yanglei
-          password: yanglei
-          default-label: /src/evo-config-file
 ---
 spring:
   profiles: vm
