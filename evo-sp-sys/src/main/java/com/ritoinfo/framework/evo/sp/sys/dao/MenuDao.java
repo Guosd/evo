@@ -13,7 +13,7 @@ import java.util.Map;
  * Date: 2018-04-23 21:12
  */
 @Mapper
-public interface MenuDao extends BaseXmlDao<Menu, Long, MenuCondition> {
+public interface MenuDao extends BaseXmlDao<Menu, Long> {
 	Map<String, Object> getWithParent(Long id);
 
 	List<Map<String, Object>> findByIds(Long... ids);

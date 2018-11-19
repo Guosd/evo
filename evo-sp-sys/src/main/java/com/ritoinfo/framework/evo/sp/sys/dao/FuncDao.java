@@ -13,7 +13,7 @@ import java.util.Map;
  * Date: 2018-03-04 18:03
  */
 @Mapper
-public interface FuncDao extends BaseXmlDao<Func, Long, FuncCondition> {
+public interface FuncDao extends BaseXmlDao<Func, Long> {
 	Map<String, Object> getWithMicro(Long id);
 
 	int countWithMicro(FuncCondition condition);

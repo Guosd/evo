@@ -26,7 +26,7 @@ import java.util.Map;
  * User: Kyll
  * Date: 2018-11-16 18:03
  */
-public abstract class BaseHibernateDao<E extends BaseHibernateEntity, PK extends Serializable, D> implements BaseDao<E, PK, D> {
+public abstract class BaseHibernateDao<E extends BaseHibernateEntity, PK extends Serializable> implements BaseDao<E, PK> {
 	@Autowired
 	@Getter private HibernateTemplate hibernateTemplate;
 

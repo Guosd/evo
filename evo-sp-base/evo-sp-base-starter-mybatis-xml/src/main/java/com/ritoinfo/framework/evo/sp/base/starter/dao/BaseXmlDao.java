@@ -8,5 +8,5 @@ import java.io.Serializable;
  * User: Kyll
  * Date: 2018-02-09 16:54
  */
-public interface BaseXmlDao<E extends BaseXmlEntity, PK extends Serializable, D> extends BaseDao<E, PK, D> {
+public interface BaseXmlDao<E extends BaseXmlEntity, PK extends Serializable> extends BaseDao<E, PK> {
 }

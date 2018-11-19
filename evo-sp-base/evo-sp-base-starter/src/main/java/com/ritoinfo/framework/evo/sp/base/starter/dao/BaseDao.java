@@ -9,7 +9,7 @@ import java.util.List;
  * User: Kyll
  * Date: 2018-02-26 16:13
  */
-public interface BaseDao<E extends BaseEntity, PK extends Serializable, D> {
+public interface BaseDao<E extends BaseEntity, PK extends Serializable> {
 	E get(PK id);
 
 	E getOne(Object condition);
