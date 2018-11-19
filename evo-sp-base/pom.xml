@@ -23,6 +23,7 @@
 		<module>evo-sp-base-starter-mybatis-mapper</module>
 		<module>evo-sp-base-starter-mybatis-xml</module>
 		<module>evo-sp-base-validate</module>
+		<module>evo-sp-base-starter-hibernate</module>
 	</modules>
 
 	<dependencies>

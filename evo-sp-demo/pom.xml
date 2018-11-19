@@ -29,6 +29,7 @@
 		<module>evo-sp-demo-dt-rocketmq-account</module>
 		<module>evo-sp-demo-dt-rocketmq-order</module>
 		<module>evo-sp-demo-dt-rocketmq-storage</module>
+		<module>evo-sp-demo-hibernate</module>
 	</modules>
 
 </project>

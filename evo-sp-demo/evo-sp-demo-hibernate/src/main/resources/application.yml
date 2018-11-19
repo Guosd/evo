@@ -1,0 +1,50 @@
+server:
+  port: 30016
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/evo_demo?useUnicode=true&characterEncoding=UTF8&useSSL=false
+    username: evo_demo
+    password: evo_demo
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-test-query: select 1
+      connection-timeout: 30000 # 等待连接池分配连接的最大时长
+      idle-timeout: 600000 # 连接闲置状态的最大时长
+      maximum-pool-size: 60 # 连接池中允许的最大连接数, 推荐的公式：((core_count * 2) + effective_spindle_count)
+      max-lifetime: 1800000 # 连接的生命时长, 建议设置比数据库超时时长少30秒
+      minimum-idle: 10
+      read-only: false # 连接只读数据库时配置为true, 保证安全
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+  rabbitmq:
+  #  addresses: ${evo.spring.rabbitmq.addresses}
+    host: 127.0.0.1
+    port: 5672
+    virtual-host: evo_vhost
+    username: evo
+    password: evo
+  jackson:
+    time-zone: GMT+8
+  sleuth:
+    http:
+      enabled: true
+    sampler:
+      probability: 1.0
+#  jpa:
+#    hibernate:
+#      naming:
+#        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+#        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+hibernate:
+  dialect: org.hibernate.dialect.MySQLDialect
+  show-sql: true
+  format-sql: false
+  packages: com.ritoinfo.framework.evo.sp.demo

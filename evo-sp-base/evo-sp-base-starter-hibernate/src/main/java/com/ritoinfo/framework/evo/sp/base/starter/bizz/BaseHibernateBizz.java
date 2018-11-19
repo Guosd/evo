@@ -1,40 +1,40 @@
 package com.ritoinfo.framework.evo.sp.base.starter.bizz;
 
+import com.ritoinfo.framework.evo.common.uitl.BeanUtil;
 import com.ritoinfo.framework.evo.common.uitl.DateUtil;
 import com.ritoinfo.framework.evo.sp.base.dto.PageDto;
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
-import com.ritoinfo.framework.evo.sp.base.starter.dao.BaseXmlDao;
-import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseXmlEntity;
+import com.ritoinfo.framework.evo.sp.base.starter.dao.BaseHibernateDao;
+import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseHibernateEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * User: Kyll
  * Date: 2018-02-09 16:52
  */
-public abstract class BaseXmlBizz<Dao extends BaseXmlDao, E extends BaseXmlEntity, PK extends Serializable, Dto> extends BaseBizz<Dao, E, PK, Dto> {
+public abstract class BaseHibernateBizz<Dao extends BaseHibernateDao, E extends BaseHibernateEntity, PK extends Serializable, Dto> extends BaseBizz<Dao, E, PK, Dto> {
 	@Autowired
 	protected Dao dao;
 
 	@SuppressWarnings("unchecked")
 	public Dto get(PK id) {
-		E e = (E) dao.get(id);
-		return e == null ? null : toDto(e);
+		return toDto((E) dao.get(id));
 	}
 
 	@SuppressWarnings("unchecked")
 	public Dto getOne(Object condition) {
-		E e = (E) dao.getOne(condition);
-		return e == null ? null : toDto(e);
+		return toDto((E) dao.getOne(condition));
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Dto> find() {
-		return toDto(dao.find(null));
+		return toDto(dao.findAll());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -44,20 +44,22 @@ public abstract class BaseXmlBizz<Dao extends BaseXmlDao, E extends BaseXmlEntit
 
 	@SuppressWarnings("unchecked")
 	public PageList<Dto> findPage(PageDto condition) {
-		PageList<Dto> pageList = new PageList<>();
+		int totalRecord = dao.count(condition);
 
-		int count = dao.countLike(condition.count());
-		BaseHelper.copyPage(pageList, count, condition);
-
-		if (count > 0) {
-			pageList.setDataList(toDto(dao.findLike(condition.page())));
+		List<E> list;
+		if (totalRecord > 0) {
+			list = dao.find(condition, condition.getPageNo() * condition.getPageSize(), condition.getPageSize());
+		} else {
+			list = new ArrayList<>();
 		}
 
+		PageList<Dto> pageList = new PageList<>();
+		BaseHelper.copyPage(pageList, totalRecord, condition, toDto(list));
 		return pageList;
 	}
 
 	public int count() {
-		return dao.count(null);
+		return dao.count();
 	}
 
 	public int count(Object condition) {
@@ -74,7 +76,7 @@ public abstract class BaseXmlBizz<Dao extends BaseXmlDao, E extends BaseXmlEntit
 		entity.setCreateTime(DateUtil.now());
 		entity.setUpdateTime(entity.getCreateTime());
 
-		dao.insert(entity);
+		dao.save(entity);
 
 		return (PK) entity.getId();
 	}
@@ -83,6 +85,7 @@ public abstract class BaseXmlBizz<Dao extends BaseXmlDao, E extends BaseXmlEntit
 	@SuppressWarnings("unchecked")
 	public void update(Dto dto) {
 		E entity = (E) dao.get(getPKValue(dto));
+		BeanUtil.copy(entity, dto);
 
 		entity.setUpdateBy(getUserContextId());
 		entity.setUpdateTime(DateUtil.now());

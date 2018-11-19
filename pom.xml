@@ -81,6 +81,7 @@
 		<mapper-spring-boot-starter.version>2.0.3</mapper-spring-boot-starter.version>
 		<pagehelper-spring-boot-starter.version>1.2.5</pagehelper-spring-boot-starter.version>
 		<mysql-connector-java.version>8.0.12</mysql-connector-java.version>
+		<hibernate-core.version>5.2.17.Final</hibernate-core.version>
 		<rocketmq-client.version>4.3.1</rocketmq-client.version>
 		<rocketmq-logappender.version>4.3.1</rocketmq-logappender.version>
 
@@ -98,6 +99,7 @@
 		<evo-sp-base-validate.version>1.0.0-SNAPSHOT</evo-sp-base-validate.version>
 		<evo-sp-base-starter.version>1.0.0-SNAPSHOT</evo-sp-base-starter.version>
 		<evo-sp-base-starter-jpa.version>1.0.0-SNAPSHOT</evo-sp-base-starter-jpa.version>
+		<evo-sp-base-starter-hibernate.version>1.0.0-SNAPSHOT</evo-sp-base-starter-hibernate.version>
 		<evo-sp-base-starter-mybatis-mapper.version>1.0.0-SNAPSHOT</evo-sp-base-starter-mybatis-mapper.version>
 		<evo-sp-base-starter-mybatis-xml.version>1.0.0-SNAPSHOT</evo-sp-base-starter-mybatis-xml.version>
 
@@ -211,7 +213,7 @@
 			<id>spring-releases</id>
 			<url>https://repo.spring.io/libs-release</url>
 		</repository>
-		<!--<repository>
+		<repository>
 			<id>spring-milestones</id>
 			<name>Spring Milestones</name>
 			<url>https://repo.spring.io/libs-milestone</url>
@@ -226,14 +228,14 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-		</repository>-->
+		</repository>
 	</repositories>
 
 	<pluginRepositories>
 		<pluginRepository>
 			<id>spring-releases</id>
 			<url>https://repo.spring.io/libs-release</url>
-		</pluginRepository><!--
+		</pluginRepository>
 		<pluginRepository>
 			<id>spring-snapshots</id>
 			<name>Spring Snapshots</name>
@@ -249,7 +251,7 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
-		</pluginRepository>-->
+		</pluginRepository>
 	</pluginRepositories>
 
 </project>
