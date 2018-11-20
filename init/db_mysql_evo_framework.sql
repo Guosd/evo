@@ -70,37 +70,3 @@ create table dts_record
   update_by bigint null,
   update_time datetime null
 );
-
-insert into config_properties values (null, 'master', 'evo', 'default', 'jwt.algorithm', 'HS512', '加密方式', '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'jwt.issuer', 'http://ritoinfo.com', '发行人', '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'jwt.signingKey', '1580fcb1746e468095b1bc24b6fb94b8', '签名', '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'jwt.expirationTime', '4320', '过期时间 分钟 60 * 24 * 3', '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'jwt.refreshExpirationTime', '5760', '刷新过期时间 分钟 60 * 24 * 4', '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'jwt.header', 'X-Authorization', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'password.salt', '8', '密码撒盐位数', '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'auth.loginPath', '/ui/comm/login', '登录URI', '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'auth.excludePaths', '/ui/comm/login', '排除令牌验证URI', '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'auth.verifyCode.type', 'fix', 'random 随机; fix 固定', '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'auth.verifyCode.length', '6', '当 type = random 时，验证码位数', '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'auth.verifyCode.value', '123456', '当 type= fix 时， 验证码值', '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'auth.verifyCode.expirationTime', '2', '过期时间 分钟', '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'sms.address', 'http://10.21.111.71:9087/smserver/submitMessage', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'sms.comCode', 'ZBKG', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'sms.orgCode', '00000000', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'sms.businessNo', 'ZBKG00000000DJCFAPP001', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'sms.businessTypeCode', '04', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'sms.channel', '0', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'sms.ip', '10.20.133.30', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'redis.companyPrefix', 'ZBKG', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'evo.spring.redis.cluster.nodes', '10.20.133.85:7000, 10.20.133.85:7002, 10.20.133.85:7003, 10.20.133.85:7004, 10.20.133.85:7005', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'evo.spring.rabbitmq.addresses', '127.0.0.1:5672', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'evo.spring.rabbitmq.host', '127.0.0.1', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'evo.spring.rabbitmq.port', '5672', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'evo.spring.rabbitmq.virtual-host', 'evo_vhost', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'evo.spring.rabbitmq.username', 'evo', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'evo.spring.rabbitmq.password', 'evo', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'evo.ribbon.NFLoadBalancerRuleClassName', 'com.netflix.loadbalancer.RoundRobinRule', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'evo.sp.framework.datasource.url', 'jdbc:mysql://127.0.0.1:3306/evo_framework?useUnicode=true&characterEncoding=UTF8&useSSL=false', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'evo.sp.framework.datasource.username', 'evo_framework', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'evo.sp.framework.datasource.password', 'evo_framework', null, '1', now(), '1', now());
-
