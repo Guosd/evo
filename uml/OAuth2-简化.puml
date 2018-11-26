@@ -1,0 +1,21 @@
+@startuml
+
+actor 用户 order 10
+participant 浏览器 order 20
+participant 第三方应用 order 30
+participant 认证服务 order 40
+database 资源服务 order 50
+
+用户 -> 浏览器: 打开
+浏览器 -> 第三方应用: 访问
+第三方应用 -> 认证服务: 请求授权页面，携带如下参数：\nresponse_type：授权类型，固定为token\nclient_id：客户端ID\nredirect_uri：重定向URI\nscope：权限范围\nstate：第三方应用的当前状态
+认证服务 -> 浏览器: 返回授权页面
+用户 -> 浏览器: 同意授权
+浏览器 -> 认证服务: 同意授权
+认证服务 -> 浏览器: 返回第三方应用的URI，携带如下参数：\naccess_token：访问令牌\ntoken_type：令牌类型\nexpires_in：过期时间\nrefresh_token：刷新令牌\nscope：权限范围
+浏览器 -> 资源服务: 发送请求，不带令牌
+资源服务 -> 浏览器: 返回一个网页，包含的代码可以获取令牌
+浏览器 -> 浏览器: 执行获得的脚本，提取令牌
+浏览器 -> 第三方应用: 发送令牌
+
+@enduml

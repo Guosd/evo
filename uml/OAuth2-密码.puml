@@ -1,0 +1,11 @@
+@startuml
+
+actor 用户 order 10
+participant 第三方应用 order 30
+participant 认证服务 order 40
+
+用户 -> 第三方应用: 访问，提供用户名和密码
+第三方应用 -> 认证服务: 申请令牌，携带如下参数：\ngrant_type：授权类型，固定为password\nusername：用户名\npassword：密码\nscope：权限范围
+认证服务 -> 第三方应用: 确认无误后，返回令牌，携带如下参数：\naccess_token：访问令牌\ntoken_type：令牌类型\nexpires_in：过期时间\nrefresh_token：刷新令牌\nscope：权限范围
+
+@enduml

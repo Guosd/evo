@@ -1,0 +1,18 @@
+@startuml
+
+actor 用户 order 10
+participant 浏览器 order 20
+participant 第三方应用 order 30
+participant 认证服务 order 40
+
+用户 -> 浏览器: 打开
+浏览器 -> 第三方应用: 访问
+第三方应用 -> 认证服务: 请求授权页面，携带如下参数：\nresponse_type：授权类型，固定为code\nclient_id：客户端ID\nredirect_uri：重定向URI\nscope：权限范围\nstate：第三方应用的当前状态
+认证服务 -> 浏览器: 返回授权页面
+用户 -> 浏览器: 同意授权
+浏览器 -> 认证服务: 同意授权
+认证服务 -> 第三方应用: 返回第三方应用的URI，携带如下参数：\ncode：授权码，该码与客户端ID和重定向URI，是一一对应关系\nstate：第三方应用的当前状态
+第三方应用 -> 认证服务: 申请令牌，携带如下参数：\ngrant_type：授权模式，固定为authorization_code\ncode：获得的授权码\nredirect_uri：重定向URI\nclient_id：客户端ID
+认证服务 -> 第三方应用: 核对重定向URI和授权码，携带如下参数：\naccess_token：访问令牌\ntoken_type：令牌类型\nexpires_in：过期时间\nrefresh_token：刷新令牌\nscope：权限范围
+
+@enduml
