@@ -7,7 +7,7 @@ FLUSH PRIVILEGES;
 
 create table config_properties
 (
-  id int auto_increment
+  id bigint auto_increment
     primary key,
   label varchar(255) null,
   application varchar(255) null,
@@ -15,15 +15,15 @@ create table config_properties
   key_ varchar(255) null,
   value text null,
   comment varchar(255) null,
-  create_by int null,
+  create_by bigint null,
   create_time datetime null,
-  update_by int null,
+  update_by bigint null,
   update_time datetime null
 );
 
 create table zuul_route
 (
-  id int auto_increment
+  id bigint auto_increment
     primary key,
   route_id varchar(255) null,
   path varchar(255) null,
@@ -34,9 +34,9 @@ create table zuul_route
   sensitive_headers varchar(255) null,
   enabled varchar(4) null,
   comment varchar(255) null,
-  create_by int null,
+  create_by bigint null,
   create_time datetime null,
-  update_by int null,
+  update_by bigint null,
   update_time datetime null
 );
 
