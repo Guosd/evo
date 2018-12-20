@@ -1,16 +1,23 @@
 package com.ritoinfo.framework.evo.common.password.config;
 
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import com.ritoinfo.framework.evo.common.password.config.properties.PasswordProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * User: Kyll
  * Date: 2018-03-09 16:02
  */
 @Configuration
-@ConfigurationProperties(prefix = "password")
 public class PasswordConfig {
-	@Getter @Setter private Integer salt;
+	@Autowired
+	private PasswordProperties passwordProperties;
+
+	@Bean
+	public PasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder(passwordProperties.getSalt());
+	}
 }
