@@ -2,13 +2,12 @@ package com.ritoinfo.framework.evo.sp.base.starter.bizz;
 
 import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
 import com.ritoinfo.framework.evo.common.uitl.BeanUtil;
+import com.ritoinfo.framework.evo.sp.base.dto.PageDto;
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
 import com.ritoinfo.framework.evo.sp.base.starter.assist.Converter;
-import com.ritoinfo.framework.evo.sp.base.dto.PageDto;
 import com.ritoinfo.framework.evo.sp.base.starter.entity.BaseEntity;
 import com.ritoinfo.framework.evo.sp.base.starter.session.SessionHolder;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.util.List;
@@ -17,10 +16,7 @@ import java.util.List;
  * User: Kyll
  * Date: 2018-02-09 16:52
  */
-public abstract class BaseBizz<Dao, E extends BaseEntity, PK extends Serializable, Dto> {
-	@Autowired
-	protected Dao dao;
-
+public abstract class BaseBizz<E extends BaseEntity, PK extends Serializable, Dto> {
 	private Class entityClass;
 	private Class pkClass;
 	private Class dtoClass;

@@ -16,7 +16,7 @@ import java.util.List;
  * User: Kyll
  * Date: 2018-02-09 16:52
  */
-public abstract class BaseXmlBizz<Dao extends BaseXmlDao, E extends BaseXmlEntity, PK extends Serializable, Dto> extends BaseBizz<Dao, E, PK, Dto> {
+public abstract class BaseXmlBizz<Dao extends BaseXmlDao, E extends BaseXmlEntity, PK extends Serializable, Dto> extends BaseBizz<E, PK, Dto> {
 	@Autowired
 	protected Dao dao;
 

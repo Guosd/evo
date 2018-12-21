@@ -2,7 +2,6 @@ package com.ritoinfo.framework.evo.sp.auth.bizz;
 
 import com.ritoinfo.framework.evo.common.jwt.model.VerifyResult;
 import com.ritoinfo.framework.evo.common.jwt.token.JwtToken;
-import com.ritoinfo.framework.evo.common.password.crypto.PasswordEncoder;
 import com.ritoinfo.framework.evo.common.uitl.StringUtil;
 import com.ritoinfo.framework.evo.data.redis.service.RedisService;
 import com.ritoinfo.framework.evo.sp.auth.assist.RedisKeyAssist;
@@ -18,6 +17,7 @@ import com.ritoinfo.framework.evo.sp.sys.dto.PermissionDto;
 import com.ritoinfo.framework.evo.sp.sys.dto.UserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;

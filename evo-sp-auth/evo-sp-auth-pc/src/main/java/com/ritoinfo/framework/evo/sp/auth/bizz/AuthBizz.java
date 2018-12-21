@@ -1,6 +1,5 @@
 package com.ritoinfo.framework.evo.sp.auth.bizz;
 
-import com.ritoinfo.framework.evo.common.password.crypto.PasswordEncoder;
 import com.ritoinfo.framework.evo.sp.auth.dto.PcLoginDto;
 import com.ritoinfo.framework.evo.sp.auth.exception.PasswordInvalidException;
 import com.ritoinfo.framework.evo.sp.auth.exception.UserNotFoundException;
@@ -8,6 +7,7 @@ import com.ritoinfo.framework.evo.sp.sys.api.UserApi;
 import com.ritoinfo.framework.evo.sp.sys.dto.UserDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;

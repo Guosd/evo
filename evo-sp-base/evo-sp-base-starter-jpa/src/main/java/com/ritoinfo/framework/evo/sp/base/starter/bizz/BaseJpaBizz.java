@@ -22,7 +22,7 @@ import java.util.List;
  * User: Kyll
  * Date: 2018-02-09 16:52
  */
-public abstract class BaseJpaBizz<Dao extends JpaRepository, E extends BaseJpaEntity, PK extends Serializable, Dto> extends BaseBizz<Dao, E, PK, Dto> {
+public abstract class BaseJpaBizz<Dao extends JpaRepository, E extends BaseJpaEntity, PK extends Serializable, Dto> extends BaseBizz<E, PK, Dto> {
 	@Autowired
 	protected Dao dao;
 

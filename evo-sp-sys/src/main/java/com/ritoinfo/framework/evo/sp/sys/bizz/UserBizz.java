@@ -1,7 +1,6 @@
 package com.ritoinfo.framework.evo.sp.sys.bizz;
 
 import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
-import com.ritoinfo.framework.evo.common.password.crypto.PasswordEncoder;
 import com.ritoinfo.framework.evo.common.uitl.ArrayUtil;
 import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
 import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseXmlBizz;
@@ -15,6 +14,7 @@ import com.ritoinfo.framework.evo.sp.sys.exception.UserExistedException;
 import com.ritoinfo.framework.evo.sp.sys.exception.UserRoleInvalidException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
