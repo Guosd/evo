@@ -39,6 +39,12 @@ public abstract class BaseMapperBizz<Dao extends Mapper, E extends BaseMapperEnt
 	}
 
 	@SuppressWarnings("unchecked")
+	public Dto getOneLike(Object condition) {
+		E e = (E) dao.selectOneByExample(toExample(condition, true));
+		return e == null ? null : toDto(e);
+	}
+
+	@SuppressWarnings("unchecked")
 	public List<Dto> find() {
 		return toDto(dao.selectAll());
 	}
@@ -49,8 +55,18 @@ public abstract class BaseMapperBizz<Dao extends Mapper, E extends BaseMapperEnt
 	}
 
 	@SuppressWarnings("unchecked")
+	public List<Dto> findLike(Object condition) {
+		return findLike(condition, null);
+	}
+
+	@SuppressWarnings("unchecked")
 	public List<Dto> find(Object condition, ExampleCreater exampleCreater) {
 		return toDto(dao.selectByExample(toExample(condition, exampleCreater)));
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Dto> findLike(Object condition, ExampleCreater exampleCreater) {
+		return toDto(dao.selectByExample(toExample(condition, exampleCreater, true)));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -59,9 +75,24 @@ public abstract class BaseMapperBizz<Dao extends Mapper, E extends BaseMapperEnt
 	}
 
 	@SuppressWarnings("unchecked")
+	public PageList<Dto> findPageLike(PageDto condition) {
+		return findPageLike(condition, null);
+	}
+
+	@SuppressWarnings("unchecked")
 	public PageList<Dto> findPage(PageDto condition, ExampleCreater exampleCreater) {
 		Page<Object> result = PageHelper.startPage(condition.getPageNo(), condition.getPageSize());
 		List<E> list = dao.selectByExample(toExample(condition, exampleCreater));
+
+		PageList<Dto> pageList = new PageList<>();
+		BaseHelper.copyPage(pageList, result.getTotal(), condition, toDto(list));
+		return pageList;
+	}
+
+	@SuppressWarnings("unchecked")
+	public PageList<Dto> findPageLike(PageDto condition, ExampleCreater exampleCreater) {
+		Page<Object> result = PageHelper.startPage(condition.getPageNo(), condition.getPageSize());
+		List<E> list = dao.selectByExample(toExample(condition, exampleCreater, true));
 
 		PageList<Dto> pageList = new PageList<>();
 		BaseHelper.copyPage(pageList, result.getTotal(), condition, toDto(list));
@@ -77,8 +108,16 @@ public abstract class BaseMapperBizz<Dao extends Mapper, E extends BaseMapperEnt
 		return count(condition, null);
 	}
 
+	public int countLike(Object condition) {
+		return countLike(condition, null);
+	}
+
 	public int count(Object condition, ExampleCreater exampleCreater) {
 		return dao.selectCountByExample(toExample(condition, exampleCreater));
+	}
+
+	public int countLike(Object condition, ExampleCreater exampleCreater) {
+		return dao.selectCountByExample(toExample(condition, exampleCreater, true));
 	}
 
 	@Transactional
@@ -118,15 +157,31 @@ public abstract class BaseMapperBizz<Dao extends Mapper, E extends BaseMapperEnt
 		return toExample(getEntityClass(), condition, exampleCreater);
 	}
 
+	protected Example toExample(Object condition, ExampleCreater exampleCreater, boolean like) {
+		return toExample(getEntityClass(), condition, exampleCreater, like);
+	}
+
 	protected Example toExample(Object condition) {
 		return toExample(getEntityClass(), condition, null);
+	}
+
+	protected Example toExample(Object condition, boolean like) {
+		return toExample(getEntityClass(), condition, null, like);
 	}
 
 	protected Example toExample(Class clazz, Object condition) {
 		return toExample(clazz, condition, null);
 	}
 
+	protected Example toExample(Class clazz, Object condition, boolean like) {
+		return toExample(clazz, condition, null, like);
+	}
+
 	protected Example toExample(Class clazz, Object condition, ExampleCreater exampleCreater) {
+		return toExample(clazz, condition, exampleCreater, false);
+	}
+
+	protected Example toExample(Class clazz, Object condition, ExampleCreater exampleCreater, boolean like) {
 		Example example = new Example(clazz, false);
 
 		if (exampleCreater == null) {
@@ -141,7 +196,11 @@ public abstract class BaseMapperBizz<Dao extends Mapper, E extends BaseMapperEnt
 
 				Object value = entry.getValue();
 				if (value != null && StringUtil.isNotBlank(value.toString())) {
-					criteria.andLike(key, "%" + value.toString() + "%");
+					if (like) {
+						criteria.andLike(key, "%" + value.toString() + "%");
+					} else {
+						criteria.andEqualTo(key, value);
+					}
 				}
 			}
 
