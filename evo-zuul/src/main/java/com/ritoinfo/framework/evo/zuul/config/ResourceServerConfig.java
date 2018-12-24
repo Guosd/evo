@@ -1,9 +1,10 @@
 package com.ritoinfo.framework.evo.zuul.config;
 
+import com.ritoinfo.framework.evo.zuul.config.properties.AuthorizationProperties;
+import com.ritoinfo.framework.evo.zuul.config.properties.ZuulAuthProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -13,10 +14,6 @@ import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHand
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 import org.springframework.security.oauth2.provider.token.ResourceServerTokenServices;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.web.client.DefaultResponseErrorHandler;
-import org.springframework.web.client.RestTemplate;
-
-import java.io.IOException;
 
 /**
  * User: Kyll
@@ -26,38 +23,25 @@ import java.io.IOException;
 @Configuration
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	@Autowired
-	private RestTemplate restTemplate;
+	private AuthorizationProperties authorizationProperties;
+	@Autowired
+	private ZuulAuthProperties zuulAuthProperties;
 
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-		converter.setSigningKey("secret");
+		converter.setSigningKey(authorizationProperties.getJwtSigningKey());
 		return converter;
 	}
 
 	@Bean
 	public ResourceServerTokenServices tokenServices() {
-
 		// 配置RemoteTokenServices，用于向AuththorizationServer验证token
 		RemoteTokenServices tokenServices = new RemoteTokenServices();
 		tokenServices.setAccessTokenConverter(accessTokenConverter());
-
-		// 为restTemplate配置异常处理器，忽略400错误，
-		restTemplate.setErrorHandler(new DefaultResponseErrorHandler() {
-			@Override
-			// Ignore 400
-			public void handleError(ClientHttpResponse response) throws IOException {
-				if (response.getRawStatusCode() != 400) {
-					super.handleError(response);
-				}
-			}
-		});
-		tokenServices.setRestTemplate(restTemplate);
-
-		tokenServices.setCheckTokenEndpointUrl("http://evo-sp-auth-authorization/oauth/check_token");
-
-		tokenServices.setClientId("client_1");
-		tokenServices.setClientSecret("secret_1");
+		tokenServices.setCheckTokenEndpointUrl("http://" + authorizationProperties.getServiceId() + "/oauth/check_token");
+		tokenServices.setClientId(zuulAuthProperties.getClientId());
+		tokenServices.setClientSecret(zuulAuthProperties.getClientSecret());
 		return tokenServices;
 
 	}
