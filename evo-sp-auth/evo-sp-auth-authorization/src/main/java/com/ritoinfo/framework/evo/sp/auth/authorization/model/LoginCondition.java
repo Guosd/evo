@@ -13,4 +13,5 @@ import java.io.Serializable;
 @Data
 public class LoginCondition implements Serializable {
 	private String username;
+	private String mobileNumber;
 }

@@ -93,6 +93,21 @@ public class JsonUtil {
 	}
 
 	/**
+	 * JSON 字符串转换为特定类型对象
+	 * @param bytes JSON 字节数组
+	 * @param clazz 对象类
+	 * @param <T> 对象类型
+	 * @return 特定类型对象
+	 */
+	public static <T> T jsonToObject(byte[] bytes, Class<T> clazz) {
+		try {
+			return mapper.readValue(bytes, clazz);
+		} catch (IOException e) {
+			throw new JsonOperateException("JSON 转换对象失败", e);
+		}
+	}
+
+	/**
 	 * JSON 字符串转换为特定集合类型
 	 * @param json JSON 字符串
 	 * @param collectionClass 集合类

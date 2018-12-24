@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import tk.mybatis.spring.annotation.MapperScan;
@@ -13,6 +14,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  * Date: 2017-11-27 11:57
  */
 @MapperScan(basePackages = "com.ritoinfo.framework.evo.sp.auth.authorization.dao")
+@EnableFeignClients(basePackages = "com.ritoinfo.framework.evo.sp.auth.authorization.api")
 @EnableCircuitBreaker
 @SpringBootApplication
 public class EvoSpAuthAuthorizationApplication {

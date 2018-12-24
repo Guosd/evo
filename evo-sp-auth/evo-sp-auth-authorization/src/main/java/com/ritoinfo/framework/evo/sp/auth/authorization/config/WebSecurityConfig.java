@@ -1,15 +1,17 @@
 package com.ritoinfo.framework.evo.sp.auth.authorization.config;
 
-import com.ritoinfo.framework.evo.sp.auth.authorization.service.UsernamePasswordUserDetailsService;
+import com.ritoinfo.framework.evo.sp.auth.authorization.extend.filter.RequestBodyToUrlQueryStringFilter;
+import com.ritoinfo.framework.evo.sp.auth.authorization.extend.mnvc.MobileNumberVerifyCodeAuthenticationProvider;
+import com.ritoinfo.framework.evo.sp.auth.authorization.extend.mnvc.MobileNumberVerifyCodeUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 
 /**
  * User: Kyll
@@ -18,8 +20,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 @EnableWebSecurity
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+	private final RequestBodyToUrlQueryStringFilter requestBodyToUrlQueryStringFilter;
+	private final MobileNumberVerifyCodeUserDetailsService mobileNumberVerifyCodeUserDetailsService;
+
 	@Autowired
-	private UsernamePasswordUserDetailsService usernamePasswordUserDetailsService;
+	public WebSecurityConfig(RequestBodyToUrlQueryStringFilter requestBodyToUrlQueryStringFilter, MobileNumberVerifyCodeUserDetailsService mobileNumberVerifyCodeUserDetailsService) {
+		this.requestBodyToUrlQueryStringFilter = requestBodyToUrlQueryStringFilter;
+		this.mobileNumberVerifyCodeUserDetailsService = mobileNumberVerifyCodeUserDetailsService;
+	}
 
 	@Bean
 	@Override
@@ -28,13 +36,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(usernamePasswordUserDetailsService);
-	}
-
-	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
+		MobileNumberVerifyCodeAuthenticationProvider mobileNumberVerifyCodeAuthenticationProvider = new MobileNumberVerifyCodeAuthenticationProvider();
+		mobileNumberVerifyCodeAuthenticationProvider.setUserDetailsService(mobileNumberVerifyCodeUserDetailsService);
+
+		http
+				.csrf().disable()
+				.addFilterBefore(requestBodyToUrlQueryStringFilter, ChannelProcessingFilter.class)
+				.authenticationProvider(mobileNumberVerifyCodeAuthenticationProvider)
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 				.and()
 				.requestMatchers().anyRequest()

@@ -34,7 +34,7 @@ public abstract class BaseMapperBizz<Dao extends Mapper, E extends BaseMapperEnt
 
 	@SuppressWarnings("unchecked")
 	public Dto getOne(Object condition) {
-		E e = (E) dao.selectOneByExample(condition);
+		E e = (E) dao.selectOneByExample(toExample(condition));
 		return e == null ? null : toDto(e);
 	}
 
