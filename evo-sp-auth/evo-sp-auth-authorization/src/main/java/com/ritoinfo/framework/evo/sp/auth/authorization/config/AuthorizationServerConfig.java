@@ -110,6 +110,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		endpoints
 				.authenticationManager(authenticationManager)
 				.authorizationCodeServices(authorizationCodeServices())
+				.tokenStore(tokenStore())
 				.reuseRefreshTokens(false);
 
 		List<TokenGranter> tokenGranters = new ArrayList<>();
