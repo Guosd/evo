@@ -39,12 +39,6 @@ public abstract class BaseMapperBizz<Dao extends Mapper, E extends BaseMapperEnt
 	}
 
 	@SuppressWarnings("unchecked")
-	public Dto getOneLike(Object condition) {
-		E e = (E) dao.selectOneByExample(toExample(condition, true));
-		return e == null ? null : toDto(e);
-	}
-
-	@SuppressWarnings("unchecked")
 	public List<Dto> find() {
 		return toDto(dao.selectAll());
 	}

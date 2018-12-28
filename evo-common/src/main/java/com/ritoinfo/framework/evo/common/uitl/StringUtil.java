@@ -22,6 +22,10 @@ public class StringUtil {
 		return object == null ? "" : object.toString();
 	}
 
+	public static String defaultIfBlank(String str, String defaultStr) {
+		return StringUtils.defaultIfBlank(str, defaultStr);
+	}
+
 	/**
 	 * 首字母大写，其余字符不变
 	 * @param str 输入字符串

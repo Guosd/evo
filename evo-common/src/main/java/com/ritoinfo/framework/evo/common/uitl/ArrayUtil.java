@@ -39,4 +39,26 @@ public class ArrayUtil {
 		}
 		return valid;
 	}
+
+	public static boolean isIn(String[] strs, String value) {
+		boolean result = false;
+
+		if (strs != null) {
+			for (String str : strs) {
+				if (str == null) {
+					if (value == null) {
+						result = true;
+						break;
+					}
+				} else {
+					if (str.equals(value)) {
+						result = true;
+						break;
+					}
+				}
+			}
+		}
+
+		return result;
+	}
 }

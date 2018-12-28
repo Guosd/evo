@@ -56,7 +56,7 @@ public class MobileNumberVerifyCodeUser implements MobileNumberVerifyCodeUserDet
 	private static SortedSet<GrantedAuthority> sortAuthorities(Collection<? extends GrantedAuthority> authorities) {
 		Assert.notNull(authorities, "Cannot pass a null GrantedAuthority collection");
 		SortedSet<GrantedAuthority> sortedAuthorities = new TreeSet<>(new MobileNumberVerifyCodeUser.AuthorityComparator());
-		for (GrantedAuthority grantedAuthority : sortedAuthorities) {
+		for (GrantedAuthority grantedAuthority : authorities) {
 			Assert.notNull(grantedAuthority, "GrantedAuthority list cannot contain any null elements");
 			sortedAuthorities.add(grantedAuthority);
 		}

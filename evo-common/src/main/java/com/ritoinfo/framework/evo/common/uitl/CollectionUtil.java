@@ -16,4 +16,19 @@ public class CollectionUtil {
 			}
 		}
 	}
+
+	/**
+	 * 查询 map 中是否存在指定的 key，key 比较会忽略大小写
+	 * @param map Map<String, Object>
+	 * @param key String
+	 * @return 如果存在返回 true，否则返回 false
+	 */
+	public static boolean hasIgnoreCaseKey(Map<String, ?> map, String key) {
+		for (String k : map.keySet()) {
+			if (k.equalsIgnoreCase(key)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
