@@ -6,7 +6,7 @@ import com.ritoinfo.framework.evo.sp.auth.authorization.bizz.UserDetailsBizz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * User: Kyll
@@ -25,6 +25,6 @@ public class MobileNumberVerifyCodeUserDetailsServiceImpl implements MobileNumbe
 			throw new MobileNumberNotFoundException(mobileNumber);
 		}
 
-		return new MobileNumberVerifyCodeUser(userDetailsDto.getMobileNumber(), new ArrayList<>());
+		return new MobileNumberVerifyCodeUser(userDetailsDto.getMobileNumber(), Collections.emptyList());
 	}
 }
