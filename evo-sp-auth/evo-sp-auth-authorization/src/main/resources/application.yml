@@ -43,6 +43,3 @@ spring:
       enabled: true
     sampler:
       probability: 1.0
-logging:
-  level:
-    com.ritoinfo.framework.evo.sp.auth.authorization.api.UserDetailsApi: DEBUG

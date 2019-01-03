@@ -11,6 +11,9 @@ import org.springframework.cloud.netflix.zuul.filters.discovery.DiscoveryClientR
 import org.springframework.cloud.netflix.zuul.filters.discovery.ServiceRouteMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 /**
  * User: Kyll
@@ -34,5 +37,20 @@ public class ZuulConfig {
 	@Bean
 	public DiscoveryClientRouteLocator discoveryRouteLocator() {
 		return new DynamicRouteLocator(this.server.getServlet().getServletPrefix(), this.discovery, this.zuulProperties, this.serviceRouteMapper, this.registration, this.evoZuulRouteDao);
+	}
+
+	@Bean
+	public CorsFilter corsFilter() {
+		CorsConfiguration config = new CorsConfiguration();
+		config.setAllowCredentials(true);
+		config.addAllowedOrigin("*");
+		config.addAllowedHeader("*");
+		config.addAllowedMethod("*");
+		config.setMaxAge(18000L);
+
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", config);
+
+		return new CorsFilter(source);
 	}
 }

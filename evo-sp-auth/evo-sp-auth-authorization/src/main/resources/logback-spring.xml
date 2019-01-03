@@ -65,12 +65,6 @@
 		<appender-ref ref="LOGSTASH"/>
 	</logger>
 
-	<logger name="org.springframework.jdbc" level="DEBUG" additivity="false">
-		<appender-ref ref="CONSOLE"/>
-		<appender-ref ref="ROLLINGFILE"/>
-		<appender-ref ref="LOGSTASH"/>
-	</logger>
-
 	<logger name="org.springframework.security" level="DEBUG" additivity="false">
 		<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="ROLLINGFILE"/>
