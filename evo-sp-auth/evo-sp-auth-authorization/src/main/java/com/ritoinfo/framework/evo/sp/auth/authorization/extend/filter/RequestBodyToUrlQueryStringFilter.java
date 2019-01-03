@@ -47,7 +47,7 @@ public class RequestBodyToUrlQueryStringFilter implements Filter {
 			}
 			buffer.flush();
 
-			HashMap<String, String> jsonMap = JsonUtil.jsonToObject(buffer.toByteArray(), HashMap.class);
+			HashMap<String, String> jsonMap = buffer.size() > 0 ? JsonUtil.jsonToObject(buffer.toByteArray(), HashMap.class) : new HashMap<>();
 			HashMap<String, String[]> paramMap = new HashMap<>();
 			for (Map.Entry<String, String> entry : jsonMap.entrySet()) {
 				paramMap.put(entry.getKey(), new String[]{entry.getValue()});
