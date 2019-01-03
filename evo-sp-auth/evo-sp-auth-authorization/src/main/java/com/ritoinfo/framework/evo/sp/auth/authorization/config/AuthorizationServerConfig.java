@@ -1,11 +1,13 @@
 package com.ritoinfo.framework.evo.sp.auth.authorization.config;
 
+import com.ritoinfo.framework.evo.data.redis.config.RedisKeyGenerator;
 import com.ritoinfo.framework.evo.sp.auth.authorization.config.properties.AuthorizationProperties;
 import com.ritoinfo.framework.evo.sp.auth.authorization.extend.mnvc.MobileNumberVerifyCodeTokenGranter;
 import com.ritoinfo.framework.evo.sp.auth.authorization.extend.token.LoginUserAccessTokenConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -31,8 +33,8 @@ import org.springframework.security.oauth2.provider.token.AuthorizationServerTok
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -47,12 +49,16 @@ import java.util.List;
 @Configuration
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 	private final DataSource dataSource;
+	private final RedisConnectionFactory redisConnectionFactory;
+	private final RedisKeyGenerator redisKeyGenerator;
 	private final AuthorizationProperties authorizationProperties;
 	private final AuthenticationManager authenticationManager;
 
 	@Autowired
-	public AuthorizationServerConfig(DataSource dataSource, AuthorizationProperties authorizationProperties, AuthenticationManager authenticationManager) {
+	public AuthorizationServerConfig(DataSource dataSource, RedisConnectionFactory redisConnectionFactory, RedisKeyGenerator redisKeyGenerator, AuthorizationProperties authorizationProperties, AuthenticationManager authenticationManager) {
 		this.dataSource = dataSource;
+		this.redisConnectionFactory = redisConnectionFactory;
+		this.redisKeyGenerator = redisKeyGenerator;
 		this.authorizationProperties = authorizationProperties;
 		this.authenticationManager = authenticationManager;
 	}
@@ -69,7 +75,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	@Bean
 	public TokenStore tokenStore() {
-		return new JdbcTokenStore(dataSource);
+		String prefix = redisKeyGenerator.generate(RedisTokenStore.class, "", "");
+
+		RedisTokenStore redisTokenStore = new RedisTokenStore(redisConnectionFactory);
+		redisTokenStore.setPrefix(prefix.substring(0, prefix.length() - 1));
+		return redisTokenStore;
 	}
 
 	@Bean

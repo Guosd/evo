@@ -31,6 +31,8 @@ public class AssistBizz {
 	private JwtToken jwtToken;
 	@Autowired
 	private RedisService redisService;
+	@Autowired
+	private RedisKeyAssist redisKeyAssist;
 
 	public void updateLoginInfo(UserDto userDto, String token, HttpServletRequest request) {
 		userDto.setLastLoginTime(userDto.getLoginTime());
@@ -61,14 +63,14 @@ public class AssistBizz {
 	}
 
 	public String createAndSaveToken(UserContext userContext) {
-		String onlineKey = RedisKeyAssist.generate("ONLINE", userContext.getMobileNumber());
+		String onlineKey = redisKeyAssist.generate("ONLINE", userContext.getMobileNumber());
 		String onlineToken = redisService.getString(onlineKey);
 		if (StringUtil.isNotBlank(onlineToken)) {
 			log.info("用户[" + userContext.getMobileNumber() + "]的令牌[" + onlineToken + "]被重置");
 
-			redisService.delete(RedisKeyAssist.generate("TOKEN", onlineToken));
-			redisService.delete(RedisKeyAssist.generate("REFRESH_TOKEN", onlineToken));
-			redisService.delete(RedisKeyAssist.generate("OLD_TOKEN", onlineToken));
+			redisService.delete(redisKeyAssist.generate("TOKEN", onlineToken));
+			redisService.delete(redisKeyAssist.generate("REFRESH_TOKEN", onlineToken));
+			redisService.delete(redisKeyAssist.generate("OLD_TOKEN", onlineToken));
 		}
 
 		// 清空 token 过期时间，因为从 Claims 中获取 Date 类型的数据，结果是 LONG 类型， 会引起 bean 赋值错误
@@ -81,8 +83,8 @@ public class AssistBizz {
 		Date tokenExpiration = jwtToken.parse(token).getJwtExpiration();
 
 		// 设置缓存
-		redisService.set(RedisKeyAssist.generate("TOKEN", token), userContext, tokenExpiration);
-		redisService.set(RedisKeyAssist.generate("REFRESH_TOKEN", token), refreshToken, jwtToken.parse(refreshToken).getJwtExpiration());
+		redisService.set(redisKeyAssist.generate("TOKEN", token), userContext, tokenExpiration);
+		redisService.set(redisKeyAssist.generate("REFRESH_TOKEN", token), refreshToken, jwtToken.parse(refreshToken).getJwtExpiration());
 		redisService.set(onlineKey, token, tokenExpiration);
 
 		return token;

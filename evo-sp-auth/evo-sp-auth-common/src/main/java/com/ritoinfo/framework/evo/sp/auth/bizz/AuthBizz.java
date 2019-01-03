@@ -40,6 +40,8 @@ public class AuthBizz {
 	@Autowired
 	private RedisService redisService;
 	@Autowired
+	private RedisKeyAssist redisKeyAssist;
+	@Autowired
 	private AssistBizz assistBizz;
 
 	public String getDefaultUserToken(DefaultUserDto defaultUserDto, HttpServletRequest request) {
@@ -59,17 +61,17 @@ public class AuthBizz {
 
 	public boolean clear(String token) {
 		if (VerifyResult.SUCCESS == jwtToken.verify(token)) {
-			return redisService.delete(RedisKeyAssist.generate("TOKEN", token)) && redisService.delete(RedisKeyAssist.generate("REFRESH_TOKEN", token));
+			return redisService.delete(redisKeyAssist.generate("TOKEN", token)) && redisService.delete(redisKeyAssist.generate("REFRESH_TOKEN", token));
 		}
 		return false;
 	}
 
 	public String tryRefresh(String token) {
-		return redisService.getString(RedisKeyAssist.generate("OLD_TOKEN", token));
+		return redisService.getString(redisKeyAssist.generate("OLD_TOKEN", token));
 	}
 
 	public String refresh(String token) {
-		String refreshToken = redisService.getString(RedisKeyAssist.generate("REFRESH_TOKEN", token));
+		String refreshToken = redisService.getString(redisKeyAssist.generate("REFRESH_TOKEN", token));
 		if (StringUtil.isBlank(refreshToken)) {
 			throw new RefreshTokenNotFoundException(token);
 		}
@@ -77,8 +79,8 @@ public class AuthBizz {
 		VerifyResult verifyResult = jwtToken.verify(refreshToken);
 		if (VerifyResult.SUCCESS == verifyResult) {
 			String newToken = assistBizz.createAndSaveToken(jwtToken.parse(refreshToken));
-			redisService.set(RedisKeyAssist.generate("OLD_TOKEN", token), newToken, 30 * 1000L);
-			redisService.delete(RedisKeyAssist.generate("REFRESH_TOKEN", token));
+			redisService.set(redisKeyAssist.generate("OLD_TOKEN", token), newToken, 30 * 1000L);
+			redisService.delete(redisKeyAssist.generate("REFRESH_TOKEN", token));
 			return newToken;
 		} else {
 			throw new RefreshTokenVerifyException(refreshToken);
@@ -86,7 +88,7 @@ public class AuthBizz {
 	}
 
 	public boolean verify(VerifyDto verifyDto) {
-		if (redisService.exist(RedisKeyAssist.generate("TOKEN", verifyDto.getToken()))) {
+		if (redisService.exist(redisKeyAssist.generate("TOKEN", verifyDto.getToken()))) {
 			for (PermissionDto permissionDto : funcApi.getByUsername(jwtToken.parse(verifyDto.getToken()).getUsername()).getData()) {
 				String uri = permissionDto.getUri();
 				uri = uri.contains("?") ? uri.substring(0, uri.indexOf('?')) : uri;

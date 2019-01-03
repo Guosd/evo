@@ -1,40 +1,34 @@
 package com.ritoinfo.framework.evo.data.redis.config;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
+import com.ritoinfo.framework.evo.common.config.properties.ApplicationProperties;
+import com.ritoinfo.framework.evo.data.redis.config.properties.RedisProperties;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * User: Kyll
  * Date: 2018-04-16 09:04
  */
-@Configuration
+@Component
 public class RedisKeyGenerator {
-	private static String redisCompanyPrefix;
-	private static String springApplicationName;
+	@Autowired
+	private ApplicationProperties applicationProperties;
+	@Autowired
+	private RedisProperties redisProperties;
 
-	@Value("${redis.companyPrefix}")
-	public void setRedisCompanyPrefix(String redisCompanyPrefix) {
-		RedisKeyGenerator.redisCompanyPrefix = redisCompanyPrefix;
-	}
-
-	@Value("${spring.application.name}")
-	public void setSpringApplicationName(String springApplicationName) {
-		RedisKeyGenerator.springApplicationName = springApplicationName;
-	}
-
-	public static String generate(Object object, String bizzFlag, String key) {
+	public String generate(Object object, String bizzFlag, String key) {
 		return generate(object.getClass(), bizzFlag, key);
 	}
 
-	public static String generate(Class clazz, String bizzFlag, String key) {
-		return generate(springApplicationName, clazz, bizzFlag, key);
+	public String generate(Class clazz, String bizzFlag, String key) {
+		return generate(applicationProperties.getApplicationName(), clazz, bizzFlag, key);
 	}
 
-	public static String generate(String springApplicationName, Class clazz, String bizzFlag, String key) {
+	public String generate(String springApplicationName, Class clazz, String bizzFlag, String key) {
 		return generate(springApplicationName, clazz.getName(), bizzFlag, key);
 	}
 
-	public static String generate(String springApplicationName, String clazzName, String bizzFlag, String key) {
-		return redisCompanyPrefix + ":" + springApplicationName + ":" + clazzName + ":" + bizzFlag + ":" + key;
+	public String generate(String springApplicationName, String clazzName, String bizzFlag, String key) {
+		return redisProperties.getRedisCompanyPrefix() + ":" + springApplicationName + ":" + clazzName + ":" + bizzFlag + ":" + key;
 	}
 }

@@ -33,6 +33,8 @@ import java.util.Arrays;
 public class RedisConfig extends CachingConfigurerSupport {
 	@Autowired
 	private RedisConnectionFactory redisConnectionFactory;
+	@Autowired
+	private RedisKeyGenerator redisKeyGenerator;
 
 	@Bean
 	public RedisTemplate<String, Serializable> redisTemplate() {
@@ -139,7 +141,7 @@ public class RedisConfig extends CachingConfigurerSupport {
 				}
 			}
 
-			return RedisKeyGenerator.generate(o, cacheConfig.cacheNames()[0], key);
+			return redisKeyGenerator.generate(o, cacheConfig.cacheNames()[0], key);
 		};
 	}
 }
