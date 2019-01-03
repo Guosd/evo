@@ -59,7 +59,13 @@
 		</encoder>
 	</appender>
 
-	<logger name="com.ritoinfo.framework.evo" level="DEBUG" additivity="false">
+	<logger name="com.ritoinfo.framework.evo.zuul.security" level="DEBUG" additivity="false">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="ROLLINGFILE"/>
+		<appender-ref ref="LOGSTASH"/>
+	</logger>
+
+	<logger name="com.ritoinfo.framework.evo.zuul.loadbalancer" level="DEBUG" additivity="false">
 		<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="ROLLINGFILE"/>
 		<appender-ref ref="LOGSTASH"/>
@@ -71,7 +77,7 @@
 		<appender-ref ref="LOGSTASH"/>
 	</logger>
 
-	<logger name="org.springframework.retry" level="DEBUG" additivity="false">
+	<logger name="org.springframework.security" level="DEBUG" additivity="false">
 		<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="ROLLINGFILE"/>
 		<appender-ref ref="LOGSTASH"/>

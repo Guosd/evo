@@ -37,8 +37,9 @@
 			<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-security</artifactId>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-sp-oauth2-common</artifactId>
+			<version>${evo-sp-oauth2-common.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>

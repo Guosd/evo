@@ -2,7 +2,7 @@ package com.ritoinfo.framework.evo.sp.auth.authorization.config;
 
 import com.ritoinfo.framework.evo.sp.auth.authorization.extend.filter.RequestBodyToUrlQueryStringFilter;
 import com.ritoinfo.framework.evo.sp.auth.authorization.extend.mnvc.MobileNumberVerifyCodeAuthenticationProvider;
-import com.ritoinfo.framework.evo.sp.auth.authorization.extend.mnvc.MobileNumberVerifyCodeUserDetailsService;
+import com.ritoinfo.framework.evo.sp.auth.extend.LoginUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,12 +21,12 @@ import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	private final RequestBodyToUrlQueryStringFilter requestBodyToUrlQueryStringFilter;
-	private final MobileNumberVerifyCodeUserDetailsService mobileNumberVerifyCodeUserDetailsService;
+	private final LoginUserDetailsService loginUserDetailsService;
 
 	@Autowired
-	public WebSecurityConfig(RequestBodyToUrlQueryStringFilter requestBodyToUrlQueryStringFilter, MobileNumberVerifyCodeUserDetailsService mobileNumberVerifyCodeUserDetailsService) {
+	public WebSecurityConfig(RequestBodyToUrlQueryStringFilter requestBodyToUrlQueryStringFilter, LoginUserDetailsService loginUserDetailsService) {
 		this.requestBodyToUrlQueryStringFilter = requestBodyToUrlQueryStringFilter;
-		this.mobileNumberVerifyCodeUserDetailsService = mobileNumberVerifyCodeUserDetailsService;
+		this.loginUserDetailsService = loginUserDetailsService;
 	}
 
 	@Bean
@@ -38,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		MobileNumberVerifyCodeAuthenticationProvider mobileNumberVerifyCodeAuthenticationProvider = new MobileNumberVerifyCodeAuthenticationProvider();
-		mobileNumberVerifyCodeAuthenticationProvider.setUserDetailsService(mobileNumberVerifyCodeUserDetailsService);
+		mobileNumberVerifyCodeAuthenticationProvider.setUserDetailsService(loginUserDetailsService);
 
 		http
 				.csrf().disable()

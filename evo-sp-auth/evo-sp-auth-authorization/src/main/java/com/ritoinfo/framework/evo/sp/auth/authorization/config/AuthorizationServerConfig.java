@@ -2,6 +2,7 @@ package com.ritoinfo.framework.evo.sp.auth.authorization.config;
 
 import com.ritoinfo.framework.evo.sp.auth.authorization.config.properties.AuthorizationProperties;
 import com.ritoinfo.framework.evo.sp.auth.authorization.extend.mnvc.MobileNumberVerifyCodeTokenGranter;
+import com.ritoinfo.framework.evo.sp.auth.authorization.extend.token.LoginUserAccessTokenConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,12 +29,14 @@ import org.springframework.security.oauth2.provider.refresh.RefreshTokenGranter;
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -77,13 +80,21 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	}
 
 	@Bean
+	public LoginUserAccessTokenConverter userAccessTokenConverter() {
+		return new LoginUserAccessTokenConverter();
+	}
+
+	@Bean
 	public AuthorizationServerTokenServices authorizationServerTokenServices() {
+		TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+		tokenEnhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter(), userAccessTokenConverter()));
+
 		DefaultTokenServices tokenServices = new DefaultTokenServices();
 		tokenServices.setTokenStore(tokenStore());
 		tokenServices.setSupportRefreshToken(true);
 		tokenServices.setReuseRefreshToken(false);
 		tokenServices.setClientDetailsService(clientDetailsService());
-		tokenServices.setTokenEnhancer(accessTokenConverter());
+		tokenServices.setTokenEnhancer(tokenEnhancerChain);
 		return tokenServices;
 	}
 

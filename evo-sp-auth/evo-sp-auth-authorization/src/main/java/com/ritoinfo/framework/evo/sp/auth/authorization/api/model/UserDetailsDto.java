@@ -16,7 +16,9 @@ import java.io.Serializable;
 @Builder
 @Data
 public class UserDetailsDto implements Serializable {
+	private String id;
 	private String username;
 	private String password;
+	private String email;
 	private String mobileNumber;
 }

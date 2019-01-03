@@ -135,7 +135,7 @@
 		 WHERE t1.role_id = #{value}
 	</select>
 
-	<select id="findByUsername" resultType="map">
+	<select id="findByPermission" resultType="map">
 		SELECT
 			t0.prefix,
 			t1.uri,
@@ -144,8 +144,21 @@
 		  JOIN sys_func t1 ON t0.id = t1.micro_id
 		  JOIN sys_role_func t2 ON t1.id = t2.func_id
 		  JOIN sys_user_role t3 ON t2.role_id = t3.role_id
-		  JOIN sys_user t4 ON t3.user_id = t4.id
-		 WHERE t4.username = #{value}
+		 WHERE t3.user_id = #{userId}
+		   AND t1.method = #{method}
+	</select>
+
+	<select id="findByUsername" resultType="map">
+		SELECT
+			t0.prefix,
+			t1.uri,
+			t1.method
+		FROM sys_micro t0
+		JOIN sys_func t1 ON t0.id = t1.micro_id
+		JOIN sys_role_func t2 ON t1.id = t2.func_id
+		JOIN sys_user_role t3 ON t2.role_id = t3.role_id
+		JOIN sys_user t4 ON t3.user_id = t4.id
+		WHERE t4.username = #{value}
 	</select>
 
 	<select id="count" resultType="int">

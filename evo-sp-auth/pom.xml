@@ -21,6 +21,7 @@
 		<module>evo-sp-auth-pc</module>
 		<module>evo-sp-auth-mobile</module>
 		<module>evo-sp-auth-authorization</module>
+		<module>evo-sp-oauth2-common</module>
 	</modules>
 
 	<dependencies>

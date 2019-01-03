@@ -2,6 +2,7 @@ package com.ritoinfo.framework.evo.sp.sys.dao;
 
 import com.ritoinfo.framework.evo.sp.base.starter.dao.BaseXmlDao;
 import com.ritoinfo.framework.evo.sp.sys.condition.FuncCondition;
+import com.ritoinfo.framework.evo.sp.sys.condition.PermissionCondition;
 import com.ritoinfo.framework.evo.sp.sys.entity.Func;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -21,6 +22,8 @@ public interface FuncDao extends BaseXmlDao<Func, Long> {
 	List<Map<String, Object>> findPageWithMicro(FuncCondition condition);
 
 	List<Map<String, Object>> findByRoleWithMicro(Long roleId);
+
+	List<Map<String, Object>> findByPermission(PermissionCondition condition);
 
 	List<Map<String, Object>> findByUsername(String username);
 }

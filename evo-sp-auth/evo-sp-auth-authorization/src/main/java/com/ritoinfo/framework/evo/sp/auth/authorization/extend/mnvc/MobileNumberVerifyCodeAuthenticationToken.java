@@ -11,17 +11,17 @@ import java.util.Collection;
  * Date: 2018-12-21 10:55
  */
 public class MobileNumberVerifyCodeAuthenticationToken extends AbstractAuthenticationToken {
-	@Getter private final Object principal;
-	@Getter private Object credentials;
+	@Getter private final String principal;
+	@Getter private String credentials;
 
-	public MobileNumberVerifyCodeAuthenticationToken(Object principal, Object credentials) {
+	public MobileNumberVerifyCodeAuthenticationToken(String principal, String credentials) {
 		super(null);
 		this.principal = principal;
 		this.credentials = credentials;
 		this.setAuthenticated(false);
 	}
 
-	public MobileNumberVerifyCodeAuthenticationToken(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities) {
+	public MobileNumberVerifyCodeAuthenticationToken(String principal, String credentials, Collection<? extends GrantedAuthority> authorities) {
 		super(authorities);
 		this.principal = principal;
 		this.credentials = credentials;
@@ -36,6 +36,7 @@ public class MobileNumberVerifyCodeAuthenticationToken extends AbstractAuthentic
 		}
 	}
 
+	@Override
 	public void eraseCredentials() {
 		super.eraseCredentials();
 		this.credentials = null;
@@ -43,10 +44,6 @@ public class MobileNumberVerifyCodeAuthenticationToken extends AbstractAuthentic
 
 	@Override
 	public String getName() {
-		if (this.getPrincipal() instanceof MobileNumberVerifyCodeUserDetails) {
-			return ((MobileNumberVerifyCodeUserDetails)this.getPrincipal()).getMobileNumber();
-		} else {
-			return this.getPrincipal() == null ? "" : this.getPrincipal().toString();
-		}
+		return this.getPrincipal();
 	}
 }

@@ -44,7 +44,7 @@ public class DynamicRouteLocator extends DiscoveryClientRouteLocator {
 		criteria.andEqualTo("enabled", "1");
 
 		List<EvoZuulRoute> evoZuulRouteList = evoZuulRouteDao.selectByExample(example);
-		log.info("加载路由表: " + JsonUtil.objectToJson(evoZuulRouteList));
+		log.debug("加载路由表: " + JsonUtil.objectToJson(evoZuulRouteList));
 
 		for (EvoZuulRoute evoZuulRoute : evoZuulRouteList) {
 			String path = evoZuulRoute.getPath();

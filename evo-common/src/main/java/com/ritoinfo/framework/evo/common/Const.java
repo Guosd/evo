@@ -26,6 +26,8 @@ public class Const {
 
 	public static final String SPRING_APPLICATION_NAME_AUTH = "evo-sp-auth";
 
+	public static final String ROLE_ANONYMOUS = "ROLE_ANONYMOUS";
+
 	public static final String RC_SUCC = "SUCC-0000";
 	public static final String RC_FAIL_REQUEST_PARAM = "FAIL-0001";
 	public static final String RC_FAIL_UNEXPECT = "FAIL-0002";

@@ -4,6 +4,7 @@ import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
 import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseXmlBizz;
 import com.ritoinfo.framework.evo.sp.sys.condition.FuncCondition;
+import com.ritoinfo.framework.evo.sp.sys.condition.PermissionCondition;
 import com.ritoinfo.framework.evo.sp.sys.dao.FuncDao;
 import com.ritoinfo.framework.evo.sp.sys.dto.FuncDto;
 import com.ritoinfo.framework.evo.sp.sys.dto.MenuDto;
@@ -41,6 +42,10 @@ public class FuncBizz extends BaseXmlBizz<FuncDao, Func, Long, FuncDto> {
 
 	public List<FuncDto> findByRoleWithMicro(Long roleId) {
 		return BaseHelper.sqlMapToObject(dao.findByRoleWithMicro(roleId), FuncDto.class);
+	}
+
+	public List<PermissionDto> findByPermission(PermissionCondition condition) {
+		return BaseHelper.sqlMapToObject(dao.findByPermission(condition), PermissionDto.class);
 	}
 
 	public List<PermissionDto> findByUsername(String username) {

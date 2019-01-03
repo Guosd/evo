@@ -1,17 +1,22 @@
 package com.ritoinfo.framework.evo.sp.auth.authorization.extend.mnvc;
 
+import com.ritoinfo.framework.evo.sp.auth.extend.LoginAuthenticationToken;
+import com.ritoinfo.framework.evo.sp.auth.extend.LoginUserDetails;
+import com.ritoinfo.framework.evo.sp.auth.extend.LoginUserDetailsService;
+import com.ritoinfo.framework.evo.sp.auth.extend.cache.LoginUserCache;
+import com.ritoinfo.framework.evo.sp.auth.extend.cache.NullLoginUserCache;
+import com.ritoinfo.framework.evo.sp.auth.extend.checker.DefaultPostAuthenticationChecks;
+import com.ritoinfo.framework.evo.sp.auth.extend.checker.DefaultPreAuthenticationChecks;
+import com.ritoinfo.framework.evo.sp.auth.extend.checker.LoginUserDetailsChecker;
+import com.ritoinfo.framework.evo.sp.auth.extend.exception.MobileNumberNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 import org.springframework.context.support.MessageSourceAccessor;
-import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.CredentialsExpiredException;
-import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
-import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.SpringSecurityMessageSource;
@@ -27,15 +32,15 @@ import org.springframework.util.Assert;
 @Slf4j
 public class MobileNumberVerifyCodeAuthenticationProvider implements AuthenticationProvider, InitializingBean, MessageSourceAware {
 	protected MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
-	private MobileNumberVerifyCodeUserCache userCache = new NullMobileNumberVerifyCodeUserCache();
+	private LoginUserCache userCache = new NullLoginUserCache();
 	private boolean forcePrincipalAsString = false;
 	protected boolean hideUserNotFoundExceptions = true;
-	private MobileNumberVerifyCodeUserDetailsChecker preAuthenticationChecks = new MobileNumberVerifyCodeAuthenticationProvider.DefaultPreAuthenticationChecks();
-	private MobileNumberVerifyCodeUserDetailsChecker postAuthenticationChecks = new MobileNumberVerifyCodeAuthenticationProvider.DefaultPostAuthenticationChecks();
+	private LoginUserDetailsChecker preAuthenticationChecks = new DefaultPreAuthenticationChecks();
+	private LoginUserDetailsChecker postAuthenticationChecks = new DefaultPostAuthenticationChecks();
 	private GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
-	private MobileNumberVerifyCodeUserDetailsService userDetailsService;
+	private LoginUserDetailsService userDetailsService;
 
-	protected void additionalAuthenticationChecks(MobileNumberVerifyCodeUserDetails userDetails, MobileNumberVerifyCodeAuthenticationToken authentication) throws AuthenticationException {
+	protected void additionalAuthenticationChecks(LoginUserDetails userDetails, MobileNumberVerifyCodeAuthenticationToken authentication) throws AuthenticationException {
 		if (authentication.getCredentials() == null) {
 			log.debug("Authentication failed: no credentials provided");
 			throw new BadCredentialsException(this.messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
@@ -58,7 +63,7 @@ public class MobileNumberVerifyCodeAuthenticationProvider implements Authenticat
 		Assert.isInstanceOf(MobileNumberVerifyCodeAuthenticationToken.class, authentication, this.messages.getMessage("AbstractUserDetailsAuthenticationProvider.onlySupports", "Only MobileNumberVerifyCodeAuthenticationToken is supported"));
 		String mobileNumber = authentication.getPrincipal() == null ? "NONE_PROVIDED" : authentication.getName();
 		boolean cacheWasUsed = true;
-		MobileNumberVerifyCodeUserDetails user = this.userCache.getUserFromCache(mobileNumber);
+		LoginUserDetails user = this.userCache.getUserFromCache(mobileNumber);
 		if (user == null) {
 			cacheWasUsed = false;
 
@@ -103,8 +108,8 @@ public class MobileNumberVerifyCodeAuthenticationProvider implements Authenticat
 		return this.createSuccessAuthentication(principalToReturn, authentication, user);
 	}
 
-	protected Authentication createSuccessAuthentication(Object principal, Authentication authentication, MobileNumberVerifyCodeUserDetails user) {
-		MobileNumberVerifyCodeAuthenticationToken result = new MobileNumberVerifyCodeAuthenticationToken(principal, authentication.getCredentials(), this.authoritiesMapper.mapAuthorities(user.getAuthorities()));
+	protected Authentication createSuccessAuthentication(Object principal, Authentication authentication, LoginUserDetails user) {
+		LoginAuthenticationToken result = new LoginAuthenticationToken(principal, authentication.getCredentials(), this.authoritiesMapper.mapAuthorities(user.getAuthorities()));
 		result.setDetails(authentication.getDetails());
 		return result;
 	}
@@ -113,7 +118,7 @@ public class MobileNumberVerifyCodeAuthenticationProvider implements Authenticat
 		Assert.notNull(this.userDetailsService, "A MobileNumberVerifyCodeUserDetailsService must be set");
 	}
 
-	public MobileNumberVerifyCodeUserCache getUserCache() {
+	public LoginUserCache getUserCache() {
 		return this.userCache;
 	}
 
@@ -125,9 +130,9 @@ public class MobileNumberVerifyCodeAuthenticationProvider implements Authenticat
 		return this.hideUserNotFoundExceptions;
 	}
 
-	protected final MobileNumberVerifyCodeUserDetails retrieveUser(String mobileNumber, MobileNumberVerifyCodeAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
+	protected final LoginUserDetails retrieveUser(String mobileNumber, MobileNumberVerifyCodeAuthenticationToken mobileNumberVerifyCodeAuthenticationToken) throws AuthenticationException {
 		try {
-			MobileNumberVerifyCodeUserDetails loadedUser = this.getUserDetailsService().loadUserByMobileNumber(mobileNumber);
+			LoginUserDetails loadedUser = this.getUserDetailsService().loadUserByMobileNumber(mobileNumber);
 			if (loadedUser == null) {
 				throw new InternalAuthenticationServiceException("MobileNumberVerifyCodeUserDetailsService returned null, which is an interface contract violation");
 			} else {
@@ -140,11 +145,11 @@ public class MobileNumberVerifyCodeAuthenticationProvider implements Authenticat
 		}
 	}
 
-	public void setUserDetailsService(MobileNumberVerifyCodeUserDetailsService userDetailsService) {
+	public void setUserDetailsService(LoginUserDetailsService userDetailsService) {
 		this.userDetailsService = userDetailsService;
 	}
 
-	protected MobileNumberVerifyCodeUserDetailsService getUserDetailsService() {
+	protected LoginUserDetailsService getUserDetailsService() {
 		return this.userDetailsService;
 	}
 
@@ -161,7 +166,7 @@ public class MobileNumberVerifyCodeAuthenticationProvider implements Authenticat
 		this.messages = new MessageSourceAccessor(messageSource);
 	}
 
-	public void setUserCache(MobileNumberVerifyCodeUserCache userCache) {
+	public void setUserCache(LoginUserCache userCache) {
 		this.userCache = userCache;
 	}
 
@@ -170,53 +175,23 @@ public class MobileNumberVerifyCodeAuthenticationProvider implements Authenticat
 		return MobileNumberVerifyCodeAuthenticationToken.class.isAssignableFrom(authentication);
 	}
 
-	protected MobileNumberVerifyCodeUserDetailsChecker getPreAuthenticationChecks() {
+	protected LoginUserDetailsChecker getPreAuthenticationChecks() {
 		return this.preAuthenticationChecks;
 	}
 
-	public void setPreAuthenticationChecks(MobileNumberVerifyCodeUserDetailsChecker preAuthenticationChecks) {
+	public void setPreAuthenticationChecks(LoginUserDetailsChecker preAuthenticationChecks) {
 		this.preAuthenticationChecks = preAuthenticationChecks;
 	}
 
-	protected MobileNumberVerifyCodeUserDetailsChecker getPostAuthenticationChecks() {
+	protected LoginUserDetailsChecker getPostAuthenticationChecks() {
 		return this.postAuthenticationChecks;
 	}
 
-	public void setPostAuthenticationChecks(MobileNumberVerifyCodeUserDetailsChecker postAuthenticationChecks) {
+	public void setPostAuthenticationChecks(LoginUserDetailsChecker postAuthenticationChecks) {
 		this.postAuthenticationChecks = postAuthenticationChecks;
 	}
 
 	public void setAuthoritiesMapper(GrantedAuthoritiesMapper authoritiesMapper) {
 		this.authoritiesMapper = authoritiesMapper;
-	}
-
-	private class DefaultPostAuthenticationChecks implements MobileNumberVerifyCodeUserDetailsChecker {
-		private DefaultPostAuthenticationChecks() {
-		}
-
-		public void check(MobileNumberVerifyCodeUserDetails user) {
-			if (!user.isCredentialsNonExpired()) {
-				MobileNumberVerifyCodeAuthenticationProvider.log.debug("User account credentials have expired");
-				throw new CredentialsExpiredException(MobileNumberVerifyCodeAuthenticationProvider.this.messages.getMessage("AbstractUserDetailsAuthenticationProvider.credentialsExpired", "User credentials have expired"));
-			}
-		}
-	}
-
-	private class DefaultPreAuthenticationChecks implements MobileNumberVerifyCodeUserDetailsChecker {
-		private DefaultPreAuthenticationChecks() {
-		}
-
-		public void check(MobileNumberVerifyCodeUserDetails user) {
-			if (!user.isAccountNonLocked()) {
-				MobileNumberVerifyCodeAuthenticationProvider.log.debug("User account is locked");
-				throw new LockedException(MobileNumberVerifyCodeAuthenticationProvider.this.messages.getMessage("AbstractUserDetailsAuthenticationProvider.locked", "User account is locked"));
-			} else if (!user.isEnabled()) {
-				MobileNumberVerifyCodeAuthenticationProvider.log.debug("User account is disabled");
-				throw new DisabledException(MobileNumberVerifyCodeAuthenticationProvider.this.messages.getMessage("AbstractUserDetailsAuthenticationProvider.disabled", "User is disabled"));
-			} else if (!user.isAccountNonExpired()) {
-				MobileNumberVerifyCodeAuthenticationProvider.log.debug("User account is expired");
-				throw new AccountExpiredException(MobileNumberVerifyCodeAuthenticationProvider.this.messages.getMessage("AbstractUserDetailsAuthenticationProvider.expired", "User account has expired"));
-			}
-		}
 	}
 }

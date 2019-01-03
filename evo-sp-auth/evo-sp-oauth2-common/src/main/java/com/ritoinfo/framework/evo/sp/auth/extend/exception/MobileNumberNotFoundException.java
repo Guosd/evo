@@ -1,4 +1,4 @@
-package com.ritoinfo.framework.evo.sp.auth.authorization.extend.mnvc;
+package com.ritoinfo.framework.evo.sp.auth.extend.exception;
 
 import org.springframework.security.core.AuthenticationException;
 

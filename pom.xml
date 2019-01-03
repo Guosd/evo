@@ -92,6 +92,7 @@
 		<evo-common-jwt.version>1.0.0-SNAPSHOT</evo-common-jwt.version>
 		<evo-common-dts.version>1.0.0-SNAPSHOT</evo-common-dts.version>
 		<evo-sp-auth-assist.version>1.0.0-SNAPSHOT</evo-sp-auth-assist.version>
+		<evo-sp-oauth2-common.version>1.0.0-SNAPSHOT</evo-sp-oauth2-common.version>
 		<evo-sp-base.version>1.0.0-SNAPSHOT</evo-sp-base.version>
 		<evo-sp-base-exception.version>1.0.0-SNAPSHOT</evo-sp-base-exception.version>
 		<evo-sp-base-model.version>1.0.0-SNAPSHOT</evo-sp-base-model.version>

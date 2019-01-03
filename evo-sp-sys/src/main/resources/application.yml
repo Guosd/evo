@@ -10,10 +10,10 @@ management:
       show-details: ALWAYS
 spring:
   datasource:
-    url: ${evo.sp.sys.datasource.url}
+    url: jdbc:mysql://127.0.0.1:3306/evo_sys?useUnicode=true&characterEncoding=UTF8&useSSL=false
     username: ${evo.sp.sys.datasource.username}
     password: ${evo.sp.sys.datasource.password}
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-test-query: select 1
       connection-timeout: 30000 # 等待连接池分配连接的最大时长

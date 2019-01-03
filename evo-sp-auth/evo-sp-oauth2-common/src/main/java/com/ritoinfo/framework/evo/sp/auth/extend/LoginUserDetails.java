@@ -1,4 +1,4 @@
-package com.ritoinfo.framework.evo.sp.auth.authorization.extend.mnvc;
+package com.ritoinfo.framework.evo.sp.auth.extend;
 
 import org.springframework.security.core.GrantedAuthority;
 
@@ -7,10 +7,16 @@ import java.util.Collection;
 
 /**
  * User: Kyll
- * Date: 2018-12-21 16:25
+ * Date: 2019-01-02 09:40
  */
-public interface MobileNumberVerifyCodeUserDetails extends Serializable {
+public interface LoginUserDetails extends Serializable {
 	Collection<? extends GrantedAuthority> getAuthorities();
+
+	String getId();
+
+	String getUsername();
+
+	String getEmail();
 
 	String getMobileNumber();
 

@@ -27,6 +27,10 @@ public class DefaultUserDetailsBizz implements UserDetailsBizz {
 	@Override
 	public UserDetailsDto getByMobileNumber(UserDetailsCondition condition) {
 		LoginDto loginDto = loginBizz.getOne(LoginCondition.builder().mobileNumber(condition.getMobileNumber()).build());
-		return UserDetailsDto.builder().mobileNumber(loginDto.getMobileNumber()).build();
+		return UserDetailsDto.builder()
+				.id(String.valueOf(loginDto.getId()))
+				.username(loginDto.getUsername())
+				.email(loginDto.getEmail())
+				.mobileNumber(loginDto.getMobileNumber()).build();
 	}
 }
