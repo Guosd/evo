@@ -14,7 +14,7 @@ spring:
   profiles:
     active: jdbc
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/evo_framework?useUnicode=true&characterEncoding=UTF8&useSSL=false
+    url: jdbc:mysql://192.168.204.130:3306/evo_framework?useUnicode=true&characterEncoding=UTF8&useSSL=false
     username: evo_framework
     password: evo_framework
     driver-class-name: com.mysql.cj.jdbc.Driver
