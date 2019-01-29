@@ -27,8 +27,8 @@ spring:
       minimum-idle: 10
       read-only: false
   rabbitmq:
-    addresses: 127.0.0.1:5672
-    host: 127.0.0.1
+    addresses: 192.168.204.131:5672
+    host: 192.168.204.130
     port: 5672
     virtual-host: evo_vhost
     username: evo
