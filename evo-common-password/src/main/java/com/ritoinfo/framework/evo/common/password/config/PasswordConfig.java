@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.common.password.config;
 
-import com.ritoinfo.framework.evo.common.password.config.properties.PasswordProperties;
+import com.ritoinfo.framework.evo.common.config.properties.CommonProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,10 +14,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class PasswordConfig {
 	@Autowired
-	private PasswordProperties passwordProperties;
+	private CommonProperties commonProperties;
 
 	@Bean
 	public PasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder(passwordProperties.getSalt());
+		return new BCryptPasswordEncoder(commonProperties.getPassword().getSalt());
 	}
 }

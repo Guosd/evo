@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.base.starter.bizz;
 
-import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
+import com.ritoinfo.framework.evo.common.model.UserContext;
 import com.ritoinfo.framework.evo.common.uitl.BeanUtil;
 import com.ritoinfo.framework.evo.sp.base.dto.PageDto;
 import com.ritoinfo.framework.evo.sp.base.model.PageList;

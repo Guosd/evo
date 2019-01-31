@@ -65,6 +65,12 @@
 		<appender-ref ref="LOGSTASH"/>
 	</logger>
 
+	<logger name="com.netflix.discovery" level="WARN" additivity="false">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="ROLLINGFILE"/>
+		<appender-ref ref="LOGSTASH"/>
+	</logger>
+
 	<root level="INFO">
 		<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="ROLLINGFILE"/>

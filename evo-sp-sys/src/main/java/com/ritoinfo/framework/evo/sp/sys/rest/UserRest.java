@@ -82,6 +82,12 @@ public class UserRest extends BaseRest<UserBizz, Long, UserDto, UserCondition> {
 		return ServiceResponse.ok();
 	}
 
+	@PutMapping("/login-info/{id}")
+	public ServiceResponse updateLoginInfo(@PathVariable("id") Long id, @RequestBody String loginIp) {
+		bizz.updateLoginInfo(id, loginIp);
+		return ServiceResponse.ok();
+	}
+
 	@GetMapping("/empty")
 	public ServiceResponse empty() {
 		return ServiceResponse.ok();

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Slf4j
 public class NetUtil {
-	public static String getRemoteAddr(HttpServletRequest request) {
+	public static String extractRemoteAddr(HttpServletRequest request) {
 		String ip = request.getHeader("X-Forwarded-For");
 		if (StringUtil.isNotBlank(ip) && !"unknown".equalsIgnoreCase(ip)) {
 			int index = ip.indexOf(",");// 处理反向代理

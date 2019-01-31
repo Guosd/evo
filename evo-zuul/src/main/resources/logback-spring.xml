@@ -59,7 +59,7 @@
 		</encoder>
 	</appender>
 
-	<logger name="com.ritoinfo.framework.evo.zuul.security" level="DEBUG" additivity="false">
+	<logger name="com.ritoinfo.framework.evo.zuul.resource" level="DEBUG" additivity="false">
 		<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="ROLLINGFILE"/>
 		<appender-ref ref="LOGSTASH"/>
@@ -78,6 +78,12 @@
 	</logger>
 
 	<logger name="org.springframework.security" level="DEBUG" additivity="false">
+		<appender-ref ref="CONSOLE"/>
+		<appender-ref ref="ROLLINGFILE"/>
+		<appender-ref ref="LOGSTASH"/>
+	</logger>
+
+	<logger name="com.netflix.discovery.shared.resolver.aws" level="WARN" additivity="false">
 		<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="ROLLINGFILE"/>
 		<appender-ref ref="LOGSTASH"/>

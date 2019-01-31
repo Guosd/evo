@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.sys.bizz;
 
-import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
+import com.ritoinfo.framework.evo.common.model.UserContext;
 import com.ritoinfo.framework.evo.sp.base.model.PageList;
 import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
 import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseXmlBizz;

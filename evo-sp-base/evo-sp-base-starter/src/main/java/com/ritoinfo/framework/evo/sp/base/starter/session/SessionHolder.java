@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.base.starter.session;
 
-import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
+import com.ritoinfo.framework.evo.common.model.UserContext;
 
 /**
  * User: Kyll

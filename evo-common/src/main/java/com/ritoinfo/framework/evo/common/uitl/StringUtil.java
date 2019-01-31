@@ -1,7 +1,12 @@
 package com.ritoinfo.framework.evo.common.uitl;
 
+import com.ritoinfo.framework.evo.common.exception.StringOperateException;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.AntPathMatcher;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +15,8 @@ import java.util.List;
  * Date: 2018-02-09 14:59
  */
 public class StringUtil {
+	private static final AntPathMatcher ANT_PATH_MATCHER = new AntPathMatcher();
+
 	public static boolean isBlank(String str) {
 		return StringUtils.isBlank(str);
 	}
@@ -75,5 +82,25 @@ public class StringUtil {
 		result.append(camel.substring(indexList.get(indexList.size() - 1)));
 
 		return result.toString();
+	}
+
+	public static boolean antPathMatch(String pattern, String path) {
+		return ANT_PATH_MATCHER.match(pattern, path);
+	}
+
+	public static String urlEncodeUTF8(String str) {
+		try {
+			return URLEncoder.encode(str, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			throw new StringOperateException("字符串编码 UTF-8 失败", e);
+		}
+	}
+
+	public static String urlDecodeUTF8(String str) {
+		try {
+			return URLDecoder.decode(str, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			throw new StringOperateException("字符串解码 UTF-8 失败", e);
+		}
 	}
 }

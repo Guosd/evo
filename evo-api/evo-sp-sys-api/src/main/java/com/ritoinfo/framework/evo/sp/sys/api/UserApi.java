@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestHeader;
  */
 @FeignClient(value = "evo-sp-sys", path = "/user")
 public interface UserApi {
+	@GetMapping("/id/{id}")
+	ServiceResponse<UserDto> get(@PathVariable("id") Long id);
+
 	@GetMapping("/username/{username}")
 	ServiceResponse<UserDto> getByUsername(@PathVariable("username") String username);
 
@@ -23,8 +26,5 @@ public interface UserApi {
 	ServiceResponse<UserDto> getByMobileNumber(@PathVariable("mobileNumber") String mobileNumber);
 
 	@PutMapping
-	ServiceResponse update(@RequestBody UserDto dto, @RequestHeader(Const.JWT_TOKEN_HEADER) String token);
-
-	@GetMapping("/empty")
-	ServiceResponse empty();
+	ServiceResponse update(@RequestBody UserDto dto, @RequestHeader(Const.HTTP_HEADER_TOKEN) String token);
 }

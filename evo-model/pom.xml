@@ -17,14 +17,12 @@
 
 	<modules>
 		<module>evo-sp-activiti-model</module>
-		<module>evo-sp-auth-pc-model</module>
-		<module>evo-sp-auth-common-model</module>
-		<module>evo-sp-auth-mobile-model</module>
 		<module>evo-sp-datadict-model</module>
 		<module>evo-sp-sms-model</module>
 		<module>evo-sp-sys-model</module>
 		<module>evo-sp-demo-model</module>
 		<module>evo-sp-dts-model</module>
+		<module>evo-sp-auth-model</module>
 	</modules>
 
 	<dependencies>

@@ -9,9 +9,9 @@ name.kyll.evo
 20025 ~ 20029 DTS # 分布式事务服务<br/>
 # sp
 20100 ~ 20104 sp-sys # 用户、角色、功能、模块<br/>
-20105 ~ 20109 sp-auth-common # 认证服务，注销、令牌刷新、权限验证<br/>
-20110 ~ 20114 sp-auth-pc # 认证服务，PC端登录<br/>
-20115 ~ 20119 sp-auth-mobile # 认证服务，移动端登录<br/>
+20105 ~ 20109 evo-sp-auth-authorization # 认证服务，自定义token<br/>
+20110 ~ 20114 evo-sp-oauth2-authorization # 认证服务，Spring Security<br/>
+20115 ~ 20119 空闲
 20120 ~ 20124 sp-datadict # 数据字典<br/>
 20125 ~ 20129 sp-activiti # 工作流<br/>
 20130 ~ 20134 sp-sms # 短信服务<br/>

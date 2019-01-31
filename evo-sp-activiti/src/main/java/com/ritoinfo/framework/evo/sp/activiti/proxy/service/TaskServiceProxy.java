@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.activiti.proxy.service;
 
-import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
+import com.ritoinfo.framework.evo.common.model.UserContext;
 import com.ritoinfo.framework.evo.common.uitl.BeanUtil;
 import com.ritoinfo.framework.evo.common.uitl.DateUtil;
 import com.ritoinfo.framework.evo.common.uitl.JsonUtil;

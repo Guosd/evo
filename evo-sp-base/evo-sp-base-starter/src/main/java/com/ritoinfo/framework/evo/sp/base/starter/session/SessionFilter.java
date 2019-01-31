@@ -1,10 +1,8 @@
 package com.ritoinfo.framework.evo.sp.base.starter.session;
 
-import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
-import com.ritoinfo.framework.evo.common.jwt.token.JwtToken;
+import com.ritoinfo.framework.evo.common.uitl.HttpServletRequestUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -28,8 +26,8 @@ import java.io.IOException;
 @WebFilter(filterName = "SessionFilter", urlPatterns = "/*")
 @Component
 public class SessionFilter implements Filter {
-	@Autowired
-	private JwtToken jwtToken;
+	@Value("${evo.common.session.enabled:true}")
+	private boolean enabled;
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -39,25 +37,10 @@ public class SessionFilter implements Filter {
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
-		String uri = request.getRequestURI();
 
-		if (!(uri.endsWith(".js") || uri.endsWith(".css")
-				|| uri.endsWith(".png") || uri.endsWith(".jpg") || uri.endsWith(".gif"))) {
-			String token = jwtToken.getToken(request);
-			if (StringUtils.isNotBlank(token)) {
-				UserContext userContext = null;
-				try {
-					userContext = jwtToken.parse(token);
-				} catch (Exception e) {
-					log.warn("令牌解析失败: " + uri + " " + e.getMessage());
-				}
-
-				if (userContext != null) {
-					SessionContext.getCurrentContext().unset();
-					SessionContext.setContextClass(SessionHolder.class);
-					SessionHolder.getCurrentHolder().setUserContext(userContext);
-				}
-			}
+		if (enabled) {
+			SessionHolder.getCurrentHolder().setUserContext(HttpServletRequestUtil.extractUserContext(request));
+			log.info("Thread Name {}, UserContext {}", Thread.currentThread().getName(), SessionHolder.getUserContext());
 		}
 
 		filterChain.doFilter(request, response);

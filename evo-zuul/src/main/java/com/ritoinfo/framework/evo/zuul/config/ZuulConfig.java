@@ -3,7 +3,6 @@ package com.ritoinfo.framework.evo.zuul.config;
 import com.ritoinfo.framework.evo.zuul.routelocator.DynamicRouteLocator;
 import com.ritoinfo.framework.evo.zuul.routelocator.dao.EvoZuulRouteDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.serviceregistry.Registration;
 import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
@@ -22,8 +21,6 @@ import org.springframework.web.filter.CorsFilter;
 @Configuration
 public class ZuulConfig {
 	@Autowired
-	protected ServerProperties server;
-	@Autowired
 	private DiscoveryClient discovery;
 	@Autowired
 	protected ZuulProperties zuulProperties;
@@ -36,7 +33,7 @@ public class ZuulConfig {
 
 	@Bean
 	public DiscoveryClientRouteLocator discoveryRouteLocator() {
-		return new DynamicRouteLocator(this.server.getServlet().getServletPrefix(), this.discovery, this.zuulProperties, this.serviceRouteMapper, this.registration, this.evoZuulRouteDao);
+		return new DynamicRouteLocator("", this.discovery, this.zuulProperties, this.serviceRouteMapper, this.registration, this.evoZuulRouteDao);
 	}
 
 	@Bean

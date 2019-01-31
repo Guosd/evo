@@ -3,10 +3,12 @@ spring:
     name: evo-sp-sms
   cloud:
     config:
-      name: config
       discovery:
         enabled: true
         service-id: evo-config
+      name: evo
+      label: master
+      failFast: true
 eureka:
   instance:
     lease-expiration-duration-in-seconds: 15

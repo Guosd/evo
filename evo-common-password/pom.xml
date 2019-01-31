@@ -14,13 +14,18 @@
 	<artifactId>evo-common-password</artifactId>
 
 	<dependencies>
-		<dependency>
+		<!--<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
+		</dependency>-->
+		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-common</artifactId>
+			<version>${evo-common.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>

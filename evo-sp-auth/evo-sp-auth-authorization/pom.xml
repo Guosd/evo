@@ -11,34 +11,11 @@
 
 	<artifactId>evo-sp-auth-authorization</artifactId>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${spring-boot-maven-plugin.version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>build-info</goal>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-sp-base-starter-mybatis-mapper</artifactId>
-			<version>${evo-sp-base-starter-mybatis-mapper.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-sp-oauth2-common</artifactId>
-			<version>${evo-sp-oauth2-common.version}</version>
+			<artifactId>evo-sp-base-starter</artifactId>
+			<version>${evo-sp-base-starter.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
@@ -46,9 +23,14 @@
 			<version>${evo-common-password.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql-connector-java.version}</version>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-sp-auth-common</artifactId>
+			<version>${evo-sp-auth-common.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-sp-sms-api</artifactId>
+			<version>${evo-sp-sms-api.version}</version>
 		</dependency>
 	</dependencies>
 

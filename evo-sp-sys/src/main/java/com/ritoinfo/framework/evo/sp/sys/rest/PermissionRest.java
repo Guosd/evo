@@ -21,8 +21,8 @@ public class PermissionRest {
 	@Autowired
 	private PermissionBizz permissionBizz;
 
-	@PostMapping("/validate")
-	public ServiceResponse<Boolean> validate(@RequestBody PermissionCondition condition) {
-		return ServiceResponse.ok(permissionBizz.validate(condition));
+	@PostMapping("/check")
+	public ServiceResponse<Boolean> check(@RequestBody PermissionCondition condition) {
+		return ServiceResponse.ok(permissionBizz.check(condition));
 	}
 }

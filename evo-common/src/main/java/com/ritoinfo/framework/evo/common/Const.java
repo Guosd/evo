@@ -11,20 +11,22 @@ public class Const {
 	public static final int HTTP_STATUS_OK = 200;
 	public static final int HTTP_STATUS_BAD_REQUEST = 400;
 	public static final int HTTP_STATUS_INTERNAL_SERVER_ERROR = 500;
+	public static final String HTTP_HEADER_TOKEN = "Authorization";// 保存 access token
+	public static final String HTTP_HEADER_USER_CONTEXT = "User-Context";// 保存 UserContext JSON
+
+	public static final String JWT_ALGORITHM = "HS512";// JWT 加密方式
+	public static final String JWT_TOKEN_PREFIX = "Bearer ";// JWT 前缀
 
 	public static final String VERIFY_CODE_SIGN_IN = "SIGN_IN";
 	public static final String VERIFY_CODE_SIGN_UP = "SIGN_UP";
 	public static final String VERIFY_CODE_TYPE_RANDOM = "random";
-	public static final String VERIFY_CODE_TYPE_FIX = "fix";
 
-	public static final String JWT_TOKEN_HEADER = "X-Authorization";
+
 
 	public static final String DTS_ROLE_PRODUCER = "RE00";
 	public static final String DTS_ROLE_CONSUMER = "RE01";
 	public static final String DTS_STEP_PROCESS = "ST00";
 	public static final String DTS_STEP_FINISHED = "ST01";
-
-	public static final String SPRING_APPLICATION_NAME_AUTH = "evo-sp-auth";
 
 	public static final String ROLE_ANONYMOUS = "ROLE_ANONYMOUS";
 
@@ -38,6 +40,7 @@ public class Const {
 	public static final String RC_AUTH_LOGIN = "AUTH-0001";
 	public static final String RC_AUTH_LOGOUT = "AUTH-0002";
 	public static final String RC_AUTH_REFRESH = "AUTH-0003";
+	public static final String RC_AUTH_CHECK = "AUTH-0003";
 	public static final String RC_AUTH_TRY_REFRESH = "AUTH-0004";
 	public static final String RC_AUTH_VERIFY = "AUTH-0005";
 	public static final String RC_AUTH_DEFAULT_TOKEN = "AUTH-0006";

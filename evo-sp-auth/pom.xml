@@ -16,30 +16,12 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>evo-sp-auth-assist</module>
 		<module>evo-sp-auth-common</module>
-		<module>evo-sp-auth-pc</module>
-		<module>evo-sp-auth-mobile</module>
-		<module>evo-sp-auth-authorization</module>
 		<module>evo-sp-oauth2-common</module>
+		<module>evo-sp-oauth2-authorization</module>
+		<module>evo-sp-auth-starter-zuul-filter</module>
+		<module>evo-sp-auth-starter-zuul-oauth2-resource</module>
+		<module>evo-sp-auth-authorization</module>
 	</modules>
-
-	<dependencies>
-		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-common-jwt</artifactId>
-			<version>${evo-common-jwt.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-data-redis</artifactId>
-			<version>${evo-data-redis.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-sp-sys-api</artifactId>
-			<version>${evo-sp-sys-api.version}</version>
-		</dependency>
-	</dependencies>
 
 </project>

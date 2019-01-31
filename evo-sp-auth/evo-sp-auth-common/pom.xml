@@ -11,44 +11,30 @@
 
 	<artifactId>evo-sp-auth-common</artifactId>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>${spring-boot-maven-plugin.version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>build-info</goal>
-							<goal>repackage</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
-
 	<dependencies>
 		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-sp-base-starter</artifactId>
-			<version>${evo-sp-base-starter.version}</version>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>${jjwt.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-common-password</artifactId>
-			<version>${evo-common-password.version}</version>
+			<artifactId>evo-sp-base-exception</artifactId>
+			<version>${evo-sp-base-exception.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-sp-auth-common-model</artifactId>
-			<version>${evo-sp-auth-common-model.version}</version>
+			<artifactId>evo-sp-auth-model</artifactId>
+			<version>${evo-sp-auth-model.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-sp-auth-assist</artifactId>
-			<version>${evo-sp-auth-assist.version}</version>
+			<artifactId>evo-data-redis</artifactId>
+			<version>${evo-data-redis.version}</version>
 		</dependency>
 	</dependencies>
 

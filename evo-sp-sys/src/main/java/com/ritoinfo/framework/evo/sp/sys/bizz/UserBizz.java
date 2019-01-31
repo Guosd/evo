@@ -1,7 +1,9 @@
 package com.ritoinfo.framework.evo.sp.sys.bizz;
 
-import com.ritoinfo.framework.evo.common.jwt.model.UserContext;
+import com.ritoinfo.framework.evo.common.model.UserContext;
 import com.ritoinfo.framework.evo.common.uitl.ArrayUtil;
+import com.ritoinfo.framework.evo.common.uitl.DateUtil;
+import com.ritoinfo.framework.evo.common.uitl.StringUtil;
 import com.ritoinfo.framework.evo.sp.base.starter.assist.BaseHelper;
 import com.ritoinfo.framework.evo.sp.base.starter.bizz.BaseXmlBizz;
 import com.ritoinfo.framework.evo.sp.base.starter.exception.UserContextNotExistException;
@@ -119,6 +121,22 @@ public class UserBizz extends BaseXmlBizz<UserDao, User, Long, UserDto> {
 		UserDto oldUserDto = this.get(dto.getId());
 		oldUserDto.setPassword(passwordEncoder.encode(dto.getPassword()));
 		this.update(oldUserDto);
+	}
+
+	@Transactional
+	public void updateLoginInfo(Long id, String loginIp) {
+		UserDto userDto = this.get(id);
+		userDto.setLastLoginTime(userDto.getLoginTime());
+		userDto.setLastLoginIp(userDto.getLoginIp());
+		userDto.setLoginTime(DateUtil.now());
+		userDto.setLoginIp(loginIp);
+
+		if (userDto.getLastLoginTime() == null || StringUtil.isBlank(userDto.getLastLoginIp())) {
+			userDto.setLastLoginTime(userDto.getLoginTime());
+			userDto.setLastLoginIp(userDto.getLoginIp());
+		}
+
+		this.update(userDto);
 	}
 
 	@Transactional

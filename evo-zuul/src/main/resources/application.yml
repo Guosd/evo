@@ -26,12 +26,12 @@ spring:
       minimum-idle: 10
       read-only: false # 连接只读数据库时配置为true, 保证安全
   rabbitmq:
-    addresses: 127.0.0.1:5672
-    host: 127.0.0.1
-    port: 5672
-    virtual-host: evo_vhost
-    username: evo
-    password: evo
+    addresses: ${evo.spring.rabbitmq.addresses}
+    host: ${evo.spring.rabbitmq.host}
+    port: ${evo.spring.rabbitmq.port}
+    virtual-host: ${evo.spring.rabbitmq.virtual-host}
+    username: ${evo.spring.rabbitmq.username}
+    password: ${evo.spring.rabbitmq.password}
   jackson:
     time-zone: GMT+8
   sleuth:
@@ -65,3 +65,7 @@ ribbon:
 sp-eco-mobile-car:
   ribbon:
     ReadTimeout: 60000
+evo:
+  common:
+    session:
+      enabled: false
