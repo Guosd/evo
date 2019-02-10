@@ -40,33 +40,3 @@ create table zuul_route
   update_time datetime null
 );
 
-create table dts_message
-(
-  id bigint auto_increment
-    primary key,
-  log_message_key varchar(255) null,
-  business_key varchar(255) null,
-  message_key varchar(255) null,
-  content varchar(512) null,
-  producer varchar(255) null,
-  consumer varchar(255) null,
-  role varchar(4) null,
-  step varchar(4) null,
-  create_by bigint null,
-  create_time datetime null,
-  update_by bigint null,
-  update_time datetime null
-);
-
-create table dts_record
-(
-  id bigint auto_increment
-    primary key,
-  business_key varchar(255) null,
-  producer_step varchar(4) null,
-  consumer_step varchar(4) null,
-  create_by bigint null,
-  create_time datetime null,
-  update_by bigint null,
-  update_time datetime null
-);
