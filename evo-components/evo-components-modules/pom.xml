@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>evo-components</artifactId>
+		<groupId>com.ritoinfo.framework</groupId>
+		<version>${revision}</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>evo-components-modules</artifactId>
+
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>evo-common</module>
+		<module>evo-base</module>
+		<module>evo-base-data-hibernate</module>
+		<module>evo-base-data-jpa</module>
+		<module>evo-base-data-mybatis-mapper</module>
+		<module>evo-base-data-mybatis-xml</module>
+		<module>evo-base-data-redis</module>
+		<module>evo-api</module>
+		<module>evo-auth-common</module>
+		<module>evo-auth-zuul-filter</module>
+		<module>evo-oauth2-common</module>
+		<module>evo-oauth2-zuul-resource</module>
+	</modules>
+
+</project>

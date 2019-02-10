@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>evo-parent-standard</artifactId>
+		<groupId>com.ritoinfo.framework</groupId>
+		<version>${revision}</version>
+		<relativePath>../../../evo-parent/evo-parent-standard</relativePath>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>evo-base-data-mybatis-mapper</artifactId>
+
+	<dependencies>
+		<dependency>
+			<groupId>tk.mybatis</groupId>
+			<artifactId>mapper-spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.ritoinfo.framework</groupId>
+			<artifactId>evo-base</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>
