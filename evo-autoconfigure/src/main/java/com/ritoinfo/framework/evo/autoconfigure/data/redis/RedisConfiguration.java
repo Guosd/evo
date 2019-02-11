@@ -5,7 +5,9 @@ import com.ritoinfo.framework.evo.common.uitl.StringUtil;
 import com.ritoinfo.framework.evo.data.redis.RedisKeyGenerator;
 import com.ritoinfo.framework.evo.data.redis.annotation.RedisKey;
 import com.ritoinfo.framework.evo.data.redis.exception.RedisOperateException;
+import com.ritoinfo.framework.evo.data.redis.service.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
@@ -30,6 +32,7 @@ import java.util.Arrays;
  * Date: 2018-03-09 16:02
  */
 @EnableCaching
+@ConditionalOnClass(RedisService.class)
 @Configuration
 public class RedisConfiguration extends CachingConfigurerSupport {
 	private final RedisConnectionFactory redisConnectionFactory;

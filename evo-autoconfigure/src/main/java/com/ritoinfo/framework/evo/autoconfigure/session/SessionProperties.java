@@ -16,7 +16,7 @@ public class SessionProperties {
 	@Data
 	public static class UserContext {
 		/**
-		 * 通过SessionHolder.getUserContext()获取当前用户。默认true。
+		 * 可以通过SessionHolder.getUserContext()获取当前用户。默认true。
 		 */
 		private boolean enabled = true;
 	}

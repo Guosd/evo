@@ -3,7 +3,7 @@ package com.ritoinfo.framework.evo.sp.auth.bizz;
 import com.ritoinfo.framework.evo.common.Const;
 import com.ritoinfo.framework.evo.common.uitl.AlgorithmUtil;
 import com.ritoinfo.framework.evo.common.uitl.StringUtil;
-import com.ritoinfo.framework.evo.sp.auth.api.UserDetailsApi;
+import com.ritoinfo.framework.evo.sp.auth.api.IamApi;
 import com.ritoinfo.framework.evo.sp.auth.api.model.UserDetailsDto;
 import com.ritoinfo.framework.evo.sp.auth.assist.RedisAssist;
 import com.ritoinfo.framework.evo.sp.auth.config.VerifyCodeConfig;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class VerifyCodeBizz {
 	@Autowired
-	private UserDetailsApi userDetailsApi;
+	private IamApi iamApi;
 	@Autowired
 	private RedisAssist redisAssist;
 	@Autowired
@@ -81,7 +81,7 @@ public class VerifyCodeBizz {
 	}
 
 	private UserDetailsDto getUser(String mobileNumber) {
-		return userDetailsApi.getByMobileNumber(mobileNumber).getData();
+		return iamApi.getByMobileNumber(mobileNumber).getData();
 	}
 
 	private boolean checkVerifyCode(String bizzFlag, String mobileNumber, String verifyCode) {

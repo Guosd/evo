@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.oauth2.authorization.extend.mnvc;
 
-import com.ritoinfo.framework.evo.sp.auth.api.UserDetailsApi;
+import com.ritoinfo.framework.evo.sp.auth.api.IamApi;
 import com.ritoinfo.framework.evo.sp.auth.api.model.UserDetailsDto;
 import com.ritoinfo.framework.evo.sp.oauth2.extend.LoginUser;
 import com.ritoinfo.framework.evo.sp.oauth2.extend.LoginUserDetails;
@@ -18,11 +18,11 @@ import java.util.Collections;
 @Component
 public class MobileNumberVerifyCodeUserDetailsServiceImpl implements LoginUserDetailsService {
 	@Autowired
-	private UserDetailsApi userDetailsApi;
+	private IamApi iamApi;
 
 	@Override
 	public LoginUserDetails loadUserByMobileNumber(String mobileNumber) {
-		UserDetailsDto userDetailsDto = userDetailsApi.getByMobileNumber(mobileNumber).getData();
+		UserDetailsDto userDetailsDto = iamApi.getByMobileNumber(mobileNumber).getData();
 
 		if (null == userDetailsDto) {
 			throw new MobileNumberNotFoundException(mobileNumber);

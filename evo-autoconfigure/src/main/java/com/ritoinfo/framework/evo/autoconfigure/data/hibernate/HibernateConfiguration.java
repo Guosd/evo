@@ -1,7 +1,9 @@
 package com.ritoinfo.framework.evo.autoconfigure.data.hibernate;
 
+import com.ritoinfo.framework.evo.base.starter.bizz.BaseHibernateBizz;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
 import org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy;
@@ -18,6 +20,7 @@ import java.util.Properties;
  * User: Kyll
  * Date: 2018-11-16 09:05
  */
+@ConditionalOnClass(BaseHibernateBizz.class)
 @EnableConfigurationProperties(HibernateProperties.class)
 @Configuration
 public class HibernateConfiguration {

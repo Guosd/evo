@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * User: Kyll
  * Date: 2018-03-29 11:30
  */
-@FeignClient(value = "evo-activiti", path = "/task")
+@FeignClient(name = "evo-activiti", path = "/task")
 public interface TaskApi {
 	@GetMapping("/page")
 	ServiceResponse<PageList<TaskDto>> findPage(@RequestBody TaskCondition condition);

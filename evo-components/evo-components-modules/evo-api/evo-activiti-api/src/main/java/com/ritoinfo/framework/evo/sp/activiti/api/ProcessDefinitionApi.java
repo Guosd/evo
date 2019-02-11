@@ -16,7 +16,7 @@ import java.util.List;
  * User: Kyll
  * Date: 2018-04-11 21:38
  */
-@FeignClient(value = "evo-activiti", path = "/process-definition")
+@FeignClient(name = "evo-activiti", path = "/process-definition")
 public interface ProcessDefinitionApi {
 	@GetMapping("/all")
 	ServiceResponse<List<ProcessDefinitionDto>> find(@RequestBody ProcessDefinitionCondition processDefinitionCondition);

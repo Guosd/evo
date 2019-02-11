@@ -12,12 +12,14 @@ import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 
 /**
  * User: Kyll
  * Date: 2019-01-31 09:20
  */
 @Slf4j
+@Component
 public class SecurityContextHolderFilter extends ZuulFilter {
 	@Override
 	public String filterType() {

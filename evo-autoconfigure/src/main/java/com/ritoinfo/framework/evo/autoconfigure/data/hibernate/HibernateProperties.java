@@ -10,8 +10,20 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Data
 @ConfigurationProperties(prefix = "evo.hibernate")
 public class HibernateProperties {
-	private String dialect;
+	/**
+	 * 数据库方言。默认org.hibernate.dialect.MySQLDialect
+	 */
+	private String dialect = "org.hibernate.dialect.MySQLDialect";
+	/**
+	 * 是否显示SQL。默认true
+	 */
 	private boolean showSql = true;
+	/**
+	 * 是否格式化SQL。默认false
+	 */
 	private boolean formatSql = false;
-	private String packages;
+	/**
+	 * 扫描实体包。默认com.ritoinfo.framework.evo.sp.demo
+	 */
+	private String packages = "com.ritoinfo.framework.evo.sp.demo";
 }

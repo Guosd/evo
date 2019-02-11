@@ -1,7 +1,6 @@
 package com.ritoinfo.framework.evo.autoconfigure.auth;
 
 import lombok.Data;
-import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -11,12 +10,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Data
 @ConfigurationProperties(prefix = "evo.auth")
 public class AuthProperties {
-	@Getter private Jwt jwt = new Jwt();
-	@Getter private Path path = new Path();
-	@Getter private VerifyCode verifyCode = new VerifyCode();
-	@Getter private Authorization authorization = new Authorization();
-	@Getter private UserDetails userDetails = new UserDetails();
-	@Getter private Rbac rbac = new Rbac();
+	private Jwt jwt = new Jwt();
+	private Path path = new Path();
+	private VerifyCode verifyCode = new VerifyCode();
+	private Authorization authorization = new Authorization();
+	private Iam iam = new Iam();
 
 	@Data
 	public static class Jwt {
@@ -77,40 +75,43 @@ public class AuthProperties {
 	@Data
 	public static class Authorization {
 		/**
-		 * 认证服务的spring.application.name。默认evo-sp-oauth2-authorization
+		 * 认证服务的spring.application.name。默认evo-oauth2
 		 */
-		private String serviceId = "evo-sp-oauth2-authorization";
+		private String serviceId = "evo-oauth2";
 	}
 
 	@Data
-	public static class UserDetails {
+	public static class Iam {
 		/**
-		 * 提供用户信息服务的spring.application.name。默认evo-sp-sys
+		 * 提供身份识别与访问管理服务的spring.application.name。默认evo-sys
 		 */
-		private String serviceId = "evo-sp-sys";
-		/**
-		 * 通过用户登录名获取用户信息的 HTTP REST URI。默认/user/username
-		 */
-		private String usernameUri = "/user/username";
-		/**
-		 * 通过手机获取用户信息的 HTTP REST URI。默认/user/mobile-number
-		 */
-		private String mobileNumberUri = "/user/mobile-number";
-		/**
-		 * 更改登录用户信息的 HTTP REST URI。默认/user/login-info
-		 */
-		private String updateLoginInfoUri = "/user/login-info";
-	}
+		private String serviceId = "evo-sys";
 
-	@Data
-	public static class Rbac {
-		/**
-		 * 提供RBAC权限验证服务的spring.application.name。默认evo-sp-sys
-		 */
-		private String serviceId = "evo-sp-sys";
-		/**
-		 * 校验权限的 HTTP REST URI。默认/permission/check
-		 */
-		private String uri = "/permission/check";
+		private UserDetails userDetails = new UserDetails();
+		private Rbac rbac = new Rbac();
+
+		@Data
+		public static class UserDetails {
+			/**
+			 * 通过用户登录名获取用户信息的 HTTP REST URI。默认/user/username
+			 */
+			private String usernameUri = "/user/username";
+			/**
+			 * 通过手机获取用户信息的 HTTP REST URI。默认/user/mobile-number
+			 */
+			private String mobileNumberUri = "/user/mobile-number";
+			/**
+			 * 更改登录用户信息的 HTTP REST URI。默认/user/login-info
+			 */
+			private String updateLoginInfoUri = "/user/login-info";
+		}
+
+		@Data
+		public static class Rbac {
+			/**
+			 * 校验权限的 HTTP REST URI。默认/permission/check
+			 */
+			private String uri = "/permission/check";
+		}
 	}
 }

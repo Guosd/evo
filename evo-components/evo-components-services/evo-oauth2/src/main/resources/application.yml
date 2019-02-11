@@ -10,9 +10,9 @@ management:
       show-details: ALWAYS
 spring:
   datasource:
-    url: ${evo.sp.framework.datasource.url}
-    username: ${evo.sp.framework.datasource.username}
-    password: ${evo.sp.framework.datasource.password}
+    url: ${evo.framework.datasource.url}
+    username: ${evo.framework.datasource.username}
+    password: ${evo.framework.datasource.password}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-test-query: select 1
@@ -23,15 +23,15 @@ spring:
       minimum-idle: 10
       read-only: false # 连接只读数据库时配置为true, 保证安全
   rabbitmq:
-    addresses: ${evo.spring.rabbitmq.addresses}
-    host: ${evo.spring.rabbitmq.host}
-    port: ${evo.spring.rabbitmq.port}
-    virtual-host: ${evo.spring.rabbitmq.virtual-host}
-    username: ${evo.spring.rabbitmq.username}
-    password: ${evo.spring.rabbitmq.password}
+    addresses: ${evo.rabbitmq.addresses}
+    host: ${evo.rabbitmq.host}
+    port: ${evo.rabbitmq.port}
+    virtual-host: ${evo.rabbitmq.virtual-host}
+    username: ${evo.rabbitmq.username}
+    password: ${evo.rabbitmq.password}
   redis:
     cluster:
-      nodes: ${evo.spring.redis.cluster.nodes}
+      nodes: ${evo.redis.cluster.nodes}
   jackson:
     time-zone: GMT+8
   sleuth:
@@ -40,6 +40,6 @@ spring:
     sampler:
       probability: 1.0
 evo:
-  common:
-    session:
+  session:
+    user-context:
       enabled: false

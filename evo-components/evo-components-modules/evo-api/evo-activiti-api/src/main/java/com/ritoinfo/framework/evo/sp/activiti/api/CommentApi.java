@@ -12,7 +12,7 @@ import java.util.List;
  * User: Kyll
  * Date: 2018-04-11 21:32
  */
-@FeignClient(value = "evo-activiti", path = "/comment")
+@FeignClient(name = "evo-activiti", path = "/comment")
 public interface CommentApi {
 	@GetMapping("{processInstanceId}")
 	ServiceResponse<List<CommentDto>> find(@PathVariable("processInstanceId") String processInstanceId);

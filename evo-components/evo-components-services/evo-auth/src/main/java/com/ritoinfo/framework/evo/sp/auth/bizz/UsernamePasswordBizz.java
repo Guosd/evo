@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.auth.bizz;
 
-import com.ritoinfo.framework.evo.sp.auth.api.UserDetailsApi;
+import com.ritoinfo.framework.evo.sp.auth.api.IamApi;
 import com.ritoinfo.framework.evo.sp.auth.api.model.UserDetailsDto;
 import com.ritoinfo.framework.evo.sp.auth.exception.PasswordInvalidException;
 import com.ritoinfo.framework.evo.sp.auth.exception.UserNotFoundException;
@@ -18,20 +18,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class UsernamePasswordBizz {
 	@Autowired
-	private UserDetailsApi userDetailsApi;
+	private IamApi iamApi;
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	@Autowired
 	private TokenBizz tokenBizz;
 
 	public String login(UsernamePasswordParam loginDto, String remoteAddr) {
-		UserDetailsDto userDetailsDto = userDetailsApi.getByUsername(loginDto.getUsername()).getData();
+		UserDetailsDto userDetailsDto = iamApi.getByUsername(loginDto.getUsername()).getData();
 		if (userDetailsDto == null) {
 			throw new UserNotFoundException(loginDto.getUsername());
 		}
 
 		if (passwordEncoder.matches(loginDto.getPassword(), userDetailsDto.getPassword())) {
-			userDetailsApi.updateLoginInfo(userDetailsDto.getId(), remoteAddr);
+			iamApi.updateLoginInfo(userDetailsDto.getId(), remoteAddr);
 			return tokenBizz.createToken(userDetailsDto);
 		}
 

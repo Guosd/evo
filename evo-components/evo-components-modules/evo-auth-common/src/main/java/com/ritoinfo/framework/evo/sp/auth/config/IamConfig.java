@@ -7,14 +7,12 @@ import lombok.NoArgsConstructor;
 
 /**
  * User: Kyll
- * Date: 2019-02-09 20:11
+ * Date: 2019-02-11 12:46
  */
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
-public class UserDetailsConfig {
-	private String usernameUri;
-	private String mobileNumberUri;
-	private String updateLoginInfoUri;
+public class IamConfig {
+	private String serviceId;
 }

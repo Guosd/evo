@@ -10,10 +10,10 @@ management:
       show-details: ALWAYS
 spring:
   datasource:
-    url: ${evo.sp.demo.datasource.url}
-    username: ${evo.sp.demo.datasource.username}
-    password: ${evo.sp.demo.datasource.password}
-    driver-class-name: com.mysql.jdbc.Driver
+    url: ${evo.demo.datasource.url}
+    username: ${evo.demo.datasource.username}
+    password: ${evo.demo.datasource.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-test-query: select 1
       connection-timeout: 30000 # 等待连接池分配连接的最大时长
@@ -23,12 +23,12 @@ spring:
       minimum-idle: 10
       read-only: false # 连接只读数据库时配置为true, 保证安全
   rabbitmq:
-    addresses: ${evo.spring.rabbitmq.addresses}
-    host: ${evo.spring.rabbitmq.host}
-    port: ${evo.spring.rabbitmq.port}
-    virtual-host: ${evo.spring.rabbitmq.virtual-host}
-    username: ${evo.spring.rabbitmq.username}
-    password: ${evo.spring.rabbitmq.password}
+    addresses: ${evo.rabbitmq.addresses}
+    host: ${evo.rabbitmq.host}
+    port: ${evo.rabbitmq.port}
+    virtual-host: ${evo.rabbitmq.virtual-host}
+    username: ${evo.rabbitmq.username}
+    password: ${evo.rabbitmq.password}
   jackson:
     time-zone: GMT+8
   sleuth:

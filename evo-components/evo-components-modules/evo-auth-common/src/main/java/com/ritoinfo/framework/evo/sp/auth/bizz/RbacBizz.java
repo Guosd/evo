@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.auth.bizz;
 
-import com.ritoinfo.framework.evo.sp.auth.api.RbacApi;
+import com.ritoinfo.framework.evo.sp.auth.api.IamApi;
 import com.ritoinfo.framework.evo.sp.auth.api.model.RbacDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class RbacBizz {
 	@Autowired
-	private RbacApi rbacApi;
+	private IamApi iamApi;
 
 	public boolean check(RbacDto rbacDto) {
-		return rbacApi.check(rbacDto).getData();
+		return iamApi.check(rbacDto).getData();
 	}
 }

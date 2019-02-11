@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.oauth2.authorization.extend.password;
 
-import com.ritoinfo.framework.evo.sp.auth.api.UserDetailsApi;
+import com.ritoinfo.framework.evo.sp.auth.api.IamApi;
 import com.ritoinfo.framework.evo.sp.auth.api.model.UserDetailsDto;
 import com.ritoinfo.framework.evo.sp.oauth2.extend.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +18,11 @@ import java.util.Collections;
 @Component
 public class UsernamePasswordUserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
-	private UserDetailsApi userDetailsApi;
+	private IamApi iamApi;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) {
-		UserDetailsDto userDetailsDto = userDetailsApi.getByUsername(username).getData();
+		UserDetailsDto userDetailsDto = iamApi.getByUsername(username).getData();
 
 		if (null == userDetailsDto) {
 			throw new UsernameNotFoundException(username);

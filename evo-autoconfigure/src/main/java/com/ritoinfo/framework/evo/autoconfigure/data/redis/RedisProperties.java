@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "evo.redis")
 public class RedisProperties {
 	/**
-	 * 公司前缀
+	 * 公司前缀。默认EVO
 	 */
-	private String companyPrefix;
+	private String companyPrefix = "EVO";
 }

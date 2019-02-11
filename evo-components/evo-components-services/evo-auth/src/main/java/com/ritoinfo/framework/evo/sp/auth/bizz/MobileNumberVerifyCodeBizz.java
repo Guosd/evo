@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.sp.auth.bizz;
 
-import com.ritoinfo.framework.evo.sp.auth.api.UserDetailsApi;
+import com.ritoinfo.framework.evo.sp.auth.api.IamApi;
 import com.ritoinfo.framework.evo.sp.auth.api.model.UserDetailsDto;
 import com.ritoinfo.framework.evo.sp.auth.exception.UserNotFoundException;
 import com.ritoinfo.framework.evo.sp.auth.exception.VerifyCodeInvalidException;
@@ -22,7 +22,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class MobileNumberVerifyCodeBizz {
 	@Autowired
-	private UserDetailsApi userDetailsApi;
+	private IamApi iamApi;
 	@Autowired
 	private SmsApi smsApi;
 	@Autowired
@@ -53,12 +53,12 @@ public class MobileNumberVerifyCodeBizz {
 		String verifyCode = loginDto.getVerifyCode();
 
 		if (verifyCodeBizz.check(mobileNumber, verifyCode)) {
-			UserDetailsDto userDetailsDto = userDetailsApi.getByMobileNumber(mobileNumber).getData();
+			UserDetailsDto userDetailsDto = iamApi.getByMobileNumber(mobileNumber).getData();
 			if (userDetailsDto == null) {
 				throw new UserNotFoundException(mobileNumber);
 			}
 
-			userDetailsApi.updateLoginInfo(userDetailsDto.getId(), remoteAddr);
+			iamApi.updateLoginInfo(userDetailsDto.getId(), remoteAddr);
 			return tokenBizz.createToken(userDetailsDto);
 		}
 

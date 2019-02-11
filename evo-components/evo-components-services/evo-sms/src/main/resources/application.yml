@@ -10,12 +10,12 @@ management:
       show-details: ALWAYS
 spring:
   rabbitmq:
-    addresses: ${evo.spring.rabbitmq.addresses}
-    host: ${evo.spring.rabbitmq.host}
-    port: ${evo.spring.rabbitmq.port}
-    virtual-host: ${evo.spring.rabbitmq.virtual-host}
-    username: ${evo.spring.rabbitmq.username}
-    password: ${evo.spring.rabbitmq.password}
+    addresses: ${evo.rabbitmq.addresses}
+    host: ${evo.rabbitmq.host}
+    port: ${evo.rabbitmq.port}
+    virtual-host: ${evo.rabbitmq.virtual-host}
+    username: ${evo.rabbitmq.username}
+    password: ${evo.rabbitmq.password}
   jackson:
     time-zone: GMT+8
   sleuth:

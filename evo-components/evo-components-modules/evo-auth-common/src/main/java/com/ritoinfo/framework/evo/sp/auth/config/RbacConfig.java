@@ -14,6 +14,5 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class RbacConfig {
-	private String serviceId;
 	private String uri;
 }

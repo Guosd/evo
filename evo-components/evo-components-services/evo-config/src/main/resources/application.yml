@@ -54,11 +54,9 @@ eureka:
       defaultZone: http://localhost:20000/eureka
 ---
 spring:
-  profiles: vm
-eureka:
-  instance:
-    ip-address: 192.168.204.134
-    prefer-ip-address: true
-  client:
-    serviceUrl:
-      defaultZone: http://192.168.204.134:50101/eureka
+  profiles: blue
+  datasource:
+    url: jdbc:mysql://192.168.1.9:3306/evo_framework?useUnicode=true&characterEncoding=UTF8&useSSL=false
+  rabbitmq:
+    addresses: 192.168.1.9:5672
+    host: 192.168.1.9
