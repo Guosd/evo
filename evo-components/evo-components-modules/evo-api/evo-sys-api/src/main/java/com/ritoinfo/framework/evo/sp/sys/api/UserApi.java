@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
  * User: Kyll
  * Date: 2018-02-13 13:43
  */
-@FeignClient(value = "evo-sp-sys", path = "/user")
+@FeignClient(value = "evo-sys", path = "/user")
 public interface UserApi {
 	@GetMapping("/id/{id}")
 	ServiceResponse<UserDto> get(@PathVariable("id") Long id);

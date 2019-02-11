@@ -36,6 +36,8 @@ spring:
       enabled: true
     sampler:
       probability: 1.0
+  main:
+    allow-bean-definition-overriding: true
 mybatis:
   type-aliases-package: com.ritoinfo.framework.evo.sp.sys.entity
   mapper-locations: classpath:mapper/**/*.xml

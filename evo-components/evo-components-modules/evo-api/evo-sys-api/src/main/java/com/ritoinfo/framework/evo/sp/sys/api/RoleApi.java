@@ -12,7 +12,7 @@ import java.util.List;
  * User: Kyll
  * Date: 2018-03-04 18:06
  */
-@FeignClient(value = "evo-sp-sys", path = "/role")
+@FeignClient(value = "evo-sys", path = "/role")
 public interface RoleApi {
 	@GetMapping("/user/id/{userId}")
 	ServiceResponse<List<RoleDto>> getByUserId(@PathVariable("userId") Long userId);

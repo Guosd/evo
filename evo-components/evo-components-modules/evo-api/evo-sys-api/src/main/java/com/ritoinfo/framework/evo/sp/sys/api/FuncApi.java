@@ -12,7 +12,7 @@ import java.util.List;
  * User: Kyll
  * Date: 2018-03-04 18:06
  */
-@FeignClient(value = "evo-sp-sys", path = "/func")
+@FeignClient(value = "evo-sys", path = "/func")
 public interface FuncApi {
 	@GetMapping("/user/username/{username}")
 	ServiceResponse<List<PermissionDto>> getByUsername(@PathVariable("username") String username);

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  * User: Kyll
  * Date: 2018-04-20 16:14
  */
-@FeignClient(value = "evo-sp-sms")
+@FeignClient(value = "evo-sms")
 public interface SmsApi {
 	@PostMapping("/send")
 	ServiceResponse send(@RequestBody SmsDto smsDto);
