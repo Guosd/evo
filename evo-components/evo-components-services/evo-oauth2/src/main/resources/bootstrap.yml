@@ -1,6 +1,6 @@
 spring:
   application:
-    name: evo-sp-oauth2-authorization
+    name: evo-oauth2
   cloud:
     config:
       discovery:

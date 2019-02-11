@@ -1,6 +1,6 @@
 spring:
   application:
-    name: evo-static-ui
+    name: evo-static
   cloud:
     config:
       name: config

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: evo-sp-activiti
+    name: evo-activiti
   cloud:
     config:
       name: config

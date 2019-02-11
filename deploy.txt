@@ -1,1 +1,1 @@
-evo-zuul: 注释掉 AuthFilter 中 101 - 106 行
+分离 evo-auth-common 中 redis 相关处理内容为另外的包

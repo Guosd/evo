@@ -1,12 +1,14 @@
 spring:
   application:
-    name: evo-sp-demo-hibernate
+    name: evo-sample-hibernate
   cloud:
     config:
-      name: config
       discovery:
         enabled: true
         service-id: evo-config
+      name: evo
+      label: master
+      failFast: true
 eureka:
   instance:
     lease-expiration-duration-in-seconds: 15

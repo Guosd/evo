@@ -60,3 +60,11 @@ spring:
   rabbitmq:
     addresses: 192.168.1.9:5672
     host: 192.168.1.9
+---
+spring:
+  profiles: desktop
+  datasource:
+    url: jdbc:mysql://192.168.18.130:3306/evo_framework?useUnicode=true&characterEncoding=UTF8&useSSL=false
+  rabbitmq:
+    addresses: 192.168.18.132:5672
+    host: 192.168.18.132

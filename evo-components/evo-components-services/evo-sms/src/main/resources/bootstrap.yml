@@ -1,6 +1,6 @@
 spring:
   application:
-    name: evo-sp-sms
+    name: evo-sms
   cloud:
     config:
       discovery:

@@ -26,6 +26,8 @@ spring:
       enabled: true
     sampler:
       probability: 1.0
+  main:
+    allow-bean-definition-overriding: true
 evo:
   session:
     user-context:

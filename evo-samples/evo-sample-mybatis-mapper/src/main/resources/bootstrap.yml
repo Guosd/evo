@@ -1,6 +1,6 @@
 spring:
   application:
-    name: evo-sp-demo-mybatis-mapper
+    name: evo-sample-mybatis-mapper
   cloud:
     config:
       discovery:
