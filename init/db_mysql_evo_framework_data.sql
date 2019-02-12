@@ -4,7 +4,7 @@ insert into config_properties values (null, 'master', 'evo', 'default', 'evo.aut
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.auth.jwt.refresh-expiration-time', '4320', '刷新令牌过期时间 单位分钟 [Default 60 * 24 * 3]', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.auth.jwt.old-expiration-time', '30', '新令牌期间，旧令牌作为临时过渡令牌的过期时间 单位秒 [Default 30]', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.auth.path.login', '/ui/comm/login', '登录页面', '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'evo.auth.path.excludes', '/auth/username-password/login, /auth/mobile-number/verify-code, /oauth2/oauth/token', '排除访问控制URI数组', '1', now(), '1', now());
+insert into config_properties values (null, 'master', 'evo', 'default', 'evo.auth.path.excludes', '/auth/username-password/login, /auth/mobile-number/verify-code, /auth/mobile-number/login, /oauth2/oauth/token', '排除访问控制URI数组', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.auth.verify-code.expiration-time', '2', '过期时间 单位分钟 [Default 2]', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.auth.verify-code.type', 'random', 'random 随机; fix 固定 [Default random]', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.auth.verify-code.length', '6', '当 type = random 时，验证码位数 [Default 6]', '1', now(), '1', now());
