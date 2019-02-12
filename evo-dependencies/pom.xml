@@ -217,7 +217,7 @@
 			</dependency>
 			<dependency>
 				<groupId>com.ritoinfo.framework</groupId>
-				<artifactId>evo-demo-api</artifactId>
+				<artifactId>evo-sample-api</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>

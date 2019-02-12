@@ -20,7 +20,7 @@
 		<module>evo-datadict-api</module>
 		<module>evo-sms-api</module>
 		<module>evo-sys-api</module>
-		<module>evo-demo-api</module>
+		<module>evo-sample-api</module>
 	</modules>
 
 	<dependencies>

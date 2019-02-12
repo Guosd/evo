@@ -18,7 +18,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.ritoinfo.framework</groupId>
-			<artifactId>evo-demo-api</artifactId>
+			<artifactId>evo-sample-api</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
