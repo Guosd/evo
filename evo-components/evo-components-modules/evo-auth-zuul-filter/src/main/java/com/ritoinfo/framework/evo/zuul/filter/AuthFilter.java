@@ -2,16 +2,16 @@ package com.ritoinfo.framework.evo.zuul.filter;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
+import com.ritoinfo.framework.evo.auth.api.IamApi;
+import com.ritoinfo.framework.evo.auth.api.TokenApi;
+import com.ritoinfo.framework.evo.auth.config.PathConfig;
+import com.ritoinfo.framework.evo.auth.model.RbacDto;
+import com.ritoinfo.framework.evo.common.Const;
 import com.ritoinfo.framework.evo.common.model.ServiceResponse;
 import com.ritoinfo.framework.evo.common.model.UserContext;
-import com.ritoinfo.framework.evo.common.Const;
 import com.ritoinfo.framework.evo.common.uitl.HttpServletUtil;
 import com.ritoinfo.framework.evo.common.uitl.JsonUtil;
 import com.ritoinfo.framework.evo.common.uitl.StringUtil;
-import com.ritoinfo.framework.evo.auth.api.PermissionApi;
-import com.ritoinfo.framework.evo.auth.api.TokenApi;
-import com.ritoinfo.framework.evo.auth.config.PathConfig;
-import com.ritoinfo.framework.evo.auth.model.PermissionParam;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,13 +31,13 @@ import java.io.IOException;
 public class AuthFilter extends ZuulFilter {
 	private final PathConfig pathConfig;
 	private final TokenApi tokenApi;
-	private final PermissionApi permissionApi;
+	private final IamApi iamApi;
 
 	@Autowired
-	public AuthFilter(PathConfig pathConfig, TokenApi tokenApi, PermissionApi permissionApi) {
+	public AuthFilter(PathConfig pathConfig, TokenApi tokenApi, IamApi iamApi) {
 		this.pathConfig = pathConfig;
 		this.tokenApi = tokenApi;
-		this.permissionApi = permissionApi;
+		this.iamApi = iamApi;
 	}
 
 	@Override
@@ -96,14 +96,14 @@ public class AuthFilter extends ZuulFilter {
 							userContext.setAccessToken(null);
 						}
 
-						requestContext.addZuulRequestHeader(Const.HTTP_HEADER_USER_CONTEXT, StringUtil.urlEncodeUTF8(JsonUtil.objectToJson(userContext)));
-
-						if (StringUtil.isNotBlank(accessToken) && !permissionApi.check(PermissionParam.builder().uri(uri).method(request.getMethod()).token(accessToken).build()).getData()) {
+						if (StringUtil.isNotBlank(accessToken) && !iamApi.check(RbacDto.builder().userId(userContext.getId()).uri(uri).method(request.getMethod()).build()).getData()) {
 							log.info("缺少权限 {}", uri);
 
 							requestContext.setSendZuulResponse(false);
 							requestContext.setResponseStatusCode(403);
 						}
+
+						requestContext.addZuulRequestHeader(Const.HTTP_HEADER_USER_CONTEXT, StringUtil.urlEncodeUTF8(JsonUtil.objectToJson(userContext)));
 					}
 				} else {
 					log.info("access token 失效 {}", uri);

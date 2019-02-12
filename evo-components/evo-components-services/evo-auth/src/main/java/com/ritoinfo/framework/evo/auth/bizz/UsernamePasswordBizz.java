@@ -1,9 +1,9 @@
 package com.ritoinfo.framework.evo.auth.bizz;
 
 import com.ritoinfo.framework.evo.auth.api.IamApi;
-import com.ritoinfo.framework.evo.auth.api.model.UserDetailsDto;
 import com.ritoinfo.framework.evo.auth.exception.PasswordInvalidException;
 import com.ritoinfo.framework.evo.auth.exception.UserNotFoundException;
+import com.ritoinfo.framework.evo.auth.model.UserDetailsDto;
 import com.ritoinfo.framework.evo.auth.model.UsernamePasswordParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

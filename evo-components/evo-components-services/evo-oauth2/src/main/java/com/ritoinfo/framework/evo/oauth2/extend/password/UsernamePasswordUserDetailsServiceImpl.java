@@ -1,7 +1,7 @@
 package com.ritoinfo.framework.evo.oauth2.extend.password;
 
 import com.ritoinfo.framework.evo.auth.api.IamApi;
-import com.ritoinfo.framework.evo.auth.api.model.UserDetailsDto;
+import com.ritoinfo.framework.evo.auth.model.UserDetailsDto;
 import com.ritoinfo.framework.evo.oauth2.extend.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,11 +1,11 @@
 package com.ritoinfo.framework.evo.auth.bizz;
 
 import com.ritoinfo.framework.evo.auth.api.IamApi;
-import com.ritoinfo.framework.evo.auth.api.model.UserDetailsDto;
 import com.ritoinfo.framework.evo.auth.exception.UserNotFoundException;
 import com.ritoinfo.framework.evo.auth.exception.VerifyCodeInvalidException;
 import com.ritoinfo.framework.evo.auth.exception.VerifyCodeSendException;
 import com.ritoinfo.framework.evo.auth.model.MobileNumberParam;
+import com.ritoinfo.framework.evo.auth.model.UserDetailsDto;
 import com.ritoinfo.framework.evo.auth.model.VerifyCodeDto;
 import com.ritoinfo.framework.evo.auth.model.VerifyCodeParam;
 import com.ritoinfo.framework.evo.sp.sms.api.SmsApi;

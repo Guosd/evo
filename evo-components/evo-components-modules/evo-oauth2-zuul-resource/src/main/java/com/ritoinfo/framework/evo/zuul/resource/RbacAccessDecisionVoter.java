@@ -1,7 +1,7 @@
 package com.ritoinfo.framework.evo.zuul.resource;
 
-import com.ritoinfo.framework.evo.auth.api.model.RbacDto;
-import com.ritoinfo.framework.evo.auth.bizz.RbacBizz;
+import com.ritoinfo.framework.evo.auth.api.IamApi;
+import com.ritoinfo.framework.evo.auth.model.RbacDto;
 import com.ritoinfo.framework.evo.oauth2.extend.LoginAuthenticationToken;
 import com.ritoinfo.framework.evo.oauth2.extend.LoginUser;
 import com.ritoinfo.framework.evo.oauth2.util.OAuth2Util;
@@ -25,7 +25,7 @@ import java.util.Collection;
 @Component
 public class RbacAccessDecisionVoter implements AccessDecisionVoter<FilterInvocation> {
 	@Autowired
-	private RbacBizz rbacBizz;
+	private IamApi iamApi;
 
 	@Override
 	public boolean supports(ConfigAttribute configAttribute) {
@@ -48,7 +48,7 @@ public class RbacAccessDecisionVoter implements AccessDecisionVoter<FilterInvoca
 				.method(filterInvocation.getHttpRequest().getMethod())
 				.uri(filterInvocation.getRequestUrl()).build();
 
-		int result = rbacBizz.check(rbacDto) ? ACCESS_GRANTED : ACCESS_DENIED;
+		int result = iamApi.check(rbacDto).getData() ? ACCESS_GRANTED : ACCESS_DENIED;
 
 		log.debug("User Id: {}, Method: {}, Uri: {}, Result: {}", rbacDto.getUserId(), rbacDto.getMethod(), rbacDto.getUri(), result);
 

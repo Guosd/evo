@@ -1,8 +1,8 @@
 package com.ritoinfo.framework.evo.auth.api;
 
+import com.ritoinfo.framework.evo.auth.model.RbacDto;
+import com.ritoinfo.framework.evo.auth.model.UserDetailsDto;
 import com.ritoinfo.framework.evo.common.model.ServiceResponse;
-import com.ritoinfo.framework.evo.auth.api.model.RbacDto;
-import com.ritoinfo.framework.evo.auth.api.model.UserDetailsDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

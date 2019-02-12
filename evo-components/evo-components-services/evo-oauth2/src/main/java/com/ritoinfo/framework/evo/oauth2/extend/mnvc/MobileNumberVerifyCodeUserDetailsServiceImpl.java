@@ -1,7 +1,7 @@
 package com.ritoinfo.framework.evo.oauth2.extend.mnvc;
 
 import com.ritoinfo.framework.evo.auth.api.IamApi;
-import com.ritoinfo.framework.evo.auth.api.model.UserDetailsDto;
+import com.ritoinfo.framework.evo.auth.model.UserDetailsDto;
 import com.ritoinfo.framework.evo.oauth2.extend.LoginUser;
 import com.ritoinfo.framework.evo.oauth2.extend.LoginUserDetails;
 import com.ritoinfo.framework.evo.oauth2.extend.LoginUserDetailsService;

@@ -1,4 +1,4 @@
-package com.ritoinfo.framework.evo.auth.api.model;
+package com.ritoinfo.framework.evo.auth.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
