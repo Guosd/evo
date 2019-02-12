@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<artifactId>evo-parent</artifactId>
-		<groupId>com.ritoinfo.framework</groupId>
+		<groupId>com.github.framework</groupId>
 		<version>${revision}</version>
 		<relativePath>../evo-parent</relativePath>
 	</parent>
@@ -22,42 +22,42 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
+			<groupId>com.github.framework</groupId>
 			<artifactId>evo-base</artifactId>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
+			<groupId>com.github.framework</groupId>
 			<artifactId>evo-base-data-hibernate</artifactId>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
+			<groupId>com.github.framework</groupId>
 			<artifactId>evo-base-data-jpa</artifactId>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
+			<groupId>com.github.framework</groupId>
 			<artifactId>evo-base-data-mybatis-mapper</artifactId>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
+			<groupId>com.github.framework</groupId>
 			<artifactId>evo-base-data-mybatis-xml</artifactId>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
+			<groupId>com.github.framework</groupId>
 			<artifactId>evo-base-data-redis</artifactId>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
+			<groupId>com.github.framework</groupId>
 			<artifactId>evo-auth-zuul-filter</artifactId>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
+			<groupId>com.github.framework</groupId>
 			<artifactId>evo-oauth2-zuul-resource</artifactId>
 			<optional>true</optional>
 		</dependency>

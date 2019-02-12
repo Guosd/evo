@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<artifactId>evo</artifactId>
-		<groupId>com.ritoinfo.framework</groupId>
+		<groupId>com.github.framework</groupId>
 		<version>${revision}</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
@@ -111,142 +111,142 @@
 			</dependency>
 			<!-- evo framework -->
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-autoconfigure</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-base</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-base-data-hibernate</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-base-data-jpa</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-base-data-mybatis-mapper</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-base-data-mybatis-xml</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-base-data-redis</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-base-spring-boot-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-base-data-hibernate-spring-boot-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-base-data-jpa-spring-boot-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-base-data-mybatis-mapper-spring-boot-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-base-data-mybatis-xml-spring-boot-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-base-data-redis-spring-boot-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-auth-zuul-filter-spring-boot-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-oauth2-zuul-resource-spring-boot-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-common</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-auth-config</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-auth-common</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-auth-zuul-filter</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-oauth2-common</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-oauth2-zuul-resource</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-sample-api</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-activiti-api</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-auth-api</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-datadict-api</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-sms-api</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
-				<groupId>com.ritoinfo.framework</groupId>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-sys-api</artifactId>
 				<version>${revision}</version>
 			</dependency>

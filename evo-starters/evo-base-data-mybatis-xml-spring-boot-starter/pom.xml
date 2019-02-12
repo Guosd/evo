@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<artifactId>evo-starters</artifactId>
-		<groupId>com.ritoinfo.framework</groupId>
+		<groupId>com.github.framework</groupId>
 		<version>${revision}</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
@@ -13,11 +13,11 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
+			<groupId>com.github.framework</groupId>
 			<artifactId>evo-starter</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>com.ritoinfo.framework</groupId>
+			<groupId>com.github.framework</groupId>
 			<artifactId>evo-base-data-mybatis-xml</artifactId>
 		</dependency>
 	</dependencies>

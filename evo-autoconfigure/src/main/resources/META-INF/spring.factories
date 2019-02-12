@@ -1,9 +1,9 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.ritoinfo.framework.evo.autoconfigure.auth.AuthConfiguration,\
-com.ritoinfo.framework.evo.autoconfigure.data.hibernate.HibernateConfiguration,\
-com.ritoinfo.framework.evo.autoconfigure.data.redis.RedisConfiguration,\
-com.ritoinfo.framework.evo.autoconfigure.feign.FeignConfiguration,\
-com.ritoinfo.framework.evo.autoconfigure.oauth2.ResourceServerConfiguration,\
-com.ritoinfo.framework.evo.autoconfigure.password.PasswordConfiguration,\
-com.ritoinfo.framework.evo.autoconfigure.session.SessionConfiguration,\
-com.ritoinfo.framework.evo.autoconfigure.swagger.SwaggerConfiguration
+com.github.framework.evo.autoconfigure.auth.AuthConfiguration,\
+com.github.framework.evo.autoconfigure.data.hibernate.HibernateConfiguration,\
+com.github.framework.evo.autoconfigure.data.redis.RedisConfiguration,\
+com.github.framework.evo.autoconfigure.feign.FeignConfiguration,\
+com.github.framework.evo.autoconfigure.oauth2.ResourceServerConfiguration,\
+com.github.framework.evo.autoconfigure.password.PasswordConfiguration,\
+com.github.framework.evo.autoconfigure.session.SessionConfiguration,\
+com.github.framework.evo.autoconfigure.swagger.SwaggerConfiguration

@@ -65,7 +65,7 @@
 		<appender-ref ref="LOGSTASH"/>
 	</logger>
 
-	<logger name="com.ritoinfo.framework.evo" level="DEBUG" additivity="false">
+	<logger name="com.github.framework.evo" level="DEBUG" additivity="false">
 		<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="ROLLINGFILE"/>
 		<appender-ref ref="LOGSTASH"/>
