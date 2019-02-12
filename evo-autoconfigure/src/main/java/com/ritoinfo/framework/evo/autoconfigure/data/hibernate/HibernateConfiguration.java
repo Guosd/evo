@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.autoconfigure.data.hibernate;
 
-import com.ritoinfo.framework.evo.base.starter.bizz.BaseHibernateBizz;
+import com.ritoinfo.framework.evo.base.bizz.BaseHibernateBizz;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;

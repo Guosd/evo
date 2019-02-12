@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class RedisAssist {
 	private static final String SPRING_APPLICATION_NAME = "evo-sp-auth";// 虚拟应用名称
-	private static final String CLASS_NAME = "com.ritoinfo.framework.evo.sp.auth.bizz.AuthBizz";// 虚拟类名
+	private static final String CLASS_NAME = "com.ritoinfo.framework.evo.auth.bizz.AuthBizz";// 虚拟类名
 
 	@Autowired
 	private RedisKeyGenerator redisKeyGenerator;

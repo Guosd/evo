@@ -18,7 +18,7 @@ insert into config_properties values (null, 'master', 'evo', 'default', 'evo.aut
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.hibernate.dialect', 'org.hibernate.dialect.MySQLDialect', '数据库方言 [Default org.hibernate.dialect.MySQLDialect]', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.hibernate.show-sql', 'true', '是否显示SQL [Default true]', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.hibernate.format-sql', 'false', '是否格式化SQL [Default false]', '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'evo.hibernate.packages', 'com.ritoinfo.framework.evo.sp.demo', '扫描实体包 [Default com.ritoinfo.framework.evo.sp.demo]', '1', now(), '1', now());
+insert into config_properties values (null, 'master', 'evo', 'default', 'evo.hibernate.packages', 'com.ritoinfo.framework.evo.demo', '扫描实体包 [Default com.ritoinfo.framework.evo.demo]', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.rabbitmq.addresses', '192.168.204.131:5672', null, '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.rabbitmq.host', '192.168.204.131', null, '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.rabbitmq.port', '5672', null, '1', now(), '1', now());

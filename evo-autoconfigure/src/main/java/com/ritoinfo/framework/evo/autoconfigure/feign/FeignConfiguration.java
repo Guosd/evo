@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.autoconfigure.feign;
 
-import com.ritoinfo.framework.evo.base.starter.interceptor.OpenFeignRequestInterceptor;
+import com.ritoinfo.framework.evo.base.interceptor.OpenFeignRequestInterceptor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.cloud.openfeign.FeignContext;
 import org.springframework.context.annotation.Bean;

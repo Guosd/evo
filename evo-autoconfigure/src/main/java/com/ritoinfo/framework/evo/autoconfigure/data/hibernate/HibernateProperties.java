@@ -23,7 +23,7 @@ public class HibernateProperties {
 	 */
 	private boolean formatSql = false;
 	/**
-	 * 扫描实体包。默认com.ritoinfo.framework.evo.sp.demo
+	 * 扫描实体包。默认com.ritoinfo.framework.evo.sample
 	 */
-	private String packages = "com.ritoinfo.framework.evo.sp.demo";
+	private String packages = "com.ritoinfo.framework.evo.sample";
 }

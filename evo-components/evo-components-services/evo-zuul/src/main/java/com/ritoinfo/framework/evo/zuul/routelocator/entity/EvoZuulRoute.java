@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.zuul.routelocator.entity;
 
-import com.ritoinfo.framework.evo.base.starter.entity.BaseMapperEntity;
+import com.ritoinfo.framework.evo.base.entity.BaseMapperEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
