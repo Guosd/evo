@@ -10,6 +10,7 @@ import com.ritoinfo.framework.evo.auth.config.VerifyCodeConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -28,41 +29,47 @@ public class AuthConfiguration {
 		this.authProperties = authProperties;
 	}
 
+	@RefreshScope
 	@Bean
 	public AuthorizationConfig authorizationConfig() {
 		return getAuthorizationConfig(authProperties.getAuthorization());
 	}
 
+	@RefreshScope
 	@Bean
 	public IamConfig iamConfig() {
 		return getIamConfig(authProperties.getIam());
 	}
 
+	@RefreshScope
 	@Bean
 	public JwtConfig jwtConfig() {
 		return getJwtConfig(authProperties.getJwt());
 	}
 
+	@RefreshScope
 	@Bean
 	public PathConfig pathConfig() {
 		return getPathConfig(authProperties.getPath());
 	}
 
+	@RefreshScope
 	@Bean
 	public RbacConfig rbacConfig() {
 		return getRbacConfig(authProperties.getIam().getRbac());
 	}
 
+	@RefreshScope
 	@Bean
 	public UserDetailsConfig userDetailsConfig() {
 		return getUserDetailsConfig(authProperties.getIam().getUserDetails());
 	}
 
+	@RefreshScope
 	@Bean
 	public VerifyCodeConfig verifyCodeConfig() {
 		return getVerifyCodeConfig(authProperties.getVerifyCode());
 	}
-
 
 	private AuthorizationConfig getAuthorizationConfig(AuthProperties.Authorization authorization) {
 		return AuthorizationConfig.builder().serviceId(authorization.getServiceId()).build();

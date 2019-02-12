@@ -29,7 +29,6 @@ insert into config_properties values (null, 'master', 'evo', 'default', 'evo.red
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.redis.cluster.nodes', '192.168.204.132:7001, 192.168.204.132:7002, 192.168.204.132:7003, 192.168.204.132:7004, 192.168.204.132:7005, 192.168.204.132:7006', 'Redis集群', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.ribbon.NFLoadBalancerRuleClassName', 'com.netflix.loadbalancer.RoundRobinRule', '负载均衡策略', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.password.strength', '10', 'BCrypt强哈希函数强度。强度参数越大，散列密码所需的工作(以指数形式)就越多 [Default 10]', '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'evo.session.user-context.enabled', 'true', '可以通过SessionHolder.getUserContext()获取当前用户 [Default true]', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.sms.enabled', 'false', 'true 开启; false 关闭 [Default false]', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.zuul.auth.client.id', 'client_1', 'OAuth2 表oauth_client_details.client_id', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.zuul.auth.client.secret', 'secret_1', 'OAuth2 表oauth_client_details.client_secret', '1', now(), '1', now());
@@ -85,6 +84,7 @@ insert into config_properties values (null, 'master', 'evo', 'yqjr', 'evo.sms.ip
 
 insert into zuul_route values (null, 'evo-auth', '/auth/**', 'evo-auth', null, '1', null, null, '1', null, '1', now(), '1', now());
 insert into zuul_route values (null, 'evo-oauth2', '/oauth2/**', 'evo-oauth2', null, '1', null, null, '1', null, '1', now(), '1', now());
+insert into zuul_route values (null, 'evo-sys', '/sys/**', 'evo-sys', null, '1', null, null, '1', null, '1', now(), '1', now());
 
 
 

@@ -197,6 +197,11 @@
 			</dependency>
 			<dependency>
 				<groupId>com.ritoinfo.framework</groupId>
+				<artifactId>evo-auth-config</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.ritoinfo.framework</groupId>
 				<artifactId>evo-auth-common</artifactId>
 				<version>${revision}</version>
 			</dependency>

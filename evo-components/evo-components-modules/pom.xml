@@ -26,6 +26,7 @@
 		<module>evo-auth-zuul-filter</module>
 		<module>evo-oauth2-common</module>
 		<module>evo-oauth2-zuul-resource</module>
+		<module>evo-auth-config</module>
 	</modules>
 
 </project>

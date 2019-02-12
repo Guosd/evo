@@ -18,6 +18,8 @@ public class Const {
 	public static final String HTTP_HEADER_X_FORWARDED_FOR = "X-Forwarded-For";// 客户端真实IP，格式 X-Forwarded-For: client, proxy1, proxy2
 	public static final String HTTP_HEADER_X_REAL_IP = "X-Real-IP";// Nginx设置的客户端真实IP
 	public static final String HTTP_HEADER_USER_AGENT = "User-Agent";// 用户代理
+	// URI Ant Path Pattern
+	public static final String URI_ANT_ACTUATOR = "/actuator/**";
 	// redis key 短信验证码前缀
 	public static final String VERIFY_CODE_PREFIX = "VERIFY_CODE_";
 	public static final String VERIFY_CODE_SIGN_IN = "SIGN_IN";

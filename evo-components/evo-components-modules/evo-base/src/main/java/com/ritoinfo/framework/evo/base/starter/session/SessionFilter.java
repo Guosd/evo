@@ -1,8 +1,11 @@
 package com.ritoinfo.framework.evo.base.starter.session;
 
+import com.ritoinfo.framework.evo.common.Const;
+import com.ritoinfo.framework.evo.common.config.UserContextConfig;
 import com.ritoinfo.framework.evo.common.uitl.HttpServletUtil;
+import com.ritoinfo.framework.evo.common.uitl.StringUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -26,8 +29,8 @@ import java.io.IOException;
 @WebFilter(filterName = "SessionFilter", urlPatterns = "/*")
 @Component
 public class SessionFilter implements Filter {
-	@Value("${evo.common.session.enabled:true}")
-	private boolean enabled;
+	@Autowired
+	private UserContextConfig userContextConfig;
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
@@ -38,9 +41,9 @@ public class SessionFilter implements Filter {
 		HttpServletRequest request = (HttpServletRequest) servletRequest;
 		HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-		if (enabled) {
+		if (userContextConfig.isEnabled() && !StringUtil.antPathMatch(Const.URI_ANT_ACTUATOR, request.getRequestURI())) {
 			SessionHolder.getCurrentHolder().setUserContext(HttpServletUtil.extractUserContext(request));
-			log.info("Thread Name {}, UserContext {}", Thread.currentThread().getName(), SessionHolder.getUserContext());
+			log.info("URI {}, Thread Name {}, UserContext {}", request.getRequestURI(), Thread.currentThread().getName(), SessionHolder.getUserContext());
 		}
 
 		filterChain.doFilter(request, response);
