@@ -1,12 +1,12 @@
 package com.ritoinfo.framework.evo.autoconfigure.auth;
 
-import com.ritoinfo.framework.evo.sp.auth.config.AuthorizationConfig;
-import com.ritoinfo.framework.evo.sp.auth.config.IamConfig;
-import com.ritoinfo.framework.evo.sp.auth.config.JwtConfig;
-import com.ritoinfo.framework.evo.sp.auth.config.PathConfig;
-import com.ritoinfo.framework.evo.sp.auth.config.RbacConfig;
-import com.ritoinfo.framework.evo.sp.auth.config.UserDetailsConfig;
-import com.ritoinfo.framework.evo.sp.auth.config.VerifyCodeConfig;
+import com.ritoinfo.framework.evo.auth.config.AuthorizationConfig;
+import com.ritoinfo.framework.evo.auth.config.IamConfig;
+import com.ritoinfo.framework.evo.auth.config.JwtConfig;
+import com.ritoinfo.framework.evo.auth.config.PathConfig;
+import com.ritoinfo.framework.evo.auth.config.RbacConfig;
+import com.ritoinfo.framework.evo.auth.config.UserDetailsConfig;
+import com.ritoinfo.framework.evo.auth.config.VerifyCodeConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

@@ -6,7 +6,7 @@ import com.netflix.zuul.exception.ZuulException;
 import com.ritoinfo.framework.evo.common.Const;
 import com.ritoinfo.framework.evo.common.uitl.JsonUtil;
 import com.ritoinfo.framework.evo.common.uitl.StringUtil;
-import com.ritoinfo.framework.evo.sp.oauth2.util.OAuth2Util;
+import com.ritoinfo.framework.evo.oauth2.util.OAuth2Util;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
 import org.springframework.security.core.Authentication;

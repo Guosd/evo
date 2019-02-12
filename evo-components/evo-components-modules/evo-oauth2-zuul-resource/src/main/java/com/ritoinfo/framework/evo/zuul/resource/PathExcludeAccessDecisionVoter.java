@@ -1,6 +1,6 @@
 package com.ritoinfo.framework.evo.zuul.resource;
 
-import com.ritoinfo.framework.evo.sp.auth.config.PathConfig;
+import com.ritoinfo.framework.evo.auth.config.PathConfig;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDecisionVoter;

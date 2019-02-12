@@ -1,10 +1,10 @@
 package com.ritoinfo.framework.evo.zuul.resource;
 
-import com.ritoinfo.framework.evo.sp.auth.api.model.RbacDto;
-import com.ritoinfo.framework.evo.sp.auth.bizz.RbacBizz;
-import com.ritoinfo.framework.evo.sp.oauth2.extend.LoginAuthenticationToken;
-import com.ritoinfo.framework.evo.sp.oauth2.extend.LoginUser;
-import com.ritoinfo.framework.evo.sp.oauth2.util.OAuth2Util;
+import com.ritoinfo.framework.evo.auth.api.model.RbacDto;
+import com.ritoinfo.framework.evo.auth.bizz.RbacBizz;
+import com.ritoinfo.framework.evo.oauth2.extend.LoginAuthenticationToken;
+import com.ritoinfo.framework.evo.oauth2.extend.LoginUser;
+import com.ritoinfo.framework.evo.oauth2.util.OAuth2Util;
 import com.ritoinfo.framework.evo.zuul.resource.exception.LoginUserNotExtractedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

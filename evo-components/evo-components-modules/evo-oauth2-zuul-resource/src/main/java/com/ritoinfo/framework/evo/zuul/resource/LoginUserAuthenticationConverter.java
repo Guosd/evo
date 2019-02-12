@@ -1,7 +1,7 @@
 package com.ritoinfo.framework.evo.zuul.resource;
 
-import com.ritoinfo.framework.evo.sp.oauth2.extend.LoginAuthenticationToken;
-import com.ritoinfo.framework.evo.sp.oauth2.extend.LoginUser;
+import com.ritoinfo.framework.evo.oauth2.extend.LoginAuthenticationToken;
+import com.ritoinfo.framework.evo.oauth2.extend.LoginUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
