@@ -48,39 +48,15 @@ insert into config_properties values (null, 'master', 'evo', 'default', 'evo.act
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.activiti.datasource.username', 'evo_activiti', null, '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.activiti.datasource.password', 'evo_activiti', null, '1', now(), '1', now());
 
-insert into config_properties values (null, 'master', 'evo', 'blue', 'evo.rabbitmq.addresses', '192.168.1.9:5672', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'blue', 'evo.rabbitmq.host', '192.168.1.9', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'blue', 'evo.redis.cluster.nodes', '192.168.1.9:7001, 192.168.1.9:7002, 192.168.1.9:7003, 192.168.1.9:7004, 192.168.1.9:7005, 192.168.1.9:7006', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'blue', 'evo.framework.datasource.url', 'jdbc:mysql://192.168.1.9:3306/evo_framework?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'blue', 'evo.demo.datasource.url', 'jdbc:mysql://192.168.1.9:3306/evo_demo?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'blue', 'evo.sys.datasource.url', 'jdbc:mysql://192.168.1.9:3306/evo_sys?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'blue', 'evo.datadict.datasource.url', 'jdbc:mysql://192.168.1.9:3306/evo_datadict?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'blue', 'evo.activiti.datasource.url', 'jdbc:mysql://192.168.1.9:3306/evo_activiti?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
-
 insert into config_properties values (null, 'master', 'evo', 'desktop', 'evo.rabbitmq.addresses', '192.168.18.132:5672', null, '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'desktop', 'evo.rabbitmq.host', '192.168.18.132', null, '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'desktop', 'evo.redis.cluster.nodes', '192.168.18.129:7001, 192.168.18.129:7002, 192.168.18.129:7003, 192.168.18.129:7004, 192.168.18.129:7005, 192.168.18.129:7006', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'desktop', 'evo.framework.datasource.url', 'jdbc:mysql://192.168.18.130:3306/evo_framework?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'desktop', 'evo.demo.datasource.url', 'jdbc:mysql://192.168.18.130:3306/evo_demo?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'desktop', 'evo.sys.datasource.url', 'jdbc:mysql://192.168.18.130:3306/evo_sys?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'desktop', 'evo.datadict.datasource.url', 'jdbc:mysql://192.168.18.130:3306/evo_datadict?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'desktop', 'evo.activiti.datasource.url', 'jdbc:mysql://192.168.18.130:3306/evo_activiti?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
+insert into config_properties values (null, 'master', 'evo', 'desktop', 'evo.framework.datasource.url', 'jdbc:mysql://192.168.18.134:3306/evo_framework?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
+insert into config_properties values (null, 'master', 'evo', 'desktop', 'evo.demo.datasource.url', 'jdbc:mysql://192.168.18.134:3306/evo_demo?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
+insert into config_properties values (null, 'master', 'evo', 'desktop', 'evo.sys.datasource.url', 'jdbc:mysql://192.168.18.134:3306/evo_sys?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
+insert into config_properties values (null, 'master', 'evo', 'desktop', 'evo.datadict.datasource.url', 'jdbc:mysql://192.168.18.134:3306/evo_datadict?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
+insert into config_properties values (null, 'master', 'evo', 'desktop', 'evo.activiti.datasource.url', 'jdbc:mysql://192.168.18.134:3306/evo_activiti?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
 
-insert into config_properties values (null, 'master', 'evo', 'yqjr', 'evo.rabbitmq.addresses', '10.20.133.40:5672, 10.20.133.43:5672', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'yqjr', 'evo.rabbitmq.host', '10.20.133.43', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'yqjr', 'evo.rabbitmq.port', '5672', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'yqjr', 'evo.rabbitmq.virtual-host', 'vhost_eco', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'yqjr', 'evo.rabbitmq.username', 'eco', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'yqjr', 'evo.rabbitmq.password', 'eco', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'yqjr', 'evo.redis.cluster.nodes', '10.20.133.85:7000, 10.20.133.85:7001, 10.20.133.85:7002, 10.20.133.85:7003, 10.20.133.85:7004, 10.20.133.85:7005', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'yqjr', 'evo.sms.enabled', 'true', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'yqjr', 'evo.sms.address', 'http://10.21.111.71:9087/smserver/submitMessage', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'yqjr', 'evo.sms.comCode', 'ZBKG', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'yqjr', 'evo.sms.orgCode', '00000000', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'yqjr', 'evo.sms.businessNo', 'ZBKG00000000DJCFAPP001', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'yqjr', 'evo.sms.businessTypeCode', '04', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'yqjr', 'evo.sms.channel', '0', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'yqjr', 'evo.sms.ip', '10.20.133.30', null, '1', now(), '1', now());
 
 insert into zuul_route values (null, 'evo-auth', '/auth/**', 'evo-auth', null, '1', null, null, '1', null, '1', now(), '1', now());
 insert into zuul_route values (null, 'evo-oauth2', '/oauth2/**', 'evo-oauth2', null, '1', null, null, '1', null, '1', now(), '1', now());
