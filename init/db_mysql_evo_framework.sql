@@ -1,6 +1,6 @@
 CREATE DATABASE evo_framework DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 CREATE USER 'evo_framework'@'%' IDENTIFIED BY 'evo_framework';
-ALTER USER 'evo_framework'@'%' IDENTIFIED WITH mysql_native_password BY 'evo_sys';
+ALTER USER 'evo_framework'@'%' IDENTIFIED WITH mysql_native_password BY 'evo_framework';
 GRANT ALL ON evo_framework.* TO 'evo_framework'@'%';
 
 FLUSH PRIVILEGES;
