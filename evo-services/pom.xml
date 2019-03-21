@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>evo-parent</artifactId>
+		<groupId>com.github.framework</groupId>
+		<version>${revision}</version>
+		<relativePath>../evo-parent</relativePath>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>evo-services</artifactId>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>evo-eureka</module>
+		<module>evo-admin</module>
+		<module>evo-config</module>
+		<module>evo-activiti</module>
+		<module>evo-auth</module>
+		<module>evo-datadict</module>
+		<module>evo-flowable</module>
+		<module>evo-oauth2</module>
+		<module>evo-sms</module>
+		<module>evo-static</module>
+		<module>evo-sys</module>
+		<module>evo-zuul-filter</module>
+		<module>evo-zuul-resource</module>
+	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
