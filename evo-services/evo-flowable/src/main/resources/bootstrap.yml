@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: evo-activiti
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: evo-config
+      name: evo
+      label: master
+      failFast: true
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+    health-check-url-path: /actuator/health
+  client:
+    initial-instance-info-replication-interval-seconds: 5
+    registry-fetch-interval-seconds: 5
+    serviceUrl:
+      defaultZone: http://localhost:20000/eureka
+logstash:
+  destination: 127.0.0.1:9600
+---
+spring:
+  profiles: vm
+eureka:
+  instance:
+    ip-address: 192.168.1.24
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.1.24:50101/eureka
+logstash:
+  destination: 192.168.1.28:9600

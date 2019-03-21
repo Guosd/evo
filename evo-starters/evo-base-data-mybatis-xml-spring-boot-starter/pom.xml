@@ -14,10 +14,6 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.github.framework</groupId>
-			<artifactId>evo-starter</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.github.framework</groupId>
 			<artifactId>evo-base-data-mybatis-xml</artifactId>
 		</dependency>
 	</dependencies>

@@ -1,0 +1,44 @@
+server:
+  port: 20130
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+spring:
+  datasource:
+    url: ${evo.activiti.datasource.url}
+    username: ${evo.activiti.datasource.username}
+    password: ${evo.activiti.datasource.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-test-query: select 1
+      connection-timeout: 30000
+      idle-timeout: 600000
+      maximum-pool-size: 60
+      max-lifetime: 1800000
+      minimum-idle: 10
+      read-only: false
+  rabbitmq:
+    addresses: ${evo.rabbitmq.addresses}
+    host: ${evo.rabbitmq.host}
+    port: ${evo.rabbitmq.port}
+    virtual-host: ${evo.rabbitmq.virtual-host}
+    username: ${evo.rabbitmq.username}
+    password: ${evo.rabbitmq.password}
+  jackson:
+    time-zone: GMT+8
+  sleuth:
+    http:
+      enabled: true
+    sampler:
+      probability: 1.0
+  activiti:
+    database-schema: evo_activiti # 数据库名称
+    database-schema-update: none # 如果设置为 true， 数据库中没有表时会新建
+    check-process-definitions: false # 是否检测流程定义文件
+    async-executor-activate: false
+    async-executor-enabled: false

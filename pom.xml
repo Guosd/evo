@@ -2,28 +2,31 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<artifactId>evo</artifactId>
-	<groupId>com.github.framework</groupId>
-	<version>${revision}</version>
 	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.github.framework</groupId>
+	<artifactId>evo</artifactId>
+	<version>${revision}</version>
+
+	<modules>
+		<module>evo-dependencies</module>
+		<module>evo-parent</module>
+		<module>evo-components</module>
+		<module>evo-starters</module>
+		<module>evo-autoconfigure</module>
+		<module>evo-services</module>
+	</modules>
 
 	<packaging>pom</packaging>
 
 	<properties>
 		<java.version>1.8</java.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<revision>1.0.0-SNAPSHOT</revision>
 	</properties>
-
-	<modules>
-		<module>evo-autoconfigure</module>
-		<module>evo-components</module>
-		<module>evo-dependencies</module><!-- 定义依赖规范 -->
-		<module>evo-parent</module><!-- 定义具体依赖实现 -->
-		<module>evo-samples</module>
-		<module>evo-starters</module>
-	</modules>
 
 	<repositories>
 		<repository>
@@ -84,18 +87,5 @@
 			</snapshots>
 		</pluginRepository>
 	</pluginRepositories>
-
-	<distributionManagement>
-		<repository>
-			<id>nexus-releases</id>
-			<name>Nexus Release Repository</name>
-			<url>http://10.21.111.31:8081/nexus/content/repositories/releases/</url>
-		</repository>
-		<snapshotRepository>
-			<id>nexus-snapshots</id>
-			<name>Nexus Snapshot Repository</name>
-			<url>http://10.21.111.31:8081/nexus/content/repositories/snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement>
 
 </project>

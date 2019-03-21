@@ -14,7 +14,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<spring-boot.version>2.1.2.RELEASE</spring-boot.version>
+		<spring-boot.version>2.1.3.RELEASE</spring-boot.version>
 		<spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
 		<spring-boot-admin-starter-server.version>2.1.2</spring-boot-admin-starter-server.version>
 		<spring-boot-maven-plugin.version>2.1.2.RELEASE</spring-boot-maven-plugin.version>
@@ -29,6 +29,8 @@
 		<mapper-spring-boot-starter.version>2.1.5</mapper-spring-boot-starter.version>
 		<pagehelper-spring-boot-starter.version>1.2.10</pagehelper-spring-boot-starter.version>
 		<activiti-spring-boot-starter-basic.version>5.22.0</activiti-spring-boot-starter-basic.version>
+		<flowable-spring-boot-starter.version>6.4.1</flowable-spring-boot-starter.version>
+		<flowable-spring-boot-starter-actuator.version>6.4.1</flowable-spring-boot-starter-actuator.version>
 		<guava.version>27.0.1-jre</guava.version>
 	</properties>
 
@@ -103,6 +105,16 @@
 				<groupId>org.activiti</groupId>
 				<artifactId>activiti-spring-boot-starter-basic</artifactId>
 				<version>${activiti-spring-boot-starter-basic.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.flowable</groupId>
+				<artifactId>flowable-spring-boot-starter</artifactId>
+				<version>${flowable-spring-boot-starter.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.flowable</groupId>
+				<artifactId>flowable-spring-boot-starter-actuator</artifactId>
+				<version>${flowable-spring-boot-starter-actuator.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.google.guava</groupId>
@@ -222,6 +234,16 @@
 			</dependency>
 			<dependency>
 				<groupId>com.github.framework</groupId>
+				<artifactId>evo-zuul-dynamic-route</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.framework</groupId>
+				<artifactId>evo-zuul-load-balancer</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-sample-api</artifactId>
 				<version>${revision}</version>
 			</dependency>
@@ -273,7 +295,6 @@
 					<executions>
 						<execution>
 							<goals>
-								<goal>build-info</goal>
 								<goal>repackage</goal>
 							</goals>
 						</execution>

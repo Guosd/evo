@@ -47,6 +47,9 @@ insert into config_properties values (null, 'master', 'evo', 'default', 'evo.dat
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.activiti.datasource.url', 'jdbc:mysql://192.168.204.130:3306/evo_activiti?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.activiti.datasource.username', 'evo_activiti', null, '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.activiti.datasource.password', 'evo_activiti', null, '1', now(), '1', now());
+insert into config_properties values (null, 'master', 'evo', 'default', 'evo.flowable.datasource.url', 'jdbc:mysql://192.168.204.130:3306/evo_flowable?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
+insert into config_properties values (null, 'master', 'evo', 'default', 'evo.flowable.datasource.username', 'evo_flowable', null, '1', now(), '1', now());
+insert into config_properties values (null, 'master', 'evo', 'default', 'evo.flowable.datasource.password', 'evo_flowable', null, '1', now(), '1', now());
 
 insert into config_properties values (null, 'master', 'evo', 'desktop', 'evo.rabbitmq.addresses', '192.168.18.132:5672', null, '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'desktop', 'evo.rabbitmq.host', '192.168.18.132', null, '1', now(), '1', now());

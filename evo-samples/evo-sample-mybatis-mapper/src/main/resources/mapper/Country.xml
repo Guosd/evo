@@ -1,6 +1,0 @@
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.github.framework.evo.sample.dao.CountryDao">
-	<select id="selectDemo" resultType="map">
-		select * from country t0 join country t1 on t0.id = t1.id
-	</select>
-</mapper>

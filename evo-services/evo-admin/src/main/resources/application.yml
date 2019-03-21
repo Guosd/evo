@@ -1,0 +1,25 @@
+server:
+  port: 20005
+spring:
+  application:
+    name: evo-admin
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+  client:
+    initial-instance-info-replication-interval-seconds: 5
+    registry-fetch-interval-seconds: 5
+    serviceUrl:
+      defaultZone: http://localhost:20000/eureka
+---
+spring:
+  profiles: vm
+eureka:
+  instance:
+    ip-address: 192.168.1.24
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.1.24:50101/eureka
+

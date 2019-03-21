@@ -3,19 +3,45 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
-		<artifactId>evo</artifactId>
+		<artifactId>evo-parent</artifactId>
 		<groupId>com.github.framework</groupId>
 		<version>${revision}</version>
+		<relativePath>../evo-parent</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>evo-components</artifactId>
-
 	<packaging>pom</packaging>
-
 	<modules>
-		<module>evo-components-modules</module>
-		<module>evo-components-services</module>
+		<module>evo-common</module>
+		<module>evo-base</module>
+		<module>evo-base-data-hibernate</module>
+		<module>evo-base-data-jpa</module>
+		<module>evo-base-data-mybatis-mapper</module>
+		<module>evo-base-data-mybatis-xml</module>
+		<module>evo-base-data-redis</module>
+		<module>evo-auth-common</module>
+		<module>evo-auth-config</module>
+		<module>evo-api</module>
+		<module>evo-auth-zuul-filter</module>
+		<module>evo-oauth2-common</module>
+		<module>evo-oauth2-zuul-resource</module>
+		<module>evo-zuul-dynamic-route</module>
+		<module>evo-zuul-load-balancer</module>
 	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

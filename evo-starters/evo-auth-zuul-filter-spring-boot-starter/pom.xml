@@ -14,7 +14,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.github.framework</groupId>
-			<artifactId>evo-starter</artifactId>
+			<artifactId>evo-zuul-dynamic-route</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.github.framework</groupId>
