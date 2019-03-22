@@ -5,6 +5,15 @@ GRANT ALL ON evo_framework.* TO 'evo_framework'@'%';
 
 FLUSH PRIVILEGES;
 
+drop table if exists config_properties;
+drop table if exists zuul_route;
+drop table if exists oauth_access_token;
+drop table if exists oauth_approvals;
+drop table if exists oauth_client_details;
+drop table if exists oauth_client_token;
+drop table if exists oauth_code;
+drop table if exists oauth_refresh_token;
+
 create table config_properties
 (
   id bigint auto_increment
