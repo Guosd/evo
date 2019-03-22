@@ -28,6 +28,7 @@
 		<mybatis-spring-boot-starter.version>2.0.0</mybatis-spring-boot-starter.version>
 		<mapper-spring-boot-starter.version>2.1.5</mapper-spring-boot-starter.version>
 		<pagehelper-spring-boot-starter.version>1.2.10</pagehelper-spring-boot-starter.version>
+		<mybatis-plus-boot-starter.version>3.1.0</mybatis-plus-boot-starter.version>
 		<activiti-spring-boot-starter-basic.version>5.22.0</activiti-spring-boot-starter-basic.version>
 		<flowable-spring-boot-starter.version>6.4.1</flowable-spring-boot-starter.version>
 		<flowable-spring-boot-starter-actuator.version>6.4.1</flowable-spring-boot-starter-actuator.version>
@@ -102,6 +103,11 @@
 				<version>${pagehelper-spring-boot-starter.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-boot-starter</artifactId>
+				<version>${mybatis-plus-boot-starter.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.activiti</groupId>
 				<artifactId>activiti-spring-boot-starter-basic</artifactId>
 				<version>${activiti-spring-boot-starter-basic.version}</version>
@@ -154,6 +160,11 @@
 			</dependency>
 			<dependency>
 				<groupId>com.github.framework</groupId>
+				<artifactId>evo-base-data-mybatis-plus</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-base-data-mybatis-xml</artifactId>
 				<version>${revision}</version>
 			</dependency>
@@ -180,6 +191,11 @@
 			<dependency>
 				<groupId>com.github.framework</groupId>
 				<artifactId>evo-base-data-mybatis-mapper-spring-boot-starter</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.framework</groupId>
+				<artifactId>evo-base-data-mybatis-plus-spring-boot-starter</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>
@@ -240,11 +256,6 @@
 			<dependency>
 				<groupId>com.github.framework</groupId>
 				<artifactId>evo-zuul-load-balancer</artifactId>
-				<version>${revision}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.github.framework</groupId>
-				<artifactId>evo-sample-api</artifactId>
 				<version>${revision}</version>
 			</dependency>
 			<dependency>

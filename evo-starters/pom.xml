@@ -17,6 +17,7 @@
 		<module>evo-base-data-hibernate-spring-boot-starter</module>
 		<module>evo-base-data-jpa-spring-boot-starter</module>
 		<module>evo-base-data-mybatis-mapper-spring-boot-starter</module>
+		<module>evo-base-data-mybatis-plus-spring-boot-starter</module>
 		<module>evo-base-data-mybatis-xml-spring-boot-starter</module>
 		<module>evo-base-data-redis-spring-boot-starter</module>
 		<module>evo-auth-zuul-filter-spring-boot-starter</module>

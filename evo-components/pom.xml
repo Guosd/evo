@@ -28,6 +28,7 @@
 		<module>evo-oauth2-zuul-resource</module>
 		<module>evo-zuul-dynamic-route</module>
 		<module>evo-zuul-load-balancer</module>
+		<module>evo-base-data-mybatis-plus</module>
 	</modules>
 
 	<build>
