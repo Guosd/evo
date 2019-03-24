@@ -265,6 +265,11 @@
 			</dependency>
 			<dependency>
 				<groupId>com.github.framework</groupId>
+				<artifactId>evo-flowable-api</artifactId>
+				<version>${revision}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.framework</groupId>
 				<artifactId>evo-auth-api</artifactId>
 				<version>${revision}</version>
 			</dependency>

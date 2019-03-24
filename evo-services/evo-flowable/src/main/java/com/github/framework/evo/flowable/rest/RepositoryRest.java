@@ -1,0 +1,26 @@
+package com.github.framework.evo.flowable.rest;
+
+import com.github.framework.evo.flowable.api.RepositoryApi;
+import com.github.framework.evo.flowable.bizz.RepositoryBizz;
+import com.github.framework.evo.flowable.model.ProcessDefinitionDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+/**
+ * User: Kyll
+ * Date: 2019-03-24 11:23
+ */
+@RequestMapping("/repository")
+@RestController
+public class RepositoryRest implements RepositoryApi {
+	@Autowired
+	private RepositoryBizz repositoryBizz;
+
+	@Override
+	public List<ProcessDefinitionDto> findAllProcessDefinition() {
+		return repositoryBizz.findAllProcessDefinition();
+	}
+}

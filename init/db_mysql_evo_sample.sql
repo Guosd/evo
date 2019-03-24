@@ -1,14 +1,8 @@
-CREATE DATABASE evo_demo_account DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-CREATE DATABASE evo_demo_order DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-CREATE DATABASE evo_demo_storage DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE DATABASE evo_sample DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 
-CREATE USER 'evo_demo_account'@'%' IDENTIFIED BY 'evo_demo_account';
-CREATE USER 'evo_demo_order'@'%' IDENTIFIED BY 'evo_demo_order';
-CREATE USER 'evo_demo_storage'@'%' IDENTIFIED BY 'evo_demo_storage';
+CREATE USER 'evo_sample'@'%' IDENTIFIED BY 'evo_sample';
 
-GRANT ALL ON evo_demo_account.* TO 'evo_demo_account'@'%';
-GRANT ALL ON evo_demo_order.* TO 'evo_demo_order'@'%';
-GRANT ALL ON evo_demo_storage.* TO 'evo_demo_storage'@'%';
+GRANT ALL ON evo_sample.* TO 'evo_sample'@'%';
 
 FLUSH PRIVILEGES;
 

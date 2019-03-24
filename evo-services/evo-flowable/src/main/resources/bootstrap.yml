@@ -1,6 +1,6 @@
 spring:
   application:
-    name: evo-activiti
+    name: evo-flowable
   cloud:
     config:
       discovery:
