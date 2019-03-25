@@ -23,8 +23,12 @@ public class StringUtil {
 		return StringUtils.isNotBlank(str);
 	}
 
-	public static String toEmpty(Object object) {
+	public static String toStringIfEmpty(Object object) {
 		return object == null ? "" : object.toString();
+	}
+
+	public static String toStringIfNull(Object object) {
+		return object == null ? null : object.toString();
 	}
 
 	public static String defaultIfBlank(String str, String defaultStr) {

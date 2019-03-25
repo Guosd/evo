@@ -37,7 +37,7 @@ public class ActivitiUtil {
 		for (Map.Entry<String, Object> entry : variableMap.entrySet()) {
 			VariableProxy variableProxy = new VariableProxy();
 			variableProxy.setName(entry.getKey());
-			variableProxy.setValue(StringUtil.toEmpty(entry.getValue()));
+			variableProxy.setValue(StringUtil.toStringIfEmpty(entry.getValue()));
 			variableProxyList.add(variableProxy);
 		}
 

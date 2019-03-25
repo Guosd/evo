@@ -9,15 +9,16 @@ import java.util.Map;
 
 /**
  * User: Kyll
- * Date: 2019-03-24 13:06
+ * Date: 2019-03-25 16:03
  */
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
-public class StartDto {
+public class TaskDto {
 	private String initiator;
-	private String processDefinitionKey;
-	private String businessKey;
+	private String taskId;
+	private String processInstanceId;
+	private String message;
 	private Map<String, Object> variables;
 }

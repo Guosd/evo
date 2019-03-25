@@ -61,6 +61,7 @@ insert into config_properties values (null, 'master', 'evo', 'blue', 'evo.sample
 insert into config_properties values (null, 'master', 'evo', 'blue', 'evo.sys.datasource.url', 'jdbc:mysql://192.168.204.130:3306/evo_sys?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'blue', 'evo.datadict.datasource.url', 'jdbc:mysql://192.168.204.130:3306/evo_datadict?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'blue', 'evo.activiti.datasource.url', 'jdbc:mysql://192.168.204.130:3306/evo_activiti?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
+insert into config_properties values (null, 'master', 'evo', 'blue', 'evo.flowable.datasource.url', 'jdbc:mysql://192.168.204.130:3306/evo_flowable?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
 
 
 insert into zuul_route values (null, 'evo-auth', '/auth/**', 'evo-auth', null, '1', null, null, '1', null, '1', now(), '1', now());

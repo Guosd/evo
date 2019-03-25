@@ -34,9 +34,9 @@ public class UserTaskListener implements TaskListener {
 	public void notify(DelegateTask delegateTask) {
 		String eventName = delegateTask.getEventName();
 		String createUrlText = ActivitiUtil.getExpressionText(createUrl);
-		String createUrlValue = StringUtil.toEmpty(ActivitiUtil.getExpressionValue(createUrl, delegateTask));
+		String createUrlValue = StringUtil.toStringIfEmpty(ActivitiUtil.getExpressionValue(createUrl, delegateTask));
 		String completeUrlText = ActivitiUtil.getExpressionText(completeUrl);
-		String completeUrlValue = StringUtil.toEmpty(ActivitiUtil.getExpressionValue(completeUrl, delegateTask));
+		String completeUrlValue = StringUtil.toStringIfEmpty(ActivitiUtil.getExpressionValue(completeUrl, delegateTask));
 
 		Map<String, Object> map = new HashMap<>();
 		map.put("assignee", delegateTask.getAssignee());

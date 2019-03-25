@@ -1,5 +1,6 @@
 package com.github.framework.evo.common.uitl;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -30,5 +31,13 @@ public class CollectionUtil {
 			}
 		}
 		return false;
+	}
+
+	public static boolean isEmpty(Collection collection) {
+		return collection == null || collection.isEmpty();
+	}
+
+	public static boolean isNotEmpty(Collection collection) {
+		return !isEmpty(collection);
 	}
 }
