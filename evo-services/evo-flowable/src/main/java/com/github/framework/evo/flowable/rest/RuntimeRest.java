@@ -2,11 +2,14 @@ package com.github.framework.evo.flowable.rest;
 
 import com.github.framework.evo.flowable.api.RuntimeApi;
 import com.github.framework.evo.flowable.bizz.RuntimeBizz;
+import com.github.framework.evo.flowable.model.CommentDto;
 import com.github.framework.evo.flowable.model.ProcessInstanceDto;
-import com.github.framework.evo.flowable.model.StartDto;
+import com.github.framework.evo.flowable.model.StartReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * User: Kyll
@@ -19,7 +22,22 @@ public class RuntimeRest implements RuntimeApi {
 	private RuntimeBizz runtimeBizz;
 
 	@Override
-	public ProcessInstanceDto startProcessInstanceByKey(StartDto startDto) {
-		return runtimeBizz.startProcessInstanceByKey(startDto);
+	public ProcessInstanceDto startProcessInstanceByKey(StartReq startReq) {
+		return runtimeBizz.startProcessInstanceByKey(startReq);
+	}
+
+	@Override
+	public ProcessInstanceDto startProcessInstanceByKeyAndNext(StartReq startReq) {
+		return runtimeBizz.startProcessInstanceByKeyAndNext(startReq);
+	}
+
+	@Override
+	public List<CommentDto> findProcessInstanceComments(String processInstanceId) {
+		return runtimeBizz.findProcessInstanceComments(processInstanceId);
+	}
+
+	@Override
+	public void clear() {
+		runtimeBizz.clear();
 	}
 }

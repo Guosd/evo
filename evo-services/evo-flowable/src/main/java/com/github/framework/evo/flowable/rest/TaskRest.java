@@ -2,7 +2,8 @@ package com.github.framework.evo.flowable.rest;
 
 import com.github.framework.evo.flowable.api.TaskApi;
 import com.github.framework.evo.flowable.bizz.TaskBizz;
-import com.github.framework.evo.flowable.model.TaskDto;
+import com.github.framework.evo.flowable.model.ClaimReq;
+import com.github.framework.evo.flowable.model.TaskReq;
 import com.github.framework.evo.flowable.model.TaskInfoDto;
 import com.github.framework.evo.flowable.model.TaskInfoQueryCondition;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,17 @@ public class TaskRest implements TaskApi {
 	}
 
 	@Override
-	public void complete(TaskDto taskDto) {
-		taskBizz.complete(taskDto);
+	public void claim(ClaimReq claimReq) {
+		taskBizz.claim(claimReq);
+	}
+
+	@Override
+	public void complete(TaskReq taskReq) {
+		taskBizz.complete(taskReq);
+	}
+
+	@Override
+	public void clear() {
+		taskBizz.clear();
 	}
 }

@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Collection;
+import java.util.Map;
 
 /**
  * User: Kyll
@@ -15,6 +15,9 @@ import java.util.Collection;
 @AllArgsConstructor
 @Builder
 @Data
-public class AssignmentDto {
-	private Collection<String> actors;
+public class AssignmentReq {
+	private String processDefinitionKey;
+	private String businessKey;
+	private String taskDefinitionKey;
+	private Map<String, Object> variables;
 }

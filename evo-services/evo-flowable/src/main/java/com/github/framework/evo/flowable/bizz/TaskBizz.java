@@ -3,13 +3,16 @@ package com.github.framework.evo.flowable.bizz;
 import com.github.framework.evo.base.assist.BaseHelper;
 import com.github.framework.evo.common.uitl.CollectionUtil;
 import com.github.framework.evo.common.uitl.StringUtil;
+import com.github.framework.evo.flowable.model.ClaimReq;
 import com.github.framework.evo.flowable.model.OrderQueryCondition;
-import com.github.framework.evo.flowable.model.TaskDto;
 import com.github.framework.evo.flowable.model.TaskInfoDto;
 import com.github.framework.evo.flowable.model.TaskInfoQueryCondition;
+import com.github.framework.evo.flowable.model.TaskReq;
 import com.github.framework.evo.flowable.model.VariableQueryCondition;
+import org.flowable.common.engine.impl.identity.Authentication;
 import org.flowable.engine.HistoryService;
 import org.flowable.engine.TaskService;
+import org.flowable.task.api.Task;
 import org.flowable.task.api.TaskInfo;
 import org.flowable.task.api.TaskInfoQuery;
 import org.flowable.task.api.TaskInfoQueryWrapper;
@@ -462,8 +465,20 @@ public class TaskBizz {
 				TaskInfoDto.class);
 	}
 
-	public void complete(TaskDto taskDto) {
-		taskService.addComment(taskDto.getTaskId(), taskDto.getProcessInstanceId(), taskDto.getMessage());
-		taskService.complete(taskDto.getTaskId(), taskDto.getVariables());
+	public void claim(ClaimReq claimReq) {
+		taskService.claim(claimReq.getTaskId(), claimReq.getUserId());
+	}
+
+	public void complete(TaskReq taskReq) {
+		Authentication.setAuthenticatedUserId(taskReq.getInitiator());
+
+		taskService.addComment(taskReq.getTaskId(), taskReq.getProcessInstanceId(), taskReq.getMessage());
+		taskService.complete(taskReq.getTaskId(), taskReq.getVariables());
+	}
+
+	public void clear() {
+		for (Task task : taskService.createTaskQuery().active().list()) {
+			taskService.deleteTask(task.getId(), true);
+		}
 	}
 }

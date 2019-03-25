@@ -5,16 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Collection;
-
 /**
  * User: Kyll
- * Date: 2019-03-24 15:08
+ * Date: 2019-03-25 23:09
  */
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
-public class AssignmentDto {
-	private Collection<String> actors;
+public class ClaimReq {
+	private String taskId;
+	private String userId;
 }

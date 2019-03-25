@@ -3,6 +3,7 @@ package com.github.framework.evo.flowable.bizz;
 import com.github.framework.evo.base.assist.BaseHelper;
 import com.github.framework.evo.flowable.model.ProcessDefinitionDto;
 import org.flowable.engine.RepositoryService;
+import org.flowable.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,10 @@ import java.util.List;
 public class RepositoryBizz {
 	@Autowired
 	private RepositoryService repositoryService;
+
+	public ProcessDefinition getProcessDefinitionByIdForRaw(String id) {
+		return repositoryService.createProcessDefinitionQuery().processDefinitionId(id).singleResult();
+	}
 
 	public List<ProcessDefinitionDto> findAllProcessDefinition() {
 		return BaseHelper.convertObject(
