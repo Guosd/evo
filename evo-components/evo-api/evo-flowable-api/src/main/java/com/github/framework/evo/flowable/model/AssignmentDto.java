@@ -17,4 +17,22 @@ import java.util.Collection;
 @Data
 public class AssignmentDto {
 	private Collection<String> actors;
+	private String condition;
+	/*
+	{
+		type: passCount
+		weight: 正数:通过数, 负数:拒绝数
+	}
+	{
+		type: passPercent
+		weight: 正数:通过率, 负数:拒绝率
+	}
+	{
+		type: weight
+		weight: {
+			pass: 正数:通过分数, 负数:拒绝分数
+			weights: [{actor: weight}, {actor: weight}]
+		}
+	}
+	*/
 }
