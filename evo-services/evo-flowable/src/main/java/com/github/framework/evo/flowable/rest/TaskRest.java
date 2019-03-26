@@ -33,6 +33,11 @@ public class TaskRest implements TaskApi {
 	}
 
 	@Override
+	public void unclaim(String taskId) {
+		taskBizz.unclaim(taskId);
+	}
+
+	@Override
 	public void complete(TaskReq taskReq) {
 		taskBizz.complete(taskReq);
 	}

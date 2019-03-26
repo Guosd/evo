@@ -16,9 +16,10 @@ import java.util.Map;
 @Builder
 @Data
 public class TaskReq {
-	private String initiator;
+	private String actor;
 	private String taskId;
 	private String processInstanceId;
 	private String message;
+	private String outgoing;
 	private Map<String, Object> variables;
 }

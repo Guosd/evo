@@ -19,6 +19,7 @@ import org.flowable.task.api.TaskInfoQueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -469,11 +470,15 @@ public class TaskBizz {
 		taskService.claim(claimReq.getTaskId(), claimReq.getUserId());
 	}
 
+	public void unclaim(String taskId) {
+		taskService.unclaim(taskId);
+	}
+
 	public void complete(TaskReq taskReq) {
-		Authentication.setAuthenticatedUserId(taskReq.getInitiator());
+		Authentication.setAuthenticatedUserId(taskReq.getActor());
 
 		taskService.addComment(taskReq.getTaskId(), taskReq.getProcessInstanceId(), taskReq.getMessage());
-		taskService.complete(taskReq.getTaskId(), taskReq.getVariables());
+		taskService.complete(taskReq.getTaskId(), taskReq.getVariables(), Collections.singletonMap("pv_outgoing", taskReq.getOutgoing()));
 	}
 
 	public void clear() {

@@ -54,7 +54,7 @@ public class ProcessInstanceBizz {
 		variableProxyList.add(new VariableProxy(ActivitiConst.DEFPV_PROCESSINSTANCE_BUSINESSKEY, ActivitiConst.VARIABLE_TYPE_STRING, businessKey));
 		variableProxyList.add(new VariableProxy(ActivitiConst.DEFPV_PREV_OUTGOING, ActivitiConst.VARIABLE_TYPE_STRING, ActivitiConst.DEFPV_PREV_OUTGOING_PASS));
 
-	//	Authentication.setAuthenticatedUserId(initiator);
+	//	Authentication.setAuthenticatedUserId(actor);
 		ProcessInstanceProxy processInstanceProxy = runtimeServiceProxy.startByKey(processDefinitionKey, businessKey, variableProxyList);
 		if (processInstanceProxy == null) {
 			throw new ProcessInstanceStartException(processDefinitionKey);

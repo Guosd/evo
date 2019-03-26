@@ -25,7 +25,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @Slf4j
 @Component
-public class AssignmentListener implements TaskListener {
+public class AssignmentActorListener implements TaskListener {
 	@Autowired
 	private RestTemplate restTemplate;
 	@Autowired

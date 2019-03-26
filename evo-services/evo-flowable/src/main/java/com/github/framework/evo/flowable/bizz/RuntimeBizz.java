@@ -13,6 +13,7 @@ import org.flowable.engine.task.Comment;
 import org.flowable.task.api.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -39,8 +40,10 @@ public class RuntimeBizz {
 				ProcessInstanceDto.class);
 	}
 
+	@Transactional
 	public ProcessInstanceDto startProcessInstanceByKeyAndNext(StartReq startReq) {
 		Authentication.setAuthenticatedUserId(startReq.getInitiator());
+
 		ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(startReq.getProcessDefinitionKey(), startReq.getBusinessKey(), startReq.getVariables());
 		log.info("ProcessInstance: {}", processInstance);
 
