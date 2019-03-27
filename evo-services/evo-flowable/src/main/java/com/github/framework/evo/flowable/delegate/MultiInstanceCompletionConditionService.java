@@ -29,9 +29,9 @@ public class MultiInstanceCompletionConditionService {
 			int nrOfInstances = (Integer) delegateExecution.getVariable("nrOfInstances");
 			double percent = jsonNode.get("weight").asDouble();
 			if (percent > 0) {
-				result = percent <= (Integer) delegateExecution.getVariable("pv_pass_count") / nrOfInstances;
+				result = percent <= (Integer) delegateExecution.getVariable("pv_pass_count") / (1.0 * nrOfInstances);
 			} else {
-				result = Math.abs(percent) <= (Integer) delegateExecution.getVariable("pv_reject_count") / nrOfInstances;
+				result = Math.abs(percent) <= (Integer) delegateExecution.getVariable("pv_reject_count") / (1.0 * nrOfInstances);
 			}
 		} else if ("weight".equals(type)) {
 			JsonNode weightNode = jsonNode.get("weight");
