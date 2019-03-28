@@ -1,5 +1,6 @@
 package com.github.framework.evo.auth.rest;
 
+import com.github.framework.evo.auth.api.TokenApi;
 import com.github.framework.evo.auth.bizz.TokenBizz;
 import com.github.framework.evo.common.model.UserContext;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("/token")
 @RestController
-public class TokenRest {
+public class TokenRest implements TokenApi {
 	@Autowired
 	private TokenBizz tokenBizz;
 
@@ -30,7 +31,7 @@ public class TokenRest {
 		return tokenBizz.refresh(accessToken);
 	}
 
-	@PostMapping("/check")
+	@Override
 	public UserContext check(@RequestBody String accessToken) {
 		return tokenBizz.check(accessToken);
 	}

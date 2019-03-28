@@ -3,6 +3,7 @@ package com.github.framework.evo.sys.rest;
 import com.github.framework.evo.base.rest.BaseRest;
 import com.github.framework.evo.common.validate.group.CreateGroup;
 import com.github.framework.evo.common.validate.group.UpdateGroup;
+import com.github.framework.evo.sys.api.UserApi;
 import com.github.framework.evo.sys.bizz.UserBizz;
 import com.github.framework.evo.sys.condition.UserCondition;
 import com.github.framework.evo.sys.dto.UserDto;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequestMapping("user")
 @RestController
-public class UserRest extends BaseRest<UserBizz, Long, UserDto, UserCondition> {
+public class UserRest extends BaseRest<UserBizz, Long, UserDto, UserCondition> implements UserApi {
 	@GetMapping("/id/{id}/role")
 	public UserDto getWithRole(@PathVariable Long id) {
 		return bizz.getWithRole(id);
@@ -42,6 +43,11 @@ public class UserRest extends BaseRest<UserBizz, Long, UserDto, UserCondition> {
 	@PostMapping("/all")
 	public Long createAll(@Validated(CreateGroup.class) @RequestBody UserDto dto) {
 		return bizz.createAll(dto);
+	}
+
+	@Override
+	public void update(UserDto dto, String token) {
+		update(dto);
 	}
 
 	@PutMapping("/with-role")

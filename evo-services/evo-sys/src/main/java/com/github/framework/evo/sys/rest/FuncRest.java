@@ -3,6 +3,7 @@ package com.github.framework.evo.sys.rest;
 import com.github.framework.evo.base.rest.BaseRest;
 import com.github.framework.evo.common.model.PageList;
 import com.github.framework.evo.common.validate.group.PageGroup;
+import com.github.framework.evo.sys.api.FuncApi;
 import com.github.framework.evo.sys.bizz.FuncBizz;
 import com.github.framework.evo.sys.condition.FuncCondition;
 import com.github.framework.evo.sys.dto.FuncDto;
@@ -23,9 +24,9 @@ import java.util.List;
  * Date: 2018-03-04 18:06
  */
 @Slf4j
-@RequestMapping("func")
+@RequestMapping("/func")
 @RestController
-public class FuncRest extends BaseRest<FuncBizz, Long, FuncDto, FuncCondition> {
+public class FuncRest extends BaseRest<FuncBizz, Long, FuncDto, FuncCondition> implements FuncApi {
 	@GetMapping("/id/{id}/micro")
 	public FuncDto getWithMicro(@PathVariable Long id) {
 		return bizz.getWithMicro(id);
@@ -36,7 +37,7 @@ public class FuncRest extends BaseRest<FuncBizz, Long, FuncDto, FuncCondition> {
 		return bizz.findPageWithMicro(condition);
 	}
 
-	@GetMapping("/user/username/{username}")
+	@Override
 	public List<PermissionDto> findByUsername(@PathVariable String username) {
 		return bizz.findByUsername(username);
 	}

@@ -2,6 +2,7 @@ package com.github.framework.evo.sys.rest;
 
 import com.github.framework.evo.base.rest.BaseRest;
 import com.github.framework.evo.common.validate.group.CreateGroup;
+import com.github.framework.evo.sys.api.RoleApi;
 import com.github.framework.evo.sys.bizz.RoleBizz;
 import com.github.framework.evo.sys.condition.RoleCondition;
 import com.github.framework.evo.sys.dto.RoleDto;
@@ -21,9 +22,9 @@ import java.util.List;
  * Date: 2018-03-04 18:06
  */
 @Slf4j
-@RequestMapping("role")
+@RequestMapping("/role")
 @RestController
-public class RoleRest extends BaseRest<RoleBizz, Long, RoleDto, RoleCondition> {
+public class RoleRest extends BaseRest<RoleBizz, Long, RoleDto, RoleCondition> implements RoleApi {
 	@GetMapping("/id/{id}/func")
 	public RoleDto getWithFunc(@PathVariable Long id) {
 		return bizz.getWithFunc(id);
@@ -34,12 +35,12 @@ public class RoleRest extends BaseRest<RoleBizz, Long, RoleDto, RoleCondition> {
 		return bizz.getByCode(code);
 	}
 
-	@GetMapping("/user/id/{userId}")
+	@Override
 	public List<RoleDto> findByUserId(@PathVariable Long userId) {
 		return bizz.findByUserId(userId);
 	}
 
-	@GetMapping("/user/username/{username}")
+	@Override
 	public List<RoleDto> findByUsername(@PathVariable String username) {
 		return bizz.findByUsername(username);
 	}

@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Date: 2018-06-08 15:36
  */
 @Slf4j
-@RequestMapping("identity")
+@RequestMapping("/identity")
 @RestController
 public class IdentityRest {
 	@Autowired
