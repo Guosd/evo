@@ -13,6 +13,7 @@ eureka:
     hostname: localhost
     lease-expiration-duration-in-seconds: 10 # 没有心跳的淘汰时间
     lease-renewal-interval-in-seconds: 5 # 心跳间隔
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
   client:
     register-with-eureka: false
     fetch-registry: false
