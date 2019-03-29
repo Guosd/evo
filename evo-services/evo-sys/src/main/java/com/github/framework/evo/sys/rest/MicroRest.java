@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Date: 2018-04-23 20:04
  */
 @Slf4j
-@RequestMapping("micro")
+@RequestMapping("/micro")
 @RestController
 public class MicroRest extends BaseRest<MicroBizz, Long, MicroDto, MicroCondition> {
 }

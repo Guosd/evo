@@ -68,6 +68,7 @@ insert into zuul_route values (null, 'evo-auth', '/auth/**', 'evo-auth', null, '
 insert into zuul_route values (null, 'evo-oauth2', '/oauth2/**', 'evo-oauth2', null, '1', null, null, '1', null, '1', now(), '1', now());
 insert into zuul_route values (null, 'evo-sys', '/sys/**', 'evo-sys', null, '1', null, null, '1', null, '1', now(), '1', now());
 
+
 insert into oauth_client_details values ('client_1', null, '$08$ykt.Bl5oKvERSruMfI4LS.otlcTepWGPolPuuk4ke9yauObbOsKri', 'all', 'authorization_code,password,mnvc,refresh_token', null, null, '43200', '259200', null, null);
 
 

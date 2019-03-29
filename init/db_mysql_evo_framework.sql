@@ -16,8 +16,7 @@ drop table if exists oauth_refresh_token;
 
 create table config_properties
 (
-  id bigint auto_increment
-    primary key,
+  id bigint auto_increment primary key,
   label varchar(255) null,
   application varchar(255) null,
   profile varchar(255) null,
@@ -32,8 +31,7 @@ create table config_properties
 
 create table zuul_route
 (
-  id bigint auto_increment
-    primary key,
+  id bigint auto_increment primary key,
   route_id varchar(255) null,
   path varchar(255) null,
   service_id varchar(255) null,

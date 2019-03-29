@@ -35,7 +35,7 @@ public class PermissionBizz {
 	}
 
 	/**
-	 * 将 /xxxx/yyyy/{id} 替换为 /xxxx/yyyy/**
+	 * 将 /xxxx/yyyy/{id} 替换为 /xxxx/yyyy/*
 	 * @param path URI
 	 * @return ANT 路径
 	 */
@@ -44,7 +44,7 @@ public class PermissionBizz {
 
 		StringBuffer sb = new StringBuffer();
 		while (matcher.find()) {
-			matcher.appendReplacement(sb, "**");
+			matcher.appendReplacement(sb, "*");
 		}
 		matcher.appendTail(sb);
 
