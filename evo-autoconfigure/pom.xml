@@ -43,6 +43,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.github.framework</groupId>
+			<artifactId>evo-base-data-mybatis-plus</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.github.framework</groupId>
 			<artifactId>evo-base-data-mybatis-xml</artifactId>
 			<optional>true</optional>
 		</dependency>

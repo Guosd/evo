@@ -171,15 +171,15 @@ public abstract class BasePlusBizz<Dao extends BaseMapper, E extends BasePlusEnt
 						wrapper.eq(key, value);
 					}
 				}
+			}
 
-				if (condition instanceof PageDto) {
-					PageDto pageDto = (PageDto) condition;
+			if (condition instanceof PageDto) {
+				PageDto pageDto = (PageDto) condition;
 
-					if ("asc".equals(pageDto.getPageOrder())) {
-						wrapper.orderByAsc(pageDto.getPageSort());
-					} else {
-						wrapper.orderByDesc(pageDto.getPageSort());
-					}
+				if ("asc".equals(pageDto.getPageOrder())) {
+					wrapper.orderByAsc(pageDto.getPageSort());
+				} else {
+					wrapper.orderByDesc(pageDto.getPageSort());
 				}
 			}
 		} else {
