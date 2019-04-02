@@ -87,6 +87,7 @@ public class RoleBizz extends BaseXmlBizz<RoleDao, Role, Long, RoleDto> {
 		}
 	}
 
+	@Transactional
 	@Override
 	public void delete(Long id) {
 		dao.deleteWithFunc(id);
