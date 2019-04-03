@@ -1,5 +1,5 @@
 server:
-  port: 20005
+  port: ${port:20005}
 spring:
   application:
     name: evo-admin
