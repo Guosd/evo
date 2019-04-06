@@ -1,5 +1,5 @@
 server:
-  port: 20125
+  port: ${port:20125}
 management:
   endpoints:
     web:
