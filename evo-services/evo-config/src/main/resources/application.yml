@@ -39,6 +39,7 @@ spring:
         default-label: master
         jdbc:
           sql: select t.key_, t.value from config_properties t where t.application = ? and t.profile = ? and t.label = ?
+      override-none: true # 决定各个微服务是否可以覆盖Spring Cloud Config的属性
     bus:
       trace:
         enabled: true # 消息总线跟踪开关
