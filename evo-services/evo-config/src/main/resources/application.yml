@@ -39,14 +39,13 @@ spring:
         default-label: master
         jdbc:
           sql: select t.key_, t.value from config_properties t where t.application = ? and t.profile = ? and t.label = ?
-      override-none: true # 决定各个微服务是否可以覆盖Spring Cloud Config的属性
     bus:
       trace:
         enabled: true # 消息总线跟踪开关
 eureka:
   instance:
     lease-expiration-duration-in-seconds: 15
-    lease-renewal-interval-in-seconds: 5
+    lease-renewal-interval-in-seconds: 5 # 心跳间隔5秒
     health-check-url-path: /actuator/health
     instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
   client:
