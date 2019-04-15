@@ -27,6 +27,7 @@
 		<module>evo-sys</module>
 		<module>evo-zuul-filter</module>
 		<module>evo-zuul-resource</module>
+		<module>evo-controller</module>
 	</modules>
 
 	<build>

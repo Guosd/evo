@@ -1,0 +1,34 @@
+server:
+  port: ${port:20400}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+spring:
+  rabbitmq:
+    addresses: ${evo.rabbitmq.addresses}
+    host: ${evo.rabbitmq.host}
+    port: ${evo.rabbitmq.port}
+    virtual-host: ${evo.rabbitmq.virtual-host}
+    username: ${evo.rabbitmq.username}
+    password: ${evo.rabbitmq.password}
+  redis:
+    cluster:
+      nodes: ${evo.redis.cluster.nodes}
+  jackson:
+    time-zone: GMT+8
+  sleuth:
+    http:
+      enabled: true
+    sampler:
+      probability: 1.0
+  main:
+    allow-bean-definition-overriding: true
+evo:
+  session:
+    user-context:
+      enabled: false
