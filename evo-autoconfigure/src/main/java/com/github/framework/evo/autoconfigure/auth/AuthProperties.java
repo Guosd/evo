@@ -27,6 +27,10 @@ public class AuthProperties {
 		 */
 		private String signingKey;
 		/**
+		 * Claims密钥，必须固定为16位或者32位
+		 */
+		private String secretKey;
+		/**
 		 * 访问令牌过期时间，单位分钟。默认60 * 24 * 1
 		 */
 		private Integer expirationTime = 1440;

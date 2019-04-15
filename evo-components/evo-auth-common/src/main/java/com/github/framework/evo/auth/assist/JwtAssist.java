@@ -1,10 +1,11 @@
 package com.github.framework.evo.auth.assist;
 
-import com.github.framework.evo.common.model.UserContext;
-import com.github.framework.evo.common.Const;
-import com.github.framework.evo.common.uitl.BeanUtil;
-import com.github.framework.evo.common.uitl.DateUtil;
 import com.github.framework.evo.auth.config.JwtConfig;
+import com.github.framework.evo.common.Const;
+import com.github.framework.evo.common.model.UserContext;
+import com.github.framework.evo.common.uitl.CryptoUtil;
+import com.github.framework.evo.common.uitl.DateUtil;
+import com.github.framework.evo.common.uitl.JsonUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -17,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -58,7 +58,7 @@ public class JwtAssist {
 	}
 
 	public UserContext parse(String token) {
-		return BeanUtil.mapToBean(parseToken(token), UserContext.class);
+		return JsonUtil.jsonToObject(CryptoUtil.decryptAes256((String) parseToken(token).get(Const.JWT_CLAIMS_KEY), jwt.getSecretKey()), UserContext.class);
 	}
 
 	public Date extractExpiration(String accessToken) {
@@ -92,8 +92,7 @@ public class JwtAssist {
 
 	private Claims createClaims(UserContext userContext) {
 		Claims claims = Jwts.claims().setSubject(userContext.getUsername());
-		Map<String, Object> map = BeanUtil.beanToMap(userContext);
-		map.forEach(claims::put);
+		claims.put(Const.JWT_CLAIMS_KEY, CryptoUtil.encryptAes256(JsonUtil.objectToJson(userContext), jwt.getSecretKey()));
 		return claims;
 	}
 

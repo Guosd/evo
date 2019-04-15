@@ -105,4 +105,12 @@ public class StringUtil {
 			throw new StringOperateException("字符串解码 UTF-8 失败", e);
 		}
 	}
+
+	public static byte[] toUTF8Byte(String str) {
+		try {
+			return str.getBytes("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			throw new StringOperateException("字符编码转换 UTF-8 异常", e);
+		}
+	}
 }

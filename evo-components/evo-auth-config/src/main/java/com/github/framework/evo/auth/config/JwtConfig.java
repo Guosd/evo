@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 public class JwtConfig {
 	private String issuer;
 	private String signingKey;
+	private String secretKey;
 	private Integer expirationTime;
 	private Integer refreshExpirationTime;
 	private Integer oldExpirationTime;

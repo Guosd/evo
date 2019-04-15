@@ -31,10 +31,15 @@ public class Const {
 	public static final String BF_REFRESH_TOKEN = "REFRESH_TOKEN";
 	public static final String BF_OLD_TOKEN = "OLD_TOKEN";
 	// 专有名词，PN为proper noun的简写
+	public static final int BUFFER_SIZE_1024 = 1024;
 	public static final String PN_UNKNOWN = "unknown";// 不确定
-
-	public static final String JWT_ALGORITHM = "HS512";// JWT 加密方式
-	public static final String JWT_TOKEN_PREFIX = "Bearer ";// JWT 前缀
+	// 加密解密
+	public static final String CRYPTO_AES256_TRANSFORMATION = "AES/CBC/PKCS5Padding";
+	public static final String CRYPTO_AES256_IV_PARAMETER_SPEC = "1001100110011001";
+	// JWT
+	public static final String JWT_ALGORITHM = "HS512";// 加密方式
+	public static final String JWT_TOKEN_PREFIX = "Bearer ";// 前缀
+	public static final String JWT_CLAIMS_KEY = "content";// Claims 内容 key
 
 
 

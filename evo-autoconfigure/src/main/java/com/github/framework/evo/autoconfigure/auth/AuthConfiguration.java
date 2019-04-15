@@ -83,6 +83,7 @@ public class AuthConfiguration {
 		return JwtConfig.builder()
 				.issuer(jwt.getIssuer())
 				.signingKey(jwt.getSigningKey())
+				.secretKey(jwt.getSecretKey())
 				.expirationTime(jwt.getExpirationTime())
 				.refreshExpirationTime(jwt.getRefreshExpirationTime())
 				.oldExpirationTime(jwt.getOldExpirationTime()).build();

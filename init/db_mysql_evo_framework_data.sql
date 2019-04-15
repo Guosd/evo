@@ -1,5 +1,6 @@
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.auth.jwt.issuer', 'http://evo.com', '发行人 [Default http://evo.com]', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.auth.jwt.signing-key', 'ec9f563404c511e9b8790a151ed9f971', '签名', '1', now(), '1', now());
+insert into config_properties values (null, 'master', 'evo', 'default', 'evo.auth.jwt.secret-Key', '6q0SYc3w5Y28YqAtYi0XTT95rOWrybbH', 'Claims密钥，必须固定为16位或者32位', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.auth.jwt.expiration-time', '1440', '访问令牌过期时间 单位分钟 [Default 60 * 24 * 1]', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.auth.jwt.refresh-expiration-time', '4320', '刷新令牌过期时间 单位分钟 [Default 60 * 24 * 3]', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.auth.jwt.old-expiration-time', '30', '新令牌期间，旧令牌作为临时过渡令牌的过期时间 单位秒 [Default 30]', '1', now(), '1', now());

@@ -33,6 +33,7 @@
 		<flowable-spring-boot-starter.version>6.4.1</flowable-spring-boot-starter.version>
 		<flowable-spring-boot-starter-actuator.version>6.4.1</flowable-spring-boot-starter-actuator.version>
 		<guava.version>27.0.1-jre</guava.version>
+		<commons-crypto.version>1.0.0</commons-crypto.version>
 	</properties>
 
 	<dependencyManagement>
@@ -126,6 +127,11 @@
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
 				<version>${guava.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-crypto</artifactId>
+				<version>${commons-crypto.version}</version>
 			</dependency>
 			<!-- evo framework -->
 			<dependency>
