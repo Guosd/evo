@@ -1,11 +1,12 @@
 package com.github.framework.evo.common.uitl;
 
-import com.github.framework.evo.common.exception.DateOperateException;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -36,11 +37,7 @@ public class DateUtil {
 	}
 
 	public static Date parse(String str, String pattern) {
-		try {
-			return new SimpleDateFormat(pattern).parse(str);
-		} catch (ParseException e) {
-			throw new DateOperateException("日期解析失败", e);
-		}
+		return Date.from(LocalDateTime.parse(str, DateTimeFormatter.ofPattern(pattern)).atZone(ZoneId.systemDefault()).toInstant());
 	}
 
 	public static String formatDate(Date date) {
@@ -60,7 +57,7 @@ public class DateUtil {
 	}
 
 	public static String format(Date date, String pattern) {
-		return date == null ? null : new SimpleDateFormat(pattern).format(date);
+		return date == null ? null : DateTimeFormatter.ofPattern(pattern).format(LocalDateTime.ofInstant(Instant.ofEpochMilli(date.getTime()), ZoneId.systemDefault()));
 	}
 
 	public static Date removeHMS(Date date) {

@@ -45,7 +45,7 @@ spring:
 eureka:
   instance:
     lease-expiration-duration-in-seconds: 15
-    lease-renewal-interval-in-seconds: 5
+    lease-renewal-interval-in-seconds: 5 # 心跳间隔5秒
     health-check-url-path: /actuator/health
     instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
   client:

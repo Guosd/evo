@@ -33,7 +33,7 @@ insert into config_properties values (null, 'master', 'evo', 'default', 'evo.pas
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.sms.enabled', 'false', 'true 开启; false 关闭 [Default false]', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.zuul.auth.client.id', 'client_1', 'OAuth2 表oauth_client_details.client_id', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.zuul.auth.client.secret', 'secret_1', 'OAuth2 表oauth_client_details.client_secret', '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'evo.session.user-context.zuul.enabled', 'true', '可以通过SessionHolder.getUserContext()获取当前用户 [Default true]', '1', now(), '1', now());
+insert into config_properties values (null, 'master', 'evo', 'default', 'evo.session.user-context.enabled', 'true', '可以通过SessionHolder.getUserContext()获取当前用户 [Default true]', '1', now(), '1', now());
 # datasource
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.framework.datasource.url', 'jdbc:mysql://192.168.18.134:3306/evo_framework?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.framework.datasource.username', 'evo_framework', null, '1', now(), '1', now());
