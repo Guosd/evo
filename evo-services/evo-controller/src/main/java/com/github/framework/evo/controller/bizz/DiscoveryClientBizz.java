@@ -22,6 +22,7 @@ import java.util.List;
 public class DiscoveryClientBizz {
 	@Autowired
 	private DiscoveryClient discoveryClient;
+
 	private static String discoveryServerType;
 
 	public List<ServiceInstanceDto> findServiceInstance() {
