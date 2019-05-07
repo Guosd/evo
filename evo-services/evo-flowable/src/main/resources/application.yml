@@ -46,4 +46,5 @@ flowable:
   process:
     async:
       executor:
-        max-async-jobs-due-per-acquisition: 1234
+        default-async-job-acquire-wait-time-in-millis: 10000 # 轮询间隔10秒
+        max-async-jobs-due-per-acquisition: 1 # 每次抓取1条记录
