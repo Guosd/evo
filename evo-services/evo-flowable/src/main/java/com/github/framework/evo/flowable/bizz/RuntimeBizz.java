@@ -4,6 +4,7 @@ import com.github.framework.evo.base.assist.BaseHelper;
 import com.github.framework.evo.flowable.model.CommentDto;
 import com.github.framework.evo.flowable.model.ProcessInstanceDto;
 import com.github.framework.evo.flowable.model.StartReq;
+import com.github.framework.evo.flowable.model.TriggerReq;
 import lombok.extern.slf4j.Slf4j;
 import org.flowable.common.engine.impl.identity.Authentication;
 import org.flowable.engine.RuntimeService;
@@ -54,6 +55,14 @@ public class RuntimeBizz {
 		taskService.complete(task.getId(), startReq.getVariables());
 
 		return BaseHelper.convertObject(processInstance, ProcessInstanceDto.class);
+	}
+
+	public void trigger(TriggerReq triggerReq) {
+		runtimeService.trigger(triggerReq.getExecutionId(), triggerReq.getProcessVariables());
+	}
+
+	public void triggerAsync(TriggerReq triggerReq) {
+		runtimeService.triggerAsync(triggerReq.getExecutionId(), triggerReq.getProcessVariables());
 	}
 
 	public List<CommentDto> findProcessInstanceComments(String processInstanceId) {

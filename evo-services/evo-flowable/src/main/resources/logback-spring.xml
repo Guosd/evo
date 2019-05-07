@@ -59,7 +59,7 @@
 		</encoder>
 	</appender>
 
-	<logger name="org.activiti" level="DEBUG" additivity="false">
+	<logger name="org.flowable" level="DEBUG" additivity="false">
 		<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="ROLLINGFILE"/>
 		<appender-ref ref="LOGSTASH"/>

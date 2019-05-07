@@ -43,3 +43,7 @@ flowable:
   content:
     storage:
       root-folder: flowable/content
+  process:
+    async:
+      executor:
+        max-async-jobs-due-per-acquisition: 1234

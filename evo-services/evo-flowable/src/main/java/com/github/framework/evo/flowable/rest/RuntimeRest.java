@@ -5,6 +5,7 @@ import com.github.framework.evo.flowable.bizz.RuntimeBizz;
 import com.github.framework.evo.flowable.model.CommentDto;
 import com.github.framework.evo.flowable.model.ProcessInstanceDto;
 import com.github.framework.evo.flowable.model.StartReq;
+import com.github.framework.evo.flowable.model.TriggerReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +30,16 @@ public class RuntimeRest implements RuntimeApi {
 	@Override
 	public ProcessInstanceDto startProcessInstanceByKeyAndNext(StartReq startReq) {
 		return runtimeBizz.startProcessInstanceByKeyAndNext(startReq);
+	}
+
+	@Override
+	public void trigger(TriggerReq triggerReq) {
+		runtimeBizz.trigger(triggerReq);
+	}
+
+	@Override
+	public void triggerAsync(TriggerReq triggerReq) {
+		runtimeBizz.triggerAsync(triggerReq);
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package com.github.framework.evo.flowable.api;
 import com.github.framework.evo.flowable.model.CommentDto;
 import com.github.framework.evo.flowable.model.ProcessInstanceDto;
 import com.github.framework.evo.flowable.model.StartReq;
+import com.github.framework.evo.flowable.model.TriggerReq;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +24,12 @@ public interface RuntimeApi {
 
 	@PostMapping("/process-instance/next")
 	ProcessInstanceDto startProcessInstanceByKeyAndNext(@RequestBody StartReq startReq);
+
+	@PostMapping("/process-instance/trigger")
+	void trigger(@RequestBody TriggerReq triggerReq);
+
+	@PostMapping("/process-instance/trigger-async")
+	void triggerAsync(@RequestBody TriggerReq triggerReq);
 
 	@GetMapping("/process-instance/{processInstanceId}/comment")
 	List<CommentDto> findProcessInstanceComments(@PathVariable("processInstanceId") String processInstanceId);
