@@ -49,6 +49,9 @@ zuul:
   retryable: true
   sensitiveHeaders:
   ignoredServices: '*'
+  ribbon:
+    eager-load:
+      enabled: true
 hystrix:
   command:
     default:
