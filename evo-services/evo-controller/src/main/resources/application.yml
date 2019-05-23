@@ -8,6 +8,8 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
+    shutdown:
+      enabled: true
 spring:
   rabbitmq:
     addresses: ${evo.rabbitmq.addresses}
