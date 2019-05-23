@@ -34,6 +34,10 @@ insert into config_properties values (null, 'master', 'evo', 'default', 'evo.sms
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.zuul.auth.client.id', 'client_1', 'OAuth2 表oauth_client_details.client_id', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.zuul.auth.client.secret', 'secret_1', 'OAuth2 表oauth_client_details.client_secret', '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.session.user-context.enabled', 'true', '可以通过SessionHolder.getUserContext()获取当前用户 [Default true]', '1', now(), '1', now());
+insert into config_properties values (null, 'master', 'evo', 'default', 'evo.eureka.rest.offline', '/offline/{serviceId}/{instanceId}', '下线服务 [Default /offline/{serviceId}/{instanceId}]', '1', now(), '1', now());
+insert into config_properties values (null, 'master', 'evo', 'default', 'evo.eureka.rest.online', '/online/{instanceId}', '上线服务 [Default /online/{instanceId}]', '1', now(), '1', now());
+insert into config_properties values (null, 'master', 'evo', 'default', 'evo.eureka.rest.shutdown', '/shutdown/{instanceId}', '停止服务 [Default /shutdown/{instanceId}]', '1', now(), '1', now());
+insert into config_properties values (null, 'master', 'evo', 'default', 'evo.eureka.rest.startup', '/startup/{instanceId}', '启动服务 [Default /startup/{instanceId}]', '1', now(), '1', now());
 # datasource
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.framework.datasource.url', 'jdbc:mysql://192.168.18.134:3306/evo_framework?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.framework.datasource.username', 'evo_framework', null, '1', now(), '1', now());

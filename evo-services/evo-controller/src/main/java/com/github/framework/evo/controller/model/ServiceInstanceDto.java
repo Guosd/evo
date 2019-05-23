@@ -10,14 +10,32 @@ import java.util.Map;
  */
 @Data
 public class ServiceInstanceDto {
+	private String name;
 	private String instanceId;
-	private String serviceId;
-	private String host;
-	private int port;
-	private String uri;
-	private boolean secure;
-	private String scheme;
+	private String hostName;
+	private String app;
+	private String ipAddr;
+	private String status;
+	private String overriddenStatus;
+	private Integer port;
+	private Boolean portEnabled;
+	private Integer securePort;
+	private Boolean securePortEnabled;
+	private String countryId;
+	private Integer renewalIntervalInSecs;
+	private Integer durationInSecs;
+	private Long registrationTimestamp;
+	private Long lastRenewalTimestamp;
+	private Long evictionTimestamp;
+	private Long serviceUpTimestamp;
 	private Map<String, String> metadata;
-
-	private String discoveryServerType;
+	private String homePageUrl;
+	private String statusPageUrl;
+	private String healthCheckUrl;
+	private String vipAddress;
+	private String secureVipAddress;
+	private Boolean coordinatingDiscoveryServer;
+	private Long lastUpdatedTimestamp;
+	private Long lastDirtyTimestamp;
+	private String actionType;
 }

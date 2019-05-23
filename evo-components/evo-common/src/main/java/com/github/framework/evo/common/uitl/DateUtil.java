@@ -60,6 +60,10 @@ public class DateUtil {
 		return date == null ? null : DateTimeFormatter.ofPattern(pattern).format(LocalDateTime.ofInstant(Instant.ofEpochMilli(date.getTime()), ZoneId.systemDefault()));
 	}
 
+	public static Date toDate(long millis) {
+		return new DateTime(millis).toDate();
+	}
+
 	public static Date removeHMS(Date date) {
 		return parseDate(formatDate(date));
 	}

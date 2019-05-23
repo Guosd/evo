@@ -1,41 +1,50 @@
 package com.github.framework.evo.controller.rest;
 
-import com.github.framework.evo.controller.bizz.EurekaBizz;
+import com.github.framework.evo.controller.bizz.ServiceInstanceBizz;
+import com.github.framework.evo.controller.model.ServiceInstanceDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * User: Kyll
  * Date: 2019-04-15 16:11
  */
 @Slf4j
-@RequestMapping("/eureka")
+@RequestMapping("/service-instance")
 @RestController
-public class EurekaRest {
+public class ServiceInstanceRest {
 	@Autowired
-	private EurekaBizz eurekaBizz;
+	private ServiceInstanceBizz serviceInstanceBizz;
+
+	@GetMapping
+	public List<ServiceInstanceDto> list() {
+		return serviceInstanceBizz.find();
+	}
 
 	@PostMapping("/startup/{instanceId}")
 	public void startup(@PathVariable String instanceId) {
-		eurekaBizz.startup(instanceId);
+		serviceInstanceBizz.startup(instanceId);
 	}
 
 	@PostMapping("/shutdown/{instanceId}")
 	public void shutdown(@PathVariable String instanceId) {
-		eurekaBizz.shutdown(instanceId);
+		serviceInstanceBizz.shutdown(instanceId);
 	}
 
-	@PostMapping("/online/{instanceId}")
-	public void online(@PathVariable String instanceId) {
-		eurekaBizz.online(instanceId);
+	@PostMapping("/online/{serviceId}/{instanceId}")
+	public void online(@PathVariable String serviceId, @PathVariable String instanceId) {
+		serviceInstanceBizz.online(serviceId, instanceId);
 	}
 
 	@PostMapping("/offline/{serviceId}/{instanceId}")
 	public void offline(@PathVariable String serviceId, @PathVariable String instanceId) {
-		eurekaBizz.offline(serviceId, instanceId);
+		serviceInstanceBizz.offline(serviceId, instanceId);
 	}
 }
