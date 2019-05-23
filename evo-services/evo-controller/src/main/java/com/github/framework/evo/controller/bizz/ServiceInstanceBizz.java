@@ -3,6 +3,7 @@ package com.github.framework.evo.controller.bizz;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.framework.evo.common.uitl.JsonUtil;
 import com.github.framework.evo.controller.api.EurekaApi;
+import com.github.framework.evo.controller.api.ServiceInstanceApi;
 import com.github.framework.evo.controller.model.ServiceInstanceDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class ServiceInstanceBizz {
 	private EurekaClientConfigBean eurekaClientConfigBean;
 	@Autowired
 	private EurekaApi eurekaApi;
+	@Autowired
+	private ServiceInstanceApi serviceInstanceApi;
 
 	public List<ServiceInstanceDto> find() {
 		List<ServiceInstanceDto> serviceInstanceDtoList = new ArrayList<>();
@@ -79,8 +82,8 @@ public class ServiceInstanceBizz {
 
 	}
 
-	public void shutdown(String instanceId) {
-
+	public void shutdown(String host, Integer port) {
+		serviceInstanceApi.shutdown(host, port);
 	}
 
 	public void online(String serviceId, String instanceId) {

@@ -33,9 +33,9 @@ public class ServiceInstanceRest {
 		serviceInstanceBizz.startup(instanceId);
 	}
 
-	@PostMapping("/shutdown/{instanceId}")
-	public void shutdown(@PathVariable String instanceId) {
-		serviceInstanceBizz.shutdown(instanceId);
+	@PostMapping("/shutdown/{host}/{port}")
+	public void shutdown(@PathVariable String host, @PathVariable int port) {
+		serviceInstanceBizz.shutdown(host, port);
 	}
 
 	@PostMapping("/online/{serviceId}/{instanceId}")
