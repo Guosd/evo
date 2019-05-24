@@ -5,16 +5,8 @@ GRANT ALL ON evo_framework.* TO 'evo_framework'@'%';
 
 FLUSH PRIVILEGES;
 
-drop table if exists config_properties;
-drop table if exists zuul_route;
-drop table if exists oauth_access_token;
-drop table if exists oauth_approvals;
-drop table if exists oauth_client_details;
-drop table if exists oauth_client_token;
-drop table if exists oauth_code;
-drop table if exists oauth_refresh_token;
-
-create table config_properties
+drop table if exists config_property;
+create table config_property
 (
   id bigint auto_increment primary key,
   label varchar(255) null,
@@ -29,6 +21,7 @@ create table config_properties
   update_time datetime null
 );
 
+drop table if exists zuul_route;
 create table zuul_route
 (
   id bigint auto_increment primary key,
@@ -47,6 +40,7 @@ create table zuul_route
   update_time datetime null
 );
 
+drop table if exists oauth_client_details;
 create table oauth_client_details (
   client_id VARCHAR(256) PRIMARY KEY,
   resource_ids VARCHAR(256),
@@ -61,6 +55,7 @@ create table oauth_client_details (
   autoapprove VARCHAR(256)
 );
 
+drop table if exists oauth_client_token;
 create table oauth_client_token (
   token_id VARCHAR(256),
   token LONGBLOB,
@@ -69,6 +64,7 @@ create table oauth_client_token (
   client_id VARCHAR(256)
 );
 
+drop table if exists oauth_access_token;
 create table oauth_access_token (
   token_id VARCHAR(256),
   token LONGBLOB,
@@ -79,16 +75,19 @@ create table oauth_access_token (
   refresh_token VARCHAR(256)
 );
 
+drop table if exists oauth_refresh_token;
 create table oauth_refresh_token (
   token_id VARCHAR(256),
   token LONGBLOB,
   authentication LONGBLOB
 );
 
+drop table if exists oauth_code;
 create table oauth_code (
   code VARCHAR(256), authentication LONGBLOB
 );
 
+drop table if exists oauth_approvals;
 create table oauth_approvals (
 	userId VARCHAR(256),
 	clientId VARCHAR(256),

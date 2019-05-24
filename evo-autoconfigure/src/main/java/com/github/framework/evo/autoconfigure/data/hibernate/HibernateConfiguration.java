@@ -1,5 +1,6 @@
 package com.github.framework.evo.autoconfigure.data.hibernate;
 
+import com.github.framework.evo.base.entity.BaseHibernateEntity;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -19,7 +20,7 @@ import java.util.Properties;
  * User: Kyll
  * Date: 2018-11-16 09:05
  */
-@ConditionalOnClass(SessionFactory.class)
+@ConditionalOnClass(BaseHibernateEntity.class)
 @EnableConfigurationProperties(HibernateProperties.class)
 @Configuration
 public class HibernateConfiguration {

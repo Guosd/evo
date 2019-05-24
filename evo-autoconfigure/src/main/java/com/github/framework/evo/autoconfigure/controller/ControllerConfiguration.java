@@ -1,4 +1,4 @@
-package com.github.framework.evo.autoconfigure.eureka;
+package com.github.framework.evo.autoconfigure.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -12,13 +12,13 @@ import org.springframework.web.client.RestTemplate;
  * Date: 2019-05-23 10:27
  */
 @Configuration
-@EnableConfigurationProperties(EurekaProperties.class)
-public class EurekaConfiguration {
-	private final EurekaProperties eurekaProperties;
+@EnableConfigurationProperties(ControllerProperties.class)
+public class ControllerConfiguration {
+	private final ControllerProperties controllerProperties;
 
 	@Autowired
-	public EurekaConfiguration(EurekaProperties eurekaProperties) {
-		this.eurekaProperties = eurekaProperties;
+	public ControllerConfiguration(ControllerProperties controllerProperties) {
+		this.controllerProperties = controllerProperties;
 	}
 
 	@ConditionalOnMissingBean(RestTemplate.class)

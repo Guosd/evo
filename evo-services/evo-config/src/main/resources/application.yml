@@ -40,7 +40,7 @@ spring:
       server:
         default-label: master
         jdbc:
-          sql: select t.key_, t.value from config_properties t where t.application = ? and t.profile = ? and t.label = ?
+          sql: select t.key_, t.value from config_property t where t.application = ? and t.profile = ? and t.label = ?
     bus:
       trace:
         enabled: true # 消息总线跟踪开关
