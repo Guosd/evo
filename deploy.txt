@@ -1,3 +1,9 @@
 简化权限模块的访问控制，URI强匹配转化为Ant Path模式匹配。重新设计的权限结构如下：
 user 1-* role
 role 1-* ant path
+
+提交到多个GIT仓库
+git remote add all https://git.oschina.net/free/Mapper.git
+git remote set-url --add all https://github.com/abel533/Mapper.git
+
+git push all --all
