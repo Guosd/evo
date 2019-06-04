@@ -62,6 +62,10 @@ spring:
     url: jdbc:mysql://10.21.127.29:3306/evo_framework?useUnicode=true&characterEncoding=UTF8&useSSL=false
   rabbitmq:
     host: 10.21.127.29
+eureka:
+  client:
+    service-url:
+      defaultZone: http://172.17.0.2:20000/eureka
 ---
 spring:
   profiles: blue
