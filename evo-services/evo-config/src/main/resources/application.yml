@@ -61,6 +61,7 @@ spring:
   datasource:
     url: jdbc:mysql://10.21.127.29:3306/evo_framework?useUnicode=true&characterEncoding=UTF8&useSSL=false
   rabbitmq:
+    addresses: 10.21.127.29:5672
     host: 10.21.127.29
 eureka:
   client:
