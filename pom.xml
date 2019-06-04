@@ -8,6 +8,27 @@
 	<artifactId>evo</artifactId>
 	<version>${revision}</version>
 
+	<profiles>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<profiles-active>prod</profiles-active>
+			</properties>
+		</profile>
+		<profile>
+			<id>uat</id>
+			<properties>
+				<profiles-active>uat</profiles-active>
+			</properties>
+		</profile>
+		<profile>
+			<id>sit</id>
+			<properties>
+				<profiles-active>sit</profiles-active>
+			</properties>
+		</profile>
+	</profiles>
+
 	<modules>
 		<module>evo-dependencies</module>
 		<module>evo-parent</module>
