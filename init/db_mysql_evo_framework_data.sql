@@ -69,6 +69,16 @@ insert into config_property values (null, 'master', 'evo', 'blue', 'evo.datadict
 insert into config_property values (null, 'master', 'evo', 'blue', 'evo.activiti.datasource.url', 'jdbc:mysql://192.168.204.130:3306/evo_activiti?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
 insert into config_property values (null, 'master', 'evo', 'blue', 'evo.flowable.datasource.url', 'jdbc:mysql://192.168.204.130:3306/evo_flowable?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
 
+insert into config_property values (null, 'master', 'evo', 'sit', 'evo.rabbitmq.addresses', '10.21.127.29:5672', null, '1', now(), '1', now());
+insert into config_property values (null, 'master', 'evo', 'sit', 'evo.rabbitmq.host', '10.21.127.29', null, '1', now(), '1', now());
+insert into config_property values (null, 'master', 'evo', 'sit', 'evo.redis.cluster.nodes', '10.21.127.29:7001, 10.21.127.29:7002, 10.21.127.29:7003, 10.21.127.29:7004, 10.21.127.29:7005, 10.21.127.29:7006', null, '1', now(), '1', now());
+insert into config_property values (null, 'master', 'evo', 'sit', 'evo.framework.datasource.url', 'jdbc:mysql://10.21.127.29:3306/evo_framework?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
+insert into config_property values (null, 'master', 'evo', 'sit', 'evo.sample.datasource.url', 'jdbc:mysql://10.21.127.29:3306/evo_sample?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
+insert into config_property values (null, 'master', 'evo', 'sit', 'evo.sys.datasource.url', 'jdbc:mysql://10.21.127.29:3306/evo_sys?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
+insert into config_property values (null, 'master', 'evo', 'sit', 'evo.datadict.datasource.url', 'jdbc:mysql://10.21.127.29:3306/evo_datadict?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
+insert into config_property values (null, 'master', 'evo', 'sit', 'evo.activiti.datasource.url', 'jdbc:mysql://10.21.127.29:3306/evo_activiti?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
+insert into config_property values (null, 'master', 'evo', 'sit', 'evo.flowable.datasource.url', 'jdbc:mysql://10.21.127.29:3306/evo_flowable?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
+
 
 insert into zuul_route values (null, 'evo-auth', '/auth/**', 'evo-auth', null, '1', null, null, '1', null, '1', now(), '1', now());
 insert into zuul_route values (null, 'evo-oauth2', '/oauth2/**', 'evo-oauth2', null, '1', null, null, '1', null, '1', now(), '1', now());
