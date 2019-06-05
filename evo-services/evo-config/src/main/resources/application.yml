@@ -64,6 +64,8 @@ spring:
     addresses: 10.21.127.29:5672
     host: 10.21.127.29
 eureka:
+  instance:
+    prefer-ip-address: true
   client:
     service-url:
       defaultZone: http://172.17.0.2:20000/eureka
