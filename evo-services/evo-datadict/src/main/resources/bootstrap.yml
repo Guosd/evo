@@ -30,4 +30,4 @@ eureka:
     prefer-ip-address: true
   client:
     service-url:
-      defaultZone: http://172.17.0.2:20000/eureka
+      defaultZone: http://evo-eureka-service:20000/eureka
