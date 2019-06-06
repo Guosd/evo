@@ -26,8 +26,6 @@ logstash:
 spring:
   profiles: sit
 eureka:
-  instance:
-    prefer-ip-address: true
   client:
     service-url:
       defaultZone: http://evo-eureka-service:20000/eureka
