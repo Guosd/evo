@@ -26,10 +26,6 @@ spring:
       read-only: false # 连接只读数据库时配置为true, 保证安全
   jpa:
     show-sql: true
-    hibernate:
-      naming:
-        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
-      #  physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
   rabbitmq:
     addresses: ${evo.rabbitmq.addresses}
     host: ${evo.rabbitmq.host}
