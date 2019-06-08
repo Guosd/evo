@@ -35,4 +35,9 @@ public class ConfigCenterRest {
 	public void updateConfigProperty(@PathVariable("application") String application, @PathVariable("profile") String profile, @PathVariable("label") String label, @PathVariable("key") String key, @RequestBody ConfigPropertyDto configPropertyDto) {
 		configCenterBizz.updateConfigProperty(application, profile, label, key, configPropertyDto);
 	}
+
+	@PostMapping("/config-item/refresh/{destination}")
+	public void refreshConfigProperty(@PathVariable("destination") String destination) {
+		configCenterBizz.refreshConfigProperty(destination);
+	}
 }

@@ -64,8 +64,8 @@ hystrix:
             timeoutInMilliseconds: 300000
 ribbon:
   NFLoadBalancerRuleClassName: ${evo.ribbon.NFLoadBalancerRuleClassName}
-  ConnectTimeout: 10000
-  ReadTimeout: 30000
+  ConnectTimeout: 10000 # 毫秒
+  ReadTimeout: 30000 # 毫秒
   OkToRetryOnAllOperations: false # 重试策略，因为涉及到服务调用幂等性，所以暂时关闭此三个属性
   MaxAutoRetriesNextServer: 0 # 在其他服务器的重试次数
   MaxAutoRetries: 0 # 在相同服务器正常请求之外的重试次数

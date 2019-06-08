@@ -3,6 +3,7 @@ package com.github.framework.evo.controller.bizz;
 import com.github.framework.evo.base.assist.BaseHelper;
 import com.github.framework.evo.base.bizz.BaseJpaBizz;
 import com.github.framework.evo.common.model.PageList;
+import com.github.framework.evo.controller.api.ConfigApi;
 import com.github.framework.evo.controller.dao.ConfigPropertyDao;
 import com.github.framework.evo.controller.entity.ConfigProperty;
 import com.github.framework.evo.controller.model.ConfigInfoDto;
@@ -10,6 +11,7 @@ import com.github.framework.evo.controller.model.ConfigItemDto;
 import com.github.framework.evo.controller.model.ConfigItemQuery;
 import com.github.framework.evo.controller.model.ConfigPropertyDto;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,9 @@ import java.util.TreeMap;
 @Slf4j
 @Service
 public class ConfigCenterBizz extends BaseJpaBizz<ConfigPropertyDao, ConfigProperty, Long, ConfigPropertyDto> {
+	@Autowired
+	private ConfigApi configApi;
+
 	public ConfigInfoDto findPage(ConfigItemQuery query) {
 		List<ConfigProperty> configPropertyList = dao.findAll(Sort.by(Sort.Direction.ASC, "label", "application", "profile", "key"));
 
@@ -79,5 +84,9 @@ public class ConfigCenterBizz extends BaseJpaBizz<ConfigPropertyDao, ConfigPrope
 		configProperty.setValue(configPropertyDto.getValue());
 		configProperty.setComment(configPropertyDto.getComment());
 		this.update(toDto(configProperty));
+	}
+
+	public void refreshConfigProperty(String destination) {
+		configApi.busRefresh(destination);
 	}
 }

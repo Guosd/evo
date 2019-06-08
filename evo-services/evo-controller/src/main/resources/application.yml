@@ -49,6 +49,9 @@ spring:
       probability: 1.0
   main:
     allow-bean-definition-overriding: true
+evo-config:
+  ribbon:
+    ReadTimeout: 60000
 evo:
   session:
     user-context:
