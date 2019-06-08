@@ -16,6 +16,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 /**
@@ -45,10 +46,14 @@ public class JpaConfiguration {
 		vendorAdapter.setGenerateDdl(jpaProperties.isGenerateDdl());
 		vendorAdapter.setShowSql(jpaProperties.isShowSql());
 
+		Properties properties = new Properties();
+		properties.setProperty("hibernate.physical_naming_strategy", "org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy");
+
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
 		factory.setJpaVendorAdapter(vendorAdapter);
 		factory.setPackagesToScan(applicationContext.getBeansWithAnnotation(SpringBootApplication.class).values().stream().map(o -> o.getClass().getPackage().getName()).collect(Collectors.toList()).toArray(new String[]{}));
 		factory.setDataSource(dataSource);
+		factory.setJpaProperties(properties);
 		return factory;
 	}
 

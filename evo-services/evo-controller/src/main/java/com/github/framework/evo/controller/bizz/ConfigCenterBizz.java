@@ -8,6 +8,7 @@ import com.github.framework.evo.controller.entity.ConfigProperty;
 import com.github.framework.evo.controller.model.ConfigInfoDto;
 import com.github.framework.evo.controller.model.ConfigItemDto;
 import com.github.framework.evo.controller.model.ConfigItemQuery;
+import com.github.framework.evo.controller.model.ConfigPropertyDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ import java.util.TreeMap;
  */
 @Slf4j
 @Service
-public class ConfigCenterBizz extends BaseJpaBizz<ConfigPropertyDao, ConfigProperty, Long, ConfigItemDto> {
+public class ConfigCenterBizz extends BaseJpaBizz<ConfigPropertyDao, ConfigProperty, Long, ConfigPropertyDto> {
 	public ConfigInfoDto findPage(ConfigItemQuery query) {
 		List<ConfigProperty> configPropertyList = dao.findAll(Sort.by(Sort.Direction.ASC, "label", "application", "profile", "key"));
 
@@ -71,5 +72,12 @@ public class ConfigCenterBizz extends BaseJpaBizz<ConfigPropertyDao, ConfigPrope
 		configInfoDto.setProfiles(profileSet.toArray(new String[0]));
 		configInfoDto.setConfigItemList(pageList);
 		return configInfoDto;
+	}
+
+	public void updateConfigProperty(String application, String profile, String label, String key, ConfigPropertyDto configPropertyDto) {
+		ConfigProperty configProperty = dao.findByApplicationAndProfileAndLabelAndKey(application, profile, label, key);
+		configProperty.setValue(configPropertyDto.getValue());
+		configProperty.setComment(configPropertyDto.getComment());
+		this.update(toDto(configProperty));
 	}
 }

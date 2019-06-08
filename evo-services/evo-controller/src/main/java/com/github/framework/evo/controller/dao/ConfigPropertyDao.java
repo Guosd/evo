@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Date: 2019-05-24 13:53
  */
 public interface ConfigPropertyDao extends JpaRepository<ConfigProperty, Long> {
+	ConfigProperty findByApplicationAndProfileAndLabelAndKey(String application, String profile, String label, String key);
 }
