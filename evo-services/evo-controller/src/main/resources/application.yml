@@ -26,8 +26,6 @@ spring:
       read-only: false # 连接只读数据库时配置为true, 保证安全
   jpa:
     show-sql: true
-    open-in-view: true
-    database-platform:
   rabbitmq:
     addresses: ${evo.rabbitmq.addresses}
     host: ${evo.rabbitmq.host}

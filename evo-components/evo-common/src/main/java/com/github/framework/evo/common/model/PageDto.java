@@ -16,7 +16,7 @@ import java.io.Serializable;
 public class PageDto implements Serializable {
 	@Getter @Setter
 	@NotNull(groups = PageGroup.class)
-	protected Integer pageNo;
+	protected Integer pageNo;// 起始页码 0
 	@Getter @Setter
 	@NotNull(groups = PageGroup.class)
 	protected Integer pageSize;

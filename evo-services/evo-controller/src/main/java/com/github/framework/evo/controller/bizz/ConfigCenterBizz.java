@@ -40,20 +40,17 @@ public class ConfigCenterBizz extends BaseJpaBizz<ConfigPropertyDao, ConfigPrope
 			String key = configProperty.getKey();
 			String profile = configProperty.getProfile();
 
-			ConfigItemDto configItemDto = configItemDtoMap.get(key);
-			if (configItemDto == null) {
-				configItemDto = new ConfigItemDto();
-				configItemDto.setLabel(configProperty.getLabel());
-				configItemDto.setApplication(configProperty.getApplication());
-				configItemDto.setKey(key);
-				configItemDto.setValueMap(new HashMap<>());
-				configItemDto.setComment(configItemDto.getComment());
-				configItemDto.setCreateTime(configItemDto.getCreateTime());
-				configItemDto.setUpdateTime(configItemDto.getUpdateTime());
-				configItemDtoMap.put(key, configItemDto);
-			}
-
-			configItemDto.getValueMap().put(profile, configProperty.getValue());
+			configItemDtoMap.computeIfAbsent(key, s -> {
+				ConfigItemDto itemDto = new ConfigItemDto();
+				itemDto.setLabel(configProperty.getLabel());
+				itemDto.setApplication(configProperty.getApplication());
+				itemDto.setKey(key);
+				itemDto.setValueMap(new HashMap<>());
+				itemDto.setComment(itemDto.getComment());
+				itemDto.setCreateTime(itemDto.getCreateTime());
+				itemDto.setUpdateTime(itemDto.getUpdateTime());
+				return itemDto;
+			}).getValueMap().put(profile, configProperty.getValue());
 		}
 
 		int total = configItemDtoMap.size();
@@ -62,6 +59,9 @@ public class ConfigCenterBizz extends BaseJpaBizz<ConfigPropertyDao, ConfigPrope
 		int end = start + pageSize;
 		if (end > total) {
 			end = total;
+		}
+		if (start > end) {
+			start = end;
 		}
 
 		PageList<ConfigItemDto> pageList = new PageList<>();
