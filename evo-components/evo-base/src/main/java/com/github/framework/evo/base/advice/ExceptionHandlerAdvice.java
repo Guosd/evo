@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -36,7 +37,10 @@ public class ExceptionHandlerAdvice {
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity handle(Exception exception) {
 		ResponseEntity responseEntity;
-		if (exception instanceof BindException) {
+		if (exception instanceof HttpMessageNotReadableException) {
+			log.warn("缺少请求体", exception);
+			responseEntity = new ResponseEntity<>(HttpStatus.valueOf(Const.HTTP_STATUS_BAD_REQUEST));
+		} else if (exception instanceof BindException) {
 			BindException bindException = (BindException) exception;
 
 			log.warn("参数绑定无效", exception);
