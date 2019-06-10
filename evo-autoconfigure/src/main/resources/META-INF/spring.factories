@@ -1,6 +1,8 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 com.github.framework.evo.autoconfigure.application.ApplicationConfiguration,\
 com.github.framework.evo.autoconfigure.auth.AuthConfiguration,\
+com.github.framework.evo.autoconfigure.controller.ControllerConfiguration,\
+com.github.framework.evo.autoconfigure.data.jpa.JpaConfiguration,\
 com.github.framework.evo.autoconfigure.data.hibernate.HibernateConfiguration,\
 com.github.framework.evo.autoconfigure.data.redis.RedisConfiguration,\
 com.github.framework.evo.autoconfigure.feign.FeignConfiguration,\
