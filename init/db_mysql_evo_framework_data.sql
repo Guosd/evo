@@ -80,6 +80,7 @@ insert into config_property values (null, 'master', 'evo', 'sit', 'evo.activiti.
 insert into config_property values (null, 'master', 'evo', 'sit', 'evo.flowable.datasource.url', 'jdbc:mysql://10.21.127.29:3306/evo_flowable?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true', null, '1', now(), '1', now());
 
 
+insert into zuul_route values (null, 'evo-controller', '/controller/**', 'evo-controller', null, '1', null, null, '1', null, '1', now(), '1', now());
 insert into zuul_route values (null, 'evo-auth', '/auth/**', 'evo-auth', null, '1', null, null, '1', null, '1', now(), '1', now());
 insert into zuul_route values (null, 'evo-oauth2', '/oauth2/**', 'evo-oauth2', null, '1', null, null, '1', null, '1', now(), '1', now());
 insert into zuul_route values (null, 'evo-sys', '/sys/**', 'evo-sys', null, '1', null, null, '1', null, '1', now(), '1', now());

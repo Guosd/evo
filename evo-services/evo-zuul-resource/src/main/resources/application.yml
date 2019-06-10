@@ -54,6 +54,15 @@ zuul:
   ribbon:
     eager-load:
       enabled: true
+  ratelimit:
+    enabled: false
+    repository: REDIS
+    default-policy-list:
+      - limit: 10
+        quota: 1000
+        refresh-interval: 60
+        type:
+          - origin
 hystrix:
   command:
     default:

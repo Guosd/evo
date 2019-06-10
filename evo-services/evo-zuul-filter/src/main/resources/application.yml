@@ -34,6 +34,9 @@ spring:
     virtual-host: ${evo.rabbitmq.virtual-host}
     username: ${evo.rabbitmq.username}
     password: ${evo.rabbitmq.password}
+  redis:
+    cluster:
+      nodes: ${evo.redis.cluster.nodes}
   jackson:
     time-zone: GMT+8
   sleuth:
@@ -54,6 +57,15 @@ zuul:
   ribbon:
     eager-load:
       enabled: true
+  ratelimit:
+    enabled: false
+    repository: REDIS
+    default-policy-list:
+      - limit: 10
+        quota: 1000
+        refresh-interval: 60
+        type:
+          - origin
 hystrix:
   command:
     default:
