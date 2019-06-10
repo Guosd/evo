@@ -34,7 +34,7 @@ public class ConfigCenterBizz extends BaseJpaBizz<ConfigPropertyDao, ConfigPrope
 	private ConfigApi configApi;
 
 	public ConfigInfoDto findPage(ConfigItemQuery query) {
-		List<ConfigProperty> configPropertyList = dao.findAll(Sort.by(Sort.Direction.ASC, "label", "application", "profile", "key"));
+		List<ConfigProperty> configPropertyList = dao.findAll(toExample(query, true), Sort.by(Sort.Direction.ASC, "label", "application", "profile", "key"));
 
 		Set<String> profileSet = new LinkedHashSet<>();// 设置环境列 default, 环境1, 环境2...
 		profileSet.add("default");

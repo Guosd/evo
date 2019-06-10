@@ -6,8 +6,10 @@ import com.github.framework.evo.common.model.PageDto;
 import com.github.framework.evo.common.model.PageList;
 import com.github.framework.evo.common.uitl.BeanUtil;
 import com.github.framework.evo.common.uitl.DateUtil;
+import com.github.framework.evo.common.uitl.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: Kyll
@@ -98,17 +101,48 @@ public abstract class BaseJpaBizz<Dao extends JpaRepository, E extends BaseJpaEn
 	}
 
 	@SuppressWarnings("unchecked")
-	protected Example toExample(Object condition) {
-		return toExample(getEntityClass(), condition);
+	protected <T> Example<T> toExample(Object condition) {
+		return toExample(getEntityClass(), condition, null, false);
 	}
 
-	protected <T> Example<T> toExample(Class<T> clazz, Object condition) {
+	@SuppressWarnings("unchecked")
+	protected <T> Example<T> toExample(Object condition, boolean like) {
+		return toExample(getEntityClass(), condition, null, like);
+	}
+
+	protected <T> Example<T> toExample(Class<T> clazz, Object condition, ExampleCreater exampleCreater, boolean like) {
 		T t = BeanUtil.newInstance(clazz);
 		BeanUtil.copy(t, condition);
-		return Example.of(t);
+
+		ExampleMatcher exampleMatcher = ExampleMatcher.matching();
+		if (exampleCreater == null) {
+			Map<String, Object> map = BeanUtil.beanToMap(t);
+			for (Map.Entry<String, Object> entry : map.entrySet()) {
+				String key = entry.getKey();
+				if (key.equals("pageNo") || key.equals("pageSize") || key.equals("pageSort") || key.equals("pageOrder")) {
+					continue;
+				}
+
+				Object value = entry.getValue();
+				if (value != null && StringUtil.isNotBlank(value.toString())) {
+					if (like) {
+						exampleMatcher = exampleMatcher.withMatcher(key, ExampleMatcher.GenericPropertyMatchers.ignoreCase().contains());
+					}
+				}
+			}
+		} else {
+			exampleCreater.create(exampleMatcher, condition);
+		}
+
+
+		return Example.of(t, exampleMatcher);
 	}
 
 	protected Pageable toPageable(PageDto condition) {
 		return PageRequest.of(condition.getPageNo(), condition.getPageSize(), Sort.by("asc".equals(condition.getPageOrder()) ? Sort.Order.asc(condition.getPageSort()) : Sort.Order.desc(condition.getPageSort())));
+	}
+
+	public static interface ExampleCreater {
+		void create(ExampleMatcher exampleMatcher, Object condition);
 	}
 }
