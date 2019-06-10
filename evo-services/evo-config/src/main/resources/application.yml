@@ -41,6 +41,9 @@ spring:
         default-label: master
         jdbc:
           sql: select t.key_, t.value from config_property t where t.application = ? and t.profile = ? and t.label = ?
+      allow-override: true # 理论上好使的三个属性， 客户端无论是JVM属性还是本地配置文件，都无法覆盖服务端的属性
+      override-none: true # 理论上好使的三个属性， 客户端无论是JVM属性还是本地配置文件，都无法覆盖服务端的属性
+      overrideSystemProperties: false # 理论上好使的三个属性， 客户端无论是JVM属性还是本地配置文件，都无法覆盖服务端的属性
     bus:
       trace:
         enabled: true # 消息总线跟踪开关
