@@ -27,6 +27,7 @@
 		<jjwt.version>0.9.1</jjwt.version>
 		<logstash-logback-encoder.version>5.3</logstash-logback-encoder.version>
 		<spring-cloud-zuul-ratelimit.version>2.2.3.RELEASE</spring-cloud-zuul-ratelimit.version>
+		<micrometer-registry-prometheus.version>1.1.4</micrometer-registry-prometheus.version>
 		<mybatis-spring-boot-starter.version>2.0.0</mybatis-spring-boot-starter.version>
 		<mapper-spring-boot-starter.version>2.1.5</mapper-spring-boot-starter.version>
 		<pagehelper-spring-boot-starter.version>1.2.10</pagehelper-spring-boot-starter.version>
@@ -99,6 +100,11 @@
 				<groupId>com.marcosbarbero.cloud</groupId>
 				<artifactId>spring-cloud-zuul-ratelimit</artifactId>
 				<version>${spring-cloud-zuul-ratelimit.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.micrometer</groupId>
+				<artifactId>micrometer-registry-prometheus</artifactId>
+				<version>${micrometer-registry-prometheus.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.mybatis.spring.boot</groupId>
