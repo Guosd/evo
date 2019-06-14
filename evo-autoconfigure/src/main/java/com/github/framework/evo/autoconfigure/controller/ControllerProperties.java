@@ -10,8 +10,31 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Data
 @ConfigurationProperties("evo.controller")
 public class ControllerProperties {
+	private DockerSwarm dockerSwarm = new DockerSwarm();
 	private Eureka eureka = new Eureka();
 	private Config config = new Config();
+
+	@Data
+	public static class DockerSwarm {
+		private Network network = new Network();
+
+		/**
+		 * Docker Swarm Http REST API host
+		 */
+		private String host = "localhost";
+		/**
+		 * Docker Swarm Http REST API port
+		 */
+		private int port = 2375;
+
+		@Data
+		public static class Network {
+			/**
+			 * Overlay网络名称
+			 */
+			private String name = "evo-overlay";
+		}
+	}
 
 	@Data
 	public static class Eureka {

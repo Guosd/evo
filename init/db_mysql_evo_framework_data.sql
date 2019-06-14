@@ -34,6 +34,9 @@ insert into config_property values (null, 'master', 'evo', 'default', 'evo.sms.e
 insert into config_property values (null, 'master', 'evo', 'default', 'evo.zuul.auth.client.id', 'client_1', 'OAuth2 表oauth_client_details.client_id', '1', now(), '1', now());
 insert into config_property values (null, 'master', 'evo', 'default', 'evo.zuul.auth.client.secret', 'secret_1', 'OAuth2 表oauth_client_details.client_secret', '1', now(), '1', now());
 insert into config_property values (null, 'master', 'evo', 'default', 'evo.session.user-context.enabled', 'true', '可以通过SessionHolder.getUserContext()获取当前用户 [Default true]', '1', now(), '1', now());
+insert into config_property values (null, 'master', 'evo', 'default', 'evo.controller.docker-swarm.host', '10.20.196.19', 'Docker Swarm Http REST API host [Default localhost]', '1', now(), '1', now());
+insert into config_property values (null, 'master', 'evo', 'default', 'evo.controller.docker-swarm.port', '2375', 'Docker Swarm Http REST API port [Default 2375]', '1', now(), '1', now());
+insert into config_property values (null, 'master', 'evo', 'default', 'evo.controller.docker-swarm.network.name', 'evo-overlay', 'Overlay网络名称 [Default evo-overlay]', '1', now(), '1', now());
 insert into config_property values (null, 'master', 'evo', 'default', 'evo.controller.eureka.rest.offline', '/offline/{serviceId}/{instanceId}', '下线服务 [Default /offline/{serviceId}/{instanceId}]', '1', now(), '1', now());
 insert into config_property values (null, 'master', 'evo', 'default', 'evo.controller.eureka.rest.online', '/online/{instanceId}', '上线服务 [Default /online/{instanceId}]', '1', now(), '1', now());
 insert into config_property values (null, 'master', 'evo', 'default', 'evo.controller.eureka.rest.shutdown', '/shutdown/{instanceId}', '停止服务 [Default /shutdown/{instanceId}]', '1', now(), '1', now());

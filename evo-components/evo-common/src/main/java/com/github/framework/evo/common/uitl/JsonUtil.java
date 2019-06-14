@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.github.framework.evo.common.exception.JsonOperateException;
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,6 +38,14 @@ public class JsonUtil {
 	 */
 	public static JavaType getCollectionType(Class collectionClass, Class elementClass) {
 		return mapper.getTypeFactory().constructParametricType(collectionClass, elementClass);
+	}
+
+	public static ObjectNode createObjectNode() {
+		return mapper.createObjectNode();
+	}
+
+	public static ArrayNode createArrayNode() {
+		return mapper.createArrayNode();
 	}
 
 	/**
