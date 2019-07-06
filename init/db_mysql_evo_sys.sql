@@ -5,6 +5,8 @@ GRANT ALL ON evo_sys.* TO 'evo_sys'@'%';
 
 FLUSH PRIVILEGES;
 
+use evo_sys;
+
 drop table if exists sys_user;
 drop table if exists sys_role;
 drop table if exists sys_func;
