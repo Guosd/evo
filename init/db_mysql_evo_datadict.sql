@@ -6,7 +6,7 @@ GRANT ALL ON evo_datadict.* TO 'evo_datadict'@'%';
 FLUSH PRIVILEGES;
 
 use evo_datadict;
--- evo_datadict
+-- evo_datadict test
 drop table if exists sys_data_dict;
 create table sys_data_dict
 (
