@@ -36,6 +36,7 @@
 		<module>evo-starters</module>
 		<module>evo-autoconfigure</module>
 		<module>evo-services</module>
+		<module>evo-zipkin</module>
 	</modules>
 
 	<packaging>pom</packaging>
