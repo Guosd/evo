@@ -8,8 +8,6 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
-    shutdown:
-      enabled: true
 spring:
   rabbitmq:
     addresses: ${evo.rabbitmq.addresses}
@@ -21,16 +19,28 @@ spring:
   redis:
     cluster:
       nodes: ${evo.redis.cluster.nodes}
+    password: sinosoft
   jackson:
     time-zone: GMT+8
   sleuth:
-    http:
-      enabled: true
     sampler:
       probability: 1.0
+    http:
+      enabled: true
   main:
     allow-bean-definition-overriding: true
+  zipkin:
+    #    base-url: http://127.0.0.1:9411
+    sender:
+      type: rabbit
+    locator:
+      discovery:
+        enabled: true
+    enabled: true
 evo:
   session:
     user-context:
       enabled: false
+zipkin:
+  rabbitmq:
+    queue: zipkin

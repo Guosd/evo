@@ -8,8 +8,6 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
-    shutdown:
-      enabled: true
 spring:
   datasource:
     url: ${evo.sys.datasource.url}
@@ -38,10 +36,24 @@ spring:
       enabled: true
     sampler:
       probability: 1.0
+    enabled: true
+    web:
+      enabled: true
   main:
     allow-bean-definition-overriding: true
+  zipkin:
+    #    base-url: http://127.0.0.1:9411/
+    sender:
+      type: rabbit
+    locator:
+      discovery:
+        enabled: true
+    enabled: true
 mybatis:
   type-aliases-package: com.github.framework.evo.sys.entity
   mapper-locations: classpath:mapper/**/*.xml
   configuration:
     map-underscore-to-camel-case: true
+zipkin:
+  rabbitmq:
+    queue: zipkin
