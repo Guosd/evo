@@ -1,0 +1,72 @@
+server:
+  port: ${port:20105}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+spring:
+  datasource:
+    url: ${evo.sys.datasource.url}
+    username: ${evo.sys.datasource.username}
+    password: ${evo.sys.datasource.password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      connection-test-query: select 1
+      connection-timeout: 30000 # 等待连接池分配连接的最大时长
+      idle-timeout: 600000 # 连接闲置状态的最大时长
+      maximum-pool-size: 60 # 连接池中允许的最大连接数, 推荐的公式：((core_count * 2) + effective_spindle_count)
+      max-lifetime: 1800000 # 连接的生命时长, 建议设置比数据库超时时长少30秒
+      minimum-idle: 10
+      read-only: false # 连接只读数据库时配置为true, 保证安全
+  rabbitmq:
+    addresses: ${evo.rabbitmq.addresses}
+    host: ${evo.rabbitmq.host}
+    port: ${evo.rabbitmq.port}
+    virtual-host: ${evo.rabbitmq.virtual-host}
+    username: ${evo.rabbitmq.username}
+    password: ${evo.rabbitmq.password}
+  jackson:
+    time-zone: GMT+8
+  sleuth:
+    http:
+      enabled: true
+    sampler:
+      probability: 1.0
+    enabled: true
+    web:
+      enabled: true
+  main:
+    allow-bean-definition-overriding: true
+  zipkin:
+#    base-url: http://127.0.0.1:9411/
+    sender:
+      type: rabbit
+    locator:
+      discovery:
+        enabled: true
+    enabled: true
+#  security:
+#    user:
+#      name: admin
+#      password: $2a$10$2EAqCDG9rMSV1fIER3JZgOdNQXxa02C.gNX0Z7KfUTud5yUODkAOa
+mybatis:
+  type-aliases-package: com.github.framework.evo.sys.entity
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+#tx-lcn:
+#  client:
+#    manager-address: 127.0.0.1:8070
+#  logger:
+#    enabled: true
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    jdbc-url: jdbc:mysql://192.168.144.128:3306/tx_logger?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowPublicKeyRetrieval=true
+#    username: root
+#    password: root
+zipkin:
+  rabbitmq:
+    queue: zipkin
