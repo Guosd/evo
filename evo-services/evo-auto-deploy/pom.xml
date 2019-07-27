@@ -10,30 +10,30 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>evo-auto-deploy</artifactId>
-
     <dependencies>
         <dependency>
             <groupId>com.github.framework</groupId>
             <artifactId>evo-base-spring-boot-starter</artifactId>
         </dependency>
-
-        <!-- 远程控制Linux 使用 -->
+        <dependency>
+            <groupId>com.github.framework</groupId>
+            <artifactId>evo-base-data-mybatis-plus-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0.4.0</version>
+        </dependency>
+        <!--<dependency>
+            <groupId>ch.ethz.ganymed</groupId>
+            <artifactId>ganymed-ssh2</artifactId>
+            <version>262</version>
+        </dependency>-->
         <dependency>
             <groupId>com.jcraft</groupId>
             <artifactId>jsch</artifactId>
             <version>0.1.55</version>
         </dependency>
-        <!-- 远程控制Windows 使用-->
-        <dependency>
-            <groupId>io.cloudsoft.windows</groupId>
-            <artifactId>winrm4j</artifactId>
-            <version>0.7.0</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
     </dependencies>
+
 </project>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.framework.evo.autodeploy.dao.AutoReplaceParameterDao">
+
+	<resultMap id="AutoReplaceParameterResultMap" type="com.github.framework.evo.autodeploy.entity.AutoReplaceParameter">
+		<id column="id" property="id"/>
+		<result column="key" property="key"/>
+		<result column="project_name" property="oldValue"/>
+		<result column="new_value" property="newValue"/>
+		<result column="create_by" property="createBy"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_by" property="updateBy"/>
+		<result column="update_time" property="updateTime"/>
+	</resultMap>
+
+	<resultMap id="FileNameResultMap" type="java.lang.String">
+		<result column="File_name" property="fileName"/>
+	</resultMap>
+
+	<sql id="columns">
+		t.id, t.key,t.project_name ,t.new_value ,
+		t.create_by, t.create_time, t.update_by, t.update_time
+	</sql>
+
+	<sql id="condition">
+		<where>
+			<if test="id != null and id != ''">
+				AND t.id = #{id}
+			</if>
+			<if test="key != null and key != ''">
+				AND t.key = #{key}
+			</if>
+			<if test="oldValue != null and oldValue != ''">
+				AND t.project_name = #{oldValue}
+			</if>
+			<if test="newValue != null and newValue != ''">
+				AND t.new_value = #{newValue}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="conditionLike">
+		<where>
+			<if test="key != null and key != ''">
+				AND t.key like #{key}||'%'
+			</if>
+			<if test="oldValue != null and oldValue != ''">
+				AND t.project_name = #{oldValue}||'%'
+			</if>
+			<if test="newValue != null and newValue != ''">
+				AND t.new_value = #{newValue}||'%'
+			</if>
+		</where>
+	</sql>
+
+	<sql id="select">
+		SELECT <include refid="columns"/> FROM evo_auto_deploy_parameter t 
+	</sql>
+
+	<select id="get" resultMap="AutoReplaceParameterResultMap">
+		<include refid="select"/>
+		WHERE t.key = #{key}
+	</select>
+
+
+	<select id="find" resultMap="AutoReplaceParameterResultMap">
+		<include refid="select"/>
+		<include refid="condition"/>
+		<if test="pageSort != null">
+			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
+		</if>
+	</select>
+
+	<select id="findLike" resultMap="AutoReplaceParameterResultMap">
+		<include refid="select"/>
+		<include refid="conditionLike"/>
+		<if test="pageSort != null">
+			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
+		</if>
+	</select>
+
+
+	<select id="count" resultType="int">
+		SELECT count(1) count FROM evo_auto_deploy_parameter t
+		<include refid="condition"/>
+	</select>
+
+	<select id="countLike" resultType="int">
+		SELECT count(1) count FROM evo_auto_deploy_parameter t
+		<include refid="conditionLike"/>
+	</select>
+
+	<select id="findFileName" resultMap="FileNameResultMap">
+		select distinct file_name from evo_auto_replace_parameter
+	</select>
+</mapper>

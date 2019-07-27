@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.framework.evo.autodeploy.dao.AutoDeployLogDao">
+
+	<resultMap id="AutoDeployLogResultMap" type="com.github.framework.evo.autodeploy.entity.AutoDeployLog">
+		<id column="id" property="id"/>
+		<result column="command" property="command"/>
+		<result column="create_by" property="createBy"/>
+		<result column="create_time" property="createTime"/>
+		<result column="update_by" property="updateBy"/>
+		<result column="update_time" property="updateTime"/>
+	</resultMap>
+
+	<sql id="columns">
+		t.id, t.command,
+		t.create_by, t.create_time, t.update_by, t.update_time
+	</sql>
+
+	<sql id="condition">
+		<where>
+			<if test="id != null and id != ''">
+				AND t.id = #{id}
+			</if>
+			<if test="command != null and command != ''">
+				AND t.command = #{command}
+			</if>
+		</where>
+	</sql>
+
+	<sql id="conditionLike">
+		<where>
+			<if test="command != null and command != ''">
+				AND t.command like #{command}||'%'
+			</if>
+		</where>
+	</sql>
+
+	<sql id="select">
+		SELECT <include refid="columns"/> FROM evo_auto_deploy_log t
+	</sql>
+
+	<select id="get" resultMap="AutoDeployLogResultMap">
+		<include refid="select"/>
+		WHERE t.id = #{value}
+	</select>
+
+
+	<select id="find" resultMap="AutoDeployLogResultMap">
+		<include refid="select"/>
+		<include refid="condition"/>
+		<if test="pageSort != null">
+			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
+		</if>
+	</select>
+
+	<select id="findLike" resultMap="AutoDeployLogResultMap">
+		<include refid="select"/>
+		<include refid="conditionLike"/>
+		<if test="pageSort != null">
+			ORDER BY ${pageSort} <if test="pageOrder != null">${pageOrder}</if>
+		</if>
+	</select>
+
+
+	<select id="count" resultType="int">
+		SELECT count(1) count FROM evo_auto_deploy_log t
+		<include refid="condition"/>
+	</select>
+
+	<select id="countLike" resultType="int">
+		SELECT count(1) count FROM evo_auto_deploy_log t
+		<include refid="conditionLike"/>
+	</select>
+
+
+
+
+</mapper>

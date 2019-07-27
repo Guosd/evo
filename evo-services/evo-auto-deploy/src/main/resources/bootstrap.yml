@@ -1,6 +1,6 @@
 spring:
   application:
-    name: evo-sys
+    name: evo-auto-deploy
   cloud:
     config:
       discovery:
@@ -15,22 +15,13 @@ eureka:
     lease-renewal-interval-in-seconds: 5
     health-check-url-path: /actuator/health
     instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
+    ip-address: 10.128.20.100
+    prefer-ip-address: true
   client:
     initial-instance-info-replication-interval-seconds: 5
     registry-fetch-interval-seconds: 5
     serviceUrl:
-      defaultZone: http://localhost:20000/eureka
+      defaultZone: http://10.128.23.215:20000/eureka
 logstash:
   destination: 127.0.0.1:9600
----
-spring:
-  profiles: vm
-eureka:
-  instance:
-    ip-address: 192.168.1.24
-    prefer-ip-address: true
-  client:
-    serviceUrl:
-      defaultZone: http://192.168.1.24:50101/eureka
-logstash:
-  destination: 192.168.1.28:9600
+

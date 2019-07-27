@@ -1,0 +1,31 @@
+--- 存放系统运行参数
+create table evo_auto_deploy_parameter(
+       id number not null primary key,
+       key varchar2(128) not null,
+       value varchar2(128) not null,
+       create_by varchar2(32) not null,
+       create_Time date not null,
+       update_by varchar2(32) not null,
+       update_Time date not null
+);
+--- 存放系统运行日志
+create table evo_auto_deploy_log(
+       id number not null primary key,
+       command varchar2(128) not null,
+       create_by varchar2(32) not null,
+       create_Time date not null,
+       update_by varchar2(32) not null,
+       update_Time date not null
+);
+
+--- 存放需要替换的参数
+create table evo_auto_replace_parameter(
+       id number not null primary key,
+       key varchar2(128) not null,
+       old_value varchar2(128) not null,
+       new_value varchar2(128) not null,
+       create_by varchar2(32) not null,
+       create_Time date not null,
+       update_by varchar2(32) not null,
+       update_Time date not null
+);
