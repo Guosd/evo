@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: Guosd
@@ -17,7 +19,7 @@ public class WindowsUtil {
 	private static InputStream inputStream ;
 	private static PrintWriter printWriter;
 	
-	private static String result;
+	private static List<String> result = new ArrayList<>();
 	
 	static {
 		try {
@@ -43,7 +45,6 @@ public class WindowsUtil {
 	/**
 	 * 打印操作
 	 * @author Administrator
-	 *
 	 */
 	private class StreamThread1 extends Thread{
 		BufferedReader bufferedReader ;
@@ -57,7 +58,7 @@ public class WindowsUtil {
 			try {
 				String line = null;
 				while((line = bufferedReader.readLine())!=null) {
-					result = line;
+					result.add(line);
 					System.out.println(line);
 				}
 			} catch (IOException e) {
@@ -81,6 +82,9 @@ public class WindowsUtil {
 	}
 
 	public static String getMessage(){
+		return result.get(result.size()-1);
+	}
+	public static List<String> getResult(){
 		return result;
 	}
 }
