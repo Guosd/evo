@@ -23,7 +23,7 @@ insert into config_properties values (null, 'master', 'evo', 'default', 'evo.hib
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.rabbitmq.addresses', '192.168.144.128:5672', null, '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.rabbitmq.host', '192.168.144.128', null, '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.rabbitmq.port', '5672', null, '1', now(), '1', now());
-insert into config_properties values (null, 'master', 'evo', 'default', 'evo.rabbitmq.virtual-host', 'evo_vhost', null, '1', now(), '1', now());
+insert into config_properties values (null, 'master', 'evo', 'default', 'evo.rabbitmq.virtual-host', 'evo-vhost', null, '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.rabbitmq.username', 'evo', null, '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.rabbitmq.password', 'evo', null, '1', now(), '1', now());
 insert into config_properties values (null, 'master', 'evo', 'default', 'evo.redis.company-prefix', 'EVO', '公司前缀 [Default EVO]', '1', now(), '1', now());

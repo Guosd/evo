@@ -16,9 +16,9 @@ spring:
   profiles:
     active: jdbc
   datasource:
-    url: jdbc:mysql://192.168.18.134:3306/evo_framework?useUnicode=true&characterEncoding=UTF8&useSSL=false
-    username: evo_framework
-    password: evo_framework
+    url: jdbc:mysql://192.168.144.129:3306/evo_framework?useUnicode=true&characterEncoding=UTF8&useSSL=false
+    username: root
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       connection-test-query: select 1
@@ -29,18 +29,18 @@ spring:
       minimum-idle: 10
       read-only: false
   rabbitmq:
-    addresses: 192.168.18.132:5672
-    host: 192.168.18.132
+    addresses: 192.168.144.129:5672
+    host: 192.168.144.129
     port: 5672
-    virtual-host: evo_vhost
-    username: evo
-    password: evo
+    virtual-host: evo-vhost
+    username: Guosd
+    password: ydcx$111
   cloud:
     config:
       server:
         default-label: master
         jdbc:
-          sql: select t.key_, t.value from config_property t where t.application = ? and t.profile = ? and t.label = ?
+          sql: select t.key_, t.value from config_properties t where t.application = ? and t.profile = ? and t.label = ?
       allow-override: true # 理论上好使的三个属性， 客户端无论是JVM属性还是本地配置文件，都无法覆盖服务端的属性
       override-none: true # 理论上好使的三个属性， 客户端无论是JVM属性还是本地配置文件，都无法覆盖服务端的属性
       overrideSystemProperties: false # 理论上好使的三个属性， 客户端无论是JVM属性还是本地配置文件，都无法覆盖服务端的属性
