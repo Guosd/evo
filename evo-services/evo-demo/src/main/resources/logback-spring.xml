@@ -59,7 +59,7 @@
 		</encoder>
 	</appender>
 
-	<logger name="com.github.framework.evo" level="DEBUG" additivity="false">
+	<logger name="com.sinosoft.demo" level="TRACE" additivity="false">
 		<appender-ref ref="CONSOLE"/>
 		<appender-ref ref="ROLLINGFILE"/>
 		<appender-ref ref="LOGSTASH"/>

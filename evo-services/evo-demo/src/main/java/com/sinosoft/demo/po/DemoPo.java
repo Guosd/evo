@@ -1,14 +1,15 @@
 package com.sinosoft.demo.po;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@TableName
+@TableName("demo")
 public class DemoPo {
-    @TableField
+    @TableId
     private String id;
-    @TableField
+    @TableField("name")
     private String name;
 }

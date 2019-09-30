@@ -44,8 +44,5 @@ spring:
       enabled: true
     sampler:
       probability: 1.0
-mybatis:
-  type-aliases-package: com.github.framework.evo.datadict.entity
-  mapper-locations: classpath:mapper/**/*.xml
-  configuration:
-    map-underscore-to-camel-case: true
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
