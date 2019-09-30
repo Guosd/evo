@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: evo-datadict
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: evo-config
+      name: evo
+      label: master
+      failFast: true
+eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 15
+    lease-renewal-interval-in-seconds: 5
+    health-check-url-path: /actuator/health
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
+  client:
+    initial-instance-info-replication-interval-seconds: 5
+    registry-fetch-interval-seconds: 5
+    serviceUrl:
+      defaultZone: http://localhost:20000/eureka
+logstash:
+  destination: 127.0.0.1:9600
+---
+spring:
+  profiles: sit
+eureka:
+  instance:
+    hostname: ${spring.application.name}-service
+  client:
+    service-url:
+      defaultZone: http://evo-eureka-service:20000/eureka

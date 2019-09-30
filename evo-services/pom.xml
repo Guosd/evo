@@ -29,15 +29,218 @@
 		<module>evo-zuul-resource</module>
 		<module>evo-controller</module>
         <module>evo-auto-deploy</module>
-	</modules>
+        <module>evo-demo</module>
+    </modules>
 
-	<build>
+	<!--<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+	</build>-->
+
+
+	<properties>
+		<groupids>
+			antlr,
+			asm-parent,
+			net.bytebuddy,
+			ch.qos.logback,
+			com.esotericsoftware,
+			com.fasterxml,
+			com.fasterxml.jackson,
+			com.fasterxml.jackson.core,
+			com.fasterxml.jackson.databind,
+			com.fasterxml.jackson.dataformat,
+			com.fasterxml.jackson.datatype,
+			com.fasterxml.jackson.module,
+			com.fasterxml.woodstox,
+			com.github.andrewoma.dexx,
+			com.github.vlsi.compactmap,
+			com.google.code.findbugs,
+			com.google.code.gson,
+			com.google.guava,
+			com.google.inject,
+			com.google.protobuf,
+			com.googlecode.json-simple,
+			com.netflix.archaius,
+			com.netflix.eureka,
+			com.netflix.hystrix,
+			com.netflix.netflix-commons,
+			com.netflix.ribbon,
+			com.netflix.rxnetty,
+			com.netflix.servo,
+			com.rabbitmq,
+			com.sun.jersey,
+			com.sun.jersey.contribs,
+			com.thoughtworks.xstream,
+			com.zaxxer,
+			commons-codec,
+			commons-collections,
+			commons-configuration,
+			commons-fileupload,
+			commons-io,
+			commons-jxpath,
+			commons-lang,
+			io.github.openfeign,
+			io.github.openfeign.form,
+			io.github.openfeign.form,
+			io.micrometer,
+			io.projectreactor,
+			io.prometheus,
+			io.reactivex,
+			io.springfox,
+			io.swagger,
+			io.zipkin.brave,
+			io.zipkin.reporter2,
+			io.zipkin.zipkin2,
+			javax.annotation,
+			javax.inject,
+			javax.servlet,
+			javax.validation,
+			javax.ws.rs,
+			javax.xml.stream,
+			joda-time,
+			mysql,
+			net.java.dev.jna,
+			net.logstash.logback,
+			org.antlr,
+			org.apache.commons,
+			org.apache.httpcomponents,
+			org.apache.logging.log4j,
+			org.apache.tomcat,
+			org.apache.tomcat.embed,
+			org.aspectj,
+			org.bouncycastle,
+			org.codehaus.jettison,
+			org.codehaus.woodstox,
+			org.freemarker,
+			org.glassfish.hk2.external,
+			org.hdrhistogram,
+			org.hibernate.validator,
+			org.jboss.logging,
+			org.jolokia,
+			org.latencyutils,
+			org.mapstruct,
+			org.mybatis,
+			org.mybatis.spring.boot,
+			org.objenesis,
+			org.ow2.asm,
+			org.projectlombok,
+			org.reactivestreams,
+			org.slf4j,
+			org.springframework,
+			org.springframework.amqp,
+			org.springframework.amqp,
+			org.springframework.boot,
+			org.springframework.cloud,
+			org.springframework.integration,
+			org.springframework.integration,
+			org.springframework.plugin,
+			org.springframework.retry,
+			org.springframework.security,
+			org.yaml,
+			stax,
+			xmlpull,
+			xpp3,
+			org.attoparser,
+			org.unbescape,
+			org.glassfish,
+			org.thymeleaf,
+			org.thymeleaf.extras,
+			org.synchronoss.cloud,
+			io.projectreactor.addons,
+			io.projectreactor.netty,
+			io.netty,
+			de.codecentric,
+			org.springframework.data,
+			io.lettuce,
+			io.jsonwebtoken,
+		</groupids>
+	</properties>
+
+
+	<build>
+		<plugins>
+			<!-- 以下尝试第二种-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<!-- 打包时忽略的文件（也就是不打进jar包里的文件） -->
+					<excludes>
+						<exclude>**/application.yml</exclude>
+						<exclude>**/bootstrap.yml</exclude>
+						<exclude>**/logback-spring.xml</exclude>
+						<exclude>**/config.properties</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<!-- 复制资源文件 -->
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<!-- 资源文件输出目录 -->
+							<outputDirectory>${project.build.directory}/resources</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- 分离lib  -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<!-- 依赖包输出目录 -->
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+							<excludeTransitive>false</excludeTransitive>
+							<stripVersion>false</stripVersion>
+							<!-- 依赖包的作用域 -->
+							<includeScope>runtime</includeScope>
+
+							<includeGroupIds>
+								${groupids}
+							</includeGroupIds>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- springboot repackage -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<layout>ZIP</layout>
+					<addResources>false</addResources>
+					<excludeGroupIds>
+						${groupids}
+					</excludeGroupIds>
+				</configuration>
+			</plugin>
+
+		</plugins>
 	</build>
+
 
 </project>

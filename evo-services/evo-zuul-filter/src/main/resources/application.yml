@@ -37,6 +37,7 @@ spring:
   redis:
     cluster:
       nodes: ${evo.redis.cluster.nodes}
+    password: sinosoft
   jackson:
     time-zone: GMT+8
   sleuth:
