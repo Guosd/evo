@@ -31,6 +31,7 @@
 		<module>evo-base-data-mybatis-plus</module>
 		<module>evo-tomcat</module>
 		<module>evo-base-data-mybatis-page</module>
+        <module>evo-code-generator</module>
 	</modules>
 
 	<build>

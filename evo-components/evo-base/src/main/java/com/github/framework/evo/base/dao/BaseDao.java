@@ -24,7 +24,11 @@ public interface BaseDao<E extends BaseEntity, PK extends Serializable> {
 
 	int insert(E entity);
 
+	int insertSelective(E entity);
+
 	int update(E entity);
+
+	int updateSelective(E entity);
 
 	int delete(PK id);
 }

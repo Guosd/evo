@@ -1,5 +1,6 @@
 package com.github.framework.evo.common.uitl;
 
+import com.sun.org.apache.xalan.internal.xsltc.compiler.Pattern;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 
@@ -22,6 +23,10 @@ public class DateUtil {
 
 	public static Date parseDate(String str) {
 		return parse(str, PATTERN_DATE);
+	}
+
+	public static void main(String[] args) {
+		parse(PATTERN_DATE,"");
 	}
 
 	public static Date parseDateCompact(String str) {

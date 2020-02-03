@@ -1,14 +1,8 @@
 package com.github.framework.evo.autodeploy.rest;
 
 import com.github.framework.evo.autodeploy.bizz.AutoDeployBizz;
-import com.github.framework.evo.autodeploy.entity.AutoDeployRequestVo;
-import com.github.framework.evo.autodeploy.entity.AutoDeployResponseVo;
-import com.github.framework.evo.common.exception.ExceptionUtil;
-import com.github.framework.evo.common.web.ApiResponse;
-import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +22,7 @@ public class AutoDeployRest {
      * @param autoDeployRequestVo
      * @return
      */
-    @ApiOperation(value = "自动发布接口")
+  /*  @ApiOperation(value = "自动发布接口")
     @PostMapping("autoDeploy")
     public ApiResponse<AutoDeployResponseVo> deploy(AutoDeployRequestVo autoDeployRequestVo){
         ApiResponse<AutoDeployResponseVo> result = ApiResponse.ok();
@@ -41,6 +35,6 @@ public class AutoDeployRest {
         }
         return result;
     }
-
+*/
 
 }
