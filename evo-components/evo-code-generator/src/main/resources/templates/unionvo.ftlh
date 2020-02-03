@@ -24,8 +24,10 @@ public class ${voInfo.keyName}Vo extends ${voInfo.keyName}KeyVo implements Seria
 	private static final long serialVersionUID = 1L;
 
 <#list table.nonKeyColumns as column>
-	/** 对应字段：${column.name}<#if column.comment != "">,备注：${column.comment}</#if> */
+    <#if toVariableString(column.name) != 'updateBy' && toVariableString(column.name) != 'deleteFlag'  && toVariableString(column.name) != 'createBy' && toVariableString(column.name) != 'updateTime' && toVariableString(column.name) != 'createTime'>
+    /** 对应字段：${column.name}<#if column.comment != "">,备注：${column.comment}</#if> */
 	@ApiModelProperty(<#if column.comment != "">"${column.comment}"</#if>)
 	private ${toJavaType(column.type)} ${toVariableString(column.name)};
-</#list>	
+    </#if>
+</#list>
 }
