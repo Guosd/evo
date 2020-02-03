@@ -40,6 +40,12 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-crypto</artifactId>
 		</dependency>
+		<!-- commons BeansCopy -->
+		<dependency>
+			<groupId>ma.glasnost.orika</groupId>
+			<artifactId>orika-core</artifactId>
+			<version>1.5.2</version>
+		</dependency>
 	</dependencies>
 
 </project>

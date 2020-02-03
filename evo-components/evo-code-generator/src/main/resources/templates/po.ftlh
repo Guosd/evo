@@ -13,7 +13,7 @@ import lombok.Data;
 
 /**
  *
- * 通过evo-code-generator工具自动生成，请勿手工修改。表${table.name}的PO对象<br/>
+ * 通过evo-code-generate-mybatis工具自动生成，请勿手工修改。表${table.name}的PO对象<br/>
  * 对应表名：${table.name}<#if table.comment != "">,备注：${table.comment}</#if>
  *
  */

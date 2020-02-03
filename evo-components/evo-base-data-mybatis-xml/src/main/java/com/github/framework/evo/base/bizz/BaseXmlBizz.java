@@ -20,12 +20,14 @@ public abstract class BaseXmlBizz<Dao extends BaseXmlDao, E extends BaseXmlEntit
 	@Autowired
 	protected Dao dao;
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public Dto get(PK id) {
 		E e = (E) dao.get(id);
 		return e == null ? null : toDto(e);
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
 	public Dto getOne(Object condition) {
 		E e = (E) dao.getOne(condition);
@@ -33,16 +35,19 @@ public abstract class BaseXmlBizz<Dao extends BaseXmlDao, E extends BaseXmlEntit
 	}
 
 	@SuppressWarnings("unchecked")
+	@Override
 	public List<Dto> find() {
 		return toDto(dao.find(null));
 	}
 
 	@SuppressWarnings("unchecked")
+	@Override
 	public List<Dto> find(Object condition) {
 		return toDto(dao.find(condition));
 	}
 
 	@SuppressWarnings("unchecked")
+	@Override
 	public PageList<Dto> findPage(PageDto condition) {
 		PageList<Dto> pageList = new PageList<>();
 
@@ -55,17 +60,18 @@ public abstract class BaseXmlBizz<Dao extends BaseXmlDao, E extends BaseXmlEntit
 
 		return pageList;
 	}
-
+	@Override
 	public int count() {
 		return dao.count(null);
 	}
-
+	@Override
 	public int count(Object condition) {
 		return dao.count(condition);
 	}
 
 	@Transactional
 	@SuppressWarnings("unchecked")
+	@Override
 	public PK create(Dto dto) {
 		E entity = toEntity(dto);
 
@@ -81,6 +87,7 @@ public abstract class BaseXmlBizz<Dao extends BaseXmlDao, E extends BaseXmlEntit
 
 	@Transactional
 	@SuppressWarnings("unchecked")
+	@Override
 	public void update(Dto dto) {
 		E entity = (E) dao.get(getPKValue(dto));
 
@@ -92,6 +99,7 @@ public abstract class BaseXmlBizz<Dao extends BaseXmlDao, E extends BaseXmlEntit
 
 	@Transactional
 	@SuppressWarnings("unchecked")
+	@Override
 	public void delete(PK id) {
 		dao.delete(id);
 	}

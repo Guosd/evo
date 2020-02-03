@@ -94,8 +94,8 @@ public abstract class BaseBizz<E extends BaseEntity, PK extends Serializable, Dt
 		return (PK) BeanUtil.getFieldValue(object, "id");
 	}
 
-	protected PK getUserContextId() {
+	protected String getUserContextId() {
 		UserContext userContext = SessionHolder.getUserContext();
-		return userContext == null ? null : userContext.getId(getPKClass());
+		return userContext == null ? null : userContext.getId();
 	}
 }
