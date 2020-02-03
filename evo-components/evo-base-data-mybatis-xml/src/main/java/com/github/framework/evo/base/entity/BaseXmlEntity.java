@@ -11,8 +11,8 @@ import java.util.Date;
  */
 public abstract class BaseXmlEntity<PK> extends BaseEntity {
 	@Getter @Setter protected PK id;
-	@Getter @Setter protected PK createBy;
+	@Getter @Setter protected String createBy;
 	@Getter @Setter protected Date createTime;
-	@Getter @Setter protected PK updateBy;
+	@Getter @Setter protected String updateBy;
 	@Getter @Setter protected Date updateTime;
 }

@@ -34,16 +34,6 @@
 		<include refid="Base_Select_By_Like_Entity" />
 	</select>
 
-	<!-- 按主键删除一条记录 -->
-	<delete id="delete" parameterType="map">
-		delete from ${table.name} 
-		<trim prefix="WHERE" prefixOverrides="AND">
-<#list table.keyColumns as column>
-			AND ${column.name} = <#noparse>#</#noparse>{${toVariableString(column.name)}} 
-</#list>		
-		</trim>
-	</delete>
-
 	<!-- 完整插入一条记录-->
 	<insert id="insert" <#if isAutoIncrementPK>useGeneratedKeys="true" keyProperty="${toVariableString(primaryKey.columnName)}"</#if> parameterType="${poInfo.packageName}.${poInfo.name}">
 		insert into ${table.name} 
