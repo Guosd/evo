@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+/**
+ * 本方法弃用，之后采用JSON字符串的形式进行获取
+ */
+@Deprecated
 public class MybatisApiUtils {
     public static final int DEFAULT_PAGE_SIZE = 10;
     public static final int MAX_PAGE_SIZE = 3000;

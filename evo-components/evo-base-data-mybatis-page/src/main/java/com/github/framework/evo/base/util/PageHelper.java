@@ -1,6 +1,8 @@
 package com.github.framework.evo.base.util;
 
+import com.github.framework.evo.base.Page;
 import com.github.framework.evo.base.PageParam;
+import com.github.framework.evo.base.PageResult;
 import com.github.framework.evo.base.dto.PageBaseDto;
 
 /**
@@ -8,16 +10,10 @@ import com.github.framework.evo.base.dto.PageBaseDto;
  */
 public class PageHelper {
 
-   /* public static <V> PageResult convert(PageParam pageParam, Page fromList, Class<V> toClass) {
-        ResultPage resultPage = Pages.convert(pageParam, fromList, toClass);
-        PageResult page = new PageResult();
-        page.setPageNum((int) resultPage.getPageNo());
-        page.setPageSize((int) resultPage.getPerPage());
-        page.setTotal(resultPage.getTotalCount());
-        page.setData(resultPage.getData());
-        return page;
+    public static <V> PageResult<V> convert(Page page) {
+        return new PageResult((long)page.getPageNo(), (long)page.getPageSize(), (long)page.getTotalCount(), page);
     }
-*/
+
     public static PageParam getPageParam(PageBaseDto pageBase) {
         int pageNum = pageBase.getPageNum();
         if(pageNum < 1) {

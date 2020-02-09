@@ -7,8 +7,8 @@ import com.github.framework.evo.common.model.PageList;
 import com.github.framework.evo.common.uitl.BeanUtil;
 import com.github.framework.evo.common.uitl.DateUtil;
 import com.github.framework.evo.common.uitl.StringUtil;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
+//import com.github.pagehelper.Page;
+//import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.common.Mapper;
@@ -75,22 +75,22 @@ public abstract class BaseMapperBizz<Dao extends Mapper, E extends BaseMapperEnt
 
 	@SuppressWarnings("unchecked")
 	public PageList<Dto> findPage(PageDto condition, ExampleCreater exampleCreater) {
-		Page<Object> result = PageHelper.startPage(condition.getPageNo(), condition.getPageSize());
+		/*Page<Object> result = PageHelper.startPage(condition.getPageNo(), condition.getPageSize());
 		List<E> list = dao.selectByExample(toExample(condition, exampleCreater));
 
 		PageList<Dto> pageList = new PageList<>();
-		BaseHelper.copyPage(pageList, result.getTotal(), condition, toDto(list));
-		return pageList;
+		BaseHelper.copyPage(pageList, result.getTotal(), condition, toDto(list));*/
+		return null;
 	}
 
 	@SuppressWarnings("unchecked")
 	public PageList<Dto> findPageLike(PageDto condition, ExampleCreater exampleCreater) {
-		Page<Object> result = PageHelper.startPage(condition.getPageNo(), condition.getPageSize());
+		/*Page<Object> result = PageHelper.startPage(condition.getPageNo(), condition.getPageSize());
 		List<E> list = dao.selectByExample(toExample(condition, exampleCreater, true));
 
 		PageList<Dto> pageList = new PageList<>();
-		BaseHelper.copyPage(pageList, result.getTotal(), condition, toDto(list));
-		return pageList;
+		BaseHelper.copyPage(pageList, result.getTotal(), condition, toDto(list));*/
+		return null;
 	}
 
 	@SuppressWarnings("unchecked")

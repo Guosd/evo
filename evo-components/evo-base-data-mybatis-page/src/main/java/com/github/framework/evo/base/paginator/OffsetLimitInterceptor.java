@@ -2,12 +2,14 @@ package com.github.framework.evo.base.paginator;
 
 import com.github.framework.evo.base.Page;
 import com.github.framework.evo.base.PageParam;
+import com.github.framework.evo.base.PageResult;
 import com.github.framework.evo.base.paginator.dialect.Dialect;
 import com.github.framework.evo.base.paginator.domain.Paginator;
 import com.github.framework.evo.base.util.SqlHelper;
 import org.apache.ibatis.cache.Cache;
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
+import org.apache.ibatis.executor.statement.RoutingStatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.MappedStatement.Builder;
@@ -36,13 +38,12 @@ public class OffsetLimitInterceptor implements Interceptor {
     private static final int PARAMETER_INDEX = 1;
     private static final int ROWBOUNDS_INDEX = 2;
     private String dialectClass;
-    @Value("${saa.power:false}")
-    private boolean power;
     public static final ThreadLocal<String> powerSql = new ThreadLocal();
 
     public OffsetLimitInterceptor() {
     }
 
+    @Override
     public Object intercept(final Invocation invocation) throws Throwable {
         Object[] queryArgs = invocation.getArgs();
         RowBounds rowBounds = (RowBounds)queryArgs[2];
@@ -53,16 +54,14 @@ public class OffsetLimitInterceptor implements Interceptor {
             MappedStatement ms = (MappedStatement)queryArgs[0];
             Object parameter = queryArgs[1];
             BoundSql boundSql = ms.getBoundSql(parameter);
-            /*
-            boolean skipDataPower = (Boolean)PowerIndicator.get("skipDataPower", false);
+           /* boolean skipDataPower = (Boolean)PowerIndicator.get("skipDataPower", false);
             if (this.power && !skipDataPower) {
                 Object obj = Springs.getBean("saaDataPowerService");
                 String sql = ((DataPowerService)obj).processSQLWithPower(boundSql.getSql());
                 powerSql.set(sql);
                 ReflectHelper.setFieldValue(boundSql, "sql", sql);
                 ms = copyFromMappedStatement(ms, new OffsetLimitInterceptor.BoundSqlSqlSource(boundSql));
-            }
-            */
+            }*/
 
             Dialect dialect;
             try {
@@ -92,6 +91,7 @@ public class OffsetLimitInterceptor implements Interceptor {
 
             Paginator paginator = new Paginator(pageParam.getPage(), pageParam.getLimit(), count);
             return new Page(result, paginator);
+            // return new PageResult(paginator.getPage(), pageParam.getTotalCount(), result);
         }
     }
 
@@ -153,10 +153,12 @@ public class OffsetLimitInterceptor implements Interceptor {
         return builder.build();
     }
 
+    @Override
     public Object plugin(Object target) {
         return Plugin.wrap(target, this);
     }
 
+    @Override
     public void setProperties(Properties properties) {
         String dialectClassName = properties.getProperty("dialectClass");
         this.setDialectClass(dialectClassName);
@@ -174,6 +176,7 @@ public class OffsetLimitInterceptor implements Interceptor {
             this.boundSql = boundSql;
         }
 
+        @Override
         public BoundSql getBoundSql(Object parameterObject) {
             return this.boundSql;
         }

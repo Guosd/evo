@@ -1,8 +1,17 @@
 package com.github.framework.evo.base.util;
 
 
+import com.github.framework.evo.base.Page;
+import com.github.framework.evo.base.PageResult;
+import com.github.framework.evo.common.uitl.BeanCopyUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
+/**
+ * @author programmer
+ */
 public class Pages {
     private static final String WHERE = " where ";
     private static final String WHERE_ONE_EQ_ONE = " where 1=1 ";
