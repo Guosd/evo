@@ -7,8 +7,9 @@
 <!-- ============================================================== -->
 <!-- ============================================================== -->
 <mapper namespace="${daoInfo.packageName}.${daoInfo.name}">
-	<#include "inc/mybatis-base-mapper-inc.ftlh"> 
- 
+	<#include "inc/mybatis-base-mapper-inc.ftlh">
+	<#assign deletedFlag = 0>
+
 	<!-- 按主键查询一条记录 -->
 	<select id="get" resultMap="BaseResultMap" parameterType="map">
 		select
@@ -66,6 +67,7 @@
 <#elseif genConfig.versionName?lower_case == toVariableString(column.name)?lower_case >
 			1<#if column_index < (columnSize -1)>,</#if>
 <#elseif "deletedFlag"?lower_case == toVariableString(column.name)?lower_case >
+	<#assign deletedFlag = 1>
 			'0'<#if column_index < (columnSize -1)>,</#if>
 <#else>			
 			<#noparse>#</#noparse>{${toVariableString(column.name)}}<#if column_index < (columnSize -1)>,</#if>
@@ -157,7 +159,13 @@
 
 	<!-- 按主键删除一条记录 -->
 	<delete id="delete" parameterType="map">
+		<#if deletedFlag == 1>
+		update ${table.name} set
+			DELETED_FLAG = '1'
+		where ${primaryKey.columnName} = <#noparse>#</#noparse>{param1}
+		<#else>
 		delete from ${table.name}
 		where ${primaryKey.columnName} = <#noparse>#</#noparse>{param1}
+		</#if>
 	</delete>
 </mapper>

@@ -4,14 +4,18 @@ import com.github.framework.evo.base.Page;
 import com.github.framework.evo.base.PageParam;
 import com.github.framework.evo.base.PageResult;
 import com.github.framework.evo.base.dto.PageBaseDto;
+import com.github.framework.evo.common.uitl.BeanCopyUtils;
 
 /**
- * Created by sino on 2019/9/19.
+ *
+ * @author sino
+ * @date 2019/9/19
  */
-public class PageHelper {
+public class PageHelper<V> {
 
-    public static <V> PageResult<V> convert(Page page) {
-        return new PageResult((long)page.getPageNo(), (long)page.getPageSize(), (long)page.getTotalCount(), page);
+    public static PageResult convert(Page page,Class<?> clazz) {
+
+        return new PageResult((long)page.getPageNo(), (long)page.getPageSize(), (long)page.getTotalCount(),  BeanCopyUtils.cloneList(page,clazz));
     }
 
     public static PageParam getPageParam(PageBaseDto pageBase) {
