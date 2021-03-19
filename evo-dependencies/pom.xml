@@ -20,7 +20,7 @@
 		<spring-boot-maven-plugin.version>2.1.2.RELEASE</spring-boot-maven-plugin.version>
 		<maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
 		<lombok.version>1.18.4</lombok.version>
-		<tomcat-embed-core.version>9.0.19</tomcat-embed-core.version>
+		<tomcat-embed-core.version>9.0.41</tomcat-embed-core.version>
 		<mysql-connector-java.version>8.0.15</mysql-connector-java.version>
 		<springfox-swagger2.version>2.9.2</springfox-swagger2.version>
 		<springfox-swagger-ui.version>2.9.2</springfox-swagger-ui.version>
